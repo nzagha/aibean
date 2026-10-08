@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "next typegen && tsc --noEmit --incremental false",
-    "lint": "eslint src scripts tests *.ts *.mjs --max-warnings=0",
+    "lint": "eslint . --max-warnings=0",
     "test": "tsx --test tests/*.test.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
