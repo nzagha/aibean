@@ -126,6 +126,8 @@ export function ExplorationProvider({ children }: { children: ReactNode }) {
   const reduced = useReducedMotion();
   const path = usePathname();
   useEffect(() => {
+    // Navigation must close the old page's modal and run its focus/scroll cleanup.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActive(null);
   }, [path]);
   useEffect(() => {

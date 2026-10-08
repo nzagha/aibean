@@ -50,7 +50,7 @@ export function ToolFilters({ initial }: { initial: CatalogFilters }) {
       preferences.value.filters as Record<string, string>,
     ).toString();
     if (query) router.replace(`/tools?${query}`, { scroll: false });
-  }, [preferences.ready, preferences.value, hasAdvanced, initial, router]);
+  }, [preferences, hasAdvanced, initial, router]);
   const select = (
     name: string,
     label: string,

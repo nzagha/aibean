@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight, Bookmark } from "lucide-react";
 import type { Tool } from "@/lib/catalog/types";
 import { categoryById } from "@/lib/catalog/taxonomy";

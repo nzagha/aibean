@@ -21,7 +21,9 @@ export function useLocalStorage<T>(
   const current = useRef(initial);
   const initialRef = useRef(initial);
   const parseRef = useRef(parse);
-  parseRef.current = parse;
+  useEffect(() => {
+    parseRef.current = parse;
+  }, [parse]);
   useEffect(() => {
     function read() {
       try {

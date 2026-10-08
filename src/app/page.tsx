@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  Search,
   SlidersHorizontal,
   BookOpen,
   Layers,

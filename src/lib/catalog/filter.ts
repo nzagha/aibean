@@ -52,6 +52,8 @@ export function updateComparison(ids: string[], id: string): string[] {
 export function safeReturnPath(input: unknown) {
   return typeof input === "string" &&
     /^\/(?!\/)/.test(input) &&
+    // Control characters are deliberately rejected at this redirect boundary.
+    // eslint-disable-next-line no-control-regex
     !/[\\\u0000-\u001f]/.test(input)
     ? input
     : "/account";
