@@ -1,5 +1,7 @@
 # Product scope
 
+October 8 owner amendment: Supabase Auth is the sole approved target identity platform. Enterprise/SAML, anonymous identities and Web3 authentication are excluded. Public browsing remains available. Follow `SUPABASE_AUTH_ARCHITECTURE.md` and `MVP_REMEDIATION_PLAN.md` for the controlled migration and current stage sequence; preserve historical audit evidence.
+
 The user selected a staged MVP on October 5, 2026. Functional authority is `aiBean _MVP_Development_Master_Plan_v0_3.docx` (September 30, 2026). The approved existing brand is retained. The earlier job/deliverable plan does not override v0.3 behavior.
 
 Navigation: AI Tools, AI Skills, Events, Creators, Submit, For Vendors, Login. Playbooks remain a separate, free-to-read product. Full Pricing requires sign-in. Vendor is a per-tool capability on a User or Creator, not an independent account type.

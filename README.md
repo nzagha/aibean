@@ -52,11 +52,9 @@ For the optional Docker app container, run `docker compose --env-file .env.local
 
 ## Enable accounts
 
-Create a Clerk application and configure Google, Apple and email providers. Add NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY to .env.local and restart. Google/Apple availability depends on the provider settings; Apple needs its own developer configuration.
+The owner approved Supabase Auth as the sole identity platform on October 8. The current application still uses transitional password/Clerk code; Supabase website authentication has not yet been implemented or validated. Do not create a new Clerk integration. Agent MCP login does not configure application authentication or database access.
 
-Create your own signed-in user. To bootstrap an administrator, run `npm run admin:grant -- user_<your verified Clerk user ID>`. This is an explicit operator action, writes audit history and never exposes an admin signup option. Normal users can save tools, create stacks and submit reviews; administrators can create drafts, publish/archive tools and moderate reviews/paid claims.
-
-Reference: https://clerk.com/docs/nextjs/getting-started/quickstart
+Start with [the Supabase architecture](docs/SUPABASE_AUTH_ARCHITECTURE.md), [identity migration plan](docs/SUPABASE_AUTH_MIGRATION_PLAN.md), and [current stage evidence](docs/FOUNDATION_PROGRESS.md). Existing internal User IDs and ownership must survive migration. The current admin bootstrap is legacy and must be replaced after the identity mapping is verified. Enterprise, Anonymous and Web3 Auth are excluded.
 
 ## Test-only claim payments
 
@@ -77,17 +75,21 @@ UC-035 (community discussions) and excluded listing-type modules are inactive un
 ## Validation
 
 ```sh
+npm run lint
 npm test
 npm run typecheck
 npm run build
+npm audit --omit=dev --audit-level=high
 node scripts/smoke-http.mjs
 ```
 
 The HTTP smoke script expects the unconfigured local development preview (no auth/billing keys). Unit/database tests cover taxonomy relationships, combined filtering, industry fit, trust/freshness, comparison limits, ranking commercial exclusion, URL validation, relational uniqueness and rollback. Database tests use isolated PGlite; they do not imply a connected PostgreSQL deployment has been verified.
 
-During this implementation, Docker Desktop's engine did not respond and the browser automation runtime failed to initialize. PostgreSQL/Clerk/Stripe end-to-end journeys and visual/mobile interaction QA therefore remain pending. The production build and automated domain/migration checks were run. The final October 7 audit flags Next.js 16.3.6 and moderate development-only transitive advisories through drizzle-kit; see the audit for applicability and remediation. Do not apply an unreviewed forced downgrade to silence them.
+PostgreSQL/provider/Stripe end-to-end journeys and full visual/mobile interaction QA remain pending. Next.js is patched to 16.3.8 on the Supabase foundation branch; the October 7 audit remains a historical snapshot of 16.3.6. Moderate development-only transitive advisories through drizzle-kit remain under review; do not apply an unreviewed forced downgrade to silence them. See docs/FOUNDATION_PROGRESS.md for current validation and blockers.
 
 ## Implementation and next stages
+
+The active sequence is [MVP_REMEDIATION_PLAN.md](docs/MVP_REMEDIATION_PLAN.md), with stage evidence in [FOUNDATION_PROGRESS.md](docs/FOUNDATION_PROGRESS.md). It supersedes legacy authentication instructions in earlier stage documents.
 
 See docs/MVP_SCOPE.md for the staged plan and docs/MVP_ACCEPTANCE_MATRIX.md for what is implemented versus verified or pending. Other contracts cover auth, security, data, ranking, billing, vendor workflows, Skills, Playbooks, Creators and Events.
 

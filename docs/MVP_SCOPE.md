@@ -1,5 +1,7 @@
 # Staged delivery
 
+> October 8 amendment: the active nine-stage implementation sequence is `MVP_REMEDIATION_PLAN.md`. Supabase Auth is the sole approved target identity provider, replacing the legacy Clerk/custom-login references below after verified identity migration. Historical implementation descriptions below do not establish current configuration or end-to-end readiness. See `FOUNDATION_PROGRESS.md`.
+
 ## Stage 1 — Tool discovery and foundation
 
 Implemented: revised menus; scoped search routing; tool directory/detail; taxonomy import; category/subcategory/industry/use-case/trust filters; industry pages; 2–4 tool comparison; legacy redirects; setup-aware sign-in; Clerk integration; Drizzle schema/migration and idempotent seed; server-side account/admin checks; saves; personal stacks; moderated reviews; basic admin draft/publication/review/claim operations; per-tool vendor access; test-only Stripe claim checkout/webhook; isolated database and domain tests.
