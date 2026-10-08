@@ -1,0 +1,432 @@
+{
+  "schema_version": "1.0",
+  "product": "aiBean",
+  "audit_date": "2026-10-07",
+  "timezone": "America/New_York",
+  "purpose": "Portable audit package for independent AI review",
+  "authorization": {
+    "audit_documents": "Authorized by owner follow-up",
+    "application_changes": "Not authorized by audit-document request",
+    "database_changes": "Not performed or authorized",
+    "root_agents_file": "Unchanged; proposal only"
+  },
+  "recommendation": {
+    "incremental_dashboard_development": "CONDITIONAL GO after foundation tasks",
+    "public_multi_user_release": "NO-GO pending gates",
+    "live_billing": "NO-GO pending gates",
+    "next_dashboard": "Admin"
+  },
+  "decisions": {
+    "playbooks": "Included by explicit owner confirmation",
+    "branding": "Preserve existing layout/grid/typography/style",
+    "featured": {
+      "price": 99,
+      "currency_in_code": "USD",
+      "currency_confirmation": "Implementation assumption; confirm for live launch",
+      "days": 5,
+      "admin_approval_before_publication": true
+    },
+    "auth": "Temporary password-only mode; other providers deferred",
+    "excluded": [
+      "Discussions",
+      "Replies",
+      "News",
+      "Courses",
+      "Social Videos",
+      "Native mobile apps",
+      "Native video hosting",
+      "Direct messaging",
+      "Creator payouts"
+    ]
+  },
+  "installed_versions": {
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "typescript": "5.9.3",
+    "drizzle_orm": "0.45.3",
+    "clerk_nextjs": "7.9.11"
+  },
+  "observed_configuration": {
+    "password_mode": true,
+    "database_url_present": false,
+    "clerk_keys_present": false,
+    "stripe_settings_present": false,
+    "upstash_settings_present": false,
+    "secret_values_included": false
+  },
+  "validation": {
+    "tests": {
+      "passed": 20,
+      "failed": 0,
+      "scope": "Unit/DOM/pure rules and isolated PGlite"
+    },
+    "typescript": "Passed",
+    "production_build": "Passed; non-generated hash changes = []",
+    "http": {
+      "public_checks": 15,
+      "guest_redirect_checks": 8,
+      "unconfigured_billing": "503",
+      "unknown_tool": "not-found content and noindex; streamed status may be 200"
+    },
+    "lint": "Unavailable; no configuration",
+    "migrations": {
+      "source_files": 2,
+      "source_tables": 14,
+      "source_chain": "Consistent; isolated SQL replay passed",
+      "live_applied_history": "Unknown"
+    },
+    "docker": {
+      "real_env": "Missing required password",
+      "dummy_env_syntax": "Passed",
+      "containers_started": false
+    },
+    "git": "Not a repository",
+    "dependency_audit": {
+      "production_packages_high": 1,
+      "development_packages_moderate": 4,
+      "note": "Latest scan supersedes earlier scan; conditional applicability"
+    }
+  },
+  "reports": [
+    "CURRENT_STATE_AUDIT.md",
+    "ARCHITECTURE_REVIEW.md",
+    "DATABASE_GAP_ANALYSIS.md",
+    "SECURITY_AND_AUTH_REVIEW.md",
+    "MVP_FEATURE_MATRIX.md",
+    "DASHBOARD_READINESS.md",
+    "REMEDIATION_BACKLOG.md",
+    "RECOMMENDED_BUILD_SEQUENCE.md",
+    "EVIDENCE_AND_VALIDATION.md",
+    "AGENTS_PROPOSAL.md",
+    "AI_REVIEW_BRIEF.md"
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "title": "No source-control baseline",
+      "assessment": "**P0 foundation; confirmed.** Git checks report that the directory is not a repository. Existing ZIP snapshots are not commit history. Before edits, establish a secret-free baseline and preserve version 1/1.1 archives. Evidence E01/E16. Task A01."
+    },
+    {
+      "id": "F02",
+      "title": "Runtime database behavior cannot be established",
+      "assessment": "**P0 foundation; confirmed configuration gap.** DATABASE_URL is absent. Source migrations are not evidence of deployed tables, grants or rows. Establish an isolated target and inspect actual metadata before migration planning. Evidence E04/E05/E13. Task A04."
+    },
+    {
+      "id": "F03",
+      "title": "Temporary auth cannot use documented admin bootstrap",
+      "assessment": "**P0 foundation; confirmed code mismatch.** Password identities begin password_; scripts/grant-admin.ts accepts only user_ Clerk IDs. Database connection alone does not resolve this. Add an explicit, audited, development-only operator path or an approved identity transition. Do not turn the shared test credential into a production admin identity. Evidence E06. Task A03."
+    },
+    {
+      "id": "F04",
+      "title": "Core Tool relationships are under-modeled",
+      "assessment": "**P0 before broader publishing; confirmed.** One relational category plus a JSONB Tool payload cannot enforce required multi-category, use-case, industry and sub-vertical relationships. Keep JSONB for suitable flexible attributes, but move ownership, relationships, trust and commercial invariants to enforceable structures. Evidence E05/E11. Task A04."
+    },
+    {
+      "id": "F05",
+      "title": "Taxonomy source and importer lag v1.1",
+      "assessment": "**P1 data integrity; confirmed.** The imported JSON is v1; importer provenance is hard-coded and generated subcategory IDs depend on list order. The seed script does not update existing taxonomy rows. Preserve stable identities and explicitly reconcile changed metadata. Evidence E11/D03. Task A04."
+    },
+    {
+      "id": "F06",
+      "title": "Orders support claims only",
+      "assessment": "**P0 before commercial expansion; confirmed.** orders.claim_id is mandatory and unique. Placements separately contain payment fields. Shared orders/payment attempts/refunds/entitlements are needed for submissions, edits, verification and subscriptions. Preserve editorial state separately. Evidence E05/E08/E09. Task A08."
+    },
+    {
+      "id": "F07",
+      "title": "Checkout recovery crosses database/provider boundaries",
+      "assessment": "**P0 before charging real money; confirmed design risk, not reproduced failure.** Placement checkout performs Stripe calls inside a database transaction; claim creation persists claim/order before remote checkout creation and later session recording. Row locks and provider idempotency help but do not create an atomic distributed transaction. Define durable attempts and reconciliation for timeouts, rollback, abandoned sessions and delayed webhooks. Evidence E08/E09. Task A08."
+    },
+    {
+      "id": "F08",
+      "title": "Unpaid placement request can reserve a Tool indefinitely",
+      "assessment": "**P1 before operational promotion; confirmed.** pending_review/approved requests block another open request for the Tool. There is no expiry/cancel transition for an unpaid approved request. Because any authenticated user may apply, one applicant can prevent another sponsor from proceeding. Keep the owner's broad eligibility decision; add expiration, cancellation and operational resolution. Evidence E08. Task A15."
+    },
+    {
+      "id": "F09",
+      "title": "Catalog and detail queries are unbounded",
+      "assessment": "**P1 before catalog growth; confirmed.** getTools loads all published Tools, all approved reviews and all vendor-access rows. Per-Tool processing repeatedly scans arrays. getTool loads that catalog and finds one slug. Implement SQL predicates, page limits, aggregate queries and necessary indexes. Evidence E10. Tasks A04/A05."
+    },
+    {
+      "id": "F10",
+      "title": "Ranking exists as a function, not a product workflow",
+      "assessment": "**P1; confirmed.** calculateToolScore is not integrated into catalog rendering or stored contextual rankings. UI honestly says not scored. Input derivation, evidence, version history, decay and context explanations remain missing. Evidence E12. Task A07."
+    },
+    {
+      "id": "F11",
+      "title": "Trust fields lack a managed evidence lifecycle",
+      "assessment": "**P1; confirmed.** The Tool type distinguishes verification status, separate verified badge and Last Verified, but no Last Checked/evidence/reverification service exists. Admins cannot currently perform a complete audited verification workflow. Evidence E05/E07/E12. Tasks A07/A11."
+    },
+    {
+      "id": "F12",
+      "title": "Public and featured repositories can disagree",
+      "assessment": "**P1 consistency; confirmed source difference.** Normal Tool reads derive rating/review counts and claimed status from relational records. Featured reads spread Tool.data without those same derived values. Preview content can therefore use stale denormalized facts. Share a canonical projection when normalizing the catalog. Evidence E10. Task A05."
+    },
+    {
+      "id": "F13",
+      "title": "Dashboard and service boundaries are incomplete",
+      "assessment": "**P1/P2; confirmed.** Admin forms, account queries and actions directly combine workflow logic and persistence. Shared forms and some service modules exist, but there is no common dashboard layout or complete centralized capability API. Incrementally extract tested services; avoid a speculative large framework. Evidence E06/E07/E14. Tasks A03/A05/A12."
+    },
+    {
+      "id": "F14",
+      "title": "Operational observability and recovery are unverified",
+      "assessment": "**P0 external-release gate; partly missing, partly unverified.** There is a generic error boundary and audit table, but no verified structured monitoring, payment reconciliation alerts, backup restoration or production deployment pipeline. Evidence E13/E17. Task A17."
+    },
+    {
+      "id": "F15",
+      "title": "Authentication hardening is incomplete",
+      "assessment": "**P0 external-release gate; confirmed preview limitations.** Process-wide login budget, stateless logout limitations, no recovery/verified multi-user lifecycle and body-size checking after buffering. Preserve the temporary mode while defining its boundary. Evidence E06. Tasks A03/A17."
+    },
+    {
+      "id": "F16",
+      "title": "Supabase grants/RLS decision is unverified",
+      "assessment": "**P0 before exposing database-backed services; confirmed absence of migration policies.** No client Supabase SDK was found, but public-schema SQL has no RLS policies. Actual exposure is unknown. Inspect grants and API schemas; do not infer protection from server-only imports. Evidence E05/E13. Task A04."
+    },
+    {
+      "id": "F17",
+      "title": "Framework dependency advisories",
+      "assessment": "**P0 first remediation batch; confirmed scan, conditional exploitability.** Next.js 16.3.6 is flagged by the final scan. Specific image SSRF conditions are absent from current configuration. Development-tool transitive advisories also exist. Patch and retest without a blind major downgrade. Evidence E15. Task A02."
+    },
+    {
+      "id": "F18",
+      "title": "Test coverage is narrower than the product boundary",
+      "assessment": "**P0/P1 validation gate; confirmed.** Existing tests protect pure rules, DOM interactions and database constraints. They do not prove signed webhook routes, cross-account actions, live provider sessions or browser/mobile behavior. Evidence E13. Tasks A02/A03/A06/A08/A17."
+    },
+    {
+      "id": "F19",
+      "title": "Stored states and audit integrity are incomplete",
+      "assessment": "**P1 data integrity; confirmed.** Most status columns are free text. Some admin mutations log a transition without checking that a target row actually changed. Audit records have no verified append-only database privilege policy. Tighten transitions, affected-row checks and operational privileges. Evidence E05/E07. Tasks A04/A05/A08."
+    },
+    {
+      "id": "F20",
+      "title": "Missing content and commercial families",
+      "assessment": "**P2 locked-MVP gaps; confirmed.** Skills, Playbooks, Creator resources, Events, follows, notifications, uploads and subscriptions are not complete implementations. Placeholder routes do not supply schema or workflow coverage. Evidence E05/E14. Tasks A11–A17."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "A01",
+      "title": "Establish baseline and reconcile authority",
+      "Priority / complexity": "P0 / S.",
+      "Dependencies": "Owner review of audit; report creation is authorized, code remediation is not.",
+      "Evidence/source": "F01; E01/E16; D01–D03; stale docs identified in Current State.",
+      "Affected files/modules": "Repository metadata, versions/, docs/, AGENTS.md. Proposed audit files are now supplied; remaining baseline/reconciliation is still pending.",
+      "Description": "Establish a secret-free Git baseline if this is the intended repository; preserve existing archives; record Playbooks inclusion, temporary auth and placement decisions; reconcile implementation notes.",
+      "Acceptance": "Source is reviewable/versioned; environment/generated/private files excluded; documented authority is consistent; snapshots preserved; no claims of database or production state without evidence.",
+      "Validation": "Inspect initial tracked-file list for secrets/private attachments; verify snapshot checksums and exclusions; verify docs distinguish existing/partial/missing/unverified.",
+      "Risk/constraint": "Do not accidentally commit reference attachments or environment secrets. Source-control creation is a separate implementation action from this documentation request."
+    },
+    {
+      "id": "A02",
+      "title": "Patch dependencies and make validation reproducible",
+      "Priority / complexity": "P0 / M.",
+      "Dependencies": "A01.",
+      "Evidence/source": "F17/F18; E01/E13/E15.",
+      "Affected files/modules": "package.json, package-lock.json, lint configuration, CI workflow, affected Next.js integration.",
+      "Description": "Recheck official advisories, update Next.js to a compatible patched release, triage Drizzle/esbuild development chain, and configure meaningful lint/advisory checks.",
+      "Acceptance": "Runtime dependency findings are resolved or explicitly assessed; no blind major downgrade; typecheck, lint, tests and build run consistently in CI.",
+      "Validation": "Full/runtime npm audit; all existing tests; production build; HTTP route checks; header hydration and password-mode/Clerk-disabled behavior. Review lockfile diff.",
+      "Risk/constraint": "Dependency installation/update requires implementation approval. Preserve installed-version API conventions and read relevant Next.js docs."
+    },
+    {
+      "id": "A03",
+      "title": "Repair temporary identity/admin integration and permissions",
+      "Priority / complexity": "P0 / M.",
+      "Dependencies": "A01–A02; coordinate data contract with A04.",
+      "Evidence/source": "F03/F15/F18; E06; Master Plan §§27–28; owner's temporary-password decision.",
+      "Affected files/modules": "src/lib/auth.ts, password modules, auth API routes, scripts/grant-admin.ts, protected actions/tests.",
+      "Description": "Keep password-only access for the current version. Define an explicit development-only admin bootstrap, improve limiter/body handling and centralize Creator/per-Tool/per-content permission helpers. Document identity continuity before later Clerk migration.",
+      "Acceptance": "Credentials alone never grant privileges; operator grants are explicit/audited; ordinary users cannot elevate; temporary mode cannot silently become shared production admin access; state-changing endpoints validate session/ownership.",
+      "Validation": "Forged/expired/rotated sessions, origin rejection, safe redirects, global lockout scenario, size limits, missing services, ordinary-user denial and simultaneous capabilities using isolated identity fixtures.",
+      "Risk/constraint": "Do not enable Google/Apple or public registration prematurely against the owner's current instruction. Individual production identities are required in A17."
+    },
+    {
+      "id": "A04",
+      "title": "Establish verified database and core relational integrity",
+      "Priority / complexity": "P0 / L.",
+      "Dependencies": "A01; coordinate A03; validate with A02 tooling.",
+      "Evidence/source": "F02/F04/F05/F09/F16/F19; E04/E05/E11; D01 §32 and D03.",
+      "Affected files/modules": "src/lib/db/, db/migrations/, drizzle.config.ts, import/seed scripts, catalog types/repositories, environment documentation.",
+      "Description": "Inspect an approved isolated PostgreSQL target, verify migration ledger/grants, introduce forward migrations for core Tool/taxonomy/profile relationships and indexes, and reconcile taxonomy v1.1 with stable IDs.",
+      "Acceptance": "Actual metadata is recorded; migration source/live state agree; invalid relationships fail; taxonomy import is deterministic and repeatable; API exposure/grants/RLS are explicit; deployment roles are least-privilege.",
+      "Validation": "Empty-target and upgrade-path migration tests in PostgreSQL, FK/kind/state checks, stable-ID reimport, invalid/duplicate relations, role/grant/RLS allow/deny cases and restore to a separate target.",
+      "Risk/constraint": "No reset/squash until target history is verified. Do not invent approved sub-vertical records. Keep backend-only tables private unless policies are implemented."
+    },
+    {
+      "id": "A05",
+      "title": "Complete Admin Tool/taxonomy operations and catalog projection",
+      "Priority / complexity": "P1 / L.",
+      "Dependencies": "A02–A04.",
+      "Evidence/source": "F09/F12/F13/F19; E07/E10/E14; D01 §§13,35.",
+      "Affected files/modules": "Admin page/actions, catalog services/queries, shared forms/dashboard shell, Tool views.",
+      "Description": "Add full edit/taxonomy operations, publication gates, paginated queries and a shared Tool projection used by normal and sponsored discovery.",
+      "Acceptance": "Admin creates/edits/publishes/archives a real Tool with required relations; nonexistent/stale targets cannot produce false success audits; public pages reflect canonical facts; branded layout is unchanged.",
+      "Validation": "Non-admin denial, malformed taxonomy, stale concurrent edit, unknown target, publication completeness, archived visibility, consistent featured/ordinary ratings and ownership, query pagination.",
+      "Risk/constraint": "Payment or vendor role must not authorize canonical trust/ranking edits."
+    },
+    {
+      "id": "A06",
+      "title": "Complete User engagement and private-data isolation",
+      "Priority / complexity": "P1 / M.",
+      "Dependencies": "A04–A05; permissions from A03.",
+      "Evidence/source": "E05/E07/E14; F18; D01 §§19–20,36.",
+      "Affected files/modules": "Account page, saves/reviews/Stack actions, comparison persistence and engagement schema.",
+      "Description": "Finish Stack rename/remove/order/membership, saved-content handling, review status and account comparison persistence. Define unavailable-Tool behavior.",
+      "Acceptance": "Two users have isolated private state; one review per user/Tool; review edits re-enter moderation; comparison stays within 2–4; browser convenience does not impersonate account storage.",
+      "Validation": "Cross-account forged IDs, duplicate/concurrent saves, Stack ownership, removed/unpublished Tools, review moderation transitions and compare hydration/persistence.",
+      "Risk/constraint": "Shared public/Creator Stack support must not accidentally expose personal Stacks."
+    },
+    {
+      "id": "A07",
+      "title": "Integrate evidence-based verification and contextual ranking",
+      "Priority / complexity": "P1 / L.",
+      "Dependencies": "A04–A05; coordinate initial signals with A06/A10.",
+      "Evidence/source": "F10/F11; E12; D01 §§22,24.",
+      "Affected files/modules": "Ranking/trust services, score/evidence schema, Admin trust controls, Tool filters/details/compare.",
+      "Description": "Derive reviewed scoring inputs, store versions/context/explanations, implement Last Checked/Verified evidence and freshness, and keep commercial fields excluded.",
+      "Acceptance": "Visible rank is tied to a context/version; unknown data remains unknown; verification requires authorized evidence; paid/claimed status cannot substitute for verification or organic quality.",
+      "Validation": "Deterministic scoring, factor/penalty bounds, missing/NaN input validation, freshness boundaries/future dates, evidence permissions, commercial-exclusion and explanation consistency.",
+      "Risk/constraint": "Do not fabricate ranking data to populate empty UI."
+    },
+    {
+      "id": "A08",
+      "title": "Generalize billing and implement durable recovery",
+      "Priority / complexity": "P0 before commercial expansion / L.",
+      "Dependencies": "A04 and A03.",
+      "Evidence/source": "F06/F07/F19; E08/E09; D01 §§23,29.",
+      "Affected files/modules": "Order/payment/attempt/refund schema, billing services, claim/featured actions, webhook handler and operational queues.",
+      "Description": "Support generic purchases, durable checkout attempts and reconciliation; separate payment, editorial and entitlement state. Avoid holding DB locks across unnecessary provider work.",
+      "Acceptance": "Provider timeout/rollback can be reconciled; retries cannot duplicate purchase/entitlement; failed/refunded/disputed state is auditable; no redirect grants access.",
+      "Validation": "Signed raw-body webhook tests against PostgreSQL; replay, out-of-order, amount/currency/identity mismatch, concurrency, failure after provider success, rollback, cancellation and refund/dispute tests.",
+      "Risk/constraint": "Remain in Stripe sandbox until launch gates and business policies are approved."
+    },
+    {
+      "id": "A09",
+      "title": "Prove paid submission/claim and Vendor access",
+      "Priority / complexity": "P1 / L.",
+      "Dependencies": "A03–A08; A07 can be developed alongside claim mechanics.",
+      "Evidence/source": "Partial claim code and submission placeholder, E07/E09/E14; D01 §§21,37.",
+      "Affected files/modules": "Submission/claim services and schema, Admin queues, Vendor workspace, account request history.",
+      "Description": "Complete eligible paid submission and claim workflows, proof review, rejection/dispute/revocation rules and one-owner assignment.",
+      "Acceptance": "Ordinary users cannot directly submit new Tools; eligible actors pay and enter review; paid claim cannot bypass proof review; only one approved owner; all outcomes are visible.",
+      "Validation": "Competing claimants, unpaid approval rejection, ineligible submitter, foreign request ID, rejected/refunded order, archived Tool, revocation and capability combinations.",
+      "Risk/constraint": "Define rejected/competing paid-claim fee/refund policy before live checkout; do not invent terms."
+    },
+    {
+      "id": "A10",
+      "title": "Add initial analytics and safe outbound attribution",
+      "Priority / complexity": "P1 / M.",
+      "Dependencies": "A04–A06; agree event contracts with A07/A09.",
+      "Evidence/source": "Missing analytics/link services, E05/E14; D01 §25.",
+      "Affected files/modules": "analytics_events, tracked/outbound links, instrumentation, aggregate queries and Vendor reporting.",
+      "Description": "Record real Tool views, clicks, saves/compare signals with privacy-aware deduplication; validate destinations and ownership; implement minimal Vendor metrics.",
+      "Acceptance": "Metrics trace to real records, do not leak another account's private state and exclude inflated/replayed activity according to documented rules.",
+      "Validation": "Duplicate/bot bursts, private destinations, unsafe URLs, missing/archived targets, attribution retention and owner-scoped aggregate reads.",
+      "Risk/constraint": "Do not repurpose public events for analytics or treat localStorage progress as server analytics."
+    },
+    {
+      "id": "A11",
+      "title": "Complete paid Vendor edits and verification",
+      "Priority / complexity": "P2 / L.",
+      "Dependencies": "A07–A10.",
+      "Evidence/source": "Missing request families, E05/E14; D01 §§21–23.",
+      "Affected files/modules": "Edit/verification schema/services, Vendor forms, Admin queues, billing products and trust logs.",
+      "Description": "Separate proposed edits from canonical data; support paid verification and configurable zero-price promotions through the same approval workflow.",
+      "Acceptance": "Vendor modifies owned proposals only; admin applies approved changes; payment never awards verification; zero-price promotion retains checks/history.",
+      "Validation": "Foreign Tool IDs, stale proposals, duplicate payment, rejected changes, trust-field tampering and zero-price workflow.",
+      "Risk/constraint": "Last Verified remains controlled by the verification process."
+    },
+    {
+      "id": "A12",
+      "title": "Build Creator approval, Skills, Playbooks and shared Stacks",
+      "Priority / complexity": "P2 / L.",
+      "Dependencies": "A03–A07; secure assets from A13 before enabling uploads.",
+      "Evidence/source": "Creator/Skills/Playbooks placeholders, E14; D01 §§14–16; confirmed Playbook inclusion.",
+      "Affected files/modules": "Creator applications/profiles, Skill/Playbook/step relations, shared Stacks, publishing/moderation UI.",
+      "Description": "Implement explicit ownership and moderation with distinct Skill and Playbook semantics. Extend existing Stacks for public Creator use rather than duplicating unrelated systems.",
+      "Acceptance": "Approved Creator owns profile/drafts; Skills have task instructions/resources; Playbooks have ordered steps; only approved content appears publicly; personal visibility remains private.",
+      "Validation": "Cross-Creator edits, suspension, draft/private lookup, step order, relation integrity, submission/rejection/publication and public Stack boundaries.",
+      "Risk/constraint": "Do not activate excluded discussions or courses based on old workbook notes."
+    },
+    {
+      "id": "A13",
+      "title": "Build secure resources, campaign pages and affiliate tracking",
+      "Priority / complexity": "P2 / L.",
+      "Dependencies": "A10, A12; security/permission foundation.",
+      "Evidence/source": "Missing asset/resource/link families, E05/E14; D01 §§16,25,30.",
+      "Affected files/modules": "Asset/upload service, resource pages/blocks/campaigns, storage adapter, tracked links and disclosures.",
+      "Description": "Add validated resource uploads/delivery, campaign-specific Creator pages, related content and approved affiliate/external CTAs.",
+      "Acceptance": "Owned assets obey access/moderation rules; filenames/keys are safe; resources have real campaign attribution; affiliate disclosures are visible.",
+      "Validation": "Oversized/spoofed/unsafe files, private direct links, malicious SVG/HTML where relevant, revoked resources, foreign ownership, safe fallback and attribution.",
+      "Risk/constraint": "Do not accept arbitrary executable uploads or implement native video hosting."
+    },
+    {
+      "id": "A14",
+      "title": "Implement public Events and external registration",
+      "Priority / complexity": "P2 / M.",
+      "Dependencies": "A05, A10, A12.",
+      "Evidence/source": "Event placeholder, E14; D01 §17.",
+      "Affected files/modules": "events/organizers/relationships, submission/moderation, discovery and lifecycle processing.",
+      "Description": "Add format/location/timezone, approved submission, external tracked registration and upcoming/ongoing/cancelled/completed/archived behavior.",
+      "Acceptance": "Eligible actor submits; admin approves; correct filtered discovery; historical records remain appropriately accessible; no native ticketing implied.",
+      "Validation": "Timezones/DST, invalid intervals, cancellation/archive, unauthorized changes, registration destination and related-content integrity.",
+      "Risk/constraint": "Keep public Event records distinct from analytics."
+    },
+    {
+      "id": "A15",
+      "title": "Complete subscriptions, configurable pricing and placement operations",
+      "Priority / complexity": "P2 / L.",
+      "Dependencies": "A08–A09, A12; analytics from A10.",
+      "Evidence/source": "F08; absent subscription families; E08/E14; D01 §23.",
+      "Affected files/modules": "Plans/pricing/subscriptions/entitlements, pricing/billing UI, placement lifecycle and admin operations.",
+      "Description": "Reconcile subscription lifecycle and entitlements; complete unpaid request expiry/cancel, placement recovery/refunds, inventory and sponsorship operations.",
+      "Acceptance": "Full pricing remains authenticated; plan state is server-authoritative; abandoned requests release inventory; paid placements are visible for the purchased interval and distinctly sponsored.",
+      "Validation": "Renewal/cancellation/past_due/refund/dispute events, replay, entitlement drift, request expiry, date boundaries, unpaid requests and concurrent purchases.",
+      "Risk/constraint": "Preserve approved $99/five-day offer unless owner changes it; confirm currency/inventory/refund rules before live billing."
+    },
+    {
+      "id": "A16",
+      "title": "Add follows and in-app notifications",
+      "Priority / complexity": "P2 / M.",
+      "Dependencies": "A06/A09; add content/billing sources as A12/A14/A15 land.",
+      "Evidence/source": "Missing schemas/services, E05/E14; D01 §§19,36.",
+      "Affected files/modules": "Follows, notification records/jobs, account and dashboard status UI.",
+      "Description": "Support authorized follows and deduplicated submission/claim/edit/verification/content/Event/billing notifications.",
+      "Acceptance": "Intended recipients see relevant status changes; reads/unsubscribe state works; private details are never exposed to followers.",
+      "Validation": "Recipient isolation, duplicate/retried events, archived targets, unfollow/unsubscribe and read-state persistence.",
+      "Risk/constraint": "No discussion/reply notifications."
+    },
+    {
+      "id": "A17",
+      "title": "Pass external-alpha security and operations gates",
+      "Priority / complexity": "P0 release gate / L.",
+      "Dependencies": "A02–A04 foundations; relevant workflow tasks before release.",
+      "Evidence/source": "F14–F18; E04/E13/E15/E17; D01 §§27–31,41.",
+      "Affected files/modules": "Production identity integration, headers/CSP, shared limits, logging/monitoring, deployment/backup runbooks, CI/security tests.",
+      "Description": "Replace shared-preview assumptions for public users; configure and verify required providers when approved for the next version; establish monitored staging/production, least privilege, backup restoration and release controls.",
+      "Acceptance": "Individual identities/recovery/provider controls work; no shared admin; deployment secrets separated; access grants verified; payment failures observable; restore demonstrated; no open critical release blocker.",
+      "Validation": "Full multi-user IDOR/CSRF/session tests, TLS/proxy cookie behavior, CSP/provider compatibility, dependency scan, deployment smoke, alert tests and isolated restore.",
+      "Risk/constraint": "Do not turn this gate into an excuse to redesign the app. Do not enable deferred providers without the owner's next-version approval."
+    },
+    {
+      "id": "A18",
+      "title": "Improve accessibility, browser coverage and measured performance",
+      "Priority / complexity": "P3 for polish/optimization / M.",
+      "Dependencies": "Core workflows complete; baseline accessibility applies throughout earlier tasks.",
+      "Evidence/source": "Browser QA limits and unbounded discovery evidence, E02/E10/E13.",
+      "Affected files/modules": "Existing components, dialogs/navigation/forms, loading/error states, query/cache boundaries and browser tests.",
+      "Description": "Broaden device/browser coverage and optimize measured bottlenecks while retaining approved visual composition.",
+      "Acceptance": "Keyboard/focus/mobile/reduced-motion flows pass; no new hydration failures; query/page budgets meet an agreed baseline; no layout redesign.",
+      "Validation": "Browser matrix, screen-reader/keyboard checks, focus restoration, mobile overflow, hydration, representative query/load measurements.",
+      "Risk/constraint": "Accessibility/security/correctness defects discovered during earlier tasks are not deferred simply because this optimization task is P3."
+    }
+  ],
+  "next_five": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05"
+  ],
+  "secrets_policy": "No credentials, environment values, session tokens or database rows included."
+}
+

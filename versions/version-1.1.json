@@ -1,0 +1,15 @@
+{
+  "version": "1.1",
+  "savedAtUtc": "2026-10-07T18:57:29.6293037Z",
+  "description": "Current build before behavioral interactions; includes tool logos, featured placements, and corrected top navigation.",
+  "archive": "aibean-version-1.1.zip",
+  "sha256": "A2637EECEDD18E5CE60704FA35DF3AEE0AAAA425F6A7D3A66FCF4AA365288A30",
+  "fileCount": 128,
+  "excludes": [
+    "node_modules",
+    ".next",
+    "private environment files",
+    "database contents",
+    "original reference attachments"
+  ]
+}

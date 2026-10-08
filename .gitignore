@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env*
+!.env.example
+test-results/
+
+# Original planning/reference attachments remain local; publish the audit instead.
+/*.docx
+/*.xlsx
+/*.pdf
+/*.csv
+/AIBean_Job_Description_Deliverable_Plan.md

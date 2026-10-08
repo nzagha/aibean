@@ -1,0 +1,28 @@
+<svg width="184" height="170" viewBox="92 12 184 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>aiBean brand illustration — the bean &amp; the sun</title>
+  <defs>
+    <filter id="beanGrain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"></feTurbulence>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0"></feColorMatrix>
+    </filter>
+    <clipPath id="beanClip">
+      <path d="M150 72 C140 52 112 52 104 78 C98 100 102 124 120 142 C140 165 175 172 205 165 C245 156 268 124 264 92 C261 64 232 48 208 60 C196 66 184 88 174 84 C165 81 158 74 150 72 Z"></path>
+    </clipPath>
+    <clipPath id="sunClip"><circle cx="167" cy="51" r="25"></circle></clipPath>
+  </defs>
+
+  
+  <circle cx="167" cy="51" r="25" fill="#FF5C00"></circle>
+  <g clip-path="url(#sunClip)"><rect x="129" y="13" width="80" height="80" filter="url(#beanGrain)" opacity="0.10"></rect></g>
+
+  
+  <path d="M150 72 C140 52 112 52 104 78 C98 100 102 124 120 142 C140 165 175 172 205 165 C245 156 268 124 264 92 C261 64 232 48 208 60 C196 66 184 88 174 84 C165 81 158 74 150 72 Z" transform="translate(3 8)" fill="#1534D4"></path>
+
+  
+  <path d="M150 72 C140 52 112 52 104 78 C98 100 102 124 120 142 C140 165 175 172 205 165 C245 156 268 124 264 92 C261 64 232 48 208 60 C196 66 184 88 174 84 C165 81 158 74 150 72 Z" fill="#1B45F5"></path>
+  
+  <g clip-path="url(#beanClip)">
+    <rect x="98" y="48" width="172" height="126" filter="url(#beanGrain)" opacity="0.10"></rect>
+    <ellipse cx="150" cy="96" rx="52" ry="40" fill="#4E70FF" opacity="0.30"></ellipse>
+  </g>
+</svg>

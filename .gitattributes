@@ -1,0 +1,5 @@
+# Preserve audit evidence and checksums exactly across operating systems.
+docs/audit/** -text
+
+*.zip binary
+*.ttf binary

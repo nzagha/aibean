@@ -1,0 +1,33 @@
+name: aibean
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: aibean
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local database password in .env.local}
+      POSTGRES_DB: aibean
+    ports: ["127.0.0.1:54329:5432"]
+    volumes: ["aibean_pg:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aibean"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    ports: ["127.0.0.1:63799:6379"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: ["aibean_redis:/data"]
+  web:
+    profiles: ["app"]
+    build: .
+    ports: ["127.0.0.1:3001:3000"]
+    env_file: .env.local
+    environment:
+      DATABASE_URL: postgresql://aibean:${POSTGRES_PASSWORD}@db:5432/aibean
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  aibean_pg:
+  aibean_redis:

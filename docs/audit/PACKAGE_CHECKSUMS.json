@@ -1,0 +1,80 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "AGENTS_PROPOSAL.md",
+      "sha256": "7793e9182f6e809e2e5e699bc4c2affd5430c14b35c73eea464c2eaa68c41081",
+      "bytes": 3341
+    },
+    {
+      "path": "AI_REVIEW_BRIEF.md",
+      "sha256": "fd8a05db4f1a14505e49600eb1c6f40f227878a358b234fadb6b968a04ac6776",
+      "bytes": 4954
+    },
+    {
+      "path": "AIBean_FULL_AUDIT_2026-10-07.md",
+      "sha256": "81eb0e0aceca9c872f2fae7b07fe2419fdbe075f25c73979c0004e30382feda1",
+      "bytes": 115372
+    },
+    {
+      "path": "ARCHITECTURE_REVIEW.md",
+      "sha256": "9139abbd0b28d8d609bdcfa81465a08618eddcb45e34e94f21651169e5bac482",
+      "bytes": 11643
+    },
+    {
+      "path": "audit_manifest.json",
+      "sha256": "558eac7a35e0fdb81fdb38af0d7082e4b0331dade91d17fb24c73cb87ce65a5f",
+      "bytes": 32494
+    },
+    {
+      "path": "CURRENT_STATE_AUDIT.md",
+      "sha256": "c80870c1a1555e0918486bb6f988292b65b046f0777dcddcf21c0604dd7caf8d",
+      "bytes": 11373
+    },
+    {
+      "path": "DASHBOARD_READINESS.md",
+      "sha256": "28c6877e9d67bd4e62e1193609d1c18cedb358e60df5679ce3df2aed265801e6",
+      "bytes": 6164
+    },
+    {
+      "path": "DATABASE_GAP_ANALYSIS.md",
+      "sha256": "512ae66d6a490181e616611352ec59a06096f820e9fcf35ec4d3ec82d8242b44",
+      "bytes": 11808
+    },
+    {
+      "path": "EVIDENCE_AND_VALIDATION.md",
+      "sha256": "ab3556e19f3fec5894febbced7ed5b6c171d3f632a54f2ae8e4df18dcf3514c5",
+      "bytes": 16226
+    },
+    {
+      "path": "MVP_FEATURE_MATRIX.md",
+      "sha256": "c5b55afe6a8ecde124cdece5fd5c31c57cca2e10d8e74978c40a0843837be4f1",
+      "bytes": 10220
+    },
+    {
+      "path": "README.md",
+      "sha256": "dc0a8331c8df63d21e4b4ec68decf01bef615fa82b72dad309b5c7a2ac04f8d7",
+      "bytes": 3479
+    },
+    {
+      "path": "RECOMMENDED_BUILD_SEQUENCE.md",
+      "sha256": "a6b7ada30bb9285f5ad8f9950cbbdb239c5b7e4b78ba76931a7295e9a7192090",
+      "bytes": 5780
+    },
+    {
+      "path": "REMEDIATION_BACKLOG.md",
+      "sha256": "00df9f5cdbb571aeee3c47c0a4bbf5d7cd7a09ffcaa370ab64d424c1a2dc2ee9",
+      "bytes": 19856
+    },
+    {
+      "path": "SECURITY_AND_AUTH_REVIEW.md",
+      "sha256": "092b57cc9b1f6f1376a4fb82b24e27c74769c7222345b4a03277d9208074fa31",
+      "bytes": 12133
+    },
+    {
+      "path": "SOURCE_FILE_MANIFEST.json",
+      "sha256": "ae622fd1a1b1740efddd53916df0151f2f36228d99137f36e2eb3f4d4b474cac",
+      "bytes": 24187
+    }
+  ]
+}

@@ -1,0 +1,1952 @@
+{
+  "source": "aiBean_Taxonomy_Package_v1 (1).xlsx",
+  "sha256": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+  "sourceVersion": "v1 (provided workbook)",
+  "categories": [
+    {
+      "id": "CAT-01",
+      "name": "Chatbots, Assistants & Copilots",
+      "slug": "chatbots-assistants-and-copilots",
+      "description": "Conversational interfaces that answer, guide, draft, retrieve knowledge, or complete lightweight tasks.",
+      "subcategories": [
+        {
+          "id": "CAT-01-01",
+          "name": "General AI chat assistants",
+          "slug": "general-ai-chat-assistants"
+        },
+        {
+          "id": "CAT-01-02",
+          "name": "personal assistants",
+          "slug": "personal-assistants"
+        },
+        {
+          "id": "CAT-01-03",
+          "name": "meeting assistants",
+          "slug": "meeting-assistants"
+        },
+        {
+          "id": "CAT-01-04",
+          "name": "knowledge-base assistants",
+          "slug": "knowledge-base-assistants"
+        },
+        {
+          "id": "CAT-01-05",
+          "name": "customer support chatbots",
+          "slug": "customer-support-chatbots"
+        },
+        {
+          "id": "CAT-01-06",
+          "name": "voice assistants",
+          "slug": "voice-assistants"
+        },
+        {
+          "id": "CAT-01-07",
+          "name": "enterprise copilots",
+          "slug": "enterprise-copilots"
+        },
+        {
+          "id": "CAT-01-08",
+          "name": "agentic chat interfaces",
+          "slug": "agentic-chat-interfaces"
+        }
+      ]
+    },
+    {
+      "id": "CAT-02",
+      "name": "Writing, Editing & Language",
+      "slug": "writing-editing-and-language",
+      "description": "Tools for drafting, rewriting, translating, summarizing, and improving text.",
+      "subcategories": [
+        {
+          "id": "CAT-02-01",
+          "name": "Copywriting",
+          "slug": "copywriting"
+        },
+        {
+          "id": "CAT-02-02",
+          "name": "long-form writing",
+          "slug": "long-form-writing"
+        },
+        {
+          "id": "CAT-02-03",
+          "name": "grammar/style",
+          "slug": "grammar-style"
+        },
+        {
+          "id": "CAT-02-04",
+          "name": "paraphrasing",
+          "slug": "paraphrasing"
+        },
+        {
+          "id": "CAT-02-05",
+          "name": "summarization",
+          "slug": "summarization"
+        },
+        {
+          "id": "CAT-02-06",
+          "name": "translation/localization",
+          "slug": "translation-localization"
+        },
+        {
+          "id": "CAT-02-07",
+          "name": "technical documentation",
+          "slug": "technical-documentation"
+        },
+        {
+          "id": "CAT-02-08",
+          "name": "prompt generators",
+          "slug": "prompt-generators"
+        }
+      ]
+    },
+    {
+      "id": "CAT-03",
+      "name": "Image Generation, Editing & Visual Assets",
+      "slug": "image-generation-editing-and-visual-assets",
+      "description": "AI image creation and modification for marketing, design, product, and creator workflows.",
+      "subcategories": [
+        {
+          "id": "CAT-03-01",
+          "name": "Text-to-image",
+          "slug": "text-to-image"
+        },
+        {
+          "id": "CAT-03-02",
+          "name": "image editing",
+          "slug": "image-editing"
+        },
+        {
+          "id": "CAT-03-03",
+          "name": "background removal",
+          "slug": "background-removal"
+        },
+        {
+          "id": "CAT-03-04",
+          "name": "upscaling/enhancement",
+          "slug": "upscaling-enhancement"
+        },
+        {
+          "id": "CAT-03-05",
+          "name": "avatars/headshots",
+          "slug": "avatars-headshots"
+        },
+        {
+          "id": "CAT-03-06",
+          "name": "product photography",
+          "slug": "product-photography"
+        },
+        {
+          "id": "CAT-03-07",
+          "name": "logo generation",
+          "slug": "logo-generation"
+        },
+        {
+          "id": "CAT-03-08",
+          "name": "design mockups",
+          "slug": "design-mockups"
+        }
+      ]
+    },
+    {
+      "id": "CAT-04",
+      "name": "Video, Animation & Avatar Media",
+      "slug": "video-animation-and-avatar-media",
+      "description": "AI-assisted production, editing, repurposing, and synthetic video.",
+      "subcategories": [
+        {
+          "id": "CAT-04-01",
+          "name": "Text-to-video",
+          "slug": "text-to-video"
+        },
+        {
+          "id": "CAT-04-02",
+          "name": "video editing",
+          "slug": "video-editing"
+        },
+        {
+          "id": "CAT-04-03",
+          "name": "subtitles/captioning",
+          "slug": "subtitles-captioning"
+        },
+        {
+          "id": "CAT-04-04",
+          "name": "avatar/talking-head video",
+          "slug": "avatar-talking-head-video"
+        },
+        {
+          "id": "CAT-04-05",
+          "name": "highlights/summarization",
+          "slug": "highlights-summarization"
+        },
+        {
+          "id": "CAT-04-06",
+          "name": "screen recording demos",
+          "slug": "screen-recording-demos"
+        },
+        {
+          "id": "CAT-04-07",
+          "name": "motion graphics",
+          "slug": "motion-graphics"
+        },
+        {
+          "id": "CAT-04-08",
+          "name": "dubbing",
+          "slug": "dubbing"
+        }
+      ]
+    },
+    {
+      "id": "CAT-05",
+      "name": "Audio, Music & Voice",
+      "slug": "audio-music-and-voice",
+      "description": "Speech, sound, podcast, and music generation or transformation.",
+      "subcategories": [
+        {
+          "id": "CAT-05-01",
+          "name": "Text-to-speech",
+          "slug": "text-to-speech"
+        },
+        {
+          "id": "CAT-05-02",
+          "name": "speech-to-text",
+          "slug": "speech-to-text"
+        },
+        {
+          "id": "CAT-05-03",
+          "name": "voice cloning/conversion",
+          "slug": "voice-cloning-conversion"
+        },
+        {
+          "id": "CAT-05-04",
+          "name": "music generation",
+          "slug": "music-generation"
+        },
+        {
+          "id": "CAT-05-05",
+          "name": "audio cleanup",
+          "slug": "audio-cleanup"
+        },
+        {
+          "id": "CAT-05-06",
+          "name": "podcast workflows",
+          "slug": "podcast-workflows"
+        },
+        {
+          "id": "CAT-05-07",
+          "name": "sound effects",
+          "slug": "sound-effects"
+        },
+        {
+          "id": "CAT-05-08",
+          "name": "voice agents",
+          "slug": "voice-agents"
+        }
+      ]
+    },
+    {
+      "id": "CAT-06",
+      "name": "Design, UI/UX & Presentations",
+      "slug": "design-ui-ux-and-presentations",
+      "description": "Creative workflow tools for interfaces, brand systems, decks, and design operations.",
+      "subcategories": [
+        {
+          "id": "CAT-06-01",
+          "name": "UI/UX assistants",
+          "slug": "ui-ux-assistants"
+        },
+        {
+          "id": "CAT-06-02",
+          "name": "presentation generators",
+          "slug": "presentation-generators"
+        },
+        {
+          "id": "CAT-06-03",
+          "name": "brand kits",
+          "slug": "brand-kits"
+        },
+        {
+          "id": "CAT-06-04",
+          "name": "wireframing",
+          "slug": "wireframing"
+        },
+        {
+          "id": "CAT-06-05",
+          "name": "design systems",
+          "slug": "design-systems"
+        },
+        {
+          "id": "CAT-06-06",
+          "name": "3D generation",
+          "slug": "3d-generation"
+        },
+        {
+          "id": "CAT-06-07",
+          "name": "creative ideation",
+          "slug": "creative-ideation"
+        },
+        {
+          "id": "CAT-06-08",
+          "name": "slide-to-video",
+          "slug": "slide-to-video"
+        }
+      ]
+    },
+    {
+      "id": "CAT-07",
+      "name": "Coding, App Building & Developer Productivity",
+      "slug": "coding-app-building-and-developer-productivity",
+      "description": "AI coding, app creation, testing, documentation, and developer workflow acceleration.",
+      "subcategories": [
+        {
+          "id": "CAT-07-01",
+          "name": "Code assistants",
+          "slug": "code-assistants"
+        },
+        {
+          "id": "CAT-07-02",
+          "name": "code generation",
+          "slug": "code-generation"
+        },
+        {
+          "id": "CAT-07-03",
+          "name": "code review/refactoring",
+          "slug": "code-review-refactoring"
+        },
+        {
+          "id": "CAT-07-04",
+          "name": "testing assistants",
+          "slug": "testing-assistants"
+        },
+        {
+          "id": "CAT-07-05",
+          "name": "debugging",
+          "slug": "debugging"
+        },
+        {
+          "id": "CAT-07-06",
+          "name": "API/SDK generation",
+          "slug": "api-sdk-generation"
+        },
+        {
+          "id": "CAT-07-07",
+          "name": "dev documentation",
+          "slug": "dev-documentation"
+        },
+        {
+          "id": "CAT-07-08",
+          "name": "app builders",
+          "slug": "app-builders"
+        }
+      ]
+    },
+    {
+      "id": "CAT-08",
+      "name": "Websites, Apps & No-Code Builders",
+      "slug": "websites-apps-and-no-code-builders",
+      "description": "AI site/app builders and tools that create deployable digital products without traditional engineering.",
+      "subcategories": [
+        {
+          "id": "CAT-08-01",
+          "name": "Website builders",
+          "slug": "website-builders"
+        },
+        {
+          "id": "CAT-08-02",
+          "name": "landing-page builders",
+          "slug": "landing-page-builders"
+        },
+        {
+          "id": "CAT-08-03",
+          "name": "no-code app builders",
+          "slug": "no-code-app-builders"
+        },
+        {
+          "id": "CAT-08-04",
+          "name": "form builders",
+          "slug": "form-builders"
+        },
+        {
+          "id": "CAT-08-05",
+          "name": "chatbot builders",
+          "slug": "chatbot-builders"
+        },
+        {
+          "id": "CAT-08-06",
+          "name": "API connectors",
+          "slug": "api-connectors"
+        },
+        {
+          "id": "CAT-08-07",
+          "name": "internal tools",
+          "slug": "internal-tools"
+        },
+        {
+          "id": "CAT-08-08",
+          "name": "database-backed apps",
+          "slug": "database-backed-apps"
+        }
+      ]
+    },
+    {
+      "id": "CAT-09",
+      "name": "Automation, Agents & Workflow Orchestration",
+      "slug": "automation-agents-and-workflow-orchestration",
+      "description": "Tools that execute multi-step tasks, connect systems, or run autonomous/semi-autonomous workflows.",
+      "subcategories": [
+        {
+          "id": "CAT-09-01",
+          "name": "Workflow automation",
+          "slug": "workflow-automation"
+        },
+        {
+          "id": "CAT-09-02",
+          "name": "agent builders",
+          "slug": "agent-builders"
+        },
+        {
+          "id": "CAT-09-03",
+          "name": "agent orchestration",
+          "slug": "agent-orchestration"
+        },
+        {
+          "id": "CAT-09-04",
+          "name": "RPA + AI",
+          "slug": "rpa-ai"
+        },
+        {
+          "id": "CAT-09-05",
+          "name": "integration automations",
+          "slug": "integration-automations"
+        },
+        {
+          "id": "CAT-09-06",
+          "name": "browser agents",
+          "slug": "browser-agents"
+        },
+        {
+          "id": "CAT-09-07",
+          "name": "computer-use agents",
+          "slug": "computer-use-agents"
+        },
+        {
+          "id": "CAT-09-08",
+          "name": "scheduled agents",
+          "slug": "scheduled-agents"
+        }
+      ]
+    },
+    {
+      "id": "CAT-10",
+      "name": "Enterprise Knowledge, Search & RAG",
+      "slug": "enterprise-knowledge-search-and-rag",
+      "description": "Knowledge retrieval, semantic search, document Q&A, and retrieval-augmented generation systems.",
+      "subcategories": [
+        {
+          "id": "CAT-10-01",
+          "name": "Enterprise search",
+          "slug": "enterprise-search"
+        },
+        {
+          "id": "CAT-10-02",
+          "name": "RAG tooling",
+          "slug": "rag-tooling"
+        },
+        {
+          "id": "CAT-10-03",
+          "name": "vector search",
+          "slug": "vector-search"
+        },
+        {
+          "id": "CAT-10-04",
+          "name": "knowledge-base assistants",
+          "slug": "knowledge-base-assistants"
+        },
+        {
+          "id": "CAT-10-05",
+          "name": "internal wikis",
+          "slug": "internal-wikis"
+        },
+        {
+          "id": "CAT-10-06",
+          "name": "document Q&A",
+          "slug": "document-qanda"
+        },
+        {
+          "id": "CAT-10-07",
+          "name": "semantic search",
+          "slug": "semantic-search"
+        },
+        {
+          "id": "CAT-10-08",
+          "name": "knowledge graph assistants",
+          "slug": "knowledge-graph-assistants"
+        }
+      ]
+    },
+    {
+      "id": "CAT-11",
+      "name": "Data, Analytics & BI",
+      "slug": "data-analytics-and-bi",
+      "description": "Tools for analyzing, cleaning, querying, labeling, and forecasting data.",
+      "subcategories": [
+        {
+          "id": "CAT-11-01",
+          "name": "BI/insights",
+          "slug": "bi-insights"
+        },
+        {
+          "id": "CAT-11-02",
+          "name": "SQL assistants",
+          "slug": "sql-assistants"
+        },
+        {
+          "id": "CAT-11-03",
+          "name": "data cleaning",
+          "slug": "data-cleaning"
+        },
+        {
+          "id": "CAT-11-04",
+          "name": "data labeling",
+          "slug": "data-labeling"
+        },
+        {
+          "id": "CAT-11-05",
+          "name": "forecasting/planning",
+          "slug": "forecasting-planning"
+        },
+        {
+          "id": "CAT-11-06",
+          "name": "spreadsheet analysis",
+          "slug": "spreadsheet-analysis"
+        },
+        {
+          "id": "CAT-11-07",
+          "name": "notebook copilots",
+          "slug": "notebook-copilots"
+        },
+        {
+          "id": "CAT-11-08",
+          "name": "predictive analytics",
+          "slug": "predictive-analytics"
+        }
+      ]
+    },
+    {
+      "id": "CAT-12",
+      "name": "Computer Vision & Document AI",
+      "slug": "computer-vision-and-document-ai",
+      "description": "Visual recognition and document extraction workflows.",
+      "subcategories": [
+        {
+          "id": "CAT-12-01",
+          "name": "OCR/document scanning",
+          "slug": "ocr-document-scanning"
+        },
+        {
+          "id": "CAT-12-02",
+          "name": "invoice/receipt processing",
+          "slug": "invoice-receipt-processing"
+        },
+        {
+          "id": "CAT-12-03",
+          "name": "form extraction",
+          "slug": "form-extraction"
+        },
+        {
+          "id": "CAT-12-04",
+          "name": "image classification",
+          "slug": "image-classification"
+        },
+        {
+          "id": "CAT-12-05",
+          "name": "object detection",
+          "slug": "object-detection"
+        },
+        {
+          "id": "CAT-12-06",
+          "name": "visual inspection",
+          "slug": "visual-inspection"
+        },
+        {
+          "id": "CAT-12-07",
+          "name": "ID verification",
+          "slug": "id-verification"
+        },
+        {
+          "id": "CAT-12-08",
+          "name": "document classification",
+          "slug": "document-classification"
+        }
+      ]
+    },
+    {
+      "id": "CAT-13",
+      "name": "AI Infrastructure, Models & MLOps",
+      "slug": "ai-infrastructure-models-and-mlops",
+      "description": "Developer and enterprise platforms for building, hosting, evaluating, observing, and deploying models.",
+      "subcategories": [
+        {
+          "id": "CAT-13-01",
+          "name": "Model hosting/serving",
+          "slug": "model-hosting-serving"
+        },
+        {
+          "id": "CAT-13-02",
+          "name": "LLM gateways",
+          "slug": "llm-gateways"
+        },
+        {
+          "id": "CAT-13-03",
+          "name": "vector databases",
+          "slug": "vector-databases"
+        },
+        {
+          "id": "CAT-13-04",
+          "name": "RAG frameworks",
+          "slug": "rag-frameworks"
+        },
+        {
+          "id": "CAT-13-05",
+          "name": "LLM evaluation",
+          "slug": "llm-evaluation"
+        },
+        {
+          "id": "CAT-13-06",
+          "name": "observability/tracing",
+          "slug": "observability-tracing"
+        },
+        {
+          "id": "CAT-13-07",
+          "name": "prompt management",
+          "slug": "prompt-management"
+        },
+        {
+          "id": "CAT-13-08",
+          "name": "fine-tuning",
+          "slug": "fine-tuning"
+        },
+        {
+          "id": "CAT-13-09",
+          "name": "model routers",
+          "slug": "model-routers"
+        }
+      ]
+    },
+    {
+      "id": "CAT-14",
+      "name": "Security, Privacy, Governance & Trust",
+      "slug": "security-privacy-governance-and-trust",
+      "description": "AI safety, risk, policy, privacy, and security controls.",
+      "subcategories": [
+        {
+          "id": "CAT-14-01",
+          "name": "AI governance",
+          "slug": "ai-governance"
+        },
+        {
+          "id": "CAT-14-02",
+          "name": "policy controls",
+          "slug": "policy-controls"
+        },
+        {
+          "id": "CAT-14-03",
+          "name": "DLP",
+          "slug": "dlp"
+        },
+        {
+          "id": "CAT-14-04",
+          "name": "PII redaction",
+          "slug": "pii-redaction"
+        },
+        {
+          "id": "CAT-14-05",
+          "name": "prompt-injection protection",
+          "slug": "prompt-injection-protection"
+        },
+        {
+          "id": "CAT-14-06",
+          "name": "content moderation",
+          "slug": "content-moderation"
+        },
+        {
+          "id": "CAT-14-07",
+          "name": "fraud detection",
+          "slug": "fraud-detection"
+        },
+        {
+          "id": "CAT-14-08",
+          "name": "red teaming",
+          "slug": "red-teaming"
+        },
+        {
+          "id": "CAT-14-09",
+          "name": "audit logs",
+          "slug": "audit-logs"
+        }
+      ]
+    },
+    {
+      "id": "CAT-15",
+      "name": "Marketing, SEO & Advertising",
+      "slug": "marketing-seo-and-advertising",
+      "description": "AI tools for campaign planning, content operations, SEO/GEO/AEO, ads, and growth.",
+      "subcategories": [
+        {
+          "id": "CAT-15-01",
+          "name": "SEO/AEO/GEO",
+          "slug": "seo-aeo-geo"
+        },
+        {
+          "id": "CAT-15-02",
+          "name": "content strategy",
+          "slug": "content-strategy"
+        },
+        {
+          "id": "CAT-15-03",
+          "name": "ad creative generation",
+          "slug": "ad-creative-generation"
+        },
+        {
+          "id": "CAT-15-04",
+          "name": "social media marketing",
+          "slug": "social-media-marketing"
+        },
+        {
+          "id": "CAT-15-05",
+          "name": "email marketing",
+          "slug": "email-marketing"
+        },
+        {
+          "id": "CAT-15-06",
+          "name": "landing-page optimization",
+          "slug": "landing-page-optimization"
+        },
+        {
+          "id": "CAT-15-07",
+          "name": "influencer discovery",
+          "slug": "influencer-discovery"
+        },
+        {
+          "id": "CAT-15-08",
+          "name": "brand monitoring",
+          "slug": "brand-monitoring"
+        }
+      ]
+    },
+    {
+      "id": "CAT-16",
+      "name": "Sales, CRM & Revenue AI",
+      "slug": "sales-crm-and-revenue-ai",
+      "description": "AI for outbound, pipeline, calls, CRM hygiene, proposals, and revenue operations.",
+      "subcategories": [
+        {
+          "id": "CAT-16-01",
+          "name": "AI SDRs",
+          "slug": "ai-sdrs"
+        },
+        {
+          "id": "CAT-16-02",
+          "name": "lead enrichment",
+          "slug": "lead-enrichment"
+        },
+        {
+          "id": "CAT-16-03",
+          "name": "outbound personalization",
+          "slug": "outbound-personalization"
+        },
+        {
+          "id": "CAT-16-04",
+          "name": "call coaching",
+          "slug": "call-coaching"
+        },
+        {
+          "id": "CAT-16-05",
+          "name": "conversation intelligence",
+          "slug": "conversation-intelligence"
+        },
+        {
+          "id": "CAT-16-06",
+          "name": "proposal/quote generation",
+          "slug": "proposal-quote-generation"
+        },
+        {
+          "id": "CAT-16-07",
+          "name": "CRM copilots",
+          "slug": "crm-copilots"
+        },
+        {
+          "id": "CAT-16-08",
+          "name": "revenue forecasting",
+          "slug": "revenue-forecasting"
+        }
+      ]
+    },
+    {
+      "id": "CAT-17",
+      "name": "Customer Support, CX & Success",
+      "slug": "customer-support-cx-and-success",
+      "description": "Tools for support automation, customer experience, service QA, and customer success.",
+      "subcategories": [
+        {
+          "id": "CAT-17-01",
+          "name": "Support agents",
+          "slug": "support-agents"
+        },
+        {
+          "id": "CAT-17-02",
+          "name": "ticket triage",
+          "slug": "ticket-triage"
+        },
+        {
+          "id": "CAT-17-03",
+          "name": "helpdesk copilots",
+          "slug": "helpdesk-copilots"
+        },
+        {
+          "id": "CAT-17-04",
+          "name": "chat widgets",
+          "slug": "chat-widgets"
+        },
+        {
+          "id": "CAT-17-05",
+          "name": "self-serve support",
+          "slug": "self-serve-support"
+        },
+        {
+          "id": "CAT-17-06",
+          "name": "QA/compliance monitoring",
+          "slug": "qa-compliance-monitoring"
+        },
+        {
+          "id": "CAT-17-07",
+          "name": "chat analytics",
+          "slug": "chat-analytics"
+        },
+        {
+          "id": "CAT-17-08",
+          "name": "customer success health scoring",
+          "slug": "customer-success-health-scoring"
+        }
+      ]
+    },
+    {
+      "id": "CAT-18",
+      "name": "Productivity, Meetings & Business Operations",
+      "slug": "productivity-meetings-and-business-operations",
+      "description": "Horizontal productivity and back-office tools used across teams.",
+      "subcategories": [
+        {
+          "id": "CAT-18-01",
+          "name": "Project management",
+          "slug": "project-management"
+        },
+        {
+          "id": "CAT-18-02",
+          "name": "meeting productivity",
+          "slug": "meeting-productivity"
+        },
+        {
+          "id": "CAT-18-03",
+          "name": "scheduling",
+          "slug": "scheduling"
+        },
+        {
+          "id": "CAT-18-04",
+          "name": "docs/SOPs",
+          "slug": "docs-sops"
+        },
+        {
+          "id": "CAT-18-05",
+          "name": "knowledge management",
+          "slug": "knowledge-management"
+        },
+        {
+          "id": "CAT-18-06",
+          "name": "email assistants",
+          "slug": "email-assistants"
+        },
+        {
+          "id": "CAT-18-07",
+          "name": "task planning",
+          "slug": "task-planning"
+        },
+        {
+          "id": "CAT-18-08",
+          "name": "process documentation",
+          "slug": "process-documentation"
+        }
+      ]
+    },
+    {
+      "id": "CAT-19",
+      "name": "Finance, Accounting & Procurement",
+      "slug": "finance-accounting-and-procurement",
+      "description": "Finance workflows for SMBs and enterprise teams.",
+      "subcategories": [
+        {
+          "id": "CAT-19-01",
+          "name": "Invoice automation",
+          "slug": "invoice-automation"
+        },
+        {
+          "id": "CAT-19-02",
+          "name": "bookkeeping assistants",
+          "slug": "bookkeeping-assistants"
+        },
+        {
+          "id": "CAT-19-03",
+          "name": "FP&A/budgeting",
+          "slug": "fpanda-budgeting"
+        },
+        {
+          "id": "CAT-19-04",
+          "name": "financial modeling",
+          "slug": "financial-modeling"
+        },
+        {
+          "id": "CAT-19-05",
+          "name": "spend analytics",
+          "slug": "spend-analytics"
+        },
+        {
+          "id": "CAT-19-06",
+          "name": "tax support",
+          "slug": "tax-support"
+        },
+        {
+          "id": "CAT-19-07",
+          "name": "procurement automation",
+          "slug": "procurement-automation"
+        },
+        {
+          "id": "CAT-19-08",
+          "name": "expense management",
+          "slug": "expense-management"
+        }
+      ]
+    },
+    {
+      "id": "CAT-20",
+      "name": "Legal, Compliance & Policy",
+      "slug": "legal-compliance-and-policy",
+      "description": "Legal research, contract workflows, compliance, and policy operations.",
+      "subcategories": [
+        {
+          "id": "CAT-20-01",
+          "name": "Contract review",
+          "slug": "contract-review"
+        },
+        {
+          "id": "CAT-20-02",
+          "name": "legal research",
+          "slug": "legal-research"
+        },
+        {
+          "id": "CAT-20-03",
+          "name": "compliance helpers",
+          "slug": "compliance-helpers"
+        },
+        {
+          "id": "CAT-20-04",
+          "name": "policy drafting",
+          "slug": "policy-drafting"
+        },
+        {
+          "id": "CAT-20-05",
+          "name": "e-discovery",
+          "slug": "e-discovery"
+        },
+        {
+          "id": "CAT-20-06",
+          "name": "clause extraction",
+          "slug": "clause-extraction"
+        },
+        {
+          "id": "CAT-20-07",
+          "name": "regulatory monitoring",
+          "slug": "regulatory-monitoring"
+        },
+        {
+          "id": "CAT-20-08",
+          "name": "legal intake",
+          "slug": "legal-intake"
+        }
+      ]
+    },
+    {
+      "id": "CAT-21",
+      "name": "HR, Recruiting & People Ops",
+      "slug": "hr-recruiting-and-people-ops",
+      "description": "AI for hiring, interviews, employee lifecycle, and people analytics.",
+      "subcategories": [
+        {
+          "id": "CAT-21-01",
+          "name": "Candidate screening",
+          "slug": "candidate-screening"
+        },
+        {
+          "id": "CAT-21-02",
+          "name": "AI interview agents",
+          "slug": "ai-interview-agents"
+        },
+        {
+          "id": "CAT-21-03",
+          "name": "job description writing",
+          "slug": "job-description-writing"
+        },
+        {
+          "id": "CAT-21-04",
+          "name": "onboarding",
+          "slug": "onboarding"
+        },
+        {
+          "id": "CAT-21-05",
+          "name": "HR analytics",
+          "slug": "hr-analytics"
+        },
+        {
+          "id": "CAT-21-06",
+          "name": "employee support",
+          "slug": "employee-support"
+        },
+        {
+          "id": "CAT-21-07",
+          "name": "skills matching",
+          "slug": "skills-matching"
+        },
+        {
+          "id": "CAT-21-08",
+          "name": "performance summaries",
+          "slug": "performance-summaries"
+        }
+      ]
+    },
+    {
+      "id": "CAT-22",
+      "name": "Education, Training & Learning",
+      "slug": "education-training-and-learning",
+      "description": "AI tutoring, teaching, course creation, and skill development.",
+      "subcategories": [
+        {
+          "id": "CAT-22-01",
+          "name": "Tutoring",
+          "slug": "tutoring"
+        },
+        {
+          "id": "CAT-22-02",
+          "name": "lesson planning",
+          "slug": "lesson-planning"
+        },
+        {
+          "id": "CAT-22-03",
+          "name": "course creation",
+          "slug": "course-creation"
+        },
+        {
+          "id": "CAT-22-04",
+          "name": "assessment generation",
+          "slug": "assessment-generation"
+        },
+        {
+          "id": "CAT-22-05",
+          "name": "exam prep",
+          "slug": "exam-prep"
+        },
+        {
+          "id": "CAT-22-06",
+          "name": "language learning",
+          "slug": "language-learning"
+        },
+        {
+          "id": "CAT-22-07",
+          "name": "corporate training",
+          "slug": "corporate-training"
+        },
+        {
+          "id": "CAT-22-08",
+          "name": "study tools",
+          "slug": "study-tools"
+        }
+      ]
+    },
+    {
+      "id": "CAT-23",
+      "name": "Research, Science & Knowledge Work",
+      "slug": "research-science-and-knowledge-work",
+      "description": "Tools for literature, citations, expert research, synthesis, and scientific workflows.",
+      "subcategories": [
+        {
+          "id": "CAT-23-01",
+          "name": "Research assistants",
+          "slug": "research-assistants"
+        },
+        {
+          "id": "CAT-23-02",
+          "name": "literature discovery",
+          "slug": "literature-discovery"
+        },
+        {
+          "id": "CAT-23-03",
+          "name": "citation helpers",
+          "slug": "citation-helpers"
+        },
+        {
+          "id": "CAT-23-04",
+          "name": "note-taking/PKM",
+          "slug": "note-taking-pkm"
+        },
+        {
+          "id": "CAT-23-05",
+          "name": "document summarization",
+          "slug": "document-summarization"
+        },
+        {
+          "id": "CAT-23-06",
+          "name": "lab assistants",
+          "slug": "lab-assistants"
+        },
+        {
+          "id": "CAT-23-07",
+          "name": "patent search",
+          "slug": "patent-search"
+        },
+        {
+          "id": "CAT-23-08",
+          "name": "grant writing",
+          "slug": "grant-writing"
+        }
+      ]
+    },
+    {
+      "id": "CAT-24",
+      "name": "Creator, Community & Social Media Tools",
+      "slug": "creator-community-and-social-media-tools",
+      "description": "AI for creators, influencers, community builders, and social distribution.",
+      "subcategories": [
+        {
+          "id": "CAT-24-01",
+          "name": "Shorts/reels creation",
+          "slug": "shorts-reels-creation"
+        },
+        {
+          "id": "CAT-24-02",
+          "name": "scriptwriting",
+          "slug": "scriptwriting"
+        },
+        {
+          "id": "CAT-24-03",
+          "name": "thumbnail generation",
+          "slug": "thumbnail-generation"
+        },
+        {
+          "id": "CAT-24-04",
+          "name": "content repurposing",
+          "slug": "content-repurposing"
+        },
+        {
+          "id": "CAT-24-05",
+          "name": "community management",
+          "slug": "community-management"
+        },
+        {
+          "id": "CAT-24-06",
+          "name": "comment automation",
+          "slug": "comment-automation"
+        },
+        {
+          "id": "CAT-24-07",
+          "name": "profile hubs",
+          "slug": "profile-hubs"
+        },
+        {
+          "id": "CAT-24-08",
+          "name": "creator stacks",
+          "slug": "creator-stacks"
+        }
+      ]
+    },
+    {
+      "id": "CAT-25",
+      "name": "Personal, Lifestyle & Consumer AI",
+      "slug": "personal-lifestyle-and-consumer-ai",
+      "description": "Consumer-facing AI tools for personal planning, wellbeing, shopping, and daily life.",
+      "subcategories": [
+        {
+          "id": "CAT-25-01",
+          "name": "Travel planning",
+          "slug": "travel-planning"
+        },
+        {
+          "id": "CAT-25-02",
+          "name": "fitness/wellness",
+          "slug": "fitness-wellness"
+        },
+        {
+          "id": "CAT-25-03",
+          "name": "personal finance",
+          "slug": "personal-finance"
+        },
+        {
+          "id": "CAT-25-04",
+          "name": "shopping assistants",
+          "slug": "shopping-assistants"
+        },
+        {
+          "id": "CAT-25-05",
+          "name": "meal planning",
+          "slug": "meal-planning"
+        },
+        {
+          "id": "CAT-25-06",
+          "name": "home organization",
+          "slug": "home-organization"
+        },
+        {
+          "id": "CAT-25-07",
+          "name": "personal learning",
+          "slug": "personal-learning"
+        },
+        {
+          "id": "CAT-25-08",
+          "name": "entertainment",
+          "slug": "entertainment"
+        }
+      ]
+    }
+  ],
+  "industries": [
+    {
+      "id": "VER-01",
+      "name": "Creators, Influencers & Solopreneurs",
+      "slug": "creators-influencers-and-solopreneurs",
+      "description": "Creators, coaches, newsletter writers, YouTubers, podcasters, consultants",
+      "needs": [
+        "Content repurposing",
+        "audience growth",
+        "profile/playbook distribution",
+        "monetization",
+        "sponsor workflows"
+      ],
+      "categoryIds": ["CAT-15", "CAT-24", "CAT-03", "CAT-04", "CAT-05"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-02",
+      "name": "Marketing Agencies & Growth Teams",
+      "slug": "marketing-agencies-and-growth-teams",
+      "description": "Agencies, SEO teams, performance marketers, content teams",
+      "needs": [
+        "Campaign ideation",
+        "SEO/GEO",
+        "social content",
+        "reporting",
+        "client deliverables"
+      ],
+      "categoryIds": ["CAT-15", "CAT-11", "CAT-06", "CAT-18"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-03",
+      "name": "SaaS & Software Companies",
+      "slug": "saas-and-software-companies",
+      "description": "Founders, product teams, dev teams, GTM teams",
+      "needs": [
+        "Coding",
+        "support automation",
+        "sales workflows",
+        "product analytics",
+        "documentation"
+      ],
+      "categoryIds": ["CAT-07", "CAT-16", "CAT-17", "CAT-18", "CAT-13"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-04",
+      "name": "E-commerce & Retail",
+      "slug": "e-commerce-and-retail",
+      "description": "DTC brands, marketplaces, retail operators",
+      "needs": [
+        "Product photography",
+        "descriptions",
+        "support",
+        "recommendations",
+        "merchandising",
+        "inventory planning"
+      ],
+      "categoryIds": ["CAT-03", "CAT-15", "CAT-17", "CAT-11", "CAT-12"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-05",
+      "name": "Education & Online Learning",
+      "slug": "education-and-online-learning",
+      "description": "Schools, tutors, course creators, L&D teams",
+      "needs": [
+        "Tutoring",
+        "lesson plans",
+        "assessment",
+        "course generation",
+        "student support"
+      ],
+      "categoryIds": ["CAT-22", "CAT-24", "CAT-06", "CAT-18"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-06",
+      "name": "Healthcare & Life Sciences",
+      "slug": "healthcare-and-life-sciences",
+      "description": "Clinics, healthtech, pharma, research labs",
+      "needs": [
+        "Clinical documentation",
+        "patient intake",
+        "research",
+        "compliance",
+        "diagnostic support"
+      ],
+      "categoryIds": ["CAT-12", "CAT-20", "CAT-23", "CAT-14"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-07",
+      "name": "Legal Services & LegalTech",
+      "slug": "legal-services-and-legaltech",
+      "description": "Law firms, in-house counsel, compliance teams",
+      "needs": [
+        "Contract review",
+        "legal research",
+        "e-discovery",
+        "policy monitoring",
+        "client intake"
+      ],
+      "categoryIds": ["CAT-20", "CAT-10", "CAT-23", "CAT-14"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-08",
+      "name": "Finance, Accounting & Insurance",
+      "slug": "finance-accounting-and-insurance",
+      "description": "Advisors, accounting firms, insurers, fintech teams",
+      "needs": [
+        "Invoice processing",
+        "modeling",
+        "fraud detection",
+        "claims",
+        "compliance",
+        "reporting"
+      ],
+      "categoryIds": ["CAT-19", "CAT-12", "CAT-14", "CAT-11"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-09",
+      "name": "Real Estate & Property",
+      "slug": "real-estate-and-property",
+      "description": "Agents, brokerages, property managers, investors",
+      "needs": [
+        "Listing descriptions",
+        "lead response",
+        "document review",
+        "valuation support",
+        "virtual tours"
+      ],
+      "categoryIds": ["CAT-15", "CAT-16", "CAT-20", "CAT-03", "CAT-04"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-10",
+      "name": "HR, Recruiting & Staffing",
+      "slug": "hr-recruiting-and-staffing",
+      "description": "Recruiters, staffing agencies, HR departments",
+      "needs": [
+        "Candidate sourcing",
+        "interview agents",
+        "onboarding",
+        "employee support",
+        "people analytics"
+      ],
+      "categoryIds": ["CAT-21", "CAT-09", "CAT-18"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-11",
+      "name": "Customer Support & BPO",
+      "slug": "customer-support-and-bpo",
+      "description": "Support teams, call centers, CX leaders",
+      "needs": [
+        "Agent assist",
+        "ticket triage",
+        "QA",
+        "self-serve support",
+        "knowledge base automation"
+      ],
+      "categoryIds": ["CAT-17", "CAT-10", "CAT-05", "CAT-14"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-12",
+      "name": "IT, DevOps & MSPs",
+      "slug": "it-devops-and-msps",
+      "description": "IT admins, MSPs, security teams, platform engineers",
+      "needs": [
+        "IT ticketing",
+        "runbooks",
+        "observability",
+        "incident response",
+        "governance"
+      ],
+      "categoryIds": ["CAT-13", "CAT-14", "CAT-09", "CAT-18"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-13",
+      "name": "Manufacturing, Construction & Industrial",
+      "slug": "manufacturing-construction-and-industrial",
+      "description": "Operations leaders, engineers, field teams",
+      "needs": [
+        "Visual inspection",
+        "safety",
+        "SOPs",
+        "quoting",
+        "predictive maintenance"
+      ],
+      "categoryIds": ["CAT-12", "CAT-18", "CAT-11", "CAT-09"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-14",
+      "name": "Media, Publishing & Entertainment",
+      "slug": "media-publishing-and-entertainment",
+      "description": "Publishers, studios, game teams, media companies",
+      "needs": [
+        "Research",
+        "editorial workflows",
+        "audio/video production",
+        "localization",
+        "rights workflows"
+      ],
+      "categoryIds": ["CAT-02", "CAT-04", "CAT-05", "CAT-23", "CAT-24"],
+      "priority": "Medium"
+    },
+    {
+      "id": "VER-15",
+      "name": "Hospitality, Travel & Local Services",
+      "slug": "hospitality-travel-and-local-services",
+      "description": "Hotels, restaurants, agencies, local service businesses",
+      "needs": [
+        "Booking support",
+        "review response",
+        "marketing",
+        "scheduling",
+        "trip planning"
+      ],
+      "categoryIds": ["CAT-15", "CAT-17", "CAT-25", "CAT-18"],
+      "priority": "Low"
+    },
+    {
+      "id": "VER-16",
+      "name": "Public Sector, Nonprofit & Civic",
+      "slug": "public-sector-nonprofit-and-civic",
+      "description": "Government agencies, NGOs, civic orgs",
+      "needs": [
+        "Citizen services",
+        "grant writing",
+        "policy research",
+        "translation",
+        "accessibility"
+      ],
+      "categoryIds": ["CAT-20", "CAT-22", "CAT-23", "CAT-14"],
+      "priority": "Low"
+    },
+    {
+      "id": "VER-17",
+      "name": "Professional Services & Consulting",
+      "slug": "professional-services-and-consulting",
+      "description": "Consultants, analysts, accountants, advisory firms",
+      "needs": [
+        "Research",
+        "proposal generation",
+        "reporting",
+        "client delivery",
+        "knowledge management"
+      ],
+      "categoryIds": ["CAT-18", "CAT-23", "CAT-16", "CAT-11"],
+      "priority": "High"
+    },
+    {
+      "id": "VER-18",
+      "name": "Consumer & Personal Productivity",
+      "slug": "consumer-and-personal-productivity",
+      "description": "Individuals, families, hobbyists",
+      "needs": [
+        "Planning",
+        "wellness",
+        "shopping",
+        "personal finance",
+        "learning",
+        "lifestyle automation"
+      ],
+      "categoryIds": ["CAT-25", "CAT-22", "CAT-18"],
+      "priority": "Low"
+    }
+  ],
+  "useCases": [
+    {
+      "id": "UC-001",
+      "name": "Find the best AI tool for a specific task",
+      "slug": "find-the-best-ai-tool-for-a-specific-task",
+      "audience": "All",
+      "description": "Compare, shortlist, and choose tools by category, price, rating, and examples.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-002",
+      "name": "Claim and update an AI tool listing",
+      "slug": "claim-and-update-an-ai-tool-listing",
+      "audience": "Vendor",
+      "description": "Verify ownership, correct listing data, add screenshots, and engage with users.",
+      "listingTypeIds": ["LST-02", "LST-03", "LST-01"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-003",
+      "name": "Publish a creator AI resource profile",
+      "slug": "publish-a-creator-ai-resource-profile",
+      "audience": "Creators",
+      "description": "Create a public page with stack, playbooks, posts, and selected links.",
+      "listingTypeIds": ["LST-04", "LST-05", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-004",
+      "name": "Send commenters to a playbook/profile from social automations",
+      "slug": "send-commenters-to-a-playbook-profile-from-social-automations",
+      "audience": "Creators/Marketing",
+      "description": "Redirect comment-triggered automations to aiBean profile or one gated playbook.",
+      "listingTypeIds": ["LST-04", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-005",
+      "name": "Build a tool stack for short-form content production",
+      "slug": "build-a-tool-stack-for-short-form-content-production",
+      "audience": "Creators",
+      "description": "Plan scripts, thumbnails, voice, video editing, captions, and repurposing.",
+      "listingTypeIds": ["LST-06", "LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-006",
+      "name": "Generate and optimize SEO/GEO content",
+      "slug": "generate-and-optimize-seo-geo-content",
+      "audience": "Marketing",
+      "description": "Research keywords, draft content, optimize for search and AI answer engines.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-007",
+      "name": "Create ad creatives and campaign variants",
+      "slug": "create-ad-creatives-and-campaign-variants",
+      "audience": "Marketing/E-commerce",
+      "description": "Generate images, copy, landing-page variants, and tests.",
+      "listingTypeIds": ["LST-01", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-008",
+      "name": "Automate outbound sales personalization",
+      "slug": "automate-outbound-sales-personalization",
+      "audience": "Sales",
+      "description": "Enrich leads, draft personalized emails, sequence follow-ups, log CRM updates.",
+      "listingTypeIds": ["LST-01", "LST-09"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-009",
+      "name": "Summarize sales calls and coach reps",
+      "slug": "summarize-sales-calls-and-coach-reps",
+      "audience": "Sales",
+      "description": "Transcribe calls, score conversations, extract objections, and recommend coaching.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-010",
+      "name": "Deploy a customer support agent",
+      "slug": "deploy-a-customer-support-agent",
+      "audience": "Support",
+      "description": "Answer FAQs, triage tickets, escalate, and update knowledge base.",
+      "listingTypeIds": ["LST-01", "LST-09", "LST-10"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-011",
+      "name": "Create a knowledge-base assistant over company documents",
+      "slug": "create-a-knowledge-base-assistant-over-company-documents",
+      "audience": "SaaS/Support/Legal",
+      "description": "Ingest documents, retrieve answers, cite sources, and govern access.",
+      "listingTypeIds": ["LST-01", "LST-09", "LST-10"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-012",
+      "name": "Choose a RAG/vector database stack",
+      "slug": "choose-a-rag-vector-database-stack",
+      "audience": "Technical",
+      "description": "Compare vector DBs, RAG frameworks, eval tools, and deployment options.",
+      "listingTypeIds": ["LST-01", "LST-10", "LST-11"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-013",
+      "name": "Compare LLMs for a workflow",
+      "slug": "compare-llms-for-a-workflow",
+      "audience": "Technical",
+      "description": "Compare models by modality, cost, speed, context, privacy, and eval performance.",
+      "listingTypeIds": ["LST-10", "LST-11"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-014",
+      "name": "Generate production-ready code faster",
+      "slug": "generate-production-ready-code-faster",
+      "audience": "Technical",
+      "description": "Use coding assistants for feature generation, refactoring, debugging, and tests.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-015",
+      "name": "Build a no-code AI app or internal tool",
+      "slug": "build-a-no-code-ai-app-or-internal-tool",
+      "audience": "Ops/SMB",
+      "description": "Create database-backed apps, forms, dashboards, and AI workflows.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-09"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-016",
+      "name": "Turn meetings into actions and SOPs",
+      "slug": "turn-meetings-into-actions-and-sops",
+      "audience": "Business Ops",
+      "description": "Record, summarize, assign actions, draft SOPs, and sync to project tools.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-017",
+      "name": "Analyze spreadsheets and dashboards",
+      "slug": "analyze-spreadsheets-and-dashboards",
+      "audience": "Finance/Ops",
+      "description": "Clean data, explain trends, forecast, and generate BI reports.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-018",
+      "name": "Automate invoice and receipt processing",
+      "slug": "automate-invoice-and-receipt-processing",
+      "audience": "Finance/E-commerce",
+      "description": "Extract data, classify expenses, reconcile, and route approvals.",
+      "listingTypeIds": ["LST-01", "LST-09"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-019",
+      "name": "Review contracts and extract obligations",
+      "slug": "review-contracts-and-extract-obligations",
+      "audience": "Legal/Finance",
+      "description": "Summarize contracts, flag risks, extract clauses, and track obligations.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-020",
+      "name": "Monitor compliance and AI governance",
+      "slug": "monitor-compliance-and-ai-governance",
+      "audience": "Legal/Enterprise",
+      "description": "Create policy controls, audits, red-team tests, and approval workflows.",
+      "listingTypeIds": ["LST-01", "LST-09"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-021",
+      "name": "Screen candidates and run interviews",
+      "slug": "screen-candidates-and-run-interviews",
+      "audience": "HR",
+      "description": "Rank resumes, draft outreach, coordinate interviews, and summarize feedback.",
+      "listingTypeIds": ["LST-01", "LST-09"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-022",
+      "name": "Build employee onboarding copilots",
+      "slug": "build-employee-onboarding-copilots",
+      "audience": "HR/Ops",
+      "description": "Answer onboarding questions, generate checklists, and personalize training.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Later"
+    },
+    {
+      "id": "UC-023",
+      "name": "Create lessons, quizzes, and study guides",
+      "slug": "create-lessons-quizzes-and-study-guides",
+      "audience": "Education",
+      "description": "Generate curriculum, quizzes, rubrics, and study resources.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-13"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-024",
+      "name": "Produce product photos and descriptions",
+      "slug": "produce-product-photos-and-descriptions",
+      "audience": "E-commerce",
+      "description": "Generate product images, backgrounds, copy, translations, and variants.",
+      "listingTypeIds": ["LST-01", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-025",
+      "name": "Repurpose long videos into shorts",
+      "slug": "repurpose-long-videos-into-shorts",
+      "audience": "Creators/Media",
+      "description": "Extract clips, captions, titles, thumbnails, and posting schedule.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-026",
+      "name": "Create podcasts and voice content",
+      "slug": "create-podcasts-and-voice-content",
+      "audience": "Creators/Media",
+      "description": "Transcribe, clean audio, clone voices where permitted, generate show notes.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-027",
+      "name": "Generate presentations and pitch decks",
+      "slug": "generate-presentations-and-pitch-decks",
+      "audience": "Sales/Founders",
+      "description": "Create decks from prompts, documents, or outlines and convert to shareable assets.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-028",
+      "name": "Run deep research with citations",
+      "slug": "run-deep-research-with-citations",
+      "audience": "Research/Professional Services",
+      "description": "Search sources, synthesize findings, cite evidence, and generate briefs.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-13"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-029",
+      "name": "Transcribe and translate multimedia content",
+      "slug": "transcribe-and-translate-multimedia-content",
+      "audience": "Media/Education",
+      "description": "Create transcripts, subtitles, dubbing, translations, and accessibility assets.",
+      "listingTypeIds": ["LST-01", "LST-05"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-030",
+      "name": "Detect fraud, risk, and anomalies",
+      "slug": "detect-fraud-risk-and-anomalies",
+      "audience": "Finance/Security",
+      "description": "Identify anomalies, suspicious behavior, policy violations, and fraud signals.",
+      "listingTypeIds": ["LST-01", "LST-10"],
+      "priority": "Later"
+    },
+    {
+      "id": "UC-031",
+      "name": "Moderate user-generated content",
+      "slug": "moderate-user-generated-content",
+      "audience": "Platforms/Community",
+      "description": "Detect unsafe content, enforce rules, and escalate edge cases.",
+      "listingTypeIds": ["LST-01", "LST-09"],
+      "priority": "Later"
+    },
+    {
+      "id": "UC-032",
+      "name": "Create browser-based AI workflows",
+      "slug": "create-browser-based-ai-workflows",
+      "audience": "General",
+      "description": "Use extensions/agents to summarize pages, fill forms, collect leads, and automate browser tasks.",
+      "listingTypeIds": ["LST-12", "LST-09"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-033",
+      "name": "Create a custom assistant for a niche workflow",
+      "slug": "create-a-custom-assistant-for-a-niche-workflow",
+      "audience": "General",
+      "description": "Build assistant instructions, files, actions, and sharing permissions.",
+      "listingTypeIds": ["LST-08", "LST-07", "LST-05"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-034",
+      "name": "Compare tools by real playbooks instead of feature lists",
+      "slug": "compare-tools-by-real-playbooks-instead-of-feature-lists",
+      "audience": "All",
+      "description": "See how tools perform inside workflows, not only vendor descriptions.",
+      "listingTypeIds": ["LST-01", "LST-05", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-035",
+      "name": "Publish community discussions around a tool or workflow",
+      "slug": "publish-community-discussions-around-a-tool-or-workflow",
+      "audience": "Community",
+      "description": "Ask questions, share examples, collect feedback, and link related tools/playbooks.",
+      "listingTypeIds": ["LST-15", "LST-01", "LST-05"],
+      "priority": "Core/Later"
+    },
+    {
+      "id": "UC-036",
+      "name": "Find free resources or templates from a creator",
+      "slug": "find-free-resources-or-templates-from-a-creator",
+      "audience": "Creators/Community",
+      "description": "Access a specific playbook, template, prompt, or stack via a creator profile.",
+      "listingTypeIds": ["LST-04", "LST-05", "LST-07"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-037",
+      "name": "Evaluate privacy and security before adopting a tool",
+      "slug": "evaluate-privacy-and-security-before-adopting-a-tool",
+      "audience": "Enterprise/SMB",
+      "description": "Review data handling, permissions, SOC2/GDPR notes, and AI governance controls.",
+      "listingTypeIds": ["LST-01", "LST-02", "LST-14"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-038",
+      "name": "Discover alternatives to an AI tool",
+      "slug": "discover-alternatives-to-an-ai-tool",
+      "audience": "All",
+      "description": "Find similar tools by category, use case, pricing, platform, and vertical.",
+      "listingTypeIds": ["LST-01", "LST-06"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-039",
+      "name": "Find AI tools by integration ecosystem",
+      "slug": "find-ai-tools-by-integration-ecosystem",
+      "audience": "Ops/Technical",
+      "description": "Filter by Slack, Notion, HubSpot, Shopify, Google Workspace, Zapier, API, etc.",
+      "listingTypeIds": ["LST-01", "LST-09", "LST-12"],
+      "priority": "Core"
+    },
+    {
+      "id": "UC-040",
+      "name": "Browse AI learning paths by role",
+      "slug": "browse-ai-learning-paths-by-role",
+      "audience": "Education/All",
+      "description": "Find courses, tutorials, and tool walkthroughs mapped to job roles and workflows.",
+      "listingTypeIds": ["LST-13", "LST-05", "LST-01"],
+      "priority": "Later"
+    }
+  ],
+  "listingTypes": [
+    {
+      "id": "LST-01",
+      "name": "AI Tool / SaaS Product",
+      "description": "A commercial or free AI product with a website/app users can access.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-02",
+      "name": "Claimed Tool Profile",
+      "description": "A verified owner-managed version of an AI tool listing.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-03",
+      "name": "Vendor / Company Profile",
+      "description": "The organization behind one or many tools.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-04",
+      "name": "Creator Profile / aiBean Profile",
+      "description": "Public profile for creators, experts, curators, or users showcasing stacks, playbooks, posts, and links.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-05",
+      "name": "Playbook / Workflow",
+      "description": "A step-by-step AI workflow, resource, template, or operating procedure.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-06",
+      "name": "Tool Stack",
+      "description": "A curated set of tools used by a creator, team, or company for a defined workflow.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-07",
+      "name": "Prompt / Prompt Pack",
+      "description": "Reusable prompts for a model, role, or workflow.",
+      "priority": "Later"
+    },
+    {
+      "id": "LST-08",
+      "name": "GPT / Custom Assistant",
+      "description": "A custom assistant, GPT, bot, or persona built on a platform.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-09",
+      "name": "Agent / Automation Template",
+      "description": "A reusable automation or agent flow that performs actions across tools.",
+      "priority": "Core"
+    },
+    {
+      "id": "LST-10",
+      "name": "Model / API",
+      "description": "A foundation model, specialized model, API endpoint, or model service.",
+      "priority": "Core/Later"
+    },
+    {
+      "id": "LST-11",
+      "name": "Dataset / Benchmark",
+      "description": "Dataset, benchmark, leaderboard, or evaluation suite.",
+      "priority": "Later"
+    },
+    {
+      "id": "LST-12",
+      "name": "Browser Extension / Plugin",
+      "description": "AI extension, plugin, add-on, or app-store installable.",
+      "priority": "Core/Later"
+    },
+    {
+      "id": "LST-13",
+      "name": "Course / Tutorial / AI University Resource",
+      "description": "Educational resource teaching a tool, workflow, or AI skill.",
+      "priority": "Later"
+    },
+    {
+      "id": "LST-14",
+      "name": "News / Insight / Update",
+      "description": "Editorial or curated update about AI tools, markets, launches, or use cases.",
+      "priority": "Later"
+    },
+    {
+      "id": "LST-15",
+      "name": "Discussion Post / Community Activity",
+      "description": "Community post, question, review discussion, or showcase.",
+      "priority": "Core/Later"
+    },
+    {
+      "id": "LST-16",
+      "name": "Deal / Offer / Affiliate Page",
+      "description": "Promotion, coupon, trial, or negotiated offer attached to a tool.",
+      "priority": "Later"
+    }
+  ]
+}

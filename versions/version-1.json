@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "savedAtUtc": "2026-10-06T14:27:45.3040485Z",
+  "description": "Brand and layout baseline before tool logos. Includes the current featured placement implementation.",
+  "archive": "aibean-version-1.zip",
+  "sha256": "859598AB6CF5891E292F4D077E75B8CD90E2133AD5DE4D4B61A05740585E7B45",
+  "fileCount": 118,
+  "excludes": [
+    "node_modules",
+    ".next",
+    "private environment files",
+    "database contents",
+    "original reference attachments"
+  ]
+}
