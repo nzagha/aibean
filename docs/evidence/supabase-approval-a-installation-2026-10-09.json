@@ -536,5 +536,16 @@
     "runtime_login_count": 0
   },
   "failedInstallationChecks": [],
-  "commitAcknowledged": true
+  "commitAcknowledged": true,
+  "repositoryValidation": {
+    "implementationCommit": "9ce0baff292042d44f7c2764fbb5eaf6dd4cd02d",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38001811549",
+    "ciResult": "success",
+    "lint": true,
+    "typecheck": true,
+    "ordinaryTestsPassed": 28,
+    "productionBuildInCleanCi": true,
+    "runtimeVulnerabilities": 0,
+    "localBuildLimitation": "Windows EPERM unlink lock in existing .next cache; clean CI production build passed"
+  }
 }
