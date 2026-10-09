@@ -90,6 +90,8 @@ The HTTP smoke script expects the unconfigured local development preview (no aut
 
 Provider/Stripe end-to-end journeys, live PostgreSQL runtime provisioning and full visual/mobile interaction QA remain pending. Next.js is patched to 16.3.8 on the Supabase foundation branch; the October 7 audit remains a historical snapshot of 16.3.6. Moderate development-only transitive advisories through drizzle-kit remain under review; do not apply an unreviewed forced downgrade to silence them. See docs/FOUNDATION_PROGRESS.md for current validation and blockers.
 
+The owner confirms Supabase Free with no existing backup. [Manual backup/recovery plan](docs/SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md) documents the prepared private storage, Windows CMS encryption, empty native restore target and explicit export approval checkpoint. `npm run supabase:backup:inspect` uses read-only catalogs/counts and exports no record bodies. `scripts/prepare-private-backup.ps1` is an operator-invoked local preparation helper with explicit private-path parameters; it never loads the hosted connection. Actual hosted-data backup/restore has not run, and hosted A/B/C changes remain blocked pending recovery and independent approvals.
+
 ## Implementation and next stages
 
 The active sequence is [MVP_REMEDIATION_PLAN.md](docs/MVP_REMEDIATION_PLAN.md), with stage evidence in [FOUNDATION_PROGRESS.md](docs/FOUNDATION_PROGRESS.md). It supersedes legacy authentication instructions in earlier stage documents.

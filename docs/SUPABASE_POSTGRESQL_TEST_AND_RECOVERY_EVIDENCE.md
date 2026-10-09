@@ -13,8 +13,8 @@ Validated 9 October 2026 on `codex/supabase-foundation`. All database writes des
 | Runtime role security | PASS | Independent SCRAM login sessions, verified TLS, no elevated flags |
 | Logical backup/restore | PASS | Synthetic source restored to a separate freshly initialized instance |
 | Package integrity | PASS | Original migrations and existing installation/security manifest unchanged |
-| Hosted backup/recovery | UNVERIFIED | No live backup, restore, plan/retention check or recovery target provisioning |
-| Hosted migration readiness | CONDITIONAL GO | Technical isolated gates pass; owner decisions and secure hosted recovery gate remain |
+| Hosted backup/recovery | NOT EXECUTED | Owner confirms Free/no backups; local storage/encryption/empty target prepared |
+| Hosted migration readiness | NO-GO | Actual scoped capture/restore and separate A/B/C approvals remain required |
 
 The sanitized machine-readable run is [postgres validation evidence](evidence/supabase-postgres-validation-2026-10-09.json). It contains aggregate outcomes and hashes, not credentials, CA contents or private paths.
 
@@ -88,7 +88,9 @@ Native 17.11 Windows differs from managed 17.6 aarch64 Linux, which has Supabase
 
 All owned disposable instances stopped after the successful run. No containers, development volumes, hosted objects or Auth settings changed. Existing installation source and manifest hashes remain identical to commit 6de140a. New Approval B and validation files have independent review hashes in the approval document.
 
-## Hosted backup process proposed for owner approval
+## Earlier proposed hosted backup process — superseded
+
+The subsection below records the earlier proposal before the owner confirmed Free. Its unverified storage/target/plan statements are superseded by [the Free backup and recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md). Current preparation verified private local NTFS/ACLs, AES-256 Windows CMS encryption with a synthetic archive and a new empty loopback-only native TLS/SCRAM instance. The instance is stopped; hosted export/restore remains NOT EXECUTED. No managed daily backup/PITR is assumed. The current procedure encrypts the binary export in memory rather than retaining the plaintext .dump suggested below, and uses the prepared local target rather than requiring another hosted project.
 
 Hosted backup/restore remains unverified. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups) describes plan-dependent retention: Pro seven days, Team fourteen, Enterprise up to thirty; PITR is an additional option. The project's actual plan, retained snapshots and recovery window have not been verified. Database backups exclude Storage file bodies and omit custom-role passwords; credentials require secure reprovisioning after recovery.
 

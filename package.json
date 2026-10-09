@@ -13,6 +13,7 @@
     "db:migrate": "tsx scripts/require-reviewed-installation.ts",
     "db:seed": "tsx scripts/seed.ts",
     "supabase:check": "tsx scripts/check-supabase-readiness.ts",
+    "supabase:backup:inspect": "tsx scripts/inspect-public-backup-scope.ts",
     "db:prepare-install": "tsx scripts/prepare-database-installation.ts",
     "db:test-postgres": "tsx scripts/test-postgres-installation.ts",
     "db:up": "docker compose --env-file .env.local up -d db redis",

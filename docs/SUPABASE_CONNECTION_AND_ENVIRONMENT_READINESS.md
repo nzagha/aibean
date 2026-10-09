@@ -1,6 +1,6 @@
 # Supabase connection and environment readiness
 
-Updated 9 October 2026, including the owner's newly configured DATABASE_URL verification. Live metadata was refreshed through MCP. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
+Updated 9 October 2026, including verified DATABASE_URL and the Supabase Free backup preparation. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
 
 ## Outcome
 
@@ -35,7 +35,7 @@ npm run supabase:check
 
 The latest result confirms `hostnameVerified=true`, `transportVerified=true`, `drizzleSelectVerified=true`, selected schema public and server version 17.6. No special Node startup CA setting is now needed. No global trust store was modified.
 
-**Current migration decision: CONDITIONAL GO for staged owner review.** The existing installation SQL and manifest are unchanged. Sixteen real PostgreSQL 17.11 scenarios now pass for clean/repeat/historical installation, independent authenticated roles, multi-connection locking/ownership, rollback, and backup/restore to a separate native instance. Docker still times out; the native alternative closes the isolated PostgreSQL gate. See [test/recovery evidence](SUPABASE_POSTGRESQL_TEST_AND_RECOVERY_EVIDENCE.md). Actual hosted backup capabilities, private secure storage and a separate recovery target remain unverified. Hosted execution awaits those recovery checks plus independent installation A, runtime-login B and TestUsers-permission C approvals in the [final approval package](SUPABASE_DATABASE_INSTALLATION_APPROVAL.md). No hosted object/data/permission/Auth change occurred.
+**Current execution decision: NO-GO until the actual hosted-data recovery gate passes.** The owner confirms Supabase Free with no existing backup; no daily managed snapshot or PITR is assumed. Private storage ACLs, Windows certificate/CMS encryption and a new empty loopback-only TLS/SCRAM native target are now verified. Hosted records have not been exported or restored; the owner must approve that scoped operation first. See [the Free recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md). The unchanged installation package retains its sixteen passing synthetic native scenarios; staged technical review can continue, but A/B/C execution remains blocked. No hosted object/data/permission/Auth change occurred.
 
 The final SELECT-only refresh also verified postgres has database/schema CREATE, public CREATE, auth USAGE and auth.users REFERENCES. Hosted inventory remains only TestUsers/count two, zero Auth users and absent aiBean tables/ledgers. A future custom runtime account has not been created or authenticated on Supabase. The local shared runtime tests prove object/grant restrictions, not per-user server authorization or provider flows.
 

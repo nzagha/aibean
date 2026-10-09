@@ -1,0 +1,86 @@
+{
+  "preparedAt": "2026-10-09T21:36:44.659Z",
+  "sourceProject": "yfknxidgphhepdtwazhn",
+  "plan": {
+    "name": "Free",
+    "evidence": "Owner confirmation; billing API not inspected"
+  },
+  "hostedReadOnlyRefresh": {
+    "database": "postgres",
+    "schema": "public",
+    "serverVersion": "17.6",
+    "verifiedTls": true,
+    "drizzleSelectVerified": true,
+    "transactionReadOnly": true,
+    "testUsersCount": 2,
+    "authUsersCount": 0,
+    "applicationTablesInstalled": false,
+    "drizzleLedgerPresent": false,
+    "supabaseLedgerPresent": false,
+    "publicTables": ["TestUsers"],
+    "publicSequences": ["TestUsers_id_seq"],
+    "columns": ["id", "created_at", "email", "age", "name"],
+    "publicFunctionCount": 0,
+    "idColumnIdentityGeneration": "BY DEFAULT",
+    "testUsersRls": true,
+    "policyCount": 2,
+    "personalRecordBodiesRead": false,
+    "hostedModified": false
+  },
+  "storage": {
+    "fileSystem": "NTFS",
+    "freeGiBAtPreparation": 682,
+    "configuredSyncRootsExcluded": true,
+    "repositoryExcluded": true,
+    "reparsePointsExcluded": true,
+    "rootAclInheritanceDisabled": true,
+    "allowedPrincipals": ["Windows owner", "SYSTEM", "Administrators"],
+    "ordinaryOtherUsersGrantedAccess": false,
+    "privateKeyAclVerified": true,
+    "privateKeySeparatedFromBackups": true,
+    "arbitraryThirdPartySyncNotRuledOut": true,
+    "volumeEncryptionVerified": false
+  },
+  "encryption": {
+    "method": "Windows CMS document encryption",
+    "rsaKeyBits": 3072,
+    "certificatePrivateKeyStore": "CurrentUser/My",
+    "algorithm": "AES-256-CBC",
+    "algorithmOid": "2.16.840.1.101.3.4.1.42",
+    "syntheticCustomArchiveRoundtripSha256Matched": true,
+    "syntheticEncryptedTemporaryFileRemoved": true,
+    "privateKeyExported": false,
+    "independentDeviceKeyRecovery": "NOT VERIFIED",
+    "hostedEncryptedArchiveVerified": false
+  },
+  "isolatedTarget": {
+    "version": "PostgreSQL 17.11",
+    "freshInstance": true,
+    "loopbackOnly": true,
+    "scram": true,
+    "verifiedTls": true,
+    "publicTableCount": 0,
+    "stoppedAfterValidation": true,
+    "separateCredentialProtectedWithCurrentUserDpapi": true,
+    "plaintextBootstrapPasswordRemoved": true,
+    "hostedRecordsRestored": false
+  },
+  "priorSyntheticNativeScenarios": {
+    "passed": 16,
+    "rerunThisPreparation": false
+  },
+  "installationSqlSha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+  "runtimeLoginSqlSha256": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+  "testUsersSecuritySqlSha256": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+  "statuses": {
+    "supabaseFreeBackupProcess": "READY",
+    "hostedScopedBackup": "NOT EXECUTED",
+    "backupEncryption": "PASS (configuration and synthetic roundtrip only)",
+    "isolatedRestore": "NOT EXECUTED",
+    "recoveryReadiness": "NO-GO",
+    "installationSqlIntegrity": "PASS",
+    "approvalA": "BLOCKED",
+    "approvalB": "BLOCKED",
+    "approvalC": "BLOCKED"
+  }
+}
