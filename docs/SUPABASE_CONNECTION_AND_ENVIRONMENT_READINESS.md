@@ -1,6 +1,6 @@
 # Supabase connection and environment readiness
 
-Updated 9 October 2026, including verified DATABASE_URL and the Supabase Free backup preparation. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
+Updated 9 October 2026, including verified DATABASE_URL and the successful authorized hosted scoped backup/recovery. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
 
 ## Outcome
 
@@ -35,9 +35,9 @@ npm run supabase:check
 
 The latest result confirms `hostnameVerified=true`, `transportVerified=true`, `drizzleSelectVerified=true`, selected schema public and server version 17.6. No special Node startup CA setting is now needed. No global trust store was modified.
 
-**Current execution decision: NO-GO until the actual hosted-data recovery gate passes.** The owner confirms Supabase Free with no existing backup; no daily managed snapshot or PITR is assumed. Private storage ACLs, Windows certificate/CMS encryption and a new empty loopback-only TLS/SCRAM native target are now verified. Hosted records have not been exported or restored; the owner must approve that scoped operation first. See [the Free recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md). The unchanged installation package retains its sixteen passing synthetic native scenarios; staged technical review can continue, but A/B/C execution remains blocked. No hosted object/data/permission/Auth change occurred.
+**Recovery gate PASS; Approval A is ready for an exact owner decision.** The owner-authorized read-only export and isolated restore verified both records, scoped definitions, RLS/grants, archive integrity/decryption and source continuity. The private encrypted archive/metadata remain; successful transient local files/log were removed. The owner confirms Supabase Free; no managed daily snapshot/PITR is assumed. See [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md). The unchanged installation package retains its sixteen passing synthetic scenarios. A/B/C and Auth activation are not approved/executed; no hosted object/data/permission/Auth change occurred.
 
-Latest recovery-gate follow-up confirms empty private backup storage and, through verified-TLS read-only local catalogs, no TestUsers relation on the recovery target. It reconfirms count two on the hosted source, all fourteen aiBean tables absent, unchanged hashes and no unrelated public custom objects in the expanded catalog checks. Count equality does not establish personal-value continuity. [Exact approval wording and post-install sequence](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) remain conditional on the separately approved actual backup/rehearsal.
+Latest post-recovery read-only Drizzle inventory confirms eight schemas, only TestUsers/its identity sequence in public, two records, zero Auth users, all fourteen application tables individually absent, and no Drizzle/Supabase/security/mapping ledgers. Seven reviewed SQL hashes and baseline timestamps remain unchanged. Private source/restored/fresh-source digests establish content continuity for this capture without publishing identifiable values. [Exact approval wording and post-install sequence](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) require independent A/B/C decisions.
 
 The final SELECT-only refresh also verified postgres has database/schema CREATE, public CREATE, auth USAGE and auth.users REFERENCES. Hosted inventory remains only TestUsers/count two, zero Auth users and absent aiBean tables/ledgers. A future custom runtime account has not been created or authenticated on Supabase. The local shared runtime tests prove object/grant restrictions, not per-user server authorization or provider flows.
 
@@ -141,7 +141,7 @@ Pinned packages: supabase-js 2.117.3, SSR 0.12.7. Prepared browser, request-scop
 
 ## Exact next implementation stage
 
-1. Confirm the actual hosted backup/retention or logical recovery process, privately record secure storage and a separate recovery target, and validate recoverability under the reviewed process. Synthetic native restoration has passed; hosted restoration remains unverified.
+1. Confirm the actual hosted backup/retention or logical recovery process, privately record secure storage and a separate recovery target, and validate recoverability under the reviewed process. Synthetic and actual hosted scoped-data restoration have passed; encrypted artifacts remain private. Platform-wide and independent-device recovery remain unverified.
 2. Obtain independent A/B/C decisions for the exact SQL, impact and validation in the final approval package. Recheck target metadata/role before each approved operation; preserve TestUsers and both baseline hashes. No permission to execute is implied by CONDITIONAL GO.
 3. After A/B are approved and applied, authenticate the new restricted runtime on the real target, verify grants/role flags/TLS and replace the runtime's private connection. Preserve the separate privileged migration profile.
 4. Implement email/password/confirmation/recovery and atomic verified UUID-to-internal User provisioning. Test real two-account server ownership/capability enforcement before a coordinated single-provider cutover. Continue later approved features according to the active remediation plan.

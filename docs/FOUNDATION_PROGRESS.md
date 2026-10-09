@@ -2,6 +2,10 @@
 
 Initial assessment: 8 October 2026. Updated 9 October 2026. Branch: `codex/supabase-foundation`. This is a repository foundation, verified connection and SSR-preparation increment. Supabase website authentication and the complete aiBean MVP are not implemented by this stage.
 
+## Current milestone — actual recovery gate PASS
+
+The explicitly authorized TestUsers backup and real isolated restoration completed on 9 October at 22:29:51 UTC. Both records, scoped definitions/sequence/RLS/permissions and private content digests match; fresh hosted checks confirm no changes and all fourteen application tables/ledgers/mapping absent. Encrypted archive and metadata are retained privately; only successful transient local database files/log were removed. A is ready for its exact owner decision; A/B/C, schema installation and Auth activation remain unapproved/unexecuted. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) supersedes the preparation-only status in the chronological entries below.
+
 ## Stage 1 completed work
 
 - Verified local baseline and GitHub main both pointed to `31234704677df5e7f0252b30d996232a6602e726`; created a feature branch without rewriting history.
@@ -41,7 +45,7 @@ Docker initially reported an unavailable Linux engine. A hidden Desktop startup 
 | Stage | Status |
 |---|---|
 | 1 Repository/audit refresh | Completed; baseline foundation CI verified |
-| 2 Live database/identity | Read-only live metadata verified; application SQL configuration, isolated migration validation and reviewed installation pending |
+| 2 Live database/identity | Operator TLS/Drizzle, sixteen isolated installation scenarios and actual scoped recovery verified; exact A/B/C decisions and hosted installation/runtime pending |
 | 3 Core Supabase Auth | Client/SSR utilities prepared; login, mapping and cutover not implemented |
 | 4 Other approved methods | Requirements/platform research completed; none operational in aiBean |
 | 5 Authorization/retirement | Target contract prepared; legacy code retained pending validated replacement |
@@ -104,3 +108,13 @@ Extended the read-only scope inspector to check non-table public custom types/op
 The local target was briefly started and verified through strict libpq TLS/SCRAM with transaction_read_only=on: PostgreSQL 17.11, public table count zero and TestUsers relation absent; it was stopped afterward. The expanded hosted scope query succeeds read-only. Lint/typecheck, all 28 tests, production build and runtime audit pass (zero runtime findings). Native installation scenarios were not unnecessarily repeated; original SQL/history and historical archives remain unchanged.
 
 GitHub publication verified: recovery-gate commit `af34bf7988114fc08a72624496140d218511a798` is on `codex/supabase-foundation`; [Validate run 37997221262](https://github.com/nzagha/aibean/actions/runs/37997221262) completed successfully for that exact commit. All created/updated recovery findings and the read-only inspection helper are tracked and published. Private environment, certificate/key material, backup/recovery directories and pre-existing local skill installation files are excluded. Actual scoped export/restoration still await explicit owner authorization; this publication does not authorize A/B/C execution.
+
+## Authorized hosted scoped recovery — 9 October
+
+Executed only the approved read-only public.TestUsers/two-record scope and isolated native PostgreSQL recovery. Captured at 22:26:55 UTC; PASS at 22:29:51 UTC. Preserved one CMS AES-256-CBC archive and one encrypted metadata file, verified certificate decryption, plaintext/ciphertext hashes and private leaf/key ACLs again after cleanup. Neither archive, private path/key material, record values nor row-content digest is published. Source and restored counts are two; private content/sequence/definitions/constraints/indexes/RLS/default and effective grants match. Fresh source transaction confirms unchanged contents/metadata; subsequent read-only Drizzle independently confirms eight schemas, fourteen absent tables, no ledgers/mapping and zero Auth users. Seven reviewed SQL hashes/baseline timestamps remain unchanged.
+
+Native inspection initially needed explicit --file=- for schema output; two aborted attempts created no preserved archive. The successful archive was captured once and reused for recovery retries. Restore exposed a missing PUBLIC USAGE baseline on the recreated local public schema; the runner replayed only that observed local grant. ACL rows then matched as deterministic multisets, avoiding Linux/Windows collation-order differences. The expected dashboard permission denial is tested on the whole postgres-js transaction. All three browser/service role counts pass; dashboard SELECT denial passes. These are local role contexts, not live Data API/provider tests.
+
+The prepared native cluster was stopped; only its verified owned data directory and log were removed after fidelity and fresh-source checks. Encrypted backups and certificate/private configuration remain. Prior sixteen native scenarios were not repeated because installation SQL is unchanged. Lint, typecheck, all 28 ordinary tests, production build and runtime audit pass (zero runtime findings). Website branding/layout/auth and all hosted settings/grants/data are unchanged.
+
+A is ready for exact owner approval and fresh execution-time checks; B depends on A plus independent private provisioning approval; C needs separate impact acceptance/approval. Managed service recovery, independent-device PFX/key recovery and off-device encrypted copies remain unverified. Stop after presenting A; do not apply A/B/C or activate Auth.

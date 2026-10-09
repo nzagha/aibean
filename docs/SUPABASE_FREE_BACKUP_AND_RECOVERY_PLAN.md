@@ -1,8 +1,8 @@
 # Supabase Free manual backup and recovery
 
-Prepared 9 October 2026 for `yfknxidgphhepdtwazhn / postgres` on `codex/supabase-foundation`. **No hosted records have been exported. No hosted mutation has been authorized or executed.**
+Updated 9 October 2026 after the explicitly authorized scoped capture and isolated restoration. Target: `yfknxidgphhepdtwazhn / postgres`, branch `codex/supabase-foundation`. **Hosted-data recovery gate PASS. The source remains unchanged; A/B/C and Auth activation are not authorized or executed.**
 
-Latest follow-up review confirms the private backup directory is empty and no actual restore evidence exists. The existing encryption certificate and storage remain valid; additional read-only catalog checks found no unrelated public custom objects. [Current recovery gate and exact authorization wording](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) records the refreshed inventory, next scoped-export decision and conditional A/B/C decisions. Count two remains verified; historical personal-value equality has not been established without reading records.
+One encrypted hosted archive and one separately encrypted metadata file are now preserved privately. Capture completed at 22:26:55 UTC and recovery/source continuity passed at 22:29:51 UTC. Both records match by a private content digest, and definitions, constraints, indexes, sequence, RLS, schema/table/column/sequence/default ACLs and effective permissions match. The stopped local database files/log were removed. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) and [next authorization](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) supersede the earlier preparation-only findings. Historical values before this capture were not independently recorded.
 
 ## Current decisions and evidence
 
@@ -14,15 +14,15 @@ The earlier sixteen native PostgreSQL 17.11 scenarios and synthetic restore rema
 
 | Required status | Result | Meaning |
 |---|---|---|
-| Supabase Free backup process | READY | Local preparation is ready for scoped-export approval; execution remains gated |
-| Hosted scoped backup | NOT EXECUTED | Owner approval required before exporting record bodies |
-| Backup encryption | PASS | Configured certificate and AES-256-CBC CMS passed a synthetic archive roundtrip; no hosted encrypted archive exists yet |
-| Isolated restore | NOT EXECUTED | New empty native target is prepared; only earlier synthetic restoration passed |
-| Recovery readiness | NO-GO | Actual scoped backup integrity and hosted-data restoration are not yet verified |
+| Supabase Free backup process | VERIFIED | Owner-authorized scoped export and real isolated recovery completed |
+| Hosted scoped backup | PASS | Exactly one retained encrypted archive; TestUsers and its related public objects only |
+| Backup encryption | PASS | Real archive and private metadata encrypted using approved AES-256-CBC CMS; decryption and hashes verified again after cleanup |
+| Isolated restore | PASS | Actual two hosted records restored on the prepared native target; scoped data/metadata/grants verified |
+| Recovery readiness | PASS | Tested local recovery of this snapshot; independent-device key/off-device recovery remains unverified |
 | Installation SQL integrity | PASS | A/B/C and original migration hashes remain unchanged |
-| Approval A | BLOCKED | Hosted-data recovery gate remains open |
+| Approval A | READY FOR OWNER DECISION | Recovery gate passed; exact installation approval still required |
 | Approval B | BLOCKED | Depends on approved A, then separate runtime provisioning approval |
-| Approval C | BLOCKED | Requires recovery gate and owner confirmation of external client dependencies |
+| Approval C | PENDING INDEPENDENT DECISION | Recovery passed; owner must accept external browser-client impact |
 
 ## Confirmed local storage and encryption
 
@@ -34,19 +34,19 @@ The owner explicitly chose creation of a Windows document-encryption certificate
 
 CMS supplies confidentiality. A SHA-256 comparison checks archive integrity against a trusted recorded digest; neither is claimed as an authenticated signature. Treat the locally protected manifest as part of the trusted recovery material. Keep credentials and key material separate from backup archives. The current Windows key store supports this user's local decryption; recovery on another computer is **NOT VERIFIED**. Before relying on this as off-device or laptop-loss recovery, the owner must privately export a password-protected PFX, retain its password in their password manager separately, and test import/decryption under a separate recovery context. Use Certificates Current User (`certmgr.msc`) → Personal → aiBean local backup encryption → Export → private key → password-protected PFX. Choose the password privately; no PFX/passphrase should enter Git, chat or CI. No certificate export/upload has been automated.
 
-## Exact proposed export and privacy scope
+## Executed export and privacy scope
 
 Source: verified direct `db.yfknxidgphhepdtwazhn.supabase.co:5432`, database postgres. Existing ignored DATABASE_URL/DATABASE_CA_CERT_PATH remain unchanged. Credentials are supplied only to child-process environment variables; never through arguments, logged URIs or shell history. Set libpq `PGSSLMODE=verify-full`, the owner CA, the exact host and `PGOPTIONS=-c default_transaction_read_only=on`; clear inherited PG service settings. Refuse any different source.
 
-Proposed native command, with binary stdout captured privately by the orchestration process:
+Executed native command, with binary stdout captured privately by the orchestration process and the held transaction snapshot supplied:
 
 ```text
-pg_dump --no-password --format=custom --schema=public --strict-names --no-large-objects --lock-wait-timeout=5s
+pg_dump --no-password --format=custom --schema=public --strict-names --no-large-objects --lock-wait-timeout=5s --snapshot=<held-read-only-snapshot>
 ```
 
 Scope: all objects in public, currently **only TestUsers and TestUsers_id_seq**. Preserve both records, identity sequence definition/value, column defaults/types/nullability, primary/unique constraints, indexes, RLS and both policies, schema/table/column/sequence ACLs and public-schema default privileges. Keep ownership and ACL output; do not use --no-owner or --no-acl. No database creation/restoration is requested on the source. PostgreSQL's [pg_dump documentation](https://www.postgresql.org/docs/17/app-pgdump.html) explains that schema-scoped dumps do not automatically include outside dependencies, which must be reviewed separately.
 
-The exported personal data would comprise **email, name, age, ID and creation timestamp for two records**. No record values were read during preparation. Capture required role/grant/catalog metadata separately without pg_authid, rolpassword, hashes, connection settings or global managed-role SQL. Referenced roles include postgres, anon, authenticated, dashboard_user, service_role, supabase_admin and built-in pg_database_owner; record relevant memberships/grantors and effective privileges for review. Do not indiscriminately use pg_dumpall against hosted Supabase. Capture database ownership/ACL as metadata, without restoring global database configuration or service secrets.
+The authorized export comprises **email, name, age, ID and creation timestamp for two records**. Values were processed privately during this approved capture/restore; no values or content digest were displayed or published. No record values were read during earlier preparation. Capture required role/grant/catalog metadata separately without pg_authid, rolpassword, hashes, connection settings or global managed-role SQL. Referenced roles include postgres, anon, authenticated, dashboard_user, service_role, supabase_admin and built-in pg_database_owner; record relevant memberships/grantors and effective privileges for review. Do not indiscriminately use pg_dumpall against hosted Supabase. Capture database ownership/ACL as metadata, without restoring global database configuration or service secrets.
 
 Exclude auth, storage, vault, realtime, extensions/graphql managed contents, large objects, platform keys, provider settings, service credentials and unrelated managed objects. This is an **application public-schema backup**, not a complete Supabase project backup.
 
@@ -54,9 +54,9 @@ Before export, refresh the inventory and freeze the reviewed scope. Hold a read-
 
 For this small two-row scope, capture the binary archive in bounded memory, encode it as base64 for Windows CMS and write only the encrypted envelope into the private backup directory. Never redirect the dump into OneDrive, a temporary .dump file, chat, tool output or CI. Abort on size/process/encryption errors and remove incomplete encrypted files. Before larger future backups, separately validate a streaming encryption workflow rather than silently exceeding the bounded-memory design. In-memory buffers and Windows paging/crash behavior are not claimed to provide forensic erasure.
 
-## Approval checkpoint before execution
+## Approval checkpoint and future executions
 
-The agent must present the exact source/scope, private directory, configured encryption, empty isolated target and personal-data fields to the owner, then obtain explicit approval for this scoped export. Preparation/certificate authorization is **not** export authorization. No backup execution command is automatically run by application startup or CI. Backup approval also permits the requested disposable local recovery rehearsal, but never a restore into Supabase or a hosted A/B/C change.
+The owner explicitly authorized this exact scope, existing private encryption/storage, isolated restore, successful transient cleanup and sanitized GitHub publication. That authorization was executed and does not extend to A/B/C or Auth. For any future export, present the exact source/scope, private directory, encryption, target and personal-data fields, and obtain explicit approval. Preparation/certificate authorization is **not** export authorization. No backup execution command is automatically run by application startup or CI. Backup approval also permits the requested disposable local recovery rehearsal, but never a restore into Supabase or a hosted A/B/C change.
 
 ## Integrity and isolated restoration after approval
 
@@ -89,4 +89,4 @@ No installation SQL was regenerated. Exact preserved hashes:
 
 Original baseline hashes remain `b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468` and `168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1`. Mapping uniqueness/restrictive FKs, restricted runtime design, atomic RLS/grants, advisory lock, rollback and preservation of synthetic TestUsers passed the prior sixteen scenarios. Fresh target metadata/hash checks are still required immediately before execution.
 
-Remaining approvals are independent: **first scoped backup and local rehearsal**; only after successful actual recovery, **A exact atomic installation**, **B hosted restricted login/private provisioning and validated connection replacement**, and **C browser-grant revocation preserving TestUsers after owner confirms external dependencies**. See [the installation approval package](SUPABASE_DATABASE_INSTALLATION_APPROVAL.md) for impact, postflight and recovery. None authorizes seed data, reset, Auth setting/cutover, live payments or managed-role replay. The website and active legacy login remain unchanged.
+The scoped backup/local rehearsal is complete. Remaining approvals are independent: **A exact atomic installation**, **B hosted restricted login/private provisioning and validated connection replacement**, and **C browser-grant revocation preserving TestUsers after owner confirms external dependencies**. See [the installation approval package](SUPABASE_DATABASE_INSTALLATION_APPROVAL.md) for impact, postflight and recovery. None authorizes seed data, reset, Auth setting/cutover, live payments or managed-role replay. The website and active legacy login remain unchanged.

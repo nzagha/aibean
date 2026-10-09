@@ -1,6 +1,6 @@
 # PostgreSQL installation and recovery evidence
 
-Validated 9 October 2026 on `codex/supabase-foundation`. All database writes described here were on newly created disposable native PostgreSQL instances with synthetic fixtures. Hosted Supabase was inspected with read-only queries only. Supabase login remains inactive.
+Validated 9 October 2026 on `codex/supabase-foundation`. Earlier installation scenarios used synthetic fixtures on disposable native instances. The later explicitly authorized real TestUsers recovery also wrote only to the prepared disposable local target. Hosted Supabase was accessed read-only throughout. Supabase login remains inactive.
 
 ## Outcome and boundary
 
@@ -13,8 +13,8 @@ Validated 9 October 2026 on `codex/supabase-foundation`. All database writes des
 | Runtime role security | PASS | Independent SCRAM login sessions, verified TLS, no elevated flags |
 | Logical backup/restore | PASS | Synthetic source restored to a separate freshly initialized instance |
 | Package integrity | PASS | Original migrations and existing installation/security manifest unchanged |
-| Hosted backup/recovery | NOT EXECUTED | Owner confirms Free/no backups; local storage/encryption/empty target prepared |
-| Hosted migration readiness | NO-GO | Actual scoped capture/restore and separate A/B/C approvals remain required |
+| Hosted backup/recovery | PASS | Owner-authorized TestUsers export, private CMS/hash/decryption checks and actual isolated restoration; encrypted archive retained |
+| Hosted migration readiness | READY FOR A DECISION | Recovery passed; exact independent A/B/C approvals remain required |
 
 The sanitized machine-readable run is [postgres validation evidence](evidence/supabase-postgres-validation-2026-10-09.json). It contains aggregate outcomes and hashes, not credentials, CA contents or private paths.
 
@@ -90,9 +90,9 @@ All owned disposable instances stopped after the successful run. No containers, 
 
 ## Earlier proposed hosted backup process — superseded
 
-The subsection below records the earlier proposal before the owner confirmed Free. Its unverified storage/target/plan statements are superseded by [the Free backup and recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md). Current preparation verified private local NTFS/ACLs, AES-256 Windows CMS encryption with a synthetic archive and a new empty loopback-only native TLS/SCRAM instance. The instance is stopped; hosted export/restore remains NOT EXECUTED. No managed daily backup/PITR is assumed. The current procedure encrypts the binary export in memory rather than retaining the plaintext .dump suggested below, and uses the prepared local target rather than requiring another hosted project.
+The subsection below records the earlier proposal before the owner confirmed Free. Its unverified storage/target/plan statements are superseded by [the Free backup and recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md) and [actual scoped recovery result](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md). The owner-authorized real export/isolated restore now PASS. The encrypted archive/metadata remain private; the stopped transient local database/log were removed after validation. No managed daily backup/PITR is assumed. The executed procedure encrypted binary output in memory rather than retaining a plaintext .dump, and used the prepared local target rather than another hosted project.
 
-Hosted backup/restore remains unverified. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups) describes plan-dependent retention: Pro seven days, Team fourteen, Enterprise up to thirty; PITR is an additional option. The project's actual plan, retained snapshots and recovery window have not been verified. Database backups exclude Storage file bodies and omit custom-role passwords; credentials require secure reprovisioning after recovery.
+Managed hosted snapshots and restoration into Supabase remain unverified; actual scoped hosted-data recovery into the isolated native target is verified. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups) describes plan-dependent managed retention/PITR. The owner confirms Free; billing, retained snapshots and a managed recovery window were not independently inspected. Database backups exclude Storage file bodies and omit custom-role passwords; credentials require secure reprovisioning after recovery.
 
 Before any hosted mutation, the owner/operator must record privately:
 
@@ -101,7 +101,7 @@ Before any hosted mutation, the owner/operator must record privately:
 3. A separate disposable recovery target with its own verified project reference/endpoint. No such hosted target has been designated or provisioned; the source is never the rehearsal restore destination.
 4. Access limited to the owner/designated recovery operator; no chat, repository, CI artifact or public report contains backup rows, connection URIs, CA paths, password hashes or platform secrets.
 
-Exact proposed logical operation for the current source: verified-TLS native `pg_dump --format=custom --schema=public --file <approved encrypted directory>/public-before-install.dump`, with credentials provided through a private service/password-file mechanism; capture owner/grant/default-grant/database-ACL metadata without passwords and hash the archive. Current public data consists of TestUsers and must be preserved. Once installed, include public, drizzle and aibean_private in future app backups so both ledgers and mapping are recoverable. Do not capture auth/storage/vault rows or all platform globals merely to satisfy this app backup.
+The earlier file-output proposal was superseded by the approved bounded-memory runner: verified-TLS native `pg_dump --no-password --format=custom --schema=public --strict-names --no-large-objects --lock-wait-timeout=5s --snapshot=<held-read-only-snapshot>`. Credentials stay in a private child environment, binary output stays in memory and only Windows CMS ciphertext is written. The actual two-record archive passed local restoration, metadata/RLS/ACL comparisons and fresh-source continuity. No plaintext dump was written. See [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md). Current public data consists of TestUsers and must be preserved. Once installed, include public, drizzle and aibean_private in future app backups so both ledgers and mapping are recoverable. Do not capture auth/storage/vault rows or all platform globals merely to satisfy this app backup.
 
 A scoped public dump is **not** complete platform recovery. Preserve managed objects in place; full-project recovery requires verified Supabase snapshot/PITR or the separately reviewed [Supabase backup/restore procedure](https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore), including managed-schema customizations and project encryption requirements. Never replay native fixture/bootstrap/managed-role SQL into Supabase. Curate only approved application roles, grants and history for a compatible separate target; reconcile managed ownership rather than skipping errors blindly. For future roles-only exports, use --no-role-passwords and never replay managed role memberships automatically.
 

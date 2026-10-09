@@ -4,19 +4,19 @@ Reviewed 9 October 2026 on codex/supabase-foundation. Source: yfknxidgphhepdtwaz
 
 ## Verified current state
 
-**Only infrastructure preparation has completed. Actual hosted scoped backup and isolated hosted-data restore are NOT EXECUTED.** The privately configured backup directory is empty, no archive/manifest/recovery evidence was found, and private preparation still records hostedExportApproved=false. No backup was repeated or record body exported during this review. The sixteen prior native scenarios used synthetic data.
+**Recovery gate PASS following explicit scoped export/restore authorization.** One encrypted archive and one encrypted metadata file are retained privately; both decrypt and pass integrity checks. Both records, definitions, sequence, RLS and scoped permissions match the restored target. Hosted source continuity passed in a fresh read-only transaction. The transient local database/log were removed. A/B/C and Auth activation remain unapproved. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) provides the sanitized result; earlier preparation paragraphs below describe the pre-authorization state.
 
 Latest read-only Drizzle source refresh: transaction_read_only=on, TLS=true, PostgreSQL 17.6, only public.TestUsers and public.TestUsers_id_seq, TestUsers count two, Auth users zero, application/managed migration ledgers absent. All fourteen expected aiBean tables are individually absent: taxonomy, users, tools, saved_tools, stacks, stack_tools, tool_reviews, vendor_access, claim_requests, orders, featured_placements, billing_webhook_receipts, audit_logs and rate_limits.
 
 The scope inspector now also checks custom types, operators, collations, conversions, operator classes/families, text-search objects, noninternal triggers, rules and public extension objects/members. All returned zero; public functions also zero. Both unique constraints/indexes and both RLS policies remain. No unrelated public objects were found in these catalog checks. This closes a gap in inspecting a whole public-schema dump using table names alone. Check again immediately before export and stop if the approved scope changes.
 
-The certificate is valid and decrypts a new synthetic in-memory probe in the actual Windows operator context. RSA 3072 and allowed private-key ACL principals remain verified. A sandbox-only certificate lookup did not see the operator store; the real-context check succeeded using the existing certificate, without regeneration or private-key export. Protected storage ACLs are unchanged, approximately 685 GiB free, local CA valid and bootstrap plaintext credential absent. The prepared instance was started only for a verified-TLS/SCRAM read-only catalog check: PostgreSQL 17.11, public table count zero, TestUsers relation absent. It was then stopped. No encrypted hosted archive exists yet. Independent-device key recovery remains unverified.
+Before the authorized capture, the certificate was confirmed valid and decrypted a new synthetic in-memory probe in the actual Windows operator context. RSA 3072 and allowed private-key ACL principals remain verified. A sandbox-only certificate lookup did not see the operator store; the real-context check succeeded using the existing certificate, without regeneration or private-key export. Protected storage ACLs are unchanged, approximately 685 GiB free, local CA valid and bootstrap plaintext credential absent. The prepared instance was started only for a verified-TLS/SCRAM read-only catalog check: PostgreSQL 17.11, public table count zero, TestUsers relation absent. It was then stopped. At that earlier review, no encrypted hosted archive existed. The archive now exists and passes actual decryption/hash verification; independent-device key recovery remains unverified.
 
 The only unpublished items at the start of review were the pre-existing local .agents directory and skills-lock.json. No unpublished backup executor, archive or success evidence was present. Remote branch matched 682df26cea1a4a0e087628e9f6c4f5748d54bcf9; [its GitHub validation](https://github.com/nzagha/aibean/actions/runs/37995278340) passed. Updated inspection/authorization findings are separate from that earlier validation.
 
-**Count equality is verified, personal-value equality is not.** Neither the old preparation nor this review read TestUsers values or established a private content digest. During the approved backup/rehearsal, compare private source/restored content digests as well as counts; then recheck the source digest after capture/restore and immediately before any approved A/B/C mutation. Publish no digest of two identifiable records, identifiers or values. No claim that historical personal values are unchanged follows from count two alone.
+**Count and private content equality are now verified for the actual captured snapshot and fresh post-recovery source transaction.** Earlier preparation checked counts only. The approved capture compared the source, restored records and fresh source using an unpublished private digest. Publish no row digest, identifiers or values. Recheck privately before an approved A/B/C change; historical pre-capture values were never recorded and cannot be retrospectively proven.
 
-## Exact scoped operation requiring approval now
+## Authorized scoped operation completed
 
 Use the existing privately configured root, Windows CMS recipient and previously prepared disposable loopback-only PostgreSQL 17.11 instance. Exact local paths/port are confirmed privately with the owner and intentionally excluded from public documentation.
 
@@ -36,7 +36,7 @@ Sequence values are not MVCC snapshot-isolated; see [PostgreSQL transaction-isol
 
 Personal data exported: ID, creation timestamp, email, age and name for both records. Exclusions: credentials/password hashes, Auth/Vault/Storage/Realtime/other managed data, encryption keys and unrelated public objects. Source data/settings/roles/grants remain unchanged.
 
-Exact owner wording for the next decision:
+Historical scoped-export wording (the owner subsequently supplied explicit authorization; execution is complete):
 
 > I authorize the scoped read-only backup of yfknxidgphhepdtwazhn/postgres, limited to the existing application-owned public.TestUsers table, its two records and related sequence, definitions, policies and grants. Use the already prepared private Windows CMS encryption configuration and disposable local PostgreSQL recovery target to verify the backup and restore, then remove transient restored data. Do not export credentials, managed secrets or unrelated data, upload private backups, or execute A, B or C.
 
@@ -44,14 +44,14 @@ Exact owner wording for the next decision:
 
 | Gate | State | Remaining work |
 |---|---|---|
-| Local backup infrastructure | READY | Recheck at execution; no new infrastructure is needed |
-| Actual archive/integrity | NOT EXECUTED | Explicit scoped-export authorization |
-| Actual isolated restoration | NOT EXECUTED | Approved capture, restore and comparison |
-| Recovery gate | NO-GO | Actual capture/restoration must pass |
+| Local backup infrastructure | VERIFIED | Private archive/key ACLs rechecked; successful transient target disposed |
+| Actual archive/integrity | PASS | Encrypted archive/metadata retained and decryptable; trusted hashes match |
+| Actual isolated restoration | PASS | Both real records and scoped metadata/permissions matched |
+| Recovery gate | PASS | Local snapshot recovery verified; platform/off-device limits remain |
 | Installation integrity | PASS | Preserve A/B/C and baseline hashes; fresh preflight after recovery |
-| A | BLOCKED | Verified recovery, fresh absent-schema preflight and independent approval |
+| A | READY FOR OWNER DECISION | Recovery/fresh inventory/hash checks passed; exact authorization required |
 | B | BLOCKED | A, independent provisioning/switch approval and hosted runtime tests |
-| C | BLOCKED | Verified recovery and owner confirmation of browser-client impact |
+| C | PENDING INDEPENDENT DECISION | Owner confirmation of browser-client impact and exact authorization |
 
 | Decision | Exact file | Verified SHA-256 |
 |---|---|---|
@@ -63,7 +63,7 @@ Original baseline migration hashes remain b58134b31944656eda45a6ba929fcdb66a5ec4
 
 ## Independent authorization wording for later decisions
 
-These texts are prepared for review; **none is currently approved or executable**. Present them again after verified actual recovery and fresh source/hash checks. Target for all three is yfknxidgphhepdtwazhn/postgres on its verified direct endpoint.
+These texts are prepared for review; **none is currently approved**. Actual recovery, fresh absent-schema inventory and checksum checks have passed. Present A now and stop for the owner decision. B remains dependent on A; C requires separate impact acceptance/authorization. Target for all three is yfknxidgphhepdtwazhn/postgres on its verified direct endpoint.
 
 **A — Initial installation**
 
@@ -83,7 +83,7 @@ Repository search found no production TestUsers use beyond read-only diagnostics
 
 ## Conditional sequence and post-install acceptance
 
-The following is a recommendation after the recovery gate passes, not an execution instruction today:
+Recovery has passed. The following sequence still requires each independent approval; it is not an execution instruction today:
 
 1. Refresh source inventories/history/operator privileges, all exact checksums, TestUsers count/private digest and approved recovery evidence. If new objects/history or record changes appear, stop and review scope; do not blindly repeat an installation or backup.
 2. If C is independently approved and dependencies accepted, apply C first to close current browser table exposure; verify preserved records and denial. Otherwise keep C a separate pending decision. It is independent of A/B.

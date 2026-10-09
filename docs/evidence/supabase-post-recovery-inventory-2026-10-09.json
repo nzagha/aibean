@@ -1,0 +1,477 @@
+{
+  "inspectedAt": "2026-10-09T22:31:21.978Z",
+  "sourceProject": "yfknxidgphhepdtwazhn",
+  "scope": "Catalog metadata and aggregate counts only; no hosted records exported",
+  "identity": [
+    {
+      "database": "postgres",
+      "role": "postgres",
+      "read_only": "on",
+      "server_version": "17.6",
+      "tls": true
+    }
+  ],
+  "schemas": [
+    {
+      "nspname": "auth"
+    },
+    {
+      "nspname": "extensions"
+    },
+    {
+      "nspname": "graphql"
+    },
+    {
+      "nspname": "graphql_public"
+    },
+    {
+      "nspname": "public"
+    },
+    {
+      "nspname": "realtime"
+    },
+    {
+      "nspname": "storage"
+    },
+    {
+      "nspname": "vault"
+    }
+  ],
+  "applicationTables": [
+    {
+      "name": "audit_logs",
+      "relation": null
+    },
+    {
+      "name": "billing_webhook_receipts",
+      "relation": null
+    },
+    {
+      "name": "claim_requests",
+      "relation": null
+    },
+    {
+      "name": "featured_placements",
+      "relation": null
+    },
+    {
+      "name": "orders",
+      "relation": null
+    },
+    {
+      "name": "rate_limits",
+      "relation": null
+    },
+    {
+      "name": "saved_tools",
+      "relation": null
+    },
+    {
+      "name": "stack_tools",
+      "relation": null
+    },
+    {
+      "name": "stacks",
+      "relation": null
+    },
+    {
+      "name": "taxonomy",
+      "relation": null
+    },
+    {
+      "name": "tool_reviews",
+      "relation": null
+    },
+    {
+      "name": "tools",
+      "relation": null
+    },
+    {
+      "name": "users",
+      "relation": null
+    },
+    {
+      "name": "vendor_access",
+      "relation": null
+    }
+  ],
+  "databaseAcl": [
+    {
+      "owner": "postgres",
+      "acl": "{=Tc/postgres,postgres=CTc/postgres,supabase_etl_admin=C/postgres,supabase_storage_admin=C/postgres,dashboard_user=CTc/postgres}"
+    }
+  ],
+  "tables": [
+    {
+      "relname": "TestUsers",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "owner": "postgres"
+    },
+    {
+      "relname": "TestUsers_id_seq",
+      "relkind": "S",
+      "relrowsecurity": false,
+      "owner": "postgres"
+    }
+  ],
+  "columns": [
+    {
+      "table_name": "TestUsers",
+      "column_name": "id",
+      "data_type": "bigint",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_identity": "YES",
+      "identity_generation": "BY DEFAULT"
+    },
+    {
+      "table_name": "TestUsers",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_identity": "NO",
+      "identity_generation": null
+    },
+    {
+      "table_name": "TestUsers",
+      "column_name": "email",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_identity": "NO",
+      "identity_generation": null
+    },
+    {
+      "table_name": "TestUsers",
+      "column_name": "age",
+      "data_type": "bigint",
+      "is_nullable": "NO",
+      "column_default": "'20'::bigint",
+      "is_identity": "NO",
+      "identity_generation": null
+    },
+    {
+      "table_name": "TestUsers",
+      "column_name": "name",
+      "data_type": "text",
+      "is_nullable": "NO",
+      "column_default": "'name'::text",
+      "is_identity": "NO",
+      "identity_generation": null
+    }
+  ],
+  "constraints": [
+    {
+      "table_name": "TestUsers",
+      "conname": "TestUsers_email_key",
+      "contype": "u",
+      "definition": "UNIQUE (email)"
+    },
+    {
+      "table_name": "TestUsers",
+      "conname": "TestUsers_pkey",
+      "contype": "p",
+      "definition": "PRIMARY KEY (id)"
+    }
+  ],
+  "indexes": [
+    {
+      "tablename": "TestUsers",
+      "indexname": "TestUsers_email_key",
+      "indexdef": "CREATE UNIQUE INDEX \"TestUsers_email_key\" ON public.\"TestUsers\" USING btree (email)"
+    },
+    {
+      "tablename": "TestUsers",
+      "indexname": "TestUsers_pkey",
+      "indexdef": "CREATE UNIQUE INDEX \"TestUsers_pkey\" ON public.\"TestUsers\" USING btree (id)"
+    }
+  ],
+  "policies": [
+    {
+      "tablename": "TestUsers",
+      "policyname": "Enable insert for authenticated users only",
+      "roles": "{authenticated,dashboard_user}",
+      "cmd": "INSERT",
+      "qual": null,
+      "with_check": "true"
+    },
+    {
+      "tablename": "TestUsers",
+      "policyname": "Enable read access for all users",
+      "roles": "{public}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    }
+  ],
+  "schemaAcl": [
+    {
+      "owner": "pg_database_owner",
+      "acl": "{pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner}"
+    }
+  ],
+  "tableAcl": [
+    {
+      "relname": "TestUsers",
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+    },
+    {
+      "relname": "TestUsers_id_seq",
+      "acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}"
+    }
+  ],
+  "columnAcl": [],
+  "defaults": [
+    {
+      "owner": "postgres",
+      "defaclobjtype": "S",
+      "acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}"
+    },
+    {
+      "owner": "postgres",
+      "defaclobjtype": "f",
+      "acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}"
+    },
+    {
+      "owner": "postgres",
+      "defaclobjtype": "r",
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+    },
+    {
+      "owner": "supabase_admin",
+      "defaclobjtype": "S",
+      "acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}"
+    },
+    {
+      "owner": "supabase_admin",
+      "defaclobjtype": "f",
+      "acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}"
+    },
+    {
+      "owner": "supabase_admin",
+      "defaclobjtype": "r",
+      "acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}"
+    }
+  ],
+  "necessaryRoles": [
+    {
+      "rolname": "anon",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": false,
+      "rolcreatedb": false,
+      "rolcanlogin": false,
+      "rolreplication": false,
+      "rolbypassrls": false
+    },
+    {
+      "rolname": "authenticated",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": false,
+      "rolcreatedb": false,
+      "rolcanlogin": false,
+      "rolreplication": false,
+      "rolbypassrls": false
+    },
+    {
+      "rolname": "dashboard_user",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": true,
+      "rolcreatedb": true,
+      "rolcanlogin": false,
+      "rolreplication": true,
+      "rolbypassrls": false
+    },
+    {
+      "rolname": "pg_database_owner",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": false,
+      "rolcreatedb": false,
+      "rolcanlogin": false,
+      "rolreplication": false,
+      "rolbypassrls": false
+    },
+    {
+      "rolname": "postgres",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": true,
+      "rolcreatedb": true,
+      "rolcanlogin": true,
+      "rolreplication": true,
+      "rolbypassrls": true
+    },
+    {
+      "rolname": "service_role",
+      "rolsuper": false,
+      "rolinherit": true,
+      "rolcreaterole": false,
+      "rolcreatedb": false,
+      "rolcanlogin": false,
+      "rolreplication": false,
+      "rolbypassrls": true
+    },
+    {
+      "rolname": "supabase_admin",
+      "rolsuper": true,
+      "rolinherit": true,
+      "rolcreaterole": true,
+      "rolcreatedb": true,
+      "rolcanlogin": true,
+      "rolreplication": true,
+      "rolbypassrls": true
+    }
+  ],
+  "publicFunctionCount": [
+    {
+      "count": 0
+    }
+  ],
+  "additionalPublicObjects": [
+    {
+      "custom_types": 0,
+      "operators": 0,
+      "collations": 0,
+      "conversions": 0,
+      "operator_classes": 0,
+      "operator_families": 0,
+      "text_search_configs": 0,
+      "text_search_dictionaries": 0,
+      "text_search_parsers": 0,
+      "text_search_templates": 0,
+      "user_triggers": 0,
+      "rules": 0,
+      "extensions": 0,
+      "extension_members": 0
+    }
+  ],
+  "relevantMemberships": [
+    {
+      "parent": "anon",
+      "member": "authenticator",
+      "admin_option": false,
+      "inherit_option": false,
+      "set_option": true
+    },
+    {
+      "parent": "anon",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "authenticated",
+      "member": "authenticator",
+      "admin_option": false,
+      "inherit_option": false,
+      "set_option": true
+    },
+    {
+      "parent": "authenticated",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "authenticator",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "pg_create_subscription",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "pg_monitor",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "pg_read_all_data",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "pg_signal_backend",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "service_role",
+      "member": "authenticator",
+      "admin_option": false,
+      "inherit_option": false,
+      "set_option": true
+    },
+    {
+      "parent": "service_role",
+      "member": "postgres",
+      "admin_option": true,
+      "inherit_option": true,
+      "set_option": true
+    },
+    {
+      "parent": "supabase_privileged_role",
+      "member": "postgres",
+      "admin_option": false,
+      "inherit_option": true,
+      "set_option": true
+    }
+  ],
+  "testUsersCount": [
+    {
+      "count": 2
+    }
+  ],
+  "authUsersCount": [
+    {
+      "count": 0
+    }
+  ],
+  "ledgers": [
+    {
+      "drizzle": null,
+      "supabase": null,
+      "security": null,
+      "identities": null
+    }
+  ],
+  "sqlChecksums": {
+    "db/install/reviewed-installation.sql": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+    "db/install/runtime-login-proposal.sql": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+    "db/install/testusers-security-proposal.sql": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+    "db/migrations/0000_numerous_skullbuster.sql": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+    "db/migrations/0001_hesitant_hardball.sql": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
+  },
+  "hostedModified": false,
+  "scopeReviewPerformedWithoutAdditionalExport": true,
+  "recoveryGateEvidence": "supabase-hosted-scoped-recovery-2026-10-09.json",
+  "reviewedSqlChecksumsRevalidatedAfterRecovery": {
+    "db/install/reviewed-installation.sql": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+    "db/install/identity-and-security.sql": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+    "db/install/testusers-security-proposal.sql": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+    "db/install/runtime-login-proposal.sql": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+    "db/install/validation-read-only.sql": "61466aa36b8a3cf252396580fed0b086fa3d1a51a7c83b850365abeca7120771",
+    "db/migrations/0000_numerous_skullbuster.sql": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+    "db/migrations/0001_hesitant_hardball.sql": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
+  },
+  "installationManifestAndBaselineTimestampsUnchanged": true
+}

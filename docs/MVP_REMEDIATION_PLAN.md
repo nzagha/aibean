@@ -1,6 +1,6 @@
 # Active MVP remediation plan
 
-Updated 8 October 2026. The owner's Supabase directive supersedes October 7 tasks A03/A17 where they proposed temporary-auth hardening or future Clerk configuration. Preserve the audit itself. Keep all nine stages explicit; Stage 1 is not an authentication or full-MVP completion claim.
+Updated 9 October 2026. The owner's Supabase directive supersedes October 7 tasks A03/A17 where they proposed temporary-auth hardening or future Clerk configuration. Preserve the audit itself. Keep all nine stages explicit; Stage 1 is not an authentication or full-MVP completion claim.
 
 | Stage | Dependency | Work / acceptance |
 |---|---|---|
@@ -20,7 +20,7 @@ Stage 3–5 implementation may be developed together behind a controlled release
 
 Acceptance: the target is proven to be the intended development environment; actual schema/ledger/grants/RLS are recorded; historical identity/ownership existence is known; proposed mapping preserves all internal IDs; a disposable real PostgreSQL upgrade test proves continuity and rejects wrong-user access. No migration is applied to a shared target without a reviewed impact/recovery plan and owner approval.
 
-Live inspection confirms TestUsers with two preserved rows, no aiBean tables, no application migration ledgers and no Auth users. Application URL/key/settings and strict-TLS server DATABASE_URL/Drizzle are verified. Sixteen isolated native PostgreSQL installation/security/recovery scenarios passed with synthetic data. The owner confirms Free/no backups; protected private storage, Windows CMS encryption and a new empty local recovery target are prepared. Remaining gates: explicit scoped-export approval and verified actual hosted-data recovery, then independent exact A/B/C installation/runtime-login/TestUsers decisions. Restricted hosted runtime identity and real Auth/provider/cross-user behavior remain unverified. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md) and [the Free recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md).
+Live inspection confirms TestUsers with two preserved rows, no aiBean tables, no application migration ledgers and no Auth users. Application URL/key/settings and strict-TLS server DATABASE_URL/Drizzle are verified. Sixteen isolated native PostgreSQL installation/security/recovery scenarios passed with synthetic data. The owner confirms Free; under explicit scoped export/restore authorization, actual hosted-data recovery now PASS. One privately encrypted archive/metadata pair is retained; both records and scoped metadata/permissions match, the source is unchanged and the transient target is disposed. Remaining gates: exact independent A/B/C installation/runtime-login/TestUsers decisions. Restricted hosted runtime identity and real Auth/provider/cross-user behavior remain unverified. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md) and [the Free recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md).
 
 SSR client/refresh/cookie utilities and a read-only environment check are prepared. Active login/capability paths remain unchanged until the coordinated cutover. Do not apply 0000/0001 alone: observed default grants require atomic RLS/grant hardening. Do not treat TestUsers as legacy aiBean users or merge its records by email.
 
@@ -30,7 +30,7 @@ Acceptance: confirmed email registration, valid/invalid login, recovery, Magic L
 
 ## Admin readiness update
 
-Current Admin source has draft creation, publication/archive, review moderation, paid-claim decisions, featured-placement review and audit display. It is configuration-blocked: no connected DB, no validated Supabase Admin, and the bootstrap still expects a Clerk user_ ID. Full Tool/taxonomy edit/classification, pagination/search, validated state transitions, Creator approval and trust/ranking evidence remain missing. The next Admin increment follows identity/database gates; a dashboard shell would not satisfy them.
+Current Admin source has draft creation, publication/archive, review moderation, paid-claim decisions, featured-placement review and audit display. It is foundation-blocked: operator PostgreSQL/Drizzle connectivity and actual scoped recovery are verified, but application schema/restricted runtime are not installed, no Supabase Admin is validated, and the bootstrap still expects a Clerk user_ ID. Full Tool/taxonomy edit/classification, pagination/search, validated state transitions, Creator approval and trust/ranking evidence remain missing. The next Admin increment follows identity/database gates; a dashboard shell would not satisfy them.
 
 ## Deliverable index
 
