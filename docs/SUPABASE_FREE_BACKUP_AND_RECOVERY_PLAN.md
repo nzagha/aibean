@@ -2,6 +2,8 @@
 
 Prepared 9 October 2026 for `yfknxidgphhepdtwazhn / postgres` on `codex/supabase-foundation`. **No hosted records have been exported. No hosted mutation has been authorized or executed.**
 
+Latest follow-up review confirms the private backup directory is empty and no actual restore evidence exists. The existing encryption certificate and storage remain valid; additional read-only catalog checks found no unrelated public custom objects. [Current recovery gate and exact authorization wording](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) records the refreshed inventory, next scoped-export decision and conditional A/B/C decisions. Count two remains verified; historical personal-value equality has not been established without reading records.
+
 ## Current decisions and evidence
 
 The owner confirms the Free plan and no existing backup. This is an owner confirmation, not an independently inspected billing subscription. Do not assume managed daily snapshots or PITR. No paid upgrade or second paid project is needed for this local procedure. [Supabase's backup guidance](https://supabase.com/docs/guides/platform/backups) recommends regular exports and off-site backups for Free projects; database backups exclude Storage file bodies.

@@ -2,6 +2,8 @@
 
 Final validation updated 9 October 2026 on `codex/supabase-foundation`. **Proposal only: nothing in this package has been executed against hosted Supabase.** Sixteen native synthetic PostgreSQL scenarios and isolated restore pass. The owner confirms Free/no backups. Current hosted execution is **NO-GO** until the actual scoped backup/restore gate passes; A/B/C remain independent decisions. [The Free recovery plan](SUPABASE_FREE_BACKUP_AND_RECOVERY_PLAN.md) records verified storage/encryption/empty-target preparation and the required export approval.
 
+Latest follow-up confirms no actual backup archive or restored TestUsers relation on the prepared empty target. Existing encryption/storage checks pass and all fourteen hosted aiBean tables remain absent; A/B/C hashes are unchanged. [Current gate and exact independent authorization wording](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) prepares the next export approval and conditional later A/B/C decisions, with sequence and postflight. No decision is approved by this review.
+
 ## Target and observed state
 
 - Project: `yfknxidgphhepdtwazhn`; URL `https://yfknxidgphhepdtwazhn.supabase.co`.
