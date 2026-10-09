@@ -1,6 +1,6 @@
 # Supabase identity and database migration plan
 
-Status: design pending live inspection. No identity records changed and no migration generated or applied in the baseline stage. Existing SQL files and October 7 audit remain untouched.
+Status: live target inspected; additive installation/mapping design pending direct database connectivity and isolated validation. Updated 9 October 2026. No identity records changed and no migration generated or applied. Existing SQL files and October 7 audit remain untouched.
 
 ## Verified local structure
 
@@ -31,7 +31,9 @@ Use a read-only project-scoped MCP connection to confirm project ref/name/enviro
 
 Inspect only aggregate historical User/ownership counts and mapping collisions initially. Retrieve the minimum specific identity metadata necessary for an approved migration, in a restricted operator process. Do not dump auth.users or personal rows. Record source migration hashes and compare live metadata; do not blindly re-run CREATE TABLE SQL over an existing schema.
 
-The only currently verified project ref is from local MCP configuration: `yfknxidgphhepdtwazhn`. The cloud project and its history remain unverified. No DATABASE_URL is configured. Docker engine availability is also a blocker to current full local PostgreSQL testing; existing PGlite checks cannot verify actual role/RLS behavior.
+MCP now verifies project `yfknxidgphhepdtwazhn`, database `postgres`, PostgreSQL 17.6. All 14 aiBean tables and both application ledgers are absent; MCP migration history is empty. The separate TestUsers table has two rows and permissive public-read access. Auth users/identities both have zero rows. Preserve TestUsers; do not import it as application identity. This is a new application-schema installation on an existing project, not permission to reset it. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md).
+
+No DATABASE_URL is configured. Real PostgreSQL migration/role tests and backup/restore evidence remain required. Existing PGlite constraint tests do not prove hosted RLS behavior. Broad default public-schema grants mean 0000/0001 must not be installed alone: stage the complete migration chain plus RLS/revokes atomically, before API exposure. Test failure rollback as well as upgrade preservation. Retain the original migration hashes and ledger history.
 
 ## Proposed identity mapping
 

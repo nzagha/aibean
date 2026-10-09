@@ -1,10 +1,12 @@
 # Security baseline and open gates
 
-Updated 8 October 2026. The October 7 audit is historical evidence; this document describes current boundaries and the approved Supabase target without claiming that planned protections are deployed.
+Updated 9 October 2026. The October 7 audit is historical evidence; this document describes current boundaries and the approved Supabase target without claiming that planned protections are deployed.
 
 ## Observed implementation
 
 Local auth currently uses a shared temporary password identity; Clerk is a conditional legacy path with absent keys. The password session is signed/expiring and logout clears its cookie, but this is not the approved long-term identity platform. Supabase website login is not yet implemented/configured. The agent's MCP authorization does not authenticate application users.
+
+Live read-only inspection now confirms the correct project and metadata: no aiBean tables/migration ledgers, two preserved TestUsers rows, no Auth users. TestUsers permits public reads (confirmed without fetching personal record bodies). Public-schema defaults grant browser roles broad privileges on new tables. RLS/revokes must accompany application installation atomically. The security advisor's empty result does not invalidate these findings. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md).
 
 Existing actions resolve User/Admin identity server-side and scope several User/Vendor operations. Missing Creator/content/entitlement helpers and integrated cross-account tests prevent a complete authorization claim. Inputs validate URLs, IDs and content; redirects reject unsafe forms. Rate counters use PostgreSQL, but the temporary login limit is process-wide and is not a distributed abuse control.
 
@@ -17,7 +19,7 @@ Stripe code only accepts sandbox keys/events. Signature verification, order/sess
 - Separate browser/server clients. Publishable keys only in browser bundles; database and privileged secrets stay server-side.
 - Request-scoped SSR cookies/refresh with private cache behavior. Reauthentication/AAL checks for sensitive changes and explicit revocation limitations.
 - Least-privilege Drizzle runtime role and explicit authorization; direct SQL does not inherit a user's JWT context.
-- Inventory and test exposed schemas, grants and RLS. Enable RLS on exposed application tables with deliberate policies or no direct API access. Existing SQL has no policies; live protection is unknown.
+- Test exposed schemas, grants and RLS. Enable RLS on application tables with deliberate policies or no direct API access. Existing SQL has no policies and is not deployed; the current TestUsers public-read policy is permissive.
 - Shared rate limits and delivery abuse controls; provider settings and actual email/SMS delivery must be validated before enabling methods.
 
 ## Dependency and CI policy
@@ -28,6 +30,6 @@ The Next ESLint preset was not retained because its glob dependency chain introd
 
 ## Release gates still pending
 
-Live database/migration/grant/RLS inspection; actual isolated PostgreSQL upgrade/isolation tests; provider login/verification/recovery/linking/MFA tests; secure session revocation and callback attack tests; full Admin/Creator/Vendor boundaries; authenticated browser regression checks; CSP/TLS/proxy verification; redacted monitoring; tested backups/restore; payment reconciliation; safe Storage upload/delivery before accepting assets. Enterprise, Anonymous and Web3 Auth remain excluded.
+Application SQL configuration and least-privilege runtime role; reviewed atomic schema/mapping/RLS installation; TestUsers exposure remediation; isolated PostgreSQL upgrade/isolation tests; provider login/verification/recovery/linking/MFA tests; secure session revocation and callback attack tests; full Admin/Creator/Vendor boundaries; authenticated browser regression checks; CSP/TLS/proxy verification; redacted monitoring; tested backups/restore; payment reconciliation; safe Storage upload/delivery before accepting assets. Enterprise, Anonymous and Web3 Auth remain excluded.
 
 For any shared database change, owner approval must follow a concrete target/SQL/data-impact/validation/recovery review. No shared database modification is authorized merely because a migration file compiles.

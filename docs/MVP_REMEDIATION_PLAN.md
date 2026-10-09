@@ -20,7 +20,9 @@ Stage 3–5 implementation may be developed together behind a controlled release
 
 Acceptance: the target is proven to be the intended development environment; actual schema/ledger/grants/RLS are recorded; historical identity/ownership existence is known; proposed mapping preserves all internal IDs; a disposable real PostgreSQL upgrade test proves continuity and rejects wrong-user access. No migration is applied to a shared target without a reviewed impact/recovery plan and owner approval.
 
-Inputs still missing: callable Supabase MCP tools (the requested connection name is not registered), server database connectivity, and a running isolated PostgreSQL target. Existing local Docker engine is unavailable. Do not treat previous MCP OAuth success as database metadata evidence.
+Live MCP inspection is now complete through the existing `supabase` alias: the target has TestUsers with two preserved rows, no aiBean tables, no application migration ledgers, and no Auth identities. Application URL/key and Auth settings connectivity are verified. Inputs still missing: official server DATABASE_URL, restricted runtime-role provisioning, an isolated PostgreSQL test target, backup/recovery evidence and approval for the exact tested migration package. The complete findings and first safe implementation increment are in [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md).
+
+SSR client/refresh/cookie utilities and a read-only environment check are prepared. Active login/capability paths remain unchanged until the coordinated cutover. Do not apply 0000/0001 alone: observed default grants require atomic RLS/grant hardening. Do not treat TestUsers as legacy aiBean users or merge its records by email.
 
 ## First authentication milestone
 
@@ -33,6 +35,7 @@ Current Admin source has draft creation, publication/archive, review moderation,
 ## Deliverable index
 
 - Architecture diagram and route specification: `SUPABASE_AUTH_ARCHITECTURE.md`.
+- Verified connection, live inventory and runtime dependencies: `SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md`.
 - Provider matrix/configuration checklist: `SUPABASE_AUTH_PROVIDERS.md`.
 - Identity continuity/database migration plan: `SUPABASE_AUTH_MIGRATION_PLAN.md`.
 - Authorization/RLS matrix: `AUTH_AND_CAPABILITIES.md`.

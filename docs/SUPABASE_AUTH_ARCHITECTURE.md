@@ -1,12 +1,14 @@
 # Supabase authentication architecture
 
-Status: approved target architecture; implementation pending database/identity verification. Assessment: 8 October 2026. This document supersedes older Clerk/temporary-login plans, not the immutable October 7 audit in `docs/audit/`.
+Status: approved target architecture; SSR utilities prepared, active authentication cutover pending database/migration/provider validation. Updated 9 October 2026. This document supersedes older Clerk/temporary-login plans, not the immutable October 7 audit in `docs/audit/`.
 
 ## Current evidence
 
-The baseline is commit `31234704677df5e7f0252b30d996232a6602e726`, verified against GitHub main. The application currently selects custom password authentication or Clerk in `src/lib/auth.ts`. Local configuration selects password mode. Neither Supabase application package is installed at this assessment; application Supabase URL/key and DATABASE_URL are absent. The MCP login authenticates the development agent, not website visitors, and does not configure the application's database connection.
+The baseline is commit `31234704677df5e7f0252b30d996232a6602e726`, verified against GitHub main. The application currently selects custom password authentication or Clerk in `src/lib/auth.ts`; local configuration selects password mode. Supabase JS 2.117.3 and SSR 0.12.7 are now installed with exact pins. The correct URL/publishable key are saved locally and verified against the Auth settings endpoint. DATABASE_URL is still missing. MCP authenticates the development agent, not website visitors.
 
-Codex configuration contains `supabase` with project ref `yfknxidgphhepdtwazhn`. No `supabase-aibean-dev` registration or callable Supabase tools are exposed in this chat. Project identity, live tables, historical Users, applied migrations, grants, RLS, Auth settings and provider configuration are unverified. Docker's Linux engine is unavailable. No cloud query, migration, seed, account change or provider activation occurred.
+The existing `supabase` MCP connection successfully queried project `yfknxidgphhepdtwazhn`, database `postgres`. All 14 aiBean tables and both application migration ledgers are absent. TestUsers contains two preserved rows, while auth.users contains none. Grants/RLS and public Auth configuration were inspected read-only. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md) for evidence, the public TestUsers exposure, and the distinction between read-only operations and transport permissions. No cloud mutation occurred.
+
+Prepared `src/lib/supabase/` utilities cover browser/server/route clients, verified-claims refresh and accumulated cookie/cache headers. They are not yet wired into the framework proxy or login. Tests cover configuration boundaries and cookie propagation, not an operational provider journey. The new read-only operator check is `npm run supabase:check`.
 
 ## Target flow
 

@@ -1,10 +1,13 @@
 name: aibean
 services:
   db:
+    profiles: ["local-services"]
     image: postgres:17-alpine
     environment:
       POSTGRES_USER: aibean
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local database password in .env.local}
+      # The postgres image refuses an empty password when this service starts.
+      # Leave interpolation optional so hosted-only app use needs no local secret.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
       POSTGRES_DB: aibean
     ports: ["127.0.0.1:54329:5432"]
     volumes: ["aibean_pg:/var/lib/postgresql/data"]
@@ -14,6 +17,7 @@ services:
       timeout: 5s
       retries: 10
   redis:
+    profiles: ["local-services"]
     image: redis:7-alpine
     ports: ["127.0.0.1:63799:6379"]
     command: ["redis-server", "--appendonly", "yes"]
@@ -23,11 +27,8 @@ services:
     build: .
     ports: ["127.0.0.1:3001:3000"]
     env_file: .env.local
-    environment:
-      DATABASE_URL: postgresql://aibean:${POSTGRES_PASSWORD}@db:5432/aibean
-    depends_on:
-      db:
-        condition: service_healthy
+    # Use the deliberately configured .env.local target. Do not silently
+    # replace the hosted database with the separate local PostgreSQL service.
 volumes:
   aibean_pg:
   aibean_redis:

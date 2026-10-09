@@ -35,9 +35,15 @@ Open http://127.0.0.1:3000. Without a database, development mode displays six cl
 
 The new navigation, scoped search, tool filters/detail pages, industry pages and 2–4 tool comparison are usable. Skills, Playbooks, Events and Creators have clearly labeled later-stage landing pages. Legacy Explore/Knowledge/Collections URLs continue to redirect. The newsletter remains a demo form.
 
-## Local PostgreSQL
+## Supabase development connection
 
-Docker Desktop must be running. Copy .env.example to .env.local; choose a local database password and use the same value in DATABASE_URL. Do not paste secrets into chat or commit them.
+The authoritative development target is Supabase project `yfknxidgphhepdtwazhn`. See [verified connection readiness](docs/SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md). Add the official project URL, publishable key and server-only DATABASE_URL to ignored `.env.local`; use `.env.example` as a checklist, without overwriting existing private settings. Run `npm run supabase:check` for a redacted, read-only service/SQL check. Missing configuration or an unsuitable database role returns a nonzero exit code.
+
+Do not run the old migrations alone against hosted Supabase: observed default grants require atomic RLS and permission hardening. Shared-target migration execution requires the reviewed SQL, test evidence, recovery plan and owner approval. Prepared Supabase utilities are not yet the active authentication system.
+
+## Optional local PostgreSQL tests
+
+Docker Desktop must be running. Use a deliberately isolated local environment and matching local DATABASE_URL; this plain PostgreSQL service is not a Supabase stack. Do not overwrite the hosted development configuration or paste secrets into chat. The commands below are for that local target only, never the shared hosted project.
 
 ```sh
 npm run db:up
@@ -48,7 +54,7 @@ npm run dev
 
 Postgres uses localhost:54329; Redis uses localhost:63799. No existing containers are deleted. The database persists in a named volume. Seed is idempotent and preserves existing records. Fictional tools are seeded only when AIBEAN_DEMO_MODE=true. Turn this off and curate real tool records before launch.
 
-For the optional Docker app container, run `docker compose --env-file .env.local --profile app up --build`. It is a local development image, served at localhost:3001. Update NEXT_PUBLIC_APP_URL to match when testing billing there. A production image/deployment is a later launch task.
+For the optional Docker app container, run `docker compose --env-file .env.local --profile app up --build`. It uses the explicit DATABASE_URL from `.env.local` and no longer silently substitutes the local database. Local PostgreSQL/Redis services have the `local-services` profile (explicit `npm run db:up` still starts them). For a containerized local database test use host `db`, not loopback. The app is served at localhost:3001; update NEXT_PUBLIC_APP_URL to match when testing there. Existing named volumes are preserved.
 
 ## Enable accounts
 

@@ -1,6 +1,8 @@
 # Supabase authentication providers and configuration
 
-Assessment: 8 October 2026. Design specification, not a claim of implemented website authentication. No Supabase application method has been configured or exercised in aiBean yet. Latest package metadata observed: `@supabase/supabase-js` 2.117.3 and `@supabase/ssr` 0.12.7. Select exact compatible versions and inspect their installed types during the implementation stage; these packages are not installed by the repository-baseline stage.
+Updated 9 October 2026. Method implementation remains planned; no Supabase website login has been exercised. Packages `@supabase/supabase-js` 2.117.3 and `@supabase/ssr` 0.12.7 are installed with exact pins, and their SSR cookie API types were inspected. Shared client utilities are prepared but not activated.
+
+The correct project's public Auth settings endpoint was verified with the saved publishable key: email/signup enabled, email confirmation required; phone, all returned social methods, anonymous sign-in, SAML and passkeys disabled. Email delivery, redirect/template/password-policy configuration, MFA and linking remain unverified. An enabled email flag does not mean aiBean email login works. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md).
 
 ## Registry contract
 
