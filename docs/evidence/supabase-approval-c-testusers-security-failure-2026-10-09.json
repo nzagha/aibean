@@ -1,0 +1,11 @@
+{
+  "approvalC": "FAIL",
+  "stage": "configuration",
+  "code": "ERR_ASSERTION",
+  "attempted": false,
+  "commitAcknowledged": false,
+  "rollbackVerified": null,
+  "automaticRemediationAttempted": false,
+  "checks": [],
+  "resolution": "Pre-SQL local guard classified an existing unchanged permission-aware aggregate diagnostic helper as a production dependency. Guard corrected after repository inspection; real preflight/execution/postflight subsequently passed. No failed hosted transaction."
+}

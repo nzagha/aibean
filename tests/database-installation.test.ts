@@ -28,6 +28,72 @@ async function count(db: PGlite, table: string) {
   ).rows[0].n;
 }
 
+test("exact C revokes only browser table access, preserves records/policies/sequence/service access and rolls back atomically", async () => {
+  const db = await fixture();
+  try {
+    const c = await read("db/install/testusers-security-proposal.sql");
+    assert.equal(
+      sha(c),
+      "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+    );
+    await db.exec(`CREATE SEQUENCE public.testusers_fixture_seq;
+      GRANT SELECT,USAGE,UPDATE ON public.testusers_fixture_seq TO anon,authenticated,service_role;
+      GRANT SELECT ON public."TestUsers" TO PUBLIC;
+      GRANT ALL ON public."TestUsers" TO service_role;`);
+    const beforeRows = (
+      await db.query('SELECT * FROM public."TestUsers" ORDER BY id')
+    ).rows;
+    const beforePolicies = (
+      await db.query(
+        "SELECT policyname,cmd,qual,with_check FROM pg_policies WHERE tablename='TestUsers'",
+      )
+    ).rows;
+    await assert.rejects(db.exec(c.replace("COMMIT;", "SELECT 1/0; COMMIT;")));
+    await db.exec("ROLLBACK; SET ROLE anon");
+    assert.equal(await count(db, 'public."TestUsers"'), 2);
+    await db.exec("RESET ROLE");
+    await db.exec(c);
+    assert.deepEqual(
+      (await db.query('SELECT * FROM public."TestUsers" ORDER BY id')).rows,
+      beforeRows,
+    );
+    assert.deepEqual(
+      (
+        await db.query(
+          "SELECT policyname,cmd,qual,with_check FROM pg_policies WHERE tablename='TestUsers'",
+        )
+      ).rows,
+      beforePolicies,
+    );
+    for (const role of ["anon", "authenticated"]) {
+      await db.exec(`SET ROLE ${role}`);
+      await assert.rejects(
+        db.query('SELECT 1 FROM public."TestUsers" LIMIT 0'),
+        (error: { code?: string }) => error.code === "42501",
+      );
+      await assert.rejects(
+        db.query(
+          'EXPLAIN (FORMAT JSON) INSERT INTO public."TestUsers" (email) SELECT NULL::text WHERE false',
+        ),
+        (error: { code?: string }) => error.code === "42501",
+      );
+      assert.equal(
+        (
+          await db.query<{ retained: boolean }>(
+            "SELECT has_sequence_privilege(current_user,'public.testusers_fixture_seq','SELECT,USAGE,UPDATE') AS retained",
+          )
+        ).rows[0].retained,
+        true,
+      );
+      await db.exec("RESET ROLE");
+    }
+    await db.exec("SET ROLE service_role");
+    assert.equal(await count(db, 'public."TestUsers"'), 2);
+  } finally {
+    await db.close();
+  }
+});
+
 test("ordinary user provisioning works under INSERT(id) only and cannot set capability defaults", async () => {
   const db = await fixture();
   try {
