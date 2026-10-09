@@ -10,9 +10,10 @@
     "lint": "eslint . --max-warnings=0",
     "test": "tsx --test tests/*.test.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate": "tsx scripts/require-reviewed-installation.ts",
     "db:seed": "tsx scripts/seed.ts",
     "supabase:check": "tsx scripts/check-supabase-readiness.ts",
+    "db:prepare-install": "tsx scripts/prepare-database-installation.ts",
     "db:up": "docker compose --env-file .env.local up -d db redis",
     "admin:grant": "tsx scripts/grant-admin.ts"
   },

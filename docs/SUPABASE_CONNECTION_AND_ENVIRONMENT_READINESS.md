@@ -19,22 +19,23 @@ The existing project is reachable through authenticated MCP, the saved applicati
 
 ## Downloaded certificate verification — latest result
 
-Located the owner's certificate at `C:\Users\nzagh\.config\aibean\certs\prod-ca-2021.crt`. The owner reported downloading it from database SSL settings. Supplying it as an additional trusted CA resolved the earlier certificate-chain error while keeping `rejectUnauthorized:true` and hostname verification enabled. No certificate contents or credentials were printed. No environment file or password was changed by the agent.
+Located the owner's downloaded certificate and saved only its path to ignored `DATABASE_CA_CERT_PATH`. The owner reported downloading it from official database SSL settings. Its CA identity is Supabase Root 2021 CA / Supabase Inc; its self-signature and validity check pass (valid through April 2031). Explicitly trusting this CA resolved the chain failure with `rejectUnauthorized:true` and hostname verification enabled. The successful handshake trusts the supplied CA only and verifies the expected project hostname; no network-intermediary certificate was accepted. Certificate contents, private paths and credentials are excluded from this report. Database credentials were not modified.
 
-Verified results: direct connection; database `postgres`; database role `postgres`; TLS=true; transaction_read_only=on; superuser=false; bypass_rls=true. The readiness command exits 1 because restrictedRole=false, even though databaseReachable and transportVerified are true. This is a privilege gate, not a connection failure.
+Verified results: direct connection; database `postgres`; database role `postgres`; TLS=true; transaction_read_only=on; superuser=false; BYPASSRLS/CREATEDB/CREATEROLE/REPLICATION=true. The readiness command exits 1 because restrictedRole=false, even though databaseReachable and transportVerified are true. This is a privilege gate, not a connection failure.
 
 A separate successful check used the installed Drizzle/postgres.js stack and Drizzle's transaction API with `accessMode:'read only'`. It reconfirmed database identity, all eight schemas, two TestUsers records, zero Auth users/identities, and the existing public policies/grants using SELECT queries and aggregate counts. No personal record bodies were fetched. The live application-table and migration-ledger findings below remain unchanged.
 
-For a private PowerShell terminal, set the CA path before starting Node:
+The app, Drizzle Kit configuration, readiness checker, seed and legacy operator script now share `src/lib/db/tls-config.ts`. It reads the CA using the server-only environment variable, rejects absent/invalid/expired CA configuration, forces certificate and hostname verification, and strips URL SSL parameters before passing explicit options. Drizzle Kit receives structured credentials with the same TLS object. No global TLS override or plaintext fallback is used. Seed/operator scripts were inspected/updated but not executed.
+
+Run the verified read-only check normally after configuring the local CA path:
 
 ```powershell
-$env:NODE_EXTRA_CA_CERTS = 'C:\Users\nzagh\.config\aibean\certs\prod-ca-2021.crt'
 npm run supabase:check
 ```
 
-Node reads this setting at process startup; adding it through dotenv after startup is insufficient. The setting was applied only to inspection processes. Application and migration-tool TLS configuration still requires explicit adoption and validation before deployment. No global trust store was modified.
+The latest result confirms `hostnameVerified=true`, `transportVerified=true`, `drizzleSelectVerified=true`, selected schema public and server version 17.6. No special Node startup CA setting is now needed. No global trust store was modified.
 
-**Current migration decision:** TLS and authenticated PostgreSQL/Drizzle connectivity are verified. Proceed with preparing and testing additive identity/schema/permission migrations. Shared-target execution and login cutover still require a restricted runtime role, safe atomic installation, isolated migration/authorization tests, backup/recovery evidence, exact owner-approved SQL and real Auth validation. Preserve TestUsers and its records. Do not apply the old migrations alone under the observed broad default grants.
+**Current migration decision:** the [installation review package](SUPABASE_DATABASE_INSTALLATION_APPROVAL.md) and exact SQL/checksum manifest under `db/install/` are prepared. Four new isolated PGlite tests pass for installation/repeatability, historical continuity, roles/RLS, mapping constraints, capabilities and rollback/tampered-ledger rejection. Full multi-connection PostgreSQL and backup/restore validation remain blocked by the unavailable Docker test engine and unverified recovery setup. Hosted execution and login cutover remain blocked pending those gates and owner approval. TestUsers preservation and its optional access fix are reviewed separately.
 
 ## Initial configured DATABASE_URL recheck — resolved TLS finding
 
@@ -44,9 +45,9 @@ The owner configured DATABASE_URL privately in the existing `.env.local`. A pres
 
 A retry with Node's Windows system certificate trust enabled (`NODE_USE_SYSTEM_CA=1`, temporary process setting only) produced the same error. Certificate verification was never disabled. This establishes a local TLS trust failure; it does not establish that the database password is correct or incorrect. Successful TCP/TLS negotiation far enough to receive a certificate is not successful PostgreSQL authentication. The runtime database role, authenticated TLS session, direct-query database identity and actual application ORM operations remain unverified.
 
-Next, obtain the project's trusted database CA certificate from official Supabase connection/SSL settings, validate its provenance, and configure the client to trust it while retaining certificate and hostname verification. If the certificate chain instead originates from a network/security intermediary, confirm the approved trust chain with the operator. Do not guess a CA, disable verification, or modify credentials to work around this error. See [Supabase connection configuration](https://supabase.com/docs/guides/database/connecting-to-postgres).
+The initial recommendation was to obtain the trusted project CA and distinguish any intermediary chain. This has now been resolved as recorded above, without changing credentials or disabling verification. See [Supabase connection configuration](https://supabase.com/docs/guides/database/connecting-to-postgres).
 
-The current application `src/lib/db/index.ts` supplies `prepare:false` and a five-connection pool but does not explicitly install a CA or enforce verified TLS independently of the URL. `drizzle.config.ts` loads the supplied DATABASE_URL without mutation. Neither module was changed in this inspection; the read-only probe enforced verified TLS. Application and migration-tool TLS policy must be reconciled before production-like use.
+At the initial inspection the runtime did not explicitly install the CA. That gap is now corrected by the shared verified-TLS configuration described above. The runtime retains `prepare:false` and a five-connection pool; diagnostics use one connection. Ordinary runtime credential provisioning remains pending.
 
 Fresh SELECT-only MCP inspection reconfirmed database postgres, PostgreSQL 17.6, all eight schemas listed below, TestUsers as the sole public table, both Drizzle ledger locations absent, and the Supabase ledger absent. MCP list_migrations returned an empty list. Counts remained TestUsers=2, Auth users=0, Auth identities=0, Storage objects=0. RLS policies, public table grants, constraints and broad default table grants were rechecked and match the findings below. MCP access does not prove that the new DATABASE_URL authenticates successfully.
 
@@ -134,7 +135,7 @@ Pinned packages: supabase-js 2.117.3, SSR 0.12.7. Prepared browser, request-scop
 
 ## Exact next implementation stage
 
-1. Adopt the verified CA/TLS configuration for application and migration processes. Provision/review a restricted runtime role separately from the migration operator; the inspected postgres connection has BYPASSRLS.
+1. Complete real PostgreSQL/multi-session and backup/restore tests for the prepared package. Review its proposed restricted runtime role separately from the migration operator; the inspected postgres connection has BYPASSRLS.
 2. Recheck target metadata immediately before migration planning/application. Confirm backup/restore capability and preserve TestUsers. Establish an isolated PostgreSQL test target.
 3. Generate an additive private Supabase UUID-to-internal text User mapping with unique UUID/internal ID, restrictive FKs and no email-only merging. Preserve all existing internal IDs and business relationships. No TestUsers-to-Auth import is implied.
 4. Prepare a single reviewed installation of 0000/0001 plus additive mapping/RLS/grant hardening. Test empty installation, upgrade with representative historical ownership, concurrency, unauthorized roles and transaction failure. Restrict audit mutation and browser API access.

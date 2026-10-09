@@ -1,13 +1,15 @@
 import { config } from "dotenv";
 config({ path: ".env.local" });
 import postgres from "postgres";
+import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 const id = process.argv[2];
 if (!id?.startsWith("user_") || !process.env.DATABASE_URL)
   throw new Error(
     "Usage: npm run admin:grant -- user_<verified Clerk user ID>",
   );
 async function main() {
-  const sql = postgres(process.env.DATABASE_URL!, { max: 1 });
+  const connection = verifiedDatabaseConfig();
+  const sql = postgres(connection.connectionString, connection.options);
   try {
     await sql.begin(async (tx) => {
       await tx`INSERT INTO users (id,is_admin) VALUES (${id},true) ON CONFLICT (id) DO UPDATE SET is_admin=true`;

@@ -6,6 +6,7 @@ import { db } from "./db";
 import { users, vendorAccess } from "./db/schema";
 import { safeReturnPath } from "./catalog/filter";
 import { passwordMode, passwordIdentity } from "./password-auth";
+import { hasCapability, ownsResource } from "./capabilities";
 export const authConfigured = () =>
   Boolean(
     !passwordMode() &&
@@ -34,7 +35,23 @@ export async function requireUser(
 }
 export async function requireAdmin() {
   const user = await requireUser("/admin");
-  if (!user.isAdmin) redirect("/account?notice=admin-required");
+  if (!hasCapability(user, "admin")) redirect("/account?notice=admin-required");
+  return user;
+}
+export async function requireCreator() {
+  const user = await requireUser("/creator");
+  if (!hasCapability(user, "creator"))
+    redirect("/account?notice=creator-required");
+  return user;
+}
+export async function requireVendorCapability(toolId: string) {
+  const user = await requireUser("/vendor");
+  const [access] = await db()
+    .select()
+    .from(vendorAccess)
+    .where(eq(vendorAccess.toolId, toolId));
+  if (!ownsResource(user, access?.userId))
+    redirect("/account?notice=vendor-required");
   return user;
 }
 export async function requireVendor() {

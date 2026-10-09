@@ -1,7 +1,6 @@
 import { SUPABASE_PROJECT_REF } from "../supabase/config";
 
-// Operator commands only: validate a supplied URL without reconstructing or
-// logging credentials. Runtime cutover will adopt this after role validation.
+// Validate a supplied URL without reconstructing or logging credentials.
 export function hostedDatabaseConfig(value: string | undefined) {
   if (!value) throw new Error("DATABASE_URL is not configured.");
   let url: URL;

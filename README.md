@@ -37,9 +37,9 @@ The new navigation, scoped search, tool filters/detail pages, industry pages and
 
 ## Supabase development connection
 
-The authoritative development target is Supabase project `yfknxidgphhepdtwazhn`. See [verified connection readiness](docs/SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md). Add the official project URL, publishable key and server-only DATABASE_URL to ignored `.env.local`; use `.env.example` as a checklist, without overwriting existing private settings. Run `npm run supabase:check` for a redacted, read-only service/SQL check. Missing configuration or an unsuitable database role returns a nonzero exit code.
+The authoritative development target is Supabase project `yfknxidgphhepdtwazhn`. See [verified connection readiness](docs/SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md). Add the official project URL, publishable key, server-only DATABASE_URL and DATABASE_CA_CERT_PATH to ignored `.env.local`; use `.env.example` as a checklist, without overwriting existing private settings. The CA path must point to the certificate obtained from official database SSL settings. Shared runtime/tooling configuration enforces certificate and hostname verification. Run `npm run supabase:check` for a redacted, read-only service/SQL check. Missing configuration or an unsuitable database role returns a nonzero exit code.
 
-Do not run the old migrations alone against hosted Supabase: observed default grants require atomic RLS and permission hardening. Shared-target migration execution requires the reviewed SQL, test evidence, recovery plan and owner approval. Prepared Supabase utilities are not yet the active authentication system.
+Do not run the old migrations alone against hosted Supabase: observed default grants require atomic RLS and permission hardening. `npm run db:prepare-install` regenerates the offline [installation review package](docs/SUPABASE_DATABASE_INSTALLATION_APPROVAL.md). `db:migrate` is gated pending that review and explicit approval. Prepared Supabase utilities are not yet the active authentication system.
 
 ## Optional local PostgreSQL tests
 
@@ -47,12 +47,9 @@ Docker Desktop must be running. Use a deliberately isolated local environment an
 
 ```sh
 npm run db:up
-npm run db:migrate
-npm run db:seed
-npm run dev
 ```
 
-Postgres uses localhost:54329; Redis uses localhost:63799. No existing containers are deleted. The database persists in a named volume. Seed is idempotent and preserves existing records. Fictional tools are seeded only when AIBEAN_DEMO_MODE=true. Turn this off and curate real tool records before launch.
+Postgres uses localhost:54329; Redis uses localhost:63799. No existing containers are deleted. The database persists in a named volume. These services are isolated test resources; application/tooling TLS is currently scoped to the approved hosted project and does not fall back to plaintext local URLs. Seeds remain a separately authorized operation after installation, and were not run during readiness work.
 
 For the optional Docker app container, run `docker compose --env-file .env.local --profile app up --build`. It uses the explicit DATABASE_URL from `.env.local` and no longer silently substitutes the local database. Local PostgreSQL/Redis services have the `local-services` profile (explicit `npm run db:up` still starts them). For a containerized local database test use host `db`, not loopback. The app is served at localhost:3001; update NEXT_PUBLIC_APP_URL to match when testing there. Existing named volumes are preserved.
 

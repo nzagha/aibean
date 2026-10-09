@@ -3,3 +3,8 @@ docs/audit/** -text
 
 *.zip binary
 *.ttf binary
+
+# Match the checksum format of the immutable Git migration source.
+db/migrations/*.sql text eol=lf
+db/install/*.sql text eol=lf
+db/install/*.json text eol=lf

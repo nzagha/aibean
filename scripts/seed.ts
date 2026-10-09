@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 config({ path: ".env.local" });
 import postgres from "postgres";
+import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { taxonomyRecords, tools } from "../src/lib/db/schema";
 import taxonomy from "../src/data/taxonomy.json";
@@ -8,7 +9,8 @@ import { demoTools } from "../src/data/demo-tools";
 async function main() {
   if (!process.env.DATABASE_URL)
     throw new Error("Set DATABASE_URL in .env.local");
-  const client = postgres(process.env.DATABASE_URL, { max: 1 });
+  const connection = verifiedDatabaseConfig();
+  const client = postgres(connection.connectionString, connection.options);
   const db = drizzle(client);
   try {
     await db.transaction(async (tx) => {

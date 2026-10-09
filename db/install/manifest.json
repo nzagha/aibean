@@ -1,0 +1,21 @@
+{
+  "packageId": "aibean-foundation-v1",
+  "targetProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "encoding": "UTF-8, canonical Git LF",
+  "baselineMigrations": [
+    {
+      "path": "db/migrations/0000_numerous_skullbuster.sql",
+      "createdAt": 1791247215670,
+      "sha256": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468"
+    },
+    {
+      "path": "db/migrations/0001_hesitant_hardball.sql",
+      "createdAt": 1791249181547,
+      "sha256": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
+    }
+  ],
+  "securitySqlSha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+  "installationSqlSha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+  "optionalTestUsersSqlSha256": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db"
+}

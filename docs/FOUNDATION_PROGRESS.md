@@ -63,7 +63,15 @@ Regression checks: 15 public content checks, eight guest redirects, unconfigured
 
 GitHub publication: implementation commit `dfe191b05efea6d453538e0f3b1bf36f97694c75` is pushed to `codex/supabase-foundation`. [Validate run 37938432162](https://github.com/nzagha/aibean/actions/runs/37938432162) completed successfully for that exact commit, including clean dependency installation, lint, typecheck, tests, build and runtime audit. This evidence is separate from the earlier baseline run. All active findings and historical audit files are tracked in the repository; private environment settings and locally installed agent skills remain excluded from the findings publication.
 
-## Next task and acceptance
+## Verified TLS and installation-review increment — 9 October
+
+The private DATABASE_URL and owner-supplied CA now pass direct authentication, strict certificate/hostname verification and read-only Drizzle queries to postgres/public on PostgreSQL 17.6. Shared `DATABASE_CA_CERT_PATH` configuration is used by runtime, Drizzle Kit, readiness and operator scripts. Credentials and private CA paths are excluded from committed reports. The connected postgres role has BYPASSRLS; ordinary runtime credential provisioning remains pending.
+
+Prepared `db/install/` SQL, manifests and offline generator for atomic 0000/0001 installation, additive private Auth UUID-to-User mapping, NOLOGIN restricted role, RLS and grants. Original migration contents/journal/snapshots remain unchanged. The generated package uses original Git LF checksums and rejects mismatched historical ledgers. `db:migrate` is gated; no hosted migration or permission change ran. TestUsers access hardening is a separate optional SQL proposal. Server capability helpers were extended without changing the active identity provider or UI.
+
+Validation: 28 tests passed, including four new installation/upgrade/RLS/rollback/capability tests and a missing-CA failure test; lint, typecheck and production build passed; runtime audit reports zero vulnerabilities. Readiness SQL passed transport/hostname/ORM checks and deliberately returns a nonzero result for the privileged postgres role. Native Docker engine still times out. Full multi-session PostgreSQL, Auth integration and backup restoration remain unverified. See [the approval package](SUPABASE_DATABASE_INSTALLATION_APPROVAL.md) for exact target, files, data impact, privileges, tests, recovery and approval gates.
+
+## Next stage after review
 
 Configure the official DATABASE_URL privately and verify TLS/role/pooling, establish an isolated PostgreSQL test target, and prepare the exact additive identity mapping plus atomic installation/RLS/grant migrations. Preserve TestUsers and all historical internal IDs. Prove continuity/cross-user denial and recovery in isolation, then present the non-disposable target, SQL, impact, evidence and recovery plan for owner approval. Enforced-read-only MCP URL authorization remains separate from the successful SELECT-only inspection.
 

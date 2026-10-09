@@ -7,6 +7,7 @@ import {
   SUPABASE_PROJECT_URL,
 } from "../src/lib/supabase/config";
 import { hostedDatabaseConfig } from "../src/lib/db/connection-config";
+import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 import { createSessionCookieBridge } from "../src/lib/supabase/cookies";
 
 test("public config rejects foreign projects and privileged or legacy keys without echoing them", () => {
@@ -62,6 +63,23 @@ test("operator database check rejects wrong targets and TLS downgrade without ex
     true,
   );
   assert.equal(hostedDatabaseConfig(direct).options.prepare, false);
+});
+
+test("verified TLS configuration fails closed without exposing a missing CA path", () => {
+  const direct = `postgresql://operator:fixture-password@db.${SUPABASE_PROJECT_REF}.supabase.co:5432/postgres`;
+  assert.throws(
+    () => verifiedDatabaseConfig(direct, ""),
+    /DATABASE_CA_CERT_PATH/,
+  );
+  const privatePath = "unavailable-private-fixture/certificate.pem";
+  assert.throws(
+    () => verifiedDatabaseConfig(direct, privatePath),
+    (error: Error) => {
+      assert.ok(!error.message.includes(privatePath));
+      assert.ok(!error.message.includes("fixture-password"));
+      return true;
+    },
+  );
 });
 
 test("SSR cookie bridge preserves refreshed and cleared chunks plus cache headers on redirects", async () => {
