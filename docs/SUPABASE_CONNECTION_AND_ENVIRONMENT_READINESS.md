@@ -1,6 +1,6 @@
 # Supabase connection and environment readiness
 
-Updated 9 October 2026. Live inspection was performed during the 8–9 October work session. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
+Updated 9 October 2026, including the owner's newly configured DATABASE_URL verification. Live metadata was refreshed through MCP. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
 
 ## Outcome
 
@@ -15,7 +15,23 @@ The existing project is reachable through authenticated MCP and the saved applic
 | Existing MCP alias | `supabase`, OAuth authenticated; 20 tools discovered | No duplicate `supabase-aibean-dev` registration created |
 | Application Auth API | Saved publishable key accepted; `GET /auth/v1/settings` returned 200 | No user sign-in or email delivery tested |
 | Public Data API | `HEAD /rest/v1/TestUsers?select=id&limit=0`, no user JWT, returned 206 and count 2 | No record bodies fetched |
-| Application PostgreSQL | `DATABASE_URL` missing | SQL transport, runtime role, TLS and pooler remain unverified |
+| Application PostgreSQL | DATABASE_URL present; configuration validates the approved direct project endpoint | PostgreSQL TLS certificate validation failed with SELF_SIGNED_CERT_IN_CHAIN; database authentication and Drizzle SQL execution remain unverified |
+
+## Configured DATABASE_URL recheck
+
+The owner configured DATABASE_URL privately in the existing `.env.local`. A presence-only check confirmed it is available to Node/dotenv, and Git still excludes the file. Its parsed connection settings passed the existing project validator for direct connection to the approved project. No environment variable was modified or displayed.
+
+`npm run supabase:check` again reached Auth settings successfully. Its PostgreSQL connection, using postgres.js with prepared statements disabled and certificate verification enabled, failed during TLS with **SELF_SIGNED_CERT_IN_CHAIN**. A separate diagnostic using the same postgres.js client and Drizzle wrapper attempted a SELECT inside `BEGIN READ ONLY`; the connection failed before the query could execute. Only the allowlisted error code was printed, never raw driver errors or connection strings.
+
+A retry with Node's Windows system certificate trust enabled (`NODE_USE_SYSTEM_CA=1`, temporary process setting only) produced the same error. Certificate verification was never disabled. This establishes a local TLS trust failure; it does not establish that the database password is correct or incorrect. Successful TCP/TLS negotiation far enough to receive a certificate is not successful PostgreSQL authentication. The runtime database role, authenticated TLS session, direct-query database identity and actual application ORM operations remain unverified.
+
+Next, obtain the project's trusted database CA certificate from official Supabase connection/SSL settings, validate its provenance, and configure the client to trust it while retaining certificate and hostname verification. If the certificate chain instead originates from a network/security intermediary, confirm the approved trust chain with the operator. Do not guess a CA, disable verification, or modify credentials to work around this error. See [Supabase connection configuration](https://supabase.com/docs/guides/database/connecting-to-postgres).
+
+The current application `src/lib/db/index.ts` supplies `prepare:false` and a five-connection pool but does not explicitly install a CA or enforce verified TLS independently of the URL. `drizzle.config.ts` loads the supplied DATABASE_URL without mutation. Neither module was changed in this inspection; the read-only probe enforced verified TLS. Application and migration-tool TLS policy must be reconciled before production-like use.
+
+Fresh SELECT-only MCP inspection reconfirmed database postgres, PostgreSQL 17.6, all eight schemas listed below, TestUsers as the sole public table, both Drizzle ledger locations absent, and the Supabase ledger absent. MCP list_migrations returned an empty list. Counts remained TestUsers=2, Auth users=0, Auth identities=0, Storage objects=0. RLS policies, public table grants, constraints and broad default table grants were rechecked and match the findings below. MCP access does not prove that the new DATABASE_URL authenticates successfully.
+
+**Auth migration decision:** proceed with code/design and isolated migration preparation. Do not apply shared-project migrations or switch active login yet. Gates still required: verified direct/pooled SQL authentication and TLS; restricted runtime-role design; tested atomic aiBean installation plus identity mapping/RLS/grants; preserved TestUsers; backup/recovery evidence; exact migration review and owner approval; real Auth and cross-account validation. No SQL migration or permission change was proposed for execution in this read-only check.
 
 ## Read-only inspection boundary
 
@@ -99,11 +115,11 @@ Pinned packages: supabase-js 2.117.3, SSR 0.12.7. Prepared browser, request-scop
 
 ## Exact next implementation stage
 
-1. Supply the official DATABASE_URL privately; verify TLS, project compatibility, role and pooling with the readiness command. Resolve runtime-role provisioning separately from the migration operator.
+1. Resolve the configured connection's certificate trust failure; rerun the readiness command to verify PostgreSQL authentication, database identity, TLS and role/pooling. Resolve runtime-role provisioning separately from the migration operator.
 2. Recheck target metadata immediately before migration planning/application. Confirm backup/restore capability and preserve TestUsers. Establish an isolated PostgreSQL test target.
 3. Generate an additive private Supabase UUID-to-internal text User mapping with unique UUID/internal ID, restrictive FKs and no email-only merging. Preserve all existing internal IDs and business relationships. No TestUsers-to-Auth import is implied.
 4. Prepare a single reviewed installation of 0000/0001 plus additive mapping/RLS/grant hardening. Test empty installation, upgrade with representative historical ownership, concurrency, unauthorized roles and transaction failure. Restrict audit mutation and browser API access.
 5. Present exact target, SQL/checksums, impact, lock expectations, test evidence and recovery plan for explicit owner approval. Do not apply while these gates are unresolved.
 6. Implement email/password/confirmation/recovery and stable profile provisioning, then two-account isolation. Coordinate one active-auth cutover and retire Clerk/custom sessions only after real provider validation. Continue other approved methods, Admin CRUD and sandbox claim workflow in the order in the active plan.
 
-Foundation completion remains blocked by direct PostgreSQL configuration, reviewed/applied migrations, validated identity flows and downstream feature work. No shared-database migration approval is being requested before a tested, concrete package exists.
+Foundation completion remains blocked by verified PostgreSQL connectivity/TLS, reviewed/applied migrations, validated identity flows and downstream feature work. DATABASE_URL presence is now confirmed; the earlier missing-variable blocker is resolved. No shared-database migration approval is being requested before a tested, concrete package exists.
