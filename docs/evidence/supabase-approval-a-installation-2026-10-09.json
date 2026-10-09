@@ -1,0 +1,540 @@
+{
+  "approval": "A",
+  "result": "PASS",
+  "verifiedAt": "2026-10-09T22:48:01.360Z",
+  "sourceProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "operator": "postgres",
+  "serverVersion": "17.6",
+  "tlsCaAndHostnameVerified": true,
+  "installationSqlSha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+  "validationSqlSha256": "61466aa36b8a3cf252396580fed0b086fa3d1a51a7c83b850365abeca7120771",
+  "securitySqlSha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+  "exactAtomicPackageExecuted": true,
+  "sourcePreflightReadOnly": true,
+  "postflightReadOnly": true,
+  "recoveryArchiveSha256": "c2865b79533ca6d3dafee02886ce405ef935763da2d3b49e02b79ddd4cb033f7",
+  "encryptedRecoveryArchiveSha256": "0d0d0c784fbb307395aeef4dfade66d04edeafbc0d4032503ace548742808919",
+  "backupReverifiedBeforeAndAfter": true,
+  "testUsersBefore": 2,
+  "testUsersAfter": 2,
+  "privateTestUsersContentMatched": true,
+  "testUsersDefinitionsSequenceRlsAndGrantsUnchanged": true,
+  "managedMetadataUnchangedApartFromAuthorizedMappingRiTriggers": true,
+  "publicSchemaRuntimeUsageAddedAsApproved": true,
+  "managedRoutineBodiesAndManagedDataExported": false,
+  "originalBaselineMigrationsUnchanged": true,
+  "authUsers": 0,
+  "authIdentities": 0,
+  "mappingRows": 0,
+  "privateConnectionUnchanged": true,
+  "approvalBExecuted": false,
+  "approvalCExecuted": false,
+  "authActivated": false,
+  "seedsInserted": false,
+  "checks": [
+    "Retained private encrypted archive/metadata, certificate ACLs, decryption and trusted hashes verified",
+    "Exact project/database/operator and verified TLS; all prerequisites and original private contents match recovery",
+    "Exact approved bounded atomic SQL transaction committed",
+    "Unchanged validation-read-only.sql executed in its own read-only transaction",
+    "Fourteen RLS tables, eighteen FKs, exact ledgers/mapping, restricted NOLOGIN group and denied direct client grants",
+    "Original two records/permissions and managed metadata preserved; Auth/application/mapping counts remain zero",
+    "Encrypted recovery artifacts remain verifiable; private connection/environment unchanged"
+  ],
+  "app": [
+    {
+      "tablename": "audit_logs",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "billing_webhook_receipts",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "claim_requests",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "featured_placements",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "orders",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "rate_limits",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "saved_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stack_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stacks",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "taxonomy",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tool_reviews",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "users",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "vendor_access",
+      "rowsecurity": true
+    }
+  ],
+  "foreignKeys": [
+    {
+      "schema_name": "aibean_private",
+      "table_name": "user_identities",
+      "conname": "user_identities_auth_user_id_fkey",
+      "definition": "FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "schema_name": "aibean_private",
+      "table_name": "user_identities",
+      "conname": "user_identities_user_id_fkey",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "claim_requests",
+      "conname": "claim_requests_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "claim_requests",
+      "conname": "claim_requests_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "featured_placements",
+      "conname": "featured_placements_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "featured_placements",
+      "conname": "featured_placements_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "orders",
+      "conname": "orders_claim_id_claim_requests_id_fk",
+      "definition": "FOREIGN KEY (claim_id) REFERENCES claim_requests(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "orders",
+      "conname": "orders_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "saved_tools",
+      "conname": "saved_tools_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "saved_tools",
+      "conname": "saved_tools_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stack_tools",
+      "conname": "stack_tools_stack_id_stacks_id_fk",
+      "definition": "FOREIGN KEY (stack_id) REFERENCES stacks(id) ON DELETE CASCADE"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stack_tools",
+      "conname": "stack_tools_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stacks",
+      "conname": "stacks_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tool_reviews",
+      "conname": "tool_reviews_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tool_reviews",
+      "conname": "tool_reviews_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tools",
+      "conname": "tools_category_id_taxonomy_id_fk",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "vendor_access",
+      "conname": "vendor_access_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "vendor_access",
+      "conname": "vendor_access_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    }
+  ],
+  "ledger": [
+    {
+      "hash": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+      "created_at": "1791247215670"
+    },
+    {
+      "hash": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+      "created_at": "1791249181547"
+    }
+  ],
+  "security": [
+    {
+      "id": "aibean-foundation-v1",
+      "sql_sha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a"
+    }
+  ],
+  "mapping": [
+    {
+      "column_name": "auth_user_id",
+      "data_type": "uuid",
+      "is_nullable": "NO"
+    },
+    {
+      "column_name": "user_id",
+      "data_type": "text",
+      "is_nullable": "NO"
+    },
+    {
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "is_nullable": "NO"
+    }
+  ],
+  "mappingConstraints": [
+    {
+      "contype": "f",
+      "definition": "FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "contype": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "contype": "p",
+      "definition": "PRIMARY KEY (auth_user_id)"
+    },
+    {
+      "contype": "u",
+      "definition": "UNIQUE (user_id)"
+    }
+  ],
+  "policies": [
+    {
+      "schemaname": "aibean_private",
+      "tablename": "user_identities",
+      "policyname": "runtime_insert_identity",
+      "roles": "{aibean_runtime}",
+      "cmd": "INSERT",
+      "qual": null,
+      "with_check": "true"
+    },
+    {
+      "schemaname": "aibean_private",
+      "tablename": "user_identities",
+      "policyname": "runtime_read_identity",
+      "roles": "{aibean_runtime}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_logs",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "billing_webhook_receipts",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "claim_requests",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "featured_placements",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "orders",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "rate_limits",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "saved_tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "stack_tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "stacks",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "taxonomy",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tool_reviews",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "vendor_access",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    }
+  ],
+  "privateRls": [
+    {
+      "tablename": "installations",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "user_identities",
+      "rowsecurity": true
+    }
+  ],
+  "runtime": [
+    {
+      "rolname": "aibean_runtime",
+      "rolcanlogin": false,
+      "rolsuper": false,
+      "rolbypassrls": false,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolreplication": false
+    }
+  ],
+  "memberships": [
+    {
+      "parent": "aibean_runtime",
+      "child": "postgres",
+      "admin_option": true,
+      "inherit_option": false,
+      "set_option": false
+    }
+  ],
+  "runtimeRestrictions": [
+    {
+      "database_create": false,
+      "public_create": false,
+      "private_create": false,
+      "auth_read": false,
+      "testusers_read": false,
+      "ledger_read": false,
+      "security_read": false,
+      "users_change": false,
+      "admin_change": false,
+      "creator_change": false,
+      "ordinary_user_provision": true,
+      "audit_change": false,
+      "mapping_change": false
+    }
+  ],
+  "counts": [
+    {
+      "table": "audit_logs",
+      "count": 0
+    },
+    {
+      "table": "billing_webhook_receipts",
+      "count": 0
+    },
+    {
+      "table": "claim_requests",
+      "count": 0
+    },
+    {
+      "table": "featured_placements",
+      "count": 0
+    },
+    {
+      "table": "orders",
+      "count": 0
+    },
+    {
+      "table": "rate_limits",
+      "count": 0
+    },
+    {
+      "table": "saved_tools",
+      "count": 0
+    },
+    {
+      "table": "stack_tools",
+      "count": 0
+    },
+    {
+      "table": "stacks",
+      "count": 0
+    },
+    {
+      "table": "taxonomy",
+      "count": 0
+    },
+    {
+      "table": "tool_reviews",
+      "count": 0
+    },
+    {
+      "table": "tools",
+      "count": 0
+    },
+    {
+      "table": "users",
+      "count": 0
+    },
+    {
+      "table": "vendor_access",
+      "count": 0
+    }
+  ],
+  "authorizedManagedReferenceInternalTriggers": 2,
+  "limitations": [
+    "Runtime group is not an authenticated application login; B remains pending",
+    "Shared runtime RLS relies on server visitor ownership/capability checks",
+    "Managed metadata compared; unrelated platform row contents not exported or independently hashed",
+    "Supabase MCP OAuth unavailable; direct verified TLS PostgreSQL used",
+    "Independent-device key and off-device recovery remain unverified"
+  ],
+  "independentDrizzlePostflight": {
+    "verifiedAt": "2026-10-09T22:54:15.436Z",
+    "database": "postgres",
+    "operator": "postgres",
+    "read_only": "on",
+    "tls": true,
+    "schemas": 10,
+    "application_rls_tables": 14,
+    "migration_entries": 2,
+    "security_entries": 1,
+    "testusers_count": 2,
+    "auth_users_count": 0,
+    "app_users_count": 0,
+    "mapping_count": 0,
+    "runtime_login_count": 0
+  },
+  "failedInstallationChecks": [],
+  "commitAcknowledged": true
+}

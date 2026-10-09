@@ -1,10 +1,10 @@
 # Supabase connection and environment readiness
 
-Updated 9 October 2026, including verified DATABASE_URL and the successful authorized hosted scoped backup/recovery. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
+Updated 9 October 2026, including verified DATABASE_URL, actual scoped recovery and owner-authorized hosted Approval A. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
 
 ## Outcome
 
-The existing project is reachable through authenticated MCP, the saved application publishable key, and now the configured PostgreSQL URL with the downloaded CA. **Verified TLS PostgreSQL/Drizzle connectivity passes; the application schema, restricted runtime role and Supabase login remain pending.** No migration, seed, account creation, provider-setting change, grant change, or record modification was performed.
+**Verified TLS PostgreSQL/Drizzle, scoped recovery and Approval A installation/postflight PASS.** Fourteen RLS application tables, private mapping, exact baseline/security ledgers and NOLOGIN group are installed. Auth/User/mapping counts remain zero; both TestUsers records and original permissions are preserved. Restricted application login/connection B and website Supabase Auth remain pending. Earlier MCP/public API checks passed; current MCP OAuth refresh fails, so A used the existing direct verified-TLS connection without changing MCP/Auth settings. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records current evidence.
 
 | Item | Verified evidence | Limit |
 |---|---|---|
@@ -12,7 +12,7 @@ The existing project is reachable through authenticated MCP, the saved applicati
 | Project URL | `get_project_url` returned `https://yfknxidgphhepdtwazhn.supabase.co` | Display name aiBean.io is owner-supplied, not independently verified |
 | Database | `current_database()` returned `postgres` | MCP connection is separate from Drizzle |
 | PostgreSQL | 17.6, aarch64 | Hosted server version, not local Docker version |
-| Existing MCP alias | `supabase`, OAuth authenticated; 20 tools discovered | No duplicate `supabase-aibean-dev` registration created |
+| Existing MCP alias | `supabase`; previously authenticated, current OAuth refresh failed | Direct verified-TLS PostgreSQL used for A; no connector/Auth configuration changed |
 | Application Auth API | Saved publishable key accepted; `GET /auth/v1/settings` returned 200 | No user sign-in or email delivery tested |
 | Public Data API | `HEAD /rest/v1/TestUsers?select=id&limit=0`, no user JWT, returned 206 and count 2 | No record bodies fetched |
 | Application PostgreSQL | DATABASE_URL present; direct PostgreSQL authentication, verified TLS and Drizzle SELECT succeeded with the downloaded CA | Role postgres has BYPASSRLS; not approved for normal application runtime |
@@ -23,7 +23,7 @@ Located the owner's downloaded certificate and saved only its path to ignored `D
 
 Verified results: direct connection; database `postgres`; database role `postgres`; TLS=true; transaction_read_only=on; superuser=false; BYPASSRLS/CREATEDB/CREATEROLE/REPLICATION=true. The readiness command exits 1 because restrictedRole=false, even though databaseReachable and transportVerified are true. This is a privilege gate, not a connection failure.
 
-A separate successful check used the installed Drizzle/postgres.js stack and Drizzle's transaction API with `accessMode:'read only'`. It reconfirmed database identity, all eight schemas, two TestUsers records, zero Auth users/identities, and the existing public policies/grants using SELECT queries and aggregate counts. No personal record bodies were fetched. The live application-table and migration-ledger findings below remain unchanged.
+A separate successful check used the installed Drizzle/postgres.js stack and Drizzle's transaction API with `accessMode:'read only'`. It reconfirmed database identity, all eight schemas, two TestUsers records, zero Auth users/identities, and the existing public policies/grants using SELECT queries and aggregate counts. No personal record bodies were fetched. The earlier live findings below are historical; the authorized A installation supersedes absent-application-table/ledger findings.
 
 The app, Drizzle Kit configuration, readiness checker, seed and legacy operator script now share `src/lib/db/tls-config.ts`. It reads the CA using the server-only environment variable, rejects absent/invalid/expired CA configuration, forces certificate and hostname verification, and strips URL SSL parameters before passing explicit options. Drizzle Kit receives structured credentials with the same TLS object. No global TLS override or plaintext fallback is used. Seed/operator scripts were inspected/updated but not executed.
 
@@ -35,11 +35,11 @@ npm run supabase:check
 
 The latest result confirms `hostnameVerified=true`, `transportVerified=true`, `drizzleSelectVerified=true`, selected schema public and server version 17.6. No special Node startup CA setting is now needed. No global trust store was modified.
 
-**Recovery gate PASS; Approval A is ready for an exact owner decision.** The owner-authorized read-only export and isolated restore verified both records, scoped definitions, RLS/grants, archive integrity/decryption and source continuity. The private encrypted archive/metadata remain; successful transient local files/log were removed. The owner confirms Supabase Free; no managed daily snapshot/PITR is assumed. See [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md). The unchanged installation package retains its sixteen passing synthetic scenarios. A/B/C and Auth activation are not approved/executed; no hosted object/data/permission/Auth change occurred.
+**Recovery gate and authorized Approval A PASS; B is ready for an exact owner decision.** The owner-authorized read-only export and isolated restore verified both records, scoped definitions, RLS/grants, archive integrity/decryption and source continuity. The private encrypted archive/metadata remain; successful transient local files/log were removed. The owner confirms Supabase Free; no managed daily snapshot/PITR is assumed. See [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md). The unchanged installation package retains its sixteen passing synthetic scenarios. A created only the reviewed objects/grants/history. B/C and Auth activation are not approved/executed; TestUsers and existing managed objects/data remain preserved.
 
-Latest post-recovery read-only Drizzle inventory confirms eight schemas, only TestUsers/its identity sequence in public, two records, zero Auth users, all fourteen application tables individually absent, and no Drizzle/Supabase/security/mapping ledgers. Seven reviewed SQL hashes and baseline timestamps remain unchanged. Private source/restored/fresh-source digests establish content continuity for this capture without publishing identifiable values. [Exact approval wording and post-install sequence](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) require independent A/B/C decisions.
+Pre-install post-recovery Drizzle inventory confirmed eight schemas and all application tables/ledgers absent. Current A postflight confirms fourteen RLS application tables, private mapping/ledger and Drizzle history, plus the existing TestUsers table/sequence. New drizzle/aibean_private schemas bring the non-system schema count to ten. TestUsers remains two; Auth, User, mapping and every app table remain zero. Seven reviewed SQL hashes and baseline timestamps remain unchanged. Private source/restored/fresh-source digests establish content continuity for this capture without publishing identifiable values. [Exact approval wording and post-install sequence](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) require independent A/B/C decisions.
 
-The final SELECT-only refresh also verified postgres has database/schema CREATE, public CREATE, auth USAGE and auth.users REFERENCES. Hosted inventory remains only TestUsers/count two, zero Auth users and absent aiBean tables/ledgers. A future custom runtime account has not been created or authenticated on Supabase. The local shared runtime tests prove object/grant restrictions, not per-user server authorization or provider flows.
+The final SELECT-only refresh also verified postgres has database/schema CREATE, public CREATE, auth USAGE and auth.users REFERENCES. That pre-install inventory preceded A; current installation/postflight evidence records all new app/mapping/ledger objects and preserved TestUsers/count two. A future custom runtime account has not been created or authenticated on Supabase. The local shared runtime tests prove object/grant restrictions, not per-user server authorization or provider flows.
 
 Readiness inventory is now privilege-aware: a runtime without Auth/TestUsers SELECT does not query those rows and reports null counts with verified=false. It discovers ledger names from catalogs without requiring private-schema USAGE or reading migration rows. Permission inventories explicitly state their current-role visibility scope. The shared inspector passes native read-only Drizzle tests under the restricted login before and after restore; it does not expand runtime grants.
 
@@ -93,11 +93,11 @@ Aggregate checks: TestUsers **2** rows; auth.users **0**; auth.identities **0**;
 
 ## Comparison with repository schema and migrations
 
-All 14 repository tables are **absent** from the inspected target:
+At the earlier read-only inspection, all 14 repository tables were absent. **All fourteen are now installed with RLS under approved A**; the following records the original baseline comparison:
 
 `taxonomy`, `users`, `tools`, `saved_tools`, `stacks`, `stack_tools`, `tool_reviews`, `vendor_access`, `claim_requests`, `orders`, `billing_webhook_receipts`, `audit_logs`, `rate_limits`, `featured_placements`.
 
-Consequently none of the repository's 16 application foreign keys is present. The existing one-owner-per-Tool constraint, review uniqueness/rating checks and featured-placement checks are source/test behavior, not deployed constraints.
+At that earlier inspection none of the 16 baseline FKs was present. A now deploys all 16 plus the two restrictive mapping FKs. The reviewed one-owner-per-Tool, review uniqueness/rating and featured-placement constraints are installed; complete application/provider workflow behavior remains unverified.
 
 | History source | Observation |
 |---|---|
@@ -142,8 +142,8 @@ Pinned packages: supabase-js 2.117.3, SSR 0.12.7. Prepared browser, request-scop
 ## Exact next implementation stage
 
 1. Confirm the actual hosted backup/retention or logical recovery process, privately record secure storage and a separate recovery target, and validate recoverability under the reviewed process. Synthetic and actual hosted scoped-data restoration have passed; encrypted artifacts remain private. Platform-wide and independent-device recovery remain unverified.
-2. Obtain independent A/B/C decisions for the exact SQL, impact and validation in the final approval package. Recheck target metadata/role before each approved operation; preserve TestUsers and both baseline hashes. No permission to execute is implied by CONDITIONAL GO.
-3. After A/B are approved and applied, authenticate the new restricted runtime on the real target, verify grants/role flags/TLS and replace the runtime's private connection. Preserve the separate privileged migration profile.
+2. A is executed and verified. Obtain independent B/C decisions for the exact SQL, impact and validation in the final approval package. Recheck target metadata/role before each approved operation; preserve TestUsers and both baseline hashes. No permission to execute is implied by CONDITIONAL GO.
+3. After separately approved B is applied, authenticate the new restricted runtime on the real target, verify grants/role flags/TLS and replace the runtime's private connection. Preserve the separate privileged migration profile.
 4. Implement email/password/confirmation/recovery and atomic verified UUID-to-internal User provisioning. Test real two-account server ownership/capability enforcement before a coordinated single-provider cutover. Continue later approved features according to the active remediation plan.
 
 Foundation completion remains blocked by the restricted runtime role, reviewed/applied migrations, validated identity flows and downstream feature work. DATABASE_URL presence and authenticated PostgreSQL/Drizzle TLS connectivity are now confirmed; earlier missing-variable and certificate-chain blockers are resolved for the inspected processes. No shared-database migration approval is being requested before a tested, concrete package exists.

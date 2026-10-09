@@ -1,6 +1,6 @@
 # PostgreSQL installation and recovery evidence
 
-Validated 9 October 2026 on `codex/supabase-foundation`. Earlier installation scenarios used synthetic fixtures on disposable native instances. The later explicitly authorized real TestUsers recovery also wrote only to the prepared disposable local target. Hosted Supabase was accessed read-only throughout. Supabase login remains inactive.
+Validated 9 October 2026 on `codex/supabase-foundation`. Earlier installation scenarios used synthetic fixtures on disposable native instances. The later explicitly authorized real TestUsers recovery also wrote only to the prepared disposable local target. Hosted Supabase was accessed read-only during those earlier scenarios. The later explicitly authorized Approval A atomic installation/postflight now PASS; B/C remain unexecuted and Supabase website login remains inactive. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records the real hosted result.
 
 ## Outcome and boundary
 
@@ -14,7 +14,7 @@ Validated 9 October 2026 on `codex/supabase-foundation`. Earlier installation sc
 | Logical backup/restore | PASS | Synthetic source restored to a separate freshly initialized instance |
 | Package integrity | PASS | Original migrations and existing installation/security manifest unchanged |
 | Hosted backup/recovery | PASS | Owner-authorized TestUsers export, private CMS/hash/decryption checks and actual isolated restoration; encrypted archive retained |
-| Hosted migration readiness | READY FOR A DECISION | Recovery passed; exact independent A/B/C approvals remain required |
+| Hosted installation A | PASS | Exact owner-authorized transaction and hosted postflight passed; B/C decisions pending |
 
 The sanitized machine-readable run is [postgres validation evidence](evidence/supabase-postgres-validation-2026-10-09.json). It contains aggregate outcomes and hashes, not credentials, CA contents or private paths.
 

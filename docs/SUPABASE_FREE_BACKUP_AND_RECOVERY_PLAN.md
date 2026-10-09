@@ -1,6 +1,6 @@
 # Supabase Free manual backup and recovery
 
-Updated 9 October 2026 after the explicitly authorized scoped capture and isolated restoration. Target: `yfknxidgphhepdtwazhn / postgres`, branch `codex/supabase-foundation`. **Hosted-data recovery gate PASS. The source remains unchanged; A/B/C and Auth activation are not authorized or executed.**
+Updated 9 October 2026 after the explicitly authorized scoped capture and isolated restoration. Target: `yfknxidgphhepdtwazhn / postgres`, branch `codex/supabase-foundation`. **Hosted-data recovery gate PASS. Separately authorized Approval A now PASS; TestUsers remains unchanged. B/C and Auth activation are not authorized or executed.**
 
 One encrypted hosted archive and one separately encrypted metadata file are now preserved privately. Capture completed at 22:26:55 UTC and recovery/source continuity passed at 22:29:51 UTC. Both records match by a private content digest, and definitions, constraints, indexes, sequence, RLS, schema/table/column/sequence/default ACLs and effective permissions match. The stopped local database files/log were removed. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) and [next authorization](SUPABASE_RECOVERY_GATE_AND_AUTHORIZATIONS.md) supersede the earlier preparation-only findings. Historical values before this capture were not independently recorded.
 
@@ -20,9 +20,11 @@ The earlier sixteen native PostgreSQL 17.11 scenarios and synthetic restore rema
 | Isolated restore | PASS | Actual two hosted records restored on the prepared native target; scoped data/metadata/grants verified |
 | Recovery readiness | PASS | Tested local recovery of this snapshot; independent-device key/off-device recovery remains unverified |
 | Installation SQL integrity | PASS | A/B/C and original migration hashes remain unchanged |
-| Approval A | READY FOR OWNER DECISION | Recovery gate passed; exact installation approval still required |
-| Approval B | BLOCKED | Depends on approved A, then separate runtime provisioning approval |
+| Approval A | EXECUTED / PASS | Exact owner-authorized package committed; read-only postflight passed |
+| Approval B | READY FOR OWNER DECISION | A passed; independent runtime provisioning/connection authorization required |
 | Approval C | PENDING INDEPENDENT DECISION | Recovery passed; owner must accept external browser-client impact |
+
+The retained archive is the pre-install TestUsers snapshot and remains verifiable. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records A; expanded application/drizzle/private backup coverage requires a newly reviewed scope and separate owner authorization. No new backup or upload was performed after A.
 
 ## Confirmed local storage and encryption
 

@@ -2,9 +2,9 @@
 
 Initial assessment: 8 October 2026. Updated 9 October 2026. Branch: `codex/supabase-foundation`. This is a repository foundation, verified connection and SSR-preparation increment. Supabase website authentication and the complete aiBean MVP are not implemented by this stage.
 
-## Current milestone — actual recovery gate PASS
+## Current milestone — Approval A PASS
 
-The explicitly authorized TestUsers backup and real isolated restoration completed on 9 October at 22:29:51 UTC. Both records, scoped definitions/sequence/RLS/permissions and private content digests match; fresh hosted checks confirm no changes and all fourteen application tables/ledgers/mapping absent. Encrypted archive and metadata are retained privately; only successful transient local database files/log were removed. A is ready for its exact owner decision; A/B/C, schema installation and Auth activation remain unapproved/unexecuted. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) supersedes the preparation-only status in the chronological entries below.
+The owner-authorized exact atomic installation passed on 9 October at 22:48:01 UTC: fourteen application RLS tables, eighteen expected FKs, private UUID mapping, exact baseline/security ledgers and restricted NOLOGIN group verified. Both TestUsers records/permissions and unrelated managed metadata are preserved; Auth/application/mapping counts remain zero. The earlier scoped recovery archive remains private, decryptable and verified. B is ready for a separate owner decision; B/C and Auth activation remain unapproved/unexecuted. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) supersedes earlier preparation-only and A-pending status in the chronological entries below.
 
 ## Stage 1 completed work
 
@@ -45,7 +45,7 @@ Docker initially reported an unavailable Linux engine. A hidden Desktop startup 
 | Stage | Status |
 |---|---|
 | 1 Repository/audit refresh | Completed; baseline foundation CI verified |
-| 2 Live database/identity | Operator TLS/Drizzle, sixteen isolated installation scenarios and actual scoped recovery verified; exact A/B/C decisions and hosted installation/runtime pending |
+| 2 Live database/identity | Recovery and hosted Approval A installation/postflight PASS; restricted hosted login/connection B and identity/provider validation pending |
 | 3 Core Supabase Auth | Client/SSR utilities prepared; login, mapping and cutover not implemented |
 | 4 Other approved methods | Requirements/platform research completed; none operational in aiBean |
 | 5 Authorization/retirement | Target contract prepared; legacy code retained pending validated replacement |
@@ -118,3 +118,13 @@ Native inspection initially needed explicit --file=- for schema output; two abor
 The prepared native cluster was stopped; only its verified owned data directory and log were removed after fidelity and fresh-source checks. Encrypted backups and certificate/private configuration remain. Prior sixteen native scenarios were not repeated because installation SQL is unchanged. Lint, typecheck, all 28 ordinary tests, production build and runtime audit pass (zero runtime findings). Website branding/layout/auth and all hosted settings/grants/data are unchanged.
 
 A is ready for exact owner approval and fresh execution-time checks; B depends on A plus independent private provisioning approval; C needs separate impact acceptance/approval. Managed service recovery, independent-device PFX/key recovery and off-device encrypted copies remain unverified. Stop after presenting A; do not apply A/B/C or activate Auth.
+
+## Owner-authorized Approval A execution — 9 October
+
+Independent read-only preflight passed against the direct verified-TLS project: postgres database/operator, expected privilege flags/DDL capabilities, all fourteen tables/ledgers/runtime roles absent, both TestUsers records and original grants/sequence matching encrypted recovery. Existing archive/metadata were decrypted and checked against trusted hashes/ACLs without another export. Original SQL/manifest/baseline hashes were verified; MCP OAuth refresh failed, so no MCP settings were changed and the existing direct PostgreSQL stack was used.
+
+Executed only the approved reviewed-installation.sql bytes (SHA-256 72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c) once in the existing bounded atomic transaction. COMMIT acknowledged. The unchanged validation-read-only.sql and independent assertions passed at 22:48:01 UTC: fourteen RLS app tables, eighteen exact FK names, two original migration hashes/timestamps, one matching security supplement, private UUID PK/unique internal ID/restrictive FKs and zero User/mapping/Auth records. All fourteen app tables are empty. Runtime is NOLOGIN with six false elevated/login flags; effective table/column/sequence checks deny browser/service roles all new app/private/ledger access. Runtime's documented immutable/capability/DDL restrictions pass. No installation checks failed and no rollback/fix/reset occurred.
+
+Managed structural metadata, extensions, existing role flags/memberships/defaults and Auth aggregates match. The mapping's authorized FK adds two internal RI triggers on auth.users; runtime public-schema USAGE is the approved schema grant addition. Original TestUsers table/sequence/RLS/grants/private content are unchanged. Unrelated managed row bodies and routine source were not exported/hashed, so no comprehensive platform-data fingerprint is claimed. Archive/private environment remained verifiable/unchanged afterward.
+
+Added the explicit owner-operated Approval A runner and sanitized installation report/evidence; updated active plans. Lint, route type generation/typecheck, all 28 ordinary tests and runtime dependency audit PASS (zero runtime findings). Local production build twice hit EPERM unlink in the existing Windows .next cache; clean GitHub production-build validation is pending publication. SQL/migration sources, historical audit/version archives, branding/layout, active auth and private credentials are unchanged. B/C, application login creation, seeding, Auth/Clerk cutover and live payments remain excluded.

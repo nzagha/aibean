@@ -4,9 +4,9 @@ Reviewed 9 October 2026 on codex/supabase-foundation. Source: yfknxidgphhepdtwaz
 
 ## Verified current state
 
-**Recovery gate PASS following explicit scoped export/restore authorization.** One encrypted archive and one encrypted metadata file are retained privately; both decrypt and pass integrity checks. Both records, definitions, sequence, RLS and scoped permissions match the restored target. Hosted source continuity passed in a fresh read-only transaction. The transient local database/log were removed. A/B/C and Auth activation remain unapproved. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) provides the sanitized result; earlier preparation paragraphs below describe the pre-authorization state.
+**Recovery gate PASS following explicit scoped export/restore authorization.** One encrypted archive and one encrypted metadata file are retained privately; both decrypt and pass integrity checks. Both records, definitions, sequence, RLS and scoped permissions match the restored target. Hosted source continuity passed in a fresh read-only transaction. The transient local database/log were removed. The owner then separately authorized A; its exact installation and read-only postflight now PASS. B/C and Auth activation remain unapproved. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records current installed state. [Actual hosted recovery evidence](SUPABASE_HOSTED_SCOPED_RECOVERY_RESULT.md) provides the sanitized result; earlier preparation paragraphs below describe the pre-authorization state.
 
-Latest read-only Drizzle source refresh: transaction_read_only=on, TLS=true, PostgreSQL 17.6, only public.TestUsers and public.TestUsers_id_seq, TestUsers count two, Auth users zero, application/managed migration ledgers absent. All fourteen expected aiBean tables are individually absent: taxonomy, users, tools, saved_tools, stacks, stack_tools, tool_reviews, vendor_access, claim_requests, orders, featured_placements, billing_webhook_receipts, audit_logs and rate_limits.
+Pre-install recovery-stage read-only Drizzle source refresh (superseded for application objects by successful A): transaction_read_only=on, TLS=true, PostgreSQL 17.6, only public.TestUsers and public.TestUsers_id_seq, TestUsers count two, Auth users zero, application/managed migration ledgers absent. All fourteen expected aiBean tables are individually absent: taxonomy, users, tools, saved_tools, stacks, stack_tools, tool_reviews, vendor_access, claim_requests, orders, featured_placements, billing_webhook_receipts, audit_logs and rate_limits.
 
 The scope inspector now also checks custom types, operators, collations, conversions, operator classes/families, text-search objects, noninternal triggers, rules and public extension objects/members. All returned zero; public functions also zero. Both unique constraints/indexes and both RLS policies remain. No unrelated public objects were found in these catalog checks. This closes a gap in inspecting a whole public-schema dump using table names alone. Check again immediately before export and stop if the approved scope changes.
 
@@ -49,8 +49,8 @@ Historical scoped-export wording (the owner subsequently supplied explicit autho
 | Actual isolated restoration | PASS | Both real records and scoped metadata/permissions matched |
 | Recovery gate | PASS | Local snapshot recovery verified; platform/off-device limits remain |
 | Installation integrity | PASS | Preserve A/B/C and baseline hashes; fresh preflight after recovery |
-| A | READY FOR OWNER DECISION | Recovery/fresh inventory/hash checks passed; exact authorization required |
-| B | BLOCKED | A, independent provisioning/switch approval and hosted runtime tests |
+| A | EXECUTED / PASS | Exact authorization, mandatory preflight and hosted postflight passed |
+| B | READY FOR OWNER DECISION | A passed; independent provisioning/switch approval and new hosted runtime tests |
 | C | PENDING INDEPENDENT DECISION | Owner confirmation of browser-client impact and exact authorization |
 
 | Decision | Exact file | Verified SHA-256 |
@@ -63,13 +63,13 @@ Original baseline migration hashes remain b58134b31944656eda45a6ba929fcdb66a5ec4
 
 ## Independent authorization wording for later decisions
 
-These texts are prepared for review; **none is currently approved**. Actual recovery, fresh absent-schema inventory and checksum checks have passed. Present A now and stop for the owner decision. B remains dependent on A; C requires separate impact acceptance/authorization. Target for all three is yfknxidgphhepdtwazhn/postgres on its verified direct endpoint.
+A wording below is now historical: the owner explicitly authorized A and execution/postflight passed. **B/C are not approved.** Present the exact B text now and stop for the owner decision. C still requires independent impact acceptance/authorization. Target for all three is yfknxidgphhepdtwazhn/postgres on its verified direct endpoint.
 
-**A — Initial installation**
+**A — Initial installation (authorized and completed; do not repeat)**
 
 > After the actual scoped backup and isolated restoration pass, and fresh source inventory and checksum checks pass, I authorize executing db/install/reviewed-installation.sql with SHA-256 72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c on yfknxidgphhepdtwazhn/postgres. Install the fourteen aiBean tables, identity mapping, migration/security ledgers, restricted runtime group, RLS and grants in the reviewed atomic transaction. Preserve both TestUsers records, managed objects and existing history. Run the reviewed read-only postflight. This approval excludes B, C, seeds, Auth activation and live payments.
 
-**B — Runtime login and private connection replacement**
+**B — Runtime login and private connection replacement (next independent decision)**
 
 > After A passes its postflight, I authorize db/install/runtime-login-proposal.sql with SHA-256 3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940 on yfknxidgphhepdtwazhn/postgres. Create only aibean_app_login with the reviewed aibean_runtime membership. Provision its password privately, enable its LOGIN, authenticate a new verified-TLS session and verify all reviewed privilege/ownership restrictions. Only after those checks pass, replace the private application DATABASE_URL and restart its pools, keeping the operator credential separate. Do not grant additional managed/Admin memberships, change database-wide privileges without further review, switch active Auth, seed records or enable live payments.
 
