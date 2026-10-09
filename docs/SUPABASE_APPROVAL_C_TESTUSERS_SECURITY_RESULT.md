@@ -18,8 +18,10 @@ The original bytes were hashed and executed once in their original BEGIN/COMMIT 
 | Restricted runtime | PASS; new authenticated aibean_app_login sessions pass Drizzle, strict CA/hostname TLS and reviewed restrictions |
 | Auth/platform preservation | PASS within observed scope; public Auth settings, zero Auth users/identities, managed metadata and existing roles/memberships unchanged |
 | Local lint/typecheck/tests/runtime audit | PASS; 32 tests, zero runtime audit findings |
-| Production build | Local Windows EPERM cache unlink lock; clean GitHub CI result recorded after publication |
-| GitHub CI | Pending publication; recorded below when verified |
+| Production build | PASS in clean GitHub CI; local attempt encountered a Windows EPERM cache unlink lock |
+| GitHub CI | PASS; exact implementation commit 927076739f6e98214b2bc9014c3b66b38d52a0e1, all checks successful |
+
+Publication verification: [GitHub Validate run 38005383805](https://github.com/nzagha/aibean/actions/runs/38005383805) passed lint, typecheck, tests, production build and runtime audit on the exact implementation commit. The private publication scan checked all 13 proposed files and found zero protected-value matches. Private backups, credentials and environment files were excluded. This final documentation update adds only the verified CI outcome; no executable code or database operation changes.
 
 ## Preflight and production dependency review
 
