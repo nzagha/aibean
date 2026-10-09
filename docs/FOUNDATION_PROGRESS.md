@@ -59,7 +59,9 @@ Validation: lint passed; all **23 tests passed**, including three new tests for 
 
 Security implications: TestUsers public-read exposure and broad default table grants require review before launch/schema installation. Client-visible configuration accepts only a publishable key; privileged secrets stay server-only. The prepared SQL checker validates TLS and refuses other project URLs; the production Drizzle role has not yet been configured or validated. No active capability behavior has changed.
 
-Regression checks: 15 public content checks, eight guest redirects, unconfigured billing rejection and unknown-Tool/noindex behavior passed on a temporary port-3100 development preview; the preview was stopped afterward. Compose profile validation lists only `web` for the hosted app profile. A scan of changed/new files against configured sensitive environment values found zero matches. Historical audit, migration and archive diffs remain empty. Remote CI for this increment is recorded after publication, separately from the earlier baseline run.
+Regression checks: 15 public content checks, eight guest redirects, unconfigured billing rejection and unknown-Tool/noindex behavior passed on a temporary port-3100 development preview; the preview was stopped afterward. Compose profile validation lists only `web` for the hosted app profile. A scan of changed/new files against configured sensitive environment values found zero matches. Historical audit, migration and archive diffs remain empty.
+
+GitHub publication: implementation commit `dfe191b05efea6d453538e0f3b1bf36f97694c75` is pushed to `codex/supabase-foundation`. [Validate run 37938432162](https://github.com/nzagha/aibean/actions/runs/37938432162) completed successfully for that exact commit, including clean dependency installation, lint, typecheck, tests, build and runtime audit. This evidence is separate from the earlier baseline run. All active findings and historical audit files are tracked in the repository; private environment settings and locally installed agent skills remain excluded from the findings publication.
 
 ## Next task and acceptance
 
