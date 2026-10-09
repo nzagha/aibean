@@ -235,7 +235,10 @@
     "testsPassed": 31,
     "localProductionBuild": true,
     "runtimeVulnerabilities": 0,
-    "githubCi": "pending publication"
+    "githubCi": "success",
+    "implementationCommit": "fa5ee4b776e85f673cd6de8cfcbaf22011c1c68e",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38003970237",
+    "productionBuildInCleanCi": true
   },
   "applicationValidation": {
     "publicPages": 16,

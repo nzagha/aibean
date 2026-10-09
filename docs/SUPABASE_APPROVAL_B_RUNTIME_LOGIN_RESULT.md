@@ -17,7 +17,7 @@ SHA-256: `3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940`.
 | Existing data preservation | PASS; both original TestUsers records and permissions match privately |
 | Local checks/build/tests | PASS; lint, route type generation/TypeScript, 31 tests, production build and runtime audit (zero findings) |
 | HTTP runtime | PASS; 16 public pages, 8 guest redirects, unknown-tool not-found/noindex |
-| GitHub CI | Recorded below after publication |
+| GitHub CI | PASS; [Validate run 38003970237](https://github.com/nzagha/aibean/actions/runs/38003970237), implementation commit fa5ee4b776e85f673cd6de8cfcbaf22011c1c68e |
 
 ## Mandatory preflight and exact role installation
 
@@ -50,6 +50,8 @@ Application DB construction and the readiness checker now fail closed unless DAT
 `npm run supabase:check` returned restrictedRole=true, drizzleSelectVerified=true, hostnameVerified=true and transportVerified=true. Auth/TestUsers counts are null/unverified from runtime diagnostics by design because those reads are denied; the private operator continuity check verified the two original records and zero Auth users. applicationReady/loginFlowVerified remain false for the separate Supabase website identity gates. Auth settings were read, never changed.
 
 Machine-readable [runtime evidence](evidence/supabase-approval-b-runtime-login-2026-10-09.json) and [resolved initial stop](evidence/supabase-approval-b-runtime-login-blocked-2026-10-09.json) contain sanitized facts only. Original migration files/ledgers and historical audit/version archives are unchanged. The existing CMS recovery point covers pre-install TestUsers only, not the newly installed application/mapping/ledger objects or new login credentials; expanded backup scope and off-device recovery remain separate approvals.
+
+Code and sanitized reports were pushed to `codex/supabase-foundation`. The clean GitHub run passed lint, route type generation/typecheck, all 31 tests, production build and runtime audit for the exact implementation commit above. This final status update changes documentation/evidence only. Private publication scans passed with zero matches for both configured credentials, private certificate/paths and unpublished record digest; private archives, .env.local and local skills remain excluded.
 
 ## Next independent step
 

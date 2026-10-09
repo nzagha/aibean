@@ -6,6 +6,8 @@
 
 Initial assessment: 8 October 2026. Updated 9 October 2026. Branch: `codex/supabase-foundation`. This is a repository foundation, verified connection and SSR-preparation increment. Supabase website authentication and the complete aiBean MVP are not implemented by this stage.
 
+Approval B implementation commit `fa5ee4b776e85f673cd6de8cfcbaf22011c1c68e` is published. [GitHub Validate 38003970237](https://github.com/nzagha/aibean/actions/runs/38003970237) passed all checks, including the production build. Sanitized runtime/continuity evidence and the corrected ACL-comparison stop are published in the B report. No further hosted changes or approval gates were executed.
+
 ## Previous milestone — Approval A PASS
 
 The owner-authorized exact atomic installation passed on 9 October at 22:48:01 UTC: fourteen application RLS tables, eighteen expected FKs, private UUID mapping, exact baseline/security ledgers and restricted NOLOGIN group verified. Both TestUsers records/permissions and unrelated managed metadata are preserved; Auth/application/mapping counts remain zero. The earlier scoped recovery archive remains private, decryptable and verified. B subsequently passed under explicit owner authorization; C and Auth activation remain unexecuted. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) supersedes earlier preparation-only and A-pending status in the chronological entries below.
