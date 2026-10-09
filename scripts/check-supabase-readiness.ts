@@ -7,6 +7,7 @@ import {
 import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { sql as query } from "drizzle-orm";
+import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
 
 config({ path: ".env.local", quiet: true });
 
@@ -70,14 +71,25 @@ async function main() {
         SELECT c.relname AS name, c.relrowsecurity AS rls
         FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
         WHERE n.nspname = 'public' AND c.relkind IN ('r','p') ORDER BY c.relname`);
-        const [ledgers] = await tx.execute(query`
-        SELECT to_regclass('drizzle.__drizzle_migrations')::text AS drizzle,
-               to_regclass('supabase_migrations.schema_migrations')::text AS supabase`);
+        const counts = await inspectReadinessCounts(
+          async (statement) => await tx.execute(statement),
+        );
         const [metadata] = await tx.execute(query`
           SELECT
             (SELECT jsonb_agg(nspname ORDER BY nspname) FROM pg_namespace
              WHERE nspname NOT LIKE 'pg_%' AND nspname <> 'information_schema') AS schemas,
-            (SELECT count(*) FROM auth.users) AS auth_users_count,
+            has_database_privilege(current_user,current_database(),'CREATE') AS operator_schema_create,
+            has_schema_privilege(current_user,'public','CREATE') AS operator_public_create,
+            (SELECT COALESCE(bool_or(a.privilege_type='CREATE' AND a.grantee=0),false)
+             FROM pg_namespace n CROSS JOIN LATERAL aclexplode(COALESCE(n.nspacl,acldefault('n',n.nspowner))) a
+             WHERE n.nspname='public') AS public_schema_create_default,
+            (SELECT COALESCE(bool_or(a.privilege_type='CREATE' AND a.grantee=0),false)
+             FROM pg_database d CROSS JOIN LATERAL aclexplode(COALESCE(d.datacl,acldefault('d',d.datdba))) a
+             WHERE d.datname=current_database()) AS public_database_create_default,
+            has_schema_privilege(current_user,'auth','USAGE') AS operator_auth_usage,
+            (SELECT has_table_privilege(current_user,c.oid,'REFERENCES')
+             FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+             WHERE n.nspname='auth' AND c.relname='users') AS operator_auth_references,
             (SELECT jsonb_agg(jsonb_build_object('table',tablename,'command',cmd,'roles',roles,'using',qual,'check',with_check))
              FROM pg_policies WHERE schemaname='public') AS public_policies,
             (SELECT count(*) FROM information_schema.table_privileges
@@ -85,16 +97,17 @@ async function main() {
             (SELECT jsonb_agg(jsonb_build_object('owner',pg_get_userbyid(defaclrole),'acl',defaclacl::text))
              FROM pg_default_acl d JOIN pg_namespace n ON n.oid=d.defaclnamespace
              WHERE n.nspname='public' AND defaclobjtype='r') AS public_default_table_grants`);
-        const testUsersCount = tables.some(
-          (table) => table.name === "TestUsers",
-        )
-          ? (
-              await tx.execute(
-                query`SELECT count(*) AS count FROM public."TestUsers"`,
-              )
-            )[0].count
-          : null;
-        return { identity, tables, ledgers, metadata, testUsersCount };
+        return {
+          identity,
+          tables,
+          ledgers: counts.ledgers,
+          metadata: { ...metadata, auth_users_count: counts.authUsersCount },
+          testUsersCount: counts.testUsersCount,
+          authUsersCountVerified: counts.authUsersCountVerified,
+          testUsersCountVerified: counts.testUsersCountVerified,
+          permissionInventoryScope:
+            "Privileges visible to the current database role",
+        };
       },
       { accessMode: "read only" },
     );

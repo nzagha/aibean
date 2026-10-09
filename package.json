@@ -14,6 +14,7 @@
     "db:seed": "tsx scripts/seed.ts",
     "supabase:check": "tsx scripts/check-supabase-readiness.ts",
     "db:prepare-install": "tsx scripts/prepare-database-installation.ts",
+    "db:test-postgres": "tsx scripts/test-postgres-installation.ts",
     "db:up": "docker compose --env-file .env.local up -d db redis",
     "admin:grant": "tsx scripts/grant-admin.ts"
   },

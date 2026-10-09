@@ -86,9 +86,9 @@ npm audit --omit=dev --audit-level=high
 node scripts/smoke-http.mjs
 ```
 
-The HTTP smoke script expects the unconfigured local development preview (no auth/billing keys). Unit/database tests cover taxonomy relationships, combined filtering, industry fit, trust/freshness, comparison limits, ranking commercial exclusion, URL validation, relational uniqueness and rollback. Database tests use isolated PGlite; they do not imply a connected PostgreSQL deployment has been verified.
+The HTTP smoke script expects the unconfigured local development preview (no auth/billing keys). Ordinary database tests use isolated PGlite. `npm run db:test-postgres`, with PG_TEST_BIN pointing to native PostgreSQL 17 and optional PG_TEST_OPENSSL, creates fresh loopback-only instances and runs sixteen installation/role/concurrency/recovery scenarios without loading dotenv or DATABASE_URL. See docs/SUPABASE_POSTGRESQL_TEST_AND_RECOVERY_EVIDENCE.md for commands, evidence and managed-platform limitations.
 
-PostgreSQL/provider/Stripe end-to-end journeys and full visual/mobile interaction QA remain pending. Next.js is patched to 16.3.8 on the Supabase foundation branch; the October 7 audit remains a historical snapshot of 16.3.6. Moderate development-only transitive advisories through drizzle-kit remain under review; do not apply an unreviewed forced downgrade to silence them. See docs/FOUNDATION_PROGRESS.md for current validation and blockers.
+Provider/Stripe end-to-end journeys, live PostgreSQL runtime provisioning and full visual/mobile interaction QA remain pending. Next.js is patched to 16.3.8 on the Supabase foundation branch; the October 7 audit remains a historical snapshot of 16.3.6. Moderate development-only transitive advisories through drizzle-kit remain under review; do not apply an unreviewed forced downgrade to silence them. See docs/FOUNDATION_PROGRESS.md for current validation and blockers.
 
 ## Implementation and next stages
 

@@ -16,5 +16,6 @@ export default defineConfig([
     "next-env.d.ts",
     ".agents/**",
     "versions/**",
+    "test-results/**",
   ]),
 ]);

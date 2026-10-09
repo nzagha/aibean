@@ -1,6 +1,6 @@
 # aiBean initial secure installation — review package
 
-Prepared 9 October 2026 on `codex/supabase-foundation`. **Proposal only: nothing in this package has been executed against hosted Supabase.** SQL preparation and isolated tests are authorized; hosted execution still requires owner approval and the open validation gates below.
+Final validation updated 9 October 2026 on `codex/supabase-foundation`. **Proposal only: nothing in this package has been executed against hosted Supabase.** Sixteen native PostgreSQL scenarios and isolated restore pass. Hosted readiness is **CONDITIONAL GO**, subject to the secure hosted recovery gate and independent approvals A/B/C below.
 
 ## Target and observed state
 
@@ -25,6 +25,10 @@ Credentials, CA contents and private file paths are not part of this package. Th
 | `db/install/testusers-security-proposal.sql` | Separate optional TestUsers browser-access revocation |
 | `scripts/prepare-database-installation.ts` | Offline, deterministic package generator; no DB connection |
 | `tests/database-installation.test.ts` | Isolated clean/upgrade/permission/integrity/rollback tests |
+| `scripts/test-postgres-installation.ts` | Native PostgreSQL multi-session installation/security/recovery runner |
+| `db/install/runtime-login-proposal.sql` | Separate Approval B role preparation; no credential or active runtime switch |
+| `db/install/validation-read-only.sql` | SELECT-only post-install metadata/count checks |
+| `docs/SUPABASE_POSTGRESQL_TEST_AND_RECOVERY_EVIDENCE.md` | Commands, outcomes, environment limits and proposed hosted recovery process |
 
 Run `npm run db:prepare-install` to regenerate for review. Never run the security fragment independently. `npm run db:migrate` is deliberately gated and opens no connection. There are no startup migrations. This package is not a substitute for later Auth route and provider work.
 
@@ -82,7 +86,7 @@ The main installation never alters TestUsers, its policies or records. The optio
 
 Expected clean-install impact: 14 new application tables, two private tables, a Drizzle ledger/schema and a NOLOGIN runtime role. No business data, Auth users, provider settings, credentials or capability flags are inserted/changed. The only inserted records are migration/security ledger entries. Upgrade impact: preserve existing application rows and add mapping/security objects; revoke existing client-table access. Active clients using direct Data API calls would lose that access.
 
-Before execution, verify backups in Supabase, retention/PITR availability, and a tested restore destination. Take an approved logical snapshot of existing public data/schema and relevant roles/grants using verified TLS and the official connection settings, storing it outside Git with restricted access. Verify archive integrity and restore it into a separate test target. Record aggregate counts and permission metadata, without copying personal rows into reports. Backup/restore has **not** been performed or verified in this stage.
+Native synthetic backup/restore has passed on a separate disposable instance, including database-level ACLs, roles without passwords, schema/column grants, defaults, counts, FKs and both ledgers. Hosted backup/restore has **not** been performed or verified. Before execution, confirm the project's actual backup retention/PITR or approved logical capture, exact privately recorded encrypted non-synced storage location and separate restore destination. Use the scoped operation and sensitive-data controls in the evidence document. A synthetic full-cluster dump must not be replayed into Supabase's managed objects.
 
 DDL takes relation locks; bounded lock/statement timeouts abort instead of waiting indefinitely. Choose a maintenance window, pause application writers and take the advisory lock. After an error, issue ROLLBACK before further checks, confirm original tables/counts/ledgers, and investigate. After successful commit, prefer a reviewed forward fix; do not drop schemas/users or reset the project. If restore is required, use the preapproved restore/PITR procedure and reconcile post-backup writes. A file named backup is not proof of recoverability.
 
@@ -95,16 +99,47 @@ Four new isolated tests passed using PGlite's PostgreSQL engine:
 3. Forced failure immediately before commit rolls back new application tables, role and ledgers, preserves TestUsers, and permits retry; a tampered migration ledger is rejected.
 4. Additive User/Admin/Creator predicates and wrong-owner denial, including no implicit Admin override for Tool ownership.
 
-Fixtures are synthetic and never copied from the hosted database. Docker's engine probe timed out. Full multi-connection PostgreSQL concurrency (including competing installation/ownership transactions), provider/browser integration, hosted-role restrictions and backup restoration remain unverified. PGlite tests establish SQL behavior in isolation, not a deployed production guarantee. Before hosted execution, run this package on a disposable real PostgreSQL/Supabase-compatible target and verify observer sessions never see an intermediate unprotected schema.
+Fixtures are synthetic and never copied from the hosted database. Docker's engine probe timed out; native PostgreSQL 17.11 Windows supplied the isolated alternative. Sixteen native scenarios pass, including two installers plus an observer, advisory wait/timeout, hidden uncommitted objects, rollback, historical ownership continuity, authenticated client/runtime restrictions, exact Approval B SQL and backup/restore. See [complete test and recovery evidence](SUPABASE_POSTGRESQL_TEST_AND_RECOVERY_EVIDENCE.md) and its sanitized machine-readable run. Native 17.11 is not a full reproduction of managed 17.6/Linux, its services/extensions or provider behavior. Hosted new-login authentication and hosted recovery remain unverified.
 
 ## Exact approvals and next stage
 
-Prepared for code/SQL review; **hosted execution is blocked pending the real PostgreSQL and backup/restore gates**. No approval is implied by this document or by MCP access.
+All original installation/security/migration checksums remain unchanged from commit 6de140a. No regeneration was necessary. The new independent B and validation files do not change A's manifest or the original Drizzle history.
 
-After those gates pass, request separate explicit approval for:
+### Approval A — Application schema installation
 
-1. The exact `reviewed-installation.sql` hash from the manifest, on the verified project/database, as the verified migration operator.
-2. The optional TestUsers revocation SQL and its expected client-access change.
-3. Secure runtime-login provisioning/membership and replacement of runtime credentials, without sharing credentials in chat.
+- Target: project `yfknxidgphhepdtwazhn`, direct host `db.yfknxidgphhepdtwazhn.supabase.co:5432`, database `postgres`.
+- Verified operator: `postgres`, nonsuperuser, with BYPASSRLS/CREATEDB/CREATEROLE/REPLICATION. Read-only preflight also verifies schema CREATE, public CREATE, auth USAGE and auth.users REFERENCES. Recheck endpoint/role/metadata immediately before execution.
+- Exact file: `db/install/reviewed-installation.sql`.
+- SHA-256: `72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c` (UTF-8 LF).
+- Creates 14 application tables, 16 baseline FKs plus two mapping FKs, private user_identities/installations tables, drizzle ledger/schema and NOLOGIN aibean_runtime. Only two baseline ledger records and one security ledger record are inserted. No business/Auth/TestUsers rows or capabilities change.
+- Enables application/mapping RLS, removes direct client/service-role grants, grants the restricted group only the object/column capabilities documented above. Creation and hardening share one transaction, advisory lock 621487190, five-second lock timeout and sixty-second statement timeout. Application login B is separate.
+- Evidence: clean/repeat/historical installation, concurrency and rollback pass natively; synthetic restore with equivalent permissions/counts/history passes. Actual hosted backup capabilities, secure destination and recoverability must be confirmed before executing A. Approval is conditional on that gate, not permission to skip it.
+- Postflight: run `db/install/validation-read-only.sql` as operator. Expected clean results: 14 application RLS tables, 18 FKs, the exact two manifest baseline entries, one supplement matching security hash, no browser/service-role application privileges, two TestUsers and zero Auth/User/mapping records. Existing unrelated managed objects remain intact. Re-authenticate browser/runtime roles independently after B; metadata alone is insufficient.
+- Read-only validation file SHA-256: `61466aa36b8a3cf252396580fed0b086fa3d1a51a7c83b850365abeca7120771`. Hosted PUBLIC schema/database CREATE defaults were checked false; stop and reconcile any change before A/B instead of assuming no direct grant means no inherited DDL access.
+- Recovery: abort/ROLLBACK on precommit errors; confirm original metadata/counts. After commit, pause affected writes and use reviewed forward SQL or the approved backup/restore procedure. No reset/drop or rewrite of historic migration ledger.
 
-After installation is approved and verified, implement Supabase email/confirmation/recovery and atomic profile mapping, perform two-account and capability tests, then coordinate the single-provider cutover. Supabase Auth implementation/activation remains blocked by these gates. Preserve the existing visual design, current login and Stripe sandbox throughout.
+Owner decision A authorizes only the exact atomic installation after the recovery and fresh-target preflight gates pass. It does not authorize B, C, seed data, Auth activation or live payments.
+
+### Approval B — Restricted runtime login and private connection replacement
+
+- Exact preparation file: `db/install/runtime-login-proposal.sql`.
+- SHA-256: `3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940` (UTF-8 LF).
+- After A, execute as verified postgres. Create aibean_app_login initially NOLOGIN, INHERIT, NOSUPERUSER/NOBYPASSRLS/NOCREATEDB/NOCREATEROLE/NOREPLICATION. Grant only aibean_runtime with ADMIN=false, INHERIT=true, SET=false. Check effective database CONNECT; if absent, stop for a separately reviewed database-owner grant. Do not grant managed/browser/Admin-role membership.
+- Privately generate/store a long random password in the owner's password manager. In verified-TLS interactive psql use `\password aibean_app_login`; do not put the value in chat, command arguments, committed SQL or query history. Then execute the separately approved `ALTER ROLE aibean_app_login LOGIN;`. Exact preparation/provisioning was exercised with synthetic passwords as the nonsuperuser fixture operator.
+- Authenticate a **new direct session** as aibean_app_login. Verify current_user/session_user, TLS, all five false elevated flags, membership options and no object ownership. Verify SELECT on approved tables, INSERT(id)-only User provisioning/defaults, denial of User privilege updates, audit deletion, Auth/TestUsers/ledger reads, DDL/TRUNCATE/role administration. Platform restrictions must be tested on the approved hosted login; isolated results do not establish that account exists or works there.
+- Keep the migration credential in a separate private operator service profile. Replace only the application's ignored DATABASE_URL with the verified direct custom-login connection from this project's official settings; keep DATABASE_CA_CERT_PATH private and strict CA/hostname TLS active. Runtime/Drizzle share existing validation and prepare=false. Drizzle connecting commands then use restricted runtime credentials and cannot perform DDL; db:migrate stays gated. Do not automatically repoint active authentication or use postgres for ordinary deployed requests.
+- Restart application connection pools after the private runtime switch, run read-only readiness and approved application smoke checks. Restrict external access until server authorization/provider tests pass. On connection failure, stop the deployment and fix the custom account privately rather than serving requests through the privileged operator credential. Pooler use requires its official endpoint/username and a separate check.
+
+Shared runtime RLS trusts server code across users; it cannot independently enforce visitor row ownership. Database CONNECT/TEMP/catalog and built-in-function privileges inherited from PostgreSQL defaults are distinct from application table access. No administrative DDL grant is proposed; temporary-object privileges are not globally revoked because that would affect unrelated clients.
+
+### Approval C — Independent existing TestUsers permission correction
+
+- Exact file: `db/install/testusers-security-proposal.sql`.
+- SHA-256: `0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db` (UTF-8 LF).
+- As verified operator on the same target, independently revoke TestUsers table privileges from PUBLIC, anon and authenticated in its bounded transaction. Preserve the table, columns, policies, operator access and both rows. No import into Auth occurs.
+- Any existing browser client depending on TestUsers reads/inserts loses that access; owner must confirm this client impact. Existing permissive policies remain inert without privileges and must be reviewed before any later grant. Service/managed operator access is outside this browser-read correction.
+- Native test confirms count two and independent anon/authenticated SELECT denial. Hosted postflight must repeat only counts and access checks without returning personal fields. Capture original grant metadata for a reviewed compensating grant if client impact requires a rollback; never reset or delete records.
+
+Each decision needs separate explicit owner authorization. **Current overall decision: CONDITIONAL GO for staged review; hosted execution remains pending secure recovery confirmation and A/B/C authorization.** No approval is inferred from this document, prior GitHub publication, or connection access.
+
+After approved installation and runtime verification, implement Supabase email/confirmation/recovery and atomic profile mapping, execute the two-account/capability tests listed in the evidence document, then coordinate the single-provider cutover. Supabase Auth activation remains blocked until those application/provider tests pass.

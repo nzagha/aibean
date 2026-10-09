@@ -1,6 +1,6 @@
 # Supabase identity and database migration plan
 
-Status: live target inspected; additive installation/mapping design pending direct database connectivity and isolated validation. Updated 9 October 2026. No identity records changed and no migration generated or applied. Existing SQL files and October 7 audit remain untouched.
+Status: verified-TLS live target inspected; additive installation/mapping SQL prepared and isolated native PostgreSQL validation passed. Updated 9 October 2026. No hosted identity record, schema, grant or Auth setting changed. Original Drizzle migrations and October 7 audit remain untouched. See the final installation approval package for independent A/B/C decisions and the remaining hosted recovery gate.
 
 ## Verified local structure
 
@@ -33,11 +33,11 @@ Inspect only aggregate historical User/ownership counts and mapping collisions i
 
 MCP now verifies project `yfknxidgphhepdtwazhn`, database `postgres`, PostgreSQL 17.6. All 14 aiBean tables and both application ledgers are absent; MCP migration history is empty. The separate TestUsers table has two rows and permissive public-read access. Auth users/identities both have zero rows. Preserve TestUsers; do not import it as application identity. This is a new application-schema installation on an existing project, not permission to reset it. See [connection readiness](SUPABASE_CONNECTION_AND_ENVIRONMENT_READINESS.md).
 
-No DATABASE_URL is configured. Real PostgreSQL migration/role tests and backup/restore evidence remain required. Existing PGlite constraint tests do not prove hosted RLS behavior. Broad default public-schema grants mean 0000/0001 must not be installed alone: stage the complete migration chain plus RLS/revokes atomically, before API exposure. Test failure rollback as well as upgrade preservation. Retain the original migration hashes and ledger history.
+DATABASE_URL and the private project CA are configured; verified-TLS read-only Drizzle succeeds as elevated postgres. Sixteen native PostgreSQL scenarios pass, including independent role sessions, concurrency, historical upgrade, failure rollback and separate-instance backup/restore. These do not establish hosted new-login or Auth-provider behavior. Actual hosted recovery and owner A/B/C approvals remain pending. Broad default public grants mean 0000/0001 must not be installed alone: use the complete atomic installation/security package with preserved hashes/history.
 
 ## Proposed identity mapping
 
-Preserve `public.users.id` and all referencing business records. Add a private mapping relation with a unique Supabase Auth UUID and a unique internal user_id, linked to auth.users and public.users. Exact schema/constraints depend on live inspection. Use restrictive deletion semantics; deleting an Auth identity must not cascade into ownership, reviews, orders or audits. Keep mapping writes unavailable to ordinary users.
+Preserve `public.users.id` and all referencing business records. The prepared supplement defines aibean_private.user_identities with auth_user_id UUID primary key, unique user_id text, restrictive FKs to auth.users/public.users and created_at. Both original migrations remain unchanged; the supplement has a separate security ledger and explicit private-schema lifecycle. Deleting an Auth identity cannot cascade into business records. Browser identities cannot write the mapping; the trusted server role may provision only verified identities through the eventual server transaction.
 
 Resolution: verified Supabase sub -> canonical mapping -> existing internal User -> server capabilities. New verified identities provision an ordinary User and mapping atomically/idempotently. Never elevate through signup metadata. Conflicting/concurrent mappings fail closed. Provider linking stays under the same canonical Supabase Auth user; it must not create another application User.
 
@@ -46,7 +46,7 @@ Legacy migration requires proof tying the historical internal ID to the claimant
 ## Additive rollout and validation
 
 1. Verify isolated target/history, backups and restore path. Capture metadata and aggregate continuity checks.
-2. Prepare additive mapping/permission migrations without editing 0000/0001. Use installed Drizzle tooling to generate reviewable forward SQL and snapshots.
+2. Review the prepared additive mapping/security supplement without editing 0000/0001. It is explicitly tracked outside the original Drizzle snapshot; reconcile any future generator/private-schema migration rather than silently regenerating history.
 3. Test empty and upgrade paths against disposable real PostgreSQL, including Supabase auth schema where required. Check all existing FKs, ownership counts and failure/rollback paths.
 4. Present the exact non-disposable target, SQL, locks, data/backfill impact, backup/forward-recovery plan and tests for owner approval before applying.
 5. Backfill only verified mappings. Keep a restricted migration log; no secrets/PII in repository reports.
