@@ -95,7 +95,7 @@ function privateBridge(root: string, request: object) {
   assert(!result.error);
   return result.stdout;
 }
-function verifyRecovery() {
+export function verifyRecovery() {
   assert(process.env.AIBEAN_BACKUP_ROOT);
   const root = resolve(process.env.AIBEAN_BACKUP_ROOT);
   assert.equal(privateBridge(root, { mode: "check" }), "OK");
@@ -156,7 +156,7 @@ function verifyRecovery() {
     ciphertextSha256: evidence.encryptedArchiveSha256,
   };
 }
-function compareTestUsers(
+export function compareTestUsers(
   a: Awaited<ReturnType<typeof snapshot>>,
   b: Awaited<ReturnType<typeof snapshot>>,
 ) {
@@ -169,25 +169,29 @@ function compareTestUsers(
     "dataDigest",
   ] as const)
     assert.deepEqual(b[key], a[key]);
-  const addedRuntimeUsage = b.acl.filter(
-    (row) => row.kind === "schema" && row.grantee === "aibean_runtime",
-  );
-  if (addedRuntimeUsage.length)
-    assert.deepEqual(addedRuntimeUsage, [
-      {
-        kind: "schema",
-        object: "public",
-        column: "",
-        grantee: "aibean_runtime",
-        grantor: "pg_database_owner",
-        privilege_type: "USAGE",
-        is_grantable: false,
-      },
-    ]);
-  assert.deepEqual(
-    canonical(b.acl.filter((row) => !addedRuntimeUsage.includes(row))),
-    canonical(a.acl),
-  );
+  // Both inputs may now be post-A snapshots. Normalize the exact approved
+  // schema USAGE grant on BOTH sides; stripping only b falsely reports drift.
+  const originalAcl = (snapshot: typeof a) => {
+    const addedRuntimeUsage = snapshot.acl.filter(
+      (row) => row.kind === "schema" && row.grantee === "aibean_runtime",
+    );
+    if (addedRuntimeUsage.length)
+      assert.deepEqual(addedRuntimeUsage, [
+        {
+          kind: "schema",
+          object: "public",
+          column: "",
+          grantee: "aibean_runtime",
+          grantor: "pg_database_owner",
+          privilege_type: "USAGE",
+          is_grantable: false,
+        },
+      ]);
+    return canonical(
+      snapshot.acl.filter((row) => !addedRuntimeUsage.includes(row)),
+    );
+  };
+  assert.deepEqual(originalAcl(b), originalAcl(a));
   assert.deepEqual(
     b.catalog.schemaAcl.map((row) => row.owner),
     a.catalog.schemaAcl.map((row) => row.owner),
@@ -259,7 +263,7 @@ async function managedState(q: Query) {
     ),
   };
 }
-async function state(q: Query, installed = false) {
+export async function state(q: Query, installed = false) {
   const data = await testUsersState(q, installed);
   const managed = await managedState(q);
   const installation = await q(
@@ -663,43 +667,44 @@ async function main() {
     }),
   );
 }
-main()
-  .catch(async (error) => {
-    if (attempted && !committed && client) {
-      try {
-        await client.unsafe("ROLLBACK").simple();
-        const observed = await readState();
-        assert(before);
-        compareTestUsers(before.data, observed.data);
-        assert.deepEqual(observed.managed, before.managed);
-        assert.deepEqual(observed.installation, before.installation);
-        rollbackVerified = true;
-      } catch {
-        rollbackVerified = false;
+if (process.argv[1]?.endsWith("execute-approved-installation.ts"))
+  main()
+    .catch(async (error) => {
+      if (attempted && !committed && client) {
+        try {
+          await client.unsafe("ROLLBACK").simple();
+          const observed = await readState();
+          assert(before);
+          compareTestUsers(before.data, observed.data);
+          assert.deepEqual(observed.managed, before.managed);
+          assert.deepEqual(observed.installation, before.installation);
+          rollbackVerified = true;
+        } catch {
+          rollbackVerified = false;
+        }
       }
-    }
-    const code =
-      typeof error?.code === "string" && /^[A-Z0-9_]{3,50}$/.test(error.code)
-        ? error.code
-        : "REDACTED";
-    const failure = {
-      approvalA: "FAIL",
-      stage,
-      code,
-      attempted,
-      commitAcknowledged: committed,
-      rollbackVerified,
-      automaticRemediationAttempted: false,
-      checks,
-    };
-    if (attempted)
-      writeFileSync(
-        "docs/evidence/supabase-approval-a-installation-failure-2026-10-09.json",
-        JSON.stringify(failure, null, 2) + "\n",
-      );
-    console.error(JSON.stringify(failure));
-    process.exitCode = 1;
-  })
-  .finally(async () => {
-    await client?.end({ timeout: 5 });
-  });
+      const code =
+        typeof error?.code === "string" && /^[A-Z0-9_]{3,50}$/.test(error.code)
+          ? error.code
+          : "REDACTED";
+      const failure = {
+        approvalA: "FAIL",
+        stage,
+        code,
+        attempted,
+        commitAcknowledged: committed,
+        rollbackVerified,
+        automaticRemediationAttempted: false,
+        checks,
+      };
+      if (attempted)
+        writeFileSync(
+          "docs/evidence/supabase-approval-a-installation-failure-2026-10-09.json",
+          JSON.stringify(failure, null, 2) + "\n",
+        );
+      console.error(JSON.stringify(failure));
+      process.exitCode = 1;
+    })
+    .finally(async () => {
+      await client?.end({ timeout: 5 });
+    });

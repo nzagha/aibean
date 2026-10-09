@@ -1,10 +1,14 @@
 # Supabase connection and environment readiness
 
+**Latest state — Approval B PASS (9 October 2026):** The explicitly authorized exact runtime-login package was executed once. A new password-authenticated aibean_app_login session passed trusted TLS, Drizzle reads and reviewed restrictions. The ignored application DATABASE_URL now uses that login; the operator connection and runtime credential are separately protected with private Windows DPAPI. Both TestUsers records/permissions, A objects/history and zero Auth/User/mapping counts are preserved. Local lint/typecheck, 31 tests, production build, runtime audit and public/guest HTTP checks pass. C and Supabase website Auth remain separately unexecuted. See [Approval B runtime result](SUPABASE_APPROVAL_B_RUNTIME_LOGIN_RESULT.md). Earlier observations below are chronological evidence, not current runtime configuration.
+
+**Latest state — Approval B PASS (9 October 2026):** The explicitly authorized exact runtime-login package was executed once. A new password-authenticated aibean_app_login session passed trusted TLS, Drizzle reads and reviewed restrictions. The ignored application DATABASE_URL now uses that login; the operator connection and runtime credential are separately protected with private Windows DPAPI. Both TestUsers records/permissions, A objects/history and zero Auth/User/mapping counts are preserved. Local lint/typecheck, 31 tests, production build, runtime audit and public/guest HTTP checks pass. C and Supabase website Auth remain separately unexecuted. See [Approval B runtime result](SUPABASE_APPROVAL_B_RUNTIME_LOGIN_RESULT.md). Earlier observations below are chronological evidence, not current runtime configuration.
+
 Updated 9 October 2026, including verified DATABASE_URL, actual scoped recovery and owner-authorized hosted Approval A. The latest live refresh used read-only Drizzle/PostgreSQL; earlier MCP observations are identified below. This report supersedes the connection blockers in the initial foundation assessment; `docs/audit/` remains a historical snapshot.
 
 ## Outcome
 
-**Verified TLS PostgreSQL/Drizzle, scoped recovery and Approval A installation/postflight PASS.** Fourteen RLS application tables, private mapping, exact baseline/security ledgers and NOLOGIN group are installed. Auth/User/mapping counts remain zero; both TestUsers records and original permissions are preserved. Restricted application login/connection B and website Supabase Auth remain pending. Earlier MCP/public API checks passed; current MCP OAuth refresh fails, so A used the existing direct verified-TLS connection without changing MCP/Auth settings. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records current evidence.
+**Verified TLS PostgreSQL/Drizzle, scoped recovery and Approval A installation/postflight PASS.** Fourteen RLS application tables, private mapping, exact baseline/security ledgers and NOLOGIN group are installed. Auth/User/mapping counts remain zero; both TestUsers records and original permissions are preserved. Restricted login/connection B now PASS; website Supabase Auth remains pending. Earlier MCP/public API checks passed; current MCP OAuth refresh fails, so A used the existing direct verified-TLS connection without changing MCP/Auth settings. [Approval A installation result](SUPABASE_APPROVAL_A_INSTALLATION_RESULT.md) records current evidence.
 
 | Item | Verified evidence | Limit |
 |---|---|---|
@@ -15,7 +19,7 @@ Updated 9 October 2026, including verified DATABASE_URL, actual scoped recovery 
 | Existing MCP alias | `supabase`; previously authenticated, current OAuth refresh failed | Direct verified-TLS PostgreSQL used for A; no connector/Auth configuration changed |
 | Application Auth API | Saved publishable key accepted; `GET /auth/v1/settings` returned 200 | No user sign-in or email delivery tested |
 | Public Data API | `HEAD /rest/v1/TestUsers?select=id&limit=0`, no user JWT, returned 206 and count 2 | No record bodies fetched |
-| Application PostgreSQL | DATABASE_URL present; direct PostgreSQL authentication, verified TLS and Drizzle SELECT succeeded with the downloaded CA | Role postgres has BYPASSRLS; not approved for normal application runtime |
+| Application PostgreSQL | DATABASE_URL present; direct PostgreSQL authentication, verified TLS and Drizzle SELECT succeeded with the downloaded CA | Current runtime role is aibean_app_login without elevated flags; the earlier postgres inspection connection is now stored separately |
 
 ## Downloaded certificate verification — latest result
 

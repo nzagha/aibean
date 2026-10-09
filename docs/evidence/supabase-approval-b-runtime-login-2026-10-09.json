@@ -1,0 +1,379 @@
+{
+  "approval": "B",
+  "result": "PASS",
+  "verifiedAt": "2026-10-09T23:15:44.350Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+  "hostedLogin": "VERIFIED",
+  "privileges": "PASS",
+  "databaseUrlSwitch": "PASS",
+  "drizzle": "PASS",
+  "tls": "PASS",
+  "dataPreservation": "PASS",
+  "originalProvisioningChecks": [
+    "Encrypted recovery archive verified with private decryption and integrity checks",
+    "Exact target, trusted TLS, operator, A objects/history/RLS/grants and two original records verified; runtime login absent",
+    "Unique random runtime credential and separate operator connection secured with Windows CurrentUser DPAPI and private ACLs",
+    "Exact B package committed; NOLOGIN restricted membership and inherited CONNECT verified",
+    "Verified-TLS psql non-echo password workflow completed through private process pipes",
+    "New authenticated runtime session passed strict TLS, Drizzle reads, role/grant checks and four actual denied private reads"
+  ],
+  "operatorHostnameVerified": true,
+  "privateCredentialStorage": "Windows CurrentUser DPAPI, private ACLs outside repository/sync folders",
+  "privatePasswordMethod": "Verified-TLS psql non-echo prompts through captured pipes; client-side SCRAM encryption",
+  "operatorConnectionPreservedSeparately": true,
+  "environmentVariablesExceptDatabaseUrlUnchanged": true,
+  "archiveReverified": true,
+  "testUsersPreserved": 2,
+  "originalMigrationFilesAndLedgersUnchanged": true,
+  "observedApplicationTables": 14,
+  "applicationTablesWithRls": 14,
+  "expectedForeignKeys": 18,
+  "drizzleLedgerEntries": 2,
+  "securityLedgerEntries": 1,
+  "authUsers": 0,
+  "applicationUsers": 0,
+  "identityMappings": 0,
+  "approvalCExecuted": false,
+  "authActivated": false,
+  "persistentTestRecordsInserted": false,
+  "preservationCheckerCorrection": "Normalize only the exact already-approved runtime public USAGE grant on both snapshots; reject all other ACL differences. Initial stop was a local checker false positive, not database drift.",
+  "continuationNoDatabaseWrites": true,
+  "hosted": {
+    "identity": {
+      "database": "postgres",
+      "session_user": "aibean_app_login",
+      "current_user": "aibean_app_login",
+      "read_only": "on",
+      "tls": true
+    },
+    "roles": [
+      {
+        "rolname": "aibean_app_login",
+        "rolcanlogin": true,
+        "rolinherit": true,
+        "rolsuper": false,
+        "rolbypassrls": false,
+        "rolcreatedb": false,
+        "rolcreaterole": false,
+        "rolreplication": false
+      }
+    ],
+    "memberships": [
+      {
+        "parent": "aibean_app_login",
+        "child": "postgres",
+        "admin_option": true,
+        "inherit_option": false,
+        "set_option": false
+      },
+      {
+        "parent": "aibean_runtime",
+        "child": "aibean_app_login",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": false
+      }
+    ],
+    "privileges": {
+      "database_create": false,
+      "public_create": false,
+      "private_create": false,
+      "auth_read": false,
+      "testusers_read": false,
+      "ledger_read": false,
+      "security_read": false,
+      "users_change": false,
+      "admin_change": false,
+      "creator_change": false,
+      "ordinary_user_provision": true,
+      "audit_change": false,
+      "billing_history_change": false,
+      "mapping_change": false
+    },
+    "tablePrivileges": [
+      {
+        "table": "audit_logs",
+        "select": true,
+        "insert": true,
+        "update": false,
+        "delete": false,
+        "elevated": false
+      },
+      {
+        "table": "billing_webhook_receipts",
+        "select": true,
+        "insert": true,
+        "update": false,
+        "delete": false,
+        "elevated": false
+      },
+      {
+        "table": "claim_requests",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "featured_placements",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "orders",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "rate_limits",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "saved_tools",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "stack_tools",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "stacks",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "taxonomy",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "tool_reviews",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "tools",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      },
+      {
+        "table": "users",
+        "select": true,
+        "insert": false,
+        "update": false,
+        "delete": false,
+        "elevated": false
+      },
+      {
+        "table": "vendor_access",
+        "select": true,
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "elevated": false
+      }
+    ],
+    "mapping": {
+      "read": true,
+      "provision": true
+    },
+    "drizzleCatalogQueriesPassed": true,
+    "hostnameVerified": true,
+    "deniedReads": [
+      "auth.users",
+      "public.\"TestUsers\"",
+      "drizzle.__drizzle_migrations",
+      "aibean_private.installations"
+    ],
+    "noPersistentTestWrites": true
+  },
+  "postSwitchConnectionVerified": true,
+  "postSwitchManagedAndApplicationMetadataUnchanged": true,
+  "limitations": [
+    "No hosted write-path fixtures; privilege metadata and actual denied read statements verified",
+    "Shared server runtime relies on visitor ownership/capability checks",
+    "Scoped encrypted archive covers pre-install TestUsers only; off-device key/recovery remains unverified",
+    "MCP OAuth unavailable; existing direct trusted TLS used",
+    "Supabase Auth website activation/provider end-user sessions remain separate"
+  ],
+  "repositoryValidation": {
+    "lint": true,
+    "typecheck": true,
+    "testsPassed": 31,
+    "localProductionBuild": true,
+    "runtimeVulnerabilities": 0,
+    "githubCi": "pending publication"
+  },
+  "applicationValidation": {
+    "publicPages": 16,
+    "guestRedirects": 8,
+    "noPersonalRecordsRequested": true,
+    "noPersistentWrites": true,
+    "outcomes": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/tools",
+        "status": 200
+      },
+      {
+        "path": "/explore",
+        "status": 200
+      },
+      {
+        "path": "/industries",
+        "status": 200
+      },
+      {
+        "path": "/knowledge",
+        "status": 200
+      },
+      {
+        "path": "/collections",
+        "status": 200
+      },
+      {
+        "path": "/featured",
+        "status": 200
+      },
+      {
+        "path": "/for-vendors",
+        "status": 200
+      },
+      {
+        "path": "/skills",
+        "status": 200
+      },
+      {
+        "path": "/playbooks",
+        "status": 200
+      },
+      {
+        "path": "/events",
+        "status": 200
+      },
+      {
+        "path": "/creators",
+        "status": 200
+      },
+      {
+        "path": "/compare",
+        "status": 200
+      },
+      {
+        "path": "/login",
+        "status": 200
+      },
+      {
+        "path": "/register",
+        "status": 200
+      },
+      {
+        "path": "/submit",
+        "status": 200
+      },
+      {
+        "path": "/account",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/admin",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/pricing",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/vendor",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/creator",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/submit/tool",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/claim/draft-studio",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/featured/manage",
+        "status": 307,
+        "guestRedirect": true
+      },
+      {
+        "path": "/tools/unknown-tool",
+        "status": 200,
+        "notFound": true,
+        "noindex": true
+      }
+    ]
+  },
+  "additionalGrantMetadata": {
+    "database_temporary": true,
+    "permanent_schema_create_count": 0,
+    "timestamp_insert": false,
+    "user_mutation": false
+  },
+  "applicationFreshProcessStarted": true,
+  "applicationPort": 3000,
+  "applicationReady": false,
+  "authEndUserLoginVerified": false,
+  "finalContinuityAfterApplicationSmoke": {
+    "verifiedAt": "2026-10-09T23:20:17.131Z",
+    "testUsersPrivatelyMatchOriginal": true,
+    "testUsersRecords": 2,
+    "authUsers": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "allApplicationRecords": 0,
+    "unchangedFourteenRlsTablesForeignKeysAndLedgers": true,
+    "recoveryArchiveReverified": true
+  }
+}

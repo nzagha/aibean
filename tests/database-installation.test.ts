@@ -4,6 +4,8 @@ import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { hasCapability, ownsResource } from "../src/lib/capabilities";
+import { drizzle } from "drizzle-orm/pglite";
+import { ordinaryUserInsert } from "../src/lib/db/ordinary-user";
 
 const read = async (path: string) =>
   (await fs.readFile(path, "utf8")).replace(/\r\n/g, "\n");
@@ -25,6 +27,28 @@ async function count(db: PGlite, table: string) {
     await db.query<{ n: number }>(`SELECT count(*)::int AS n FROM ${table}`)
   ).rows[0].n;
 }
+
+test("ordinary user provisioning works under INSERT(id) only and cannot set capability defaults", async () => {
+  const db = await fixture();
+  try {
+    await db.exec(await read("db/install/reviewed-installation.sql"));
+    await db.exec("SET ROLE aibean_runtime");
+    const orm = drizzle(db);
+    await orm.execute(ordinaryUserInsert("ordinary-fixture'quoted"));
+    await orm.execute(ordinaryUserInsert("ordinary-fixture'quoted"));
+    const result = await db.query<{ is_admin: boolean; is_creator: boolean }>(
+      "SELECT is_admin,is_creator FROM public.users",
+    );
+    assert.deepEqual(result.rows, [{ is_admin: false, is_creator: false }]);
+    await assert.rejects(
+      db.exec(
+        "INSERT INTO public.users(id,is_admin,is_creator,created_at) VALUES ('unsafe',DEFAULT,DEFAULT,DEFAULT)",
+      ),
+    );
+  } finally {
+    await db.close();
+  }
+});
 
 test("review package preserves source hashes, installs atomically, repeats safely and denies browser/runtime privilege escalation", async () => {
   const manifest = JSON.parse(await read("db/install/manifest.json"));

@@ -1,0 +1,18 @@
+{
+  "approvalB": "BLOCKED",
+  "stage": "fresh-authenticated-runtime-verification",
+  "code": "ERR_ASSERTION",
+  "roleCreationCommitted": true,
+  "loginEnabled": true,
+  "applicationConnectionSwitched": false,
+  "automaticReconciliationAttempted": false,
+  "checks": [
+    "Encrypted recovery archive verified with private decryption and integrity checks",
+    "Exact target, trusted TLS, operator, A objects/history/RLS/grants and two original records verified; runtime login absent",
+    "Unique random runtime credential and separate operator connection secured with Windows CurrentUser DPAPI and private ACLs",
+    "Exact B package committed; NOLOGIN restricted membership and inherited CONNECT verified",
+    "Verified-TLS psql non-echo password workflow completed through private process pipes",
+    "New authenticated runtime session passed strict TLS, Drizzle reads, role/grant checks and four actual denied private reads"
+  ],
+  "resolution": "Resolved local ACL comparator false positive under original Approval B; continuation reverified existing login and switched configuration without repeating database writes."
+}

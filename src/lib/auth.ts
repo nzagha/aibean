@@ -7,6 +7,7 @@ import { users, vendorAccess } from "./db/schema";
 import { safeReturnPath } from "./catalog/filter";
 import { passwordMode, passwordIdentity } from "./password-auth";
 import { hasCapability, ownsResource } from "./capabilities";
+import { ordinaryUserInsert } from "./db/ordinary-user";
 export const authConfigured = () =>
   Boolean(
     !passwordMode() &&
@@ -29,7 +30,7 @@ export async function requireUser(
     if (databaseRequired) redirect("/account?notice=storage-required");
     return { id, isAdmin: false, isCreator: false, createdAt: new Date(0) };
   }
-  await db().insert(users).values({ id }).onConflictDoNothing();
+  await db().execute(ordinaryUserInsert(id));
   const [user] = await db().select().from(users).where(eq(users.id, id));
   return user;
 }

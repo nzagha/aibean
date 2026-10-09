@@ -4,7 +4,7 @@ import {
   publicSupabaseConfig,
   SUPABASE_PROJECT_REF,
 } from "../src/lib/supabase/config";
-import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
+import { runtimeDatabaseConfig } from "../src/lib/db/runtime-config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { sql as query } from "drizzle-orm";
 import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
@@ -42,7 +42,7 @@ async function main() {
     process.exitCode = 1;
     return;
   }
-  const connection = verifiedDatabaseConfig();
+  const connection = runtimeDatabaseConfig();
   let hostnameVerified = false;
   const verifyHostname = connection.options.ssl.checkServerIdentity!;
   connection.options.ssl.checkServerIdentity = (hostname, certificate) => {
@@ -116,6 +116,7 @@ async function main() {
       result.identity.read_only === "on" &&
       result.identity.tls === true;
     const restrictedRole =
+      result.identity.database_role === "aibean_app_login" &&
       result.identity.superuser === false &&
       result.identity.bypass_rls === false &&
       result.identity.create_database === false &&

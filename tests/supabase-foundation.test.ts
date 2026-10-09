@@ -9,6 +9,75 @@ import {
 import { hostedDatabaseConfig } from "../src/lib/db/connection-config";
 import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 import { createSessionCookieBridge } from "../src/lib/supabase/cookies";
+import { assertRuntimeConnection } from "../src/lib/db/runtime-config";
+import { compareTestUsers } from "../scripts/execute-approved-installation";
+
+test("preservation comparison accepts the reviewed runtime USAGE on either snapshot but rejects additional ACLs", () => {
+  type Snapshot = Parameters<typeof compareTestUsers>[0];
+  const baseline = {
+    metadata: {},
+    details: [],
+    sequence: [],
+    sequenceState: [],
+    permission: [],
+    dataDigest: "private-fixture",
+    acl: [],
+    catalog: {
+      schemaAcl: [{ owner: "pg_database_owner" }],
+      databaseAcl: [],
+      defaults: [],
+    },
+  } as unknown as Snapshot;
+  const installed = {
+    ...baseline,
+    acl: [
+      {
+        kind: "schema",
+        object: "public",
+        column: "",
+        grantee: "aibean_runtime",
+        grantor: "pg_database_owner",
+        privilege_type: "USAGE",
+        is_grantable: false,
+      },
+    ],
+  };
+  assert.doesNotThrow(() => compareTestUsers(baseline, installed));
+  assert.doesNotThrow(() => compareTestUsers(installed, installed));
+  assert.throws(() =>
+    compareTestUsers(installed, {
+      ...installed,
+      acl: [{ ...installed.acl[0], privilege_type: "CREATE" }],
+    }),
+  );
+  assert.throws(() =>
+    compareTestUsers(installed, {
+      ...installed,
+      acl: [...installed.acl, { ...installed.acl[0], grantee: "unapproved" }],
+    }),
+  );
+});
+
+test("application runtime rejects operator credentials and unexpected ports with no fallback", () => {
+  const direct = `postgresql://aibean_app_login:fixture-secret@db.${SUPABASE_PROJECT_REF}.supabase.co:5432/postgres`;
+  assert.doesNotThrow(() => assertRuntimeConnection(direct));
+  assert.doesNotThrow(() =>
+    assertRuntimeConnection(
+      `postgresql://aibean_app_login.${SUPABASE_PROJECT_REF}:fixture-secret@aws-0-us-east-1.pooler.supabase.com:6543/postgres`,
+    ),
+  );
+  for (const unsafe of [
+    direct.replace("aibean_app_login", "postgres"),
+    direct.replace("5432", "6543"),
+    direct.replace("5432", "9999"),
+    undefined,
+  ]) {
+    assert.throws(
+      () => assertRuntimeConnection(unsafe),
+      (error: Error) => !error.message.includes("fixture-secret"),
+    );
+  }
+});
 
 test("public config rejects foreign projects and privileged or legacy keys without echoing them", () => {
   const key = "sb_publishable_fixture";
