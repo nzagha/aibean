@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { AccountSignOut } from "@/components/account-signout";
 import { eq } from "drizzle-orm";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -12,7 +12,8 @@ import {
   claims,
 } from "@/lib/db/schema";
 import { createStack } from "@/app/actions";
-import { passwordMode, passwordConfiguration } from "@/lib/password-auth";
+import { passwordConfiguration } from "@/lib/password-auth";
+import { authMode } from "@/lib/auth-mode";
 import { ownerPredicates } from "@/lib/db/owned-resources";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -45,11 +46,7 @@ export default async function Account() {
               Your comparison
             </Link>
           </div>
-          {passwordMode() && (
-            <form action="/api/auth/logout" method="post" className="mt-6">
-              <button className="text-link">Sign out</button>
-            </form>
-          )}
+          <AccountSignOut mode={authMode()} compact />
         </section>
       </div>
     );
@@ -73,13 +70,7 @@ export default async function Account() {
     <div className="container py-16">
       <div className="flex justify-between">
         <span className="eyebrow">Your aiBean</span>
-        {passwordMode() ? (
-          <form action="/api/auth/logout" method="post">
-            <button className="button secondary">Sign out</button>
-          </form>
-        ) : (
-          <UserButton />
-        )}
+        <AccountSignOut mode={authMode()} />
       </div>
       <h1 className="my-6 font-display text-5xl font-bold">Your next moves.</h1>
       <div className="flex flex-wrap gap-5 mb-8">
