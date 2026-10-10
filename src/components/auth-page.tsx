@@ -1,38 +1,74 @@
 import Link from "next/link";
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { authConfigured } from "@/lib/auth";
+import { authMode } from "@/lib/auth-mode";
 import { safeReturnPath } from "@/lib/catalog/filter";
-import { passwordMode, passwordConfiguration } from "@/lib/password-auth";
+import { passwordConfiguration } from "@/lib/password-auth";
 import { PasswordLogin } from "./password-login";
+import { SupabaseAuthForm, type SupabaseAuthView } from "./supabase-auth-form";
 export function AuthPage({
   register = false,
   returnTo,
   error,
   loggedOut,
+  view,
+  status,
+  field,
 }: {
   register?: boolean;
   returnTo?: string;
   error?: string;
   loggedOut?: string;
+  view?: SupabaseAuthView;
+  status?: string;
+  field?: string;
 }) {
+  const mode = authMode();
+  const password = mode === "password";
+  const supabaseView = view || (register ? "register" : "login");
   const destination = safeReturnPath(returnTo);
   return (
     <div className="container py-16">
       <div className="mx-auto max-w-lg">
         <span className="eyebrow">Your aiBean</span>
         <h1 className="my-5 font-display text-4xl font-bold">
-          {register && !passwordMode()
-            ? "Build your next stack."
-            : "Welcome back."}
+          {mode === "supabase" && supabaseView === "forgot"
+            ? "Let's get you back in."
+            : mode === "supabase" && supabaseView === "reset"
+              ? "A fresh start."
+              : mode === "supabase" && supabaseView === "confirmation"
+                ? "You're almost there."
+                : register && !password
+                  ? "Build your next stack."
+                  : "Welcome back."}
         </h1>
         <p className="mb-8">
-          {passwordMode()
-            ? register
-              ? "New account registration is coming later. Sign in with your existing account."
-              : "Sign in to your aiBean account with your email and password."
-            : "Sign in to save tools, create stacks, and share your experience."}
+          {mode === "supabase"
+            ? supabaseView === "register"
+              ? "Create your aiBean account to save tools, build stacks, and share your experience."
+              : supabaseView === "forgot"
+                ? "Enter your email to request a secure password-reset link."
+                : supabaseView === "reset"
+                  ? "Set a new password to return to your aiBean account."
+                  : supabaseView === "confirmation"
+                    ? "Check your inbox for your confirmation link, or request a new one below."
+                    : "Sign in to your aiBean account with your email and password."
+            : password
+              ? register
+                ? "New account registration is coming later. Sign in with your existing account."
+                : "Sign in to your aiBean account with your email and password."
+              : "Sign in to save tools, create stacks, and share your experience."}
         </p>
-        {passwordMode() ? (
+        {mode === "supabase" ? (
+          <SupabaseAuthForm
+            view={supabaseView}
+            returnTo={destination}
+            error={error}
+            status={status}
+            field={field}
+            loggedOut={loggedOut}
+          />
+        ) : password ? (
           <PasswordLogin
             returnTo={destination}
             error={error}

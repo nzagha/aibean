@@ -6,7 +6,7 @@ export const metadata = {
 export default async function Register({
   searchParams,
 }: {
-  searchParams: Promise<{ returnTo?: string }>;
+  searchParams: Promise<{ returnTo?: string; error?: string; field?: string }>;
 }) {
-  return <AuthPage register returnTo={(await searchParams).returnTo} />;
+  return <AuthPage register {...await searchParams} />;
 }

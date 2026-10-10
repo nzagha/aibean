@@ -13,6 +13,7 @@ import {
 } from "@/lib/db/schema";
 import { createStack } from "@/app/actions";
 import { passwordMode, passwordConfiguration } from "@/lib/password-auth";
+import { ownerPredicates } from "@/lib/db/owned-resources";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Your account",
@@ -57,17 +58,17 @@ export default async function Account() {
       .select({ id: tools.id, name: tools.name, slug: tools.slug })
       .from(savedTools)
       .innerJoin(tools, eq(savedTools.toolId, tools.id))
-      .where(eq(savedTools.userId, user.id)),
-    db().select().from(stacks).where(eq(stacks.userId, user.id)),
-    db().select().from(reviews).where(eq(reviews.userId, user.id)),
-    db().select().from(claims).where(eq(claims.userId, user.id)),
+      .where(ownerPredicates(user.id).saves),
+    db().select().from(stacks).where(ownerPredicates(user.id).stacks),
+    db().select().from(reviews).where(ownerPredicates(user.id).reviews),
+    db().select().from(claims).where(ownerPredicates(user.id).claims),
   ]);
   const members = await db()
     .select({ stackId: stackTools.stackId, name: tools.name, slug: tools.slug })
     .from(stackTools)
     .innerJoin(stacks, eq(stackTools.stackId, stacks.id))
     .innerJoin(tools, eq(stackTools.toolId, tools.id))
-    .where(eq(stacks.userId, user.id));
+    .where(ownerPredicates(user.id).stacks);
   return (
     <div className="container py-16">
       <div className="flex justify-between">

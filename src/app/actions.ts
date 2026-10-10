@@ -10,7 +10,6 @@ import {
   tools,
   savedTools,
   stacks,
-  stackTools,
   reviews,
   auditLogs,
   claims,
@@ -20,6 +19,7 @@ import {
 import { reviewInput, toolInput } from "@/lib/validation";
 import { safeReturnPath } from "@/lib/catalog/filter";
 import { rateLimit } from "@/lib/security";
+import { addOwnedStackTool, ownerPredicates } from "@/lib/db/owned-resources";
 async function publishedTool(id: unknown) {
   const toolId = z.string().min(1).max(100).parse(id);
   const [tool] = await db()
@@ -37,7 +37,7 @@ export async function saveTool(form: FormData) {
     await db()
       .delete(savedTools)
       .where(
-        and(eq(savedTools.userId, user.id), eq(savedTools.toolId, tool.id)),
+        and(ownerPredicates(user.id).saves, eq(savedTools.toolId, tool.id)),
       );
   else
     await db()
@@ -60,15 +60,7 @@ export async function addToStack(form: FormData) {
   await rateLimit(user.id, "stack");
   const tool = await publishedTool(form.get("toolId"));
   const id = z.string().uuid().parse(form.get("stackId"));
-  const [stack] = await db()
-    .select()
-    .from(stacks)
-    .where(and(eq(stacks.id, id), eq(stacks.userId, user.id)));
-  if (!stack) throw new Error("This stack is unavailable.");
-  await db()
-    .insert(stackTools)
-    .values({ stackId: id, toolId: tool.id })
-    .onConflictDoNothing();
+  await addOwnedStackTool(db(), user.id, id, tool.id);
   revalidatePath("/account");
   redirect(`/tools/${tool.slug}?notice=stacked`);
 }
@@ -80,9 +72,7 @@ export async function submitReview(form: FormData) {
   const [owner] = await db()
     .select()
     .from(vendorAccess)
-    .where(
-      and(eq(vendorAccess.toolId, tool.id), eq(vendorAccess.userId, user.id)),
-    );
+    .where(ownerPredicates(user.id).vendorTool(tool.id));
   if (owner) throw new Error("Owners cannot review their own tools.");
   await db()
     .insert(reviews)

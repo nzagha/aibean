@@ -10,6 +10,7 @@ import { CompareButton } from "@/components/compare-provider";
 import { TrustStatus, ToolCard } from "@/components/tool-card";
 import { ToolLogo } from "@/components/tool-logo";
 import { saveTool, submitReview, addToStack } from "@/app/actions";
+import { ownerPredicates } from "@/lib/db/owned-resources";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
@@ -32,7 +33,7 @@ export default async function ToolPage({
   const userId = await getIdentity();
   const canWrite = !!userId && !!process.env.DATABASE_URL;
   const userStacks = canWrite
-    ? await db().select().from(stacks).where(eq(stacks.userId, userId!))
+    ? await db().select().from(stacks).where(ownerPredicates(userId!).stacks)
     : [];
   const saved = canWrite
     ? (
@@ -40,7 +41,7 @@ export default async function ToolPage({
           .select()
           .from(savedTools)
           .where(
-            and(eq(savedTools.userId, userId!), eq(savedTools.toolId, t.id)),
+            and(ownerPredicates(userId!).saves, eq(savedTools.toolId, t.id)),
           )
       ).length > 0
     : false;

@@ -10,6 +10,8 @@ export default async function Login({
     returnTo?: string;
     error?: string;
     loggedOut?: string;
+    status?: string;
+    field?: string;
   }>;
 }) {
   return <AuthPage {...await searchParams} />;

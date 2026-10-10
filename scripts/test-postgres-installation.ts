@@ -10,6 +10,18 @@ import { checkServerIdentity, type PeerCertificate } from "node:tls";
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
+import { resolveSupabaseUser } from "../src/lib/supabase/identity";
+import {
+  addOwnedStackTool,
+  ownerPredicates,
+} from "../src/lib/db/owned-resources";
+import {
+  claims,
+  reviews,
+  savedTools,
+  stacks,
+  vendorAccess,
+} from "../src/lib/db/schema";
 
 type Client = ReturnType<typeof postgres>;
 const bin = process.env.PG_TEST_BIN;
@@ -700,6 +712,103 @@ async function main() {
         await denied(browser, 'SELECT * FROM public."TestUsers"');
         await browser.end();
       }
+    },
+  );
+  await check(
+    "Candidate canonical identity provisions once across independent runtime sessions and rolls back conflicts",
+    async () => {
+      const candidateId = "00000000-0000-4000-8000-000000000010";
+      const collisionId = "00000000-0000-4000-8000-000000000011";
+      await admin`INSERT INTO auth.users(id) VALUES (${candidateId}),(${collisionId})`;
+      const second = connect(source, "aibean_app_login", "identity-two");
+      try {
+        const beforeUsers = await count(runtime, "public.users");
+        const beforeMappings = await count(
+          runtime,
+          "aibean_private.user_identities",
+        );
+        const [first, other] = await Promise.all([
+          resolveSupabaseUser(drizzle(runtime), candidateId),
+          resolveSupabaseUser(drizzle(second), candidateId),
+        ]);
+        assert.equal(first.id, other.id);
+        assert.equal(first.isAdmin, false);
+        assert.equal(first.isCreator, false);
+        assert.equal(await count(runtime, "public.users"), beforeUsers + 1);
+        assert.equal(
+          await count(runtime, "aibean_private.user_identities"),
+          beforeMappings + 1,
+        );
+        await assert.rejects(
+          resolveSupabaseUser(drizzle(runtime), collisionId, () => first.id),
+        );
+        await assert.rejects(
+          resolveSupabaseUser(
+            drizzle(runtime),
+            "00000000-0000-4000-8000-000000000099",
+          ),
+        );
+        assert.equal(await count(runtime, "public.users"), beforeUsers + 1);
+        assert.equal(
+          await count(runtime, "aibean_private.user_identities"),
+          beforeMappings + 1,
+        );
+        assert.equal(
+          (
+            await resolveSupabaseUser(
+              drizzle(runtime),
+              "00000000-0000-4000-8000-000000000001",
+            )
+          ).id,
+          "ordinary-a",
+        );
+      } finally {
+        await second.end();
+      }
+    },
+  );
+  await check(
+    "Candidate application owner queries and transactional Stack writes isolate two actual runtime identities",
+    async () => {
+      await runtime`INSERT INTO public.claim_requests(id,tool_id,user_id,company,role,proof)
+        VALUES ('claim-a','tool','ordinary-a','Synthetic','Owner','Synthetic proof')`;
+      const orm = drizzle(runtime);
+      const other = ownerPredicates("ordinary-b");
+      assert.equal(
+        (await orm.select().from(savedTools).where(other.saves)).length,
+        0,
+      );
+      assert.equal(
+        (await orm.select().from(stacks).where(other.stacks)).length,
+        1,
+      );
+      assert.equal(
+        (await orm.select().from(reviews).where(other.reviews)).length,
+        0,
+      );
+      assert.equal(
+        (await orm.select().from(claims).where(other.claims)).length,
+        0,
+      );
+      assert.equal(
+        (await orm.select().from(vendorAccess).where(other.vendorTool("tool")))
+          .length,
+        0,
+      );
+      assert.equal(
+        (
+          await orm
+            .select()
+            .from(vendorAccess)
+            .where(ownerPredicates("ordinary-a").vendorTool("wrong-tool"))
+        ).length,
+        0,
+      );
+      await assert.rejects(
+        addOwnedStackTool(orm, "ordinary-b", "stack-a", "tool"),
+      );
+      await addOwnedStackTool(orm, "ordinary-a", "stack-a", "tool");
+      assert.equal(await count(runtime, "public.stack_tools"), 1);
     },
   );
   const expected = await snapshot(admin);

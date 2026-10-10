@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PASSWORD_COOKIE } from "@/lib/password-auth";
+import { authMode } from "@/lib/auth-mode";
+import { candidateAuthPost } from "@/lib/supabase/auth-handler";
 export async function POST(request: NextRequest) {
+  const mode = authMode();
+  if (mode === "supabase") return candidateAuthPost("logout", request);
+  if (mode !== "password") return new Response("Logout is unavailable", { status: 503 });
   const origins = new Set([
     request.nextUrl.origin,
     process.env.NEXT_PUBLIC_APP_URL

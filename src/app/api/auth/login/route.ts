@@ -10,8 +10,13 @@ import {
   SESSION_SECONDS,
 } from "@/lib/password-crypto";
 import { safeReturnPath } from "@/lib/catalog/filter";
+import { authMode } from "@/lib/auth-mode";
+import { candidateAuthPost } from "@/lib/supabase/auth-handler";
 export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
+  const mode = authMode();
+  if (mode === "supabase") return candidateAuthPost("login", request);
+  if (mode !== "password") return new Response("Login is unavailable", { status: 503 });
   const allowedOrigins = new Set([
     request.nextUrl.origin,
     process.env.NEXT_PUBLIC_APP_URL

@@ -12,7 +12,7 @@ export function createSupabaseRouteClient(request: NextRequest) {
     cookies: bridge.cookies,
     cookieOptions: {
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: request.nextUrl.protocol === "https:",
       path: "/",
     },
   });

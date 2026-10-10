@@ -6,7 +6,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { CompareProvider } from "@/components/compare-provider";
 import { authConfigured, getIdentity } from "@/lib/auth";
-import { passwordMode } from "@/lib/password-auth";
+import { authMode } from "@/lib/auth-mode";
 import { ExplorationProvider } from "@/components/exploration-provider";
 const satoshi = localFont({
   src: "../../public/brand/Satoshi.ttf",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const passwordSignedIn = passwordMode()
+  const passwordSignedIn = ["password", "supabase"].includes(authMode())
     ? Boolean(await getIdentity())
     : false;
   const content = (
