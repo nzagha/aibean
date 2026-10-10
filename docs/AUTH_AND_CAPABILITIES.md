@@ -1,6 +1,6 @@
 # Authentication, capabilities and RLS contract
 
-Updated 8 October 2026. Target: Supabase Auth alone. Current implementation still contains the temporary password/Clerk selection; replacement is gated by the identity migration plan. This is an authorization specification, not evidence of implemented or deployed policies.
+Updated 9 October 2026. Target: Supabase Auth alone. The current website still uses its transitional password provider. Candidate verified identity/mapping/capability helpers and actual owner predicates are now implemented, with mocked and native PostgreSQL tests; they are inactive for website users. See [implemented scope/evidence](SUPABASE_AUTH_PHASE_1_IMPLEMENTATION_RESULT.md). The wider account-security, entitlements and future content matrix below remains a release specification wherever no endpoint exists, not an assertion that every planned module has been implemented. Hosted Auth, privileged step-up and cutover are not verified.
 
 ## Identity and capability resolution
 

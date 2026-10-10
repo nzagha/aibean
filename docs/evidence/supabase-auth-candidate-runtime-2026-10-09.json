@@ -1,0 +1,119 @@
+{
+  "activeWebsiteModeUnchanged": true,
+  "hostedAccountsCreated": false,
+  "emailSent": false,
+  "providerCallsEnabled": false,
+  "checks": [
+    {
+      "mode": "password",
+      "path": "/",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/tools",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/industries",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/explore",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/knowledge",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/collections",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/login",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "path": "/register",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "password",
+      "protectedGuestsRedirected": true,
+      "candidateProviderGateDenied": true,
+      "unverifiedResetFormHidden": false
+    },
+    {
+      "mode": "supabase",
+      "path": "/",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/tools",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/industries",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/explore",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/knowledge",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/collections",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/login",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "path": "/register",
+      "status": 200,
+      "brandShellPresent": true
+    },
+    {
+      "mode": "supabase",
+      "protectedGuestsRedirected": true,
+      "candidateProviderGateDenied": true,
+      "unverifiedResetFormHidden": true
+    }
+  ],
+  "environmentFileUnchanged": true,
+  "result": "PASS",
+  "verifiedAt": "2026-10-10T00:01:24.300Z"
+}

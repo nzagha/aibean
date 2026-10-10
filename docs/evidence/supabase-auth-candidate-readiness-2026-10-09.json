@@ -1,0 +1,583 @@
+{
+  "stage": "Supabase Auth candidate readiness",
+  "capturedAt": "2026-10-09T23:50:27.399Z",
+  "projectRef": "yfknxidgphhepdtwazhn",
+  "method": "Publishable-key Auth settings GET and restricted strict-TLS Drizzle repeatable-read transaction",
+  "mcpAvailability": "Readiness agent had no Supabase MCP tools exposed; root documentation probe failed OAuth refresh. No Management API read credential used.",
+  "publicSettings": {
+    "settingsReachable": true,
+    "emailEnabled": true,
+    "emailConfirmationRequired": true,
+    "signupDisabled": false,
+    "phoneEnabled": false,
+    "passkeysEnabled": false,
+    "smtpConfigurationVerified": false,
+    "senderVerified": false,
+    "passwordServerPolicyVerified": false,
+    "siteUrlAndRedirectAllowlistVerified": false,
+    "projectTemplateEligibilityVerified": false,
+    "realHostedAuthVerified": false,
+    "mailDeliveryVerified": false
+  },
+  "database": {
+    "identity": {
+      "database": "postgres",
+      "role": "aibean_app_login",
+      "read_only": "on",
+      "tls": true,
+      "server_version": "17.6"
+    },
+    "relations": [
+      {
+        "schema": "aibean_private",
+        "name": "installations",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "aibean_private",
+        "name": "user_identities",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations",
+        "kind": "r",
+        "rls": false
+      },
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations_id_seq",
+        "kind": "S",
+        "rls": false
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers_id_seq",
+        "kind": "S",
+        "rls": false
+      },
+      {
+        "schema": "public",
+        "name": "audit_logs",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "billing_webhook_receipts",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "claim_requests",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "featured_placements",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "orders",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "rate_limits",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "saved_tools",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "stack_tools",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "stacks",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "taxonomy",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "tool_reviews",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "tools",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "users",
+        "kind": "r",
+        "rls": true
+      },
+      {
+        "schema": "public",
+        "name": "vendor_access",
+        "kind": "r",
+        "rls": true
+      }
+    ],
+    "applicationCounts": {
+      "audit_logs": 0,
+      "billing_webhook_receipts": 0,
+      "claim_requests": 0,
+      "featured_placements": 0,
+      "orders": 0,
+      "rate_limits": 0,
+      "saved_tools": 0,
+      "stack_tools": 0,
+      "stacks": 0,
+      "taxonomy": 0,
+      "tool_reviews": 0,
+      "tools": 0,
+      "users": 0,
+      "vendor_access": 0
+    },
+    "mappingCount": 0,
+    "constraints": [
+      {
+        "schema": "aibean_private",
+        "relation": "installations",
+        "name": "installations_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_auth_user_id_fkey",
+        "type": "f",
+        "target_schema": "auth",
+        "target_relation": "users"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_user_id_fkey",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_user_id_key",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "drizzle",
+        "relation": "__drizzle_migrations",
+        "name": "__drizzle_migrations_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_email_key",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "audit_logs",
+        "name": "audit_logs_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "billing_webhook_receipts",
+        "name": "billing_webhook_receipts_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_duration",
+        "type": "c",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_paid_window",
+        "type": "c",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_stripe_session_id_unique",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_positive_amount",
+        "type": "c",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_status",
+        "type": "c",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_claim_id_claim_requests_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "claim_requests"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_claim_id_unique",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_stripe_session_id_unique",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "rate_limits",
+        "name": "rate_limits_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_user_id_tool_id_pk",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_stack_id_stacks_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "stacks"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_stack_id_tool_id_pk",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "stacks_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "stacks_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "taxonomy",
+        "name": "taxonomy_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "rating_range",
+        "type": "c",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_category_id_taxonomy_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "taxonomy"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_slug_unique",
+        "type": "u",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "users",
+        "name": "users_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_pkey",
+        "type": "p",
+        "target_schema": null,
+        "target_relation": null
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_tool_id_tools_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "tools"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_user_id_users_id_fk",
+        "type": "f",
+        "target_schema": "public",
+        "target_relation": "users"
+      }
+    ],
+    "sequences": [
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations_id_seq",
+        "owning_schema": "drizzle",
+        "owning_table": "__drizzle_migrations",
+        "owning_column": "id"
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers_id_seq",
+        "owning_schema": "public",
+        "owning_table": "TestUsers",
+        "owning_column": "id"
+      }
+    ],
+    "privileges": {
+      "testusers_read": false,
+      "auth_users_read": false,
+      "drizzle_ledger_read": false,
+      "security_ledger_read": false
+    },
+    "readOnlyTransaction": true,
+    "hostnameVerified": true
+  },
+  "authUsersCount": null,
+  "testUsersCount": null,
+  "authUsersAndTestUsersCountsVerifiedThisRead": false,
+  "originalTwoRecordPreservationEvidence": "Prior Approval C evidence; runtime intentionally denied personal records",
+  "sourceWrites": false,
+  "authAccountsCreated": false,
+  "mailSent": false,
+  "authSettingsChanged": false,
+  "backupExportExecuted": false,
+  "isolatedRestoreExecuted": false,
+  "secretsOrPersonalRecordsPublished": false
+}

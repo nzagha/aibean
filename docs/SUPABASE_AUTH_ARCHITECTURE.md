@@ -1,8 +1,8 @@
 # Supabase authentication architecture
 
-Status: approved target architecture; SSR utilities prepared, active authentication cutover pending database/migration/provider validation. Updated 9 October 2026. This document supersedes older Clerk/temporary-login plans, not the immutable October 7 audit in `docs/audit/`.
+Status: approved target architecture with owner-authorized candidate implemented and inactive. A/B/C, restricted runtime and local candidate tests pass; real Auth/mail/two-account validation and cutover remain pending. Updated 9 October 2026. See [current candidate evidence](SUPABASE_AUTH_PHASE_1_IMPLEMENTATION_RESULT.md). This document supersedes older Clerk/temporary-login plans, not the immutable October 7 audit in `docs/audit/`.
 
-## Current evidence
+## Prior preparation evidence (superseded by current candidate result)
 
 The baseline is commit `31234704677df5e7f0252b30d996232a6602e726`, verified against GitHub main. The application currently selects custom password authentication or Clerk in `src/lib/auth.ts`; local configuration selects password mode. Supabase JS 2.117.3 and SSR 0.12.7 are now installed with exact pins. The correct URL/publishable key are saved locally and verified against the Auth settings endpoint. DATABASE_URL is still missing. MCP authenticates the development agent, not website visitors.
 
