@@ -35,5 +35,11 @@
   "privateEnvironmentChanged": false,
   "websiteLayoutChanged": false,
   "migrationsChanged": false,
-  "historicalAuditsChanged": false
+  "historicalAuditsChanged": false,
+  "sourceCommit": "3eab5d1989af99299fd79fdd1b5e90951aed71cc",
+  "githubValidateRun": "https://github.com/nzagha/aibean/actions/runs/38070884364",
+  "publicationFilesScanned": 25,
+  "privateValueMatches": 0,
+  "stagedRecoveryHashesVerified": 11,
+  "githubCiResult": "PASS"
 }
