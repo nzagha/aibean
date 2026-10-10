@@ -30,3 +30,7 @@ Complete the separately authorized corrected hosted recovery gate and fresh read
 Continue product work through paid edit/verification vertical slices and Creator Skill/Playbook persistence, then resources, Events, full User/Vendor/Creator operations and commercial administration. Keep each shared-database change behind an exact proposal and isolated tests. Launch also requires catalog/content readiness, complete commercial/provider tests, visual/accessibility QA, observability, uploads and deployment readiness. Existing homepage branding, typography, header/footer and public card-grid composition remain intact.
 
 Earlier navigation/control-panel milestone evidence remains in [navigation result](NAVIGATION_AND_ONBOARDING_RESULT.md) and [prior native validation](evidence/control-panel-native-validation.json); those files are historical results, not evidence that later full-MVP/provider gates have passed.
+
+## Publication verification
+
+The Admin UI, gated Creator/Vendor request continuation and final proposal hardening are published in [e8514d57](https://github.com/nzagha/aibean/commit/e8514d57f9063d03d49c58bd93461cc42880e0ad). [GitHub validation passed](https://github.com/nzagha/aibean/actions/runs/38095665790) all required lint/typecheck/tests/build/runtime-audit steps. Current code is isolated-tested; real Admin identity/category readiness and hosted/provider/browser journeys remain unverified. See the detailed Admin result for exact gates.
