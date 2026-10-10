@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { WorkspaceNavigation } from "@/components/workspace-navigation";
+import { ActionForm } from "@/components/action-form";
+import { updateAccount } from "./actions";
 import { AccountSignOut } from "@/components/account-signout";
 import { eq } from "drizzle-orm";
 import { requireUser } from "@/lib/auth";
@@ -54,7 +56,12 @@ export default async function Account() {
     );
   const [saved, myStacks, myReviews, myClaims] = await Promise.all([
     db()
-      .select({ id: tools.id, name: tools.name, slug: tools.slug })
+      .select({
+        id: tools.id,
+        name: tools.name,
+        slug: tools.slug,
+        status: tools.status,
+      })
       .from(savedTools)
       .innerJoin(tools, eq(savedTools.toolId, tools.id))
       .where(ownerPredicates(user.id).saves),
@@ -63,7 +70,13 @@ export default async function Account() {
     db().select().from(claims).where(ownerPredicates(user.id).claims),
   ]);
   const members = await db()
-    .select({ stackId: stackTools.stackId, name: tools.name, slug: tools.slug })
+    .select({
+      stackId: stackTools.stackId,
+      toolId: tools.id,
+      name: tools.name,
+      slug: tools.slug,
+      status: tools.status,
+    })
     .from(stackTools)
     .innerJoin(stacks, eq(stackTools.stackId, stacks.id))
     .innerJoin(tools, eq(stackTools.toolId, tools.id))
@@ -89,13 +102,17 @@ export default async function Account() {
           <h2 className="text-2xl">Saved tools</h2>
           {saved.length ? (
             saved.map((t) => (
-              <Link
-                className="account-row"
-                key={t.id}
-                href={`/tools/${t.slug}`}
-              >
-                {t.name} →
-              </Link>
+              <div className="account-row" key={t.id}>
+                {t.status === "published" ? (
+                  <Link href={`/tools/${t.slug}`}>{t.name} →</Link>
+                ) : (
+                  <span>{t.name} · Currently unavailable</span>
+                )}
+                <ActionForm action={updateAccount} label="Remove saved tool">
+                  <input type="hidden" name="operation" value="remove-save" />
+                  <input type="hidden" name="toolId" value={t.id} />
+                </ActionForm>
+              </div>
             ))
           ) : (
             <p className="mt-5">Your saved tools will appear here.</p>
@@ -106,16 +123,61 @@ export default async function Account() {
           {myStacks.map((s) => (
             <div key={s.id} className="border-b border-line py-4">
               <h3 className="text-lg">{s.name}</h3>
+              <details className="my-3">
+                <summary className="text-link cursor-pointer">
+                  Manage stack
+                </summary>
+                <ActionForm action={updateAccount} label="Rename stack">
+                  <input type="hidden" name="operation" value="rename-stack" />
+                  <input type="hidden" name="stackId" value={s.id} />
+                  <label className="field">
+                    Stack name
+                    <input
+                      name="name"
+                      defaultValue={s.name}
+                      required
+                      minLength={2}
+                      maxLength={80}
+                    />
+                  </label>
+                </ActionForm>
+                <ActionForm action={updateAccount} label="Delete this stack">
+                  <input type="hidden" name="operation" value="delete-stack" />
+                  <input type="hidden" name="stackId" value={s.id} />
+                  <label className="my-4 flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      name="confirmed"
+                      value="yes"
+                      required
+                    />
+                    Delete this stack and its memberships. My saved tools will
+                    remain.
+                  </label>
+                </ActionForm>
+              </details>
               {members
                 .filter((m) => m.stackId === s.id)
                 .map((m) => (
-                  <Link
-                    key={m.slug}
-                    className="account-row"
-                    href={`/tools/${m.slug}`}
-                  >
-                    {m.name} →
-                  </Link>
+                  <div key={m.toolId} className="account-row">
+                    {m.status === "published" ? (
+                      <Link href={`/tools/${m.slug}`}>{m.name} →</Link>
+                    ) : (
+                      <span>{m.name} · Currently unavailable</span>
+                    )}
+                    <ActionForm
+                      action={updateAccount}
+                      label="Remove from stack"
+                    >
+                      <input
+                        type="hidden"
+                        name="operation"
+                        value="remove-stack-tool"
+                      />
+                      <input type="hidden" name="stackId" value={s.id} />
+                      <input type="hidden" name="toolId" value={m.toolId} />
+                    </ActionForm>
+                  </div>
                 ))}
             </div>
           ))}
@@ -142,6 +204,42 @@ export default async function Account() {
                   {r.rating} / 5 · {r.status}
                 </strong>
                 <p>{r.body}</p>
+                <details className="mt-4">
+                  <summary className="text-link cursor-pointer">
+                    Edit and resubmit
+                  </summary>
+                  <ActionForm
+                    action={updateAccount}
+                    label="Resubmit for moderation"
+                  >
+                    <input type="hidden" name="operation" value="edit-review" />
+                    <input type="hidden" name="reviewId" value={r.id} />
+                    <label className="field">
+                      Rating
+                      <select name="rating" defaultValue={r.rating}>
+                        {[1, 2, 3, 4, 5].map((rating) => (
+                          <option key={rating} value={rating}>
+                            {rating} / 5
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="field">
+                      Your experience
+                      <textarea
+                        name="body"
+                        defaultValue={r.body}
+                        minLength={20}
+                        maxLength={4000}
+                        required
+                      />
+                    </label>
+                    <p className="my-4 text-sm">
+                      Edits return to moderation. Reviews of unavailable tools
+                      or tools you now own cannot be resubmitted.
+                    </p>
+                  </ActionForm>
+                </details>
               </div>
             ))
           ) : (

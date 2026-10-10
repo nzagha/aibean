@@ -65,3 +65,7 @@ Historical product exclusions remain: Discussions, Replies, News, Courses, Socia
 ## Navigation milestone — 10 October 2026
 
 Entry points and capability-derived account navigation are implemented and locally tested (74 tests). Registration remains accurately unavailable in password mode; Creator application intake remains pending. Vendor onboarding links existing discovery/claim/submission routes. Next: continue server-enforced Control Panel operations against existing models, and separately review any new schema. No hosted migration or Auth activation is authorized by this milestone. Evidence: docs/NAVIGATION_AND_ONBOARDING_RESULT.md.
+
+## Control Panel continuation — 10 October 2026
+
+Implemented existing-schema User management, Admin inventory filtering/pagination, scoped Vendor inventory and approved Creator access/navigation. These are increments rather than completion of the four panels. Shared restricted-runtime synthetic tests pass in PGlite and native PostgreSQL; real provider/browser journeys remain unverified. Pending work and explicit external gates are recorded in AIBEAN_MVP_PRODUCT_COMPLETION_REPORT.md. Preserve the corrected recovery package; no hosted schema/Auth/backup operation is authorized by this development stage.

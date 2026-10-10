@@ -159,3 +159,7 @@ GitHub publication verified: Approval A implementation/evidence commit `9ce0baff
 ## Navigation and onboarding — 10 October 2026
 
 Implemented capability-derived desktop/mobile account navigation, truthful registration availability, Creator/Vendor entry points, homepage participation journeys and additive account workspace links. Navigation performs read-only identity lookup and fails closed. Lint, TypeScript, 74 tests, build and runtime audit pass. Browser visual QA remains unverified because automatic approval review hit an account usage limit. No hosted changes or recovery retry. See docs/NAVIGATION_AND_ONBOARDING_RESULT.md. Control Panel implementation continues separately.
+
+## Control Panel increment — 10 October 2026
+
+Continued after navigation commit 475e144 (GitHub CI PASS). User panel now manages owned saves/stacks and resubmits reviews for moderation; Admin inventory has filters/counts/pagination; Vendor inventory uses canonical ownership including unpublished Tools; Creator access requires approval. All four have additive workspace navigation. Validation: 76 tests, lint, typecheck, build, runtime audit (zero) and 19 synthetic native PostgreSQL scenarios PASS. No hosted write, Auth activation, schema change or recovery retry. Creator applications/publishing and broader MVP workflows remain pending. See AIBEAN_MVP_PRODUCT_COMPLETION_REPORT.md and evidence/control-panel-native-validation.json.

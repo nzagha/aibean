@@ -74,6 +74,7 @@ export function Header({
             .filter(
               (link) =>
                 link.href === "/account" ||
+                link.href === "/admin" ||
                 link.href === "/register" ||
                 link.href === "/login",
             )
@@ -82,14 +83,16 @@ export function Header({
                 key={link.href}
                 href={link.href}
                 className={
-                  link.href === "/register" ? "nav-link" : "button primary"
+                  ["/register", "/admin"].includes(link.href)
+                    ? "nav-link hidden md:inline-flex whitespace-nowrap"
+                    : "button primary"
                 }
               >
                 {link.label}
               </Link>
             ))}
           {accountLinks.some((link) =>
-            ["/admin", "/creator", "/vendor"].includes(link.href),
+            ["/creator", "/vendor"].includes(link.href),
           ) && (
             <details className="relative hidden md:block">
               <summary className="nav-link cursor-pointer">Workspaces</summary>
@@ -98,7 +101,7 @@ export function Header({
                 className="placeholder-card absolute right-0 top-full z-50 mt-3 flex min-w-56 flex-col gap-4"
               >
                 {accountLinks
-                  .filter((link) => link.href !== "/account")
+                  .filter((link) => ["/creator", "/vendor"].includes(link.href))
                   .map((link) => (
                     <Link key={link.href} href={link.href} className="nav-link">
                       {link.label}

@@ -11,6 +11,7 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
 import { resolveSupabaseUser } from "../src/lib/supabase/identity";
+import { accountWorkflowContract } from "../tests/fixtures/account-workflow-contract";
 import {
   addOwnedStackTool,
   ownerPredicates,
@@ -965,6 +966,12 @@ async function main() {
       assert.deepEqual(await snapshot(restored), expected);
       await restoredOperator.end();
       await restored.end();
+    },
+  );
+  await check(
+    "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
+    async () => {
+      await accountWorkflowContract(drizzle(runtime));
     },
   );
   const evidence = {

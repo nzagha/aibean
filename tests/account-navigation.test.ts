@@ -69,9 +69,7 @@ test("navigation uses canonical additive capabilities and tool ownership, fails 
         link.label,
       );
     assert.equal(
-      doc.querySelector(
-        '[aria-label="Account workspaces"] a[href="/admin"]',
-      ) !== null,
+      doc.querySelector('header > div a[href="/admin"]') !== null,
       admin,
     );
   }

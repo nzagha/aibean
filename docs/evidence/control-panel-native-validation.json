@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-10T22:18:18.041Z",
+  "environment": "Native disposable PostgreSQL; synthetic data only",
+  "version": "postgres (PostgreSQL) 17.11",
+  "tls": "Verified generated test CA, loopback hostname/IP, SCRAM authentication; hostnossl rejected",
+  "outcomes": [
+    {
+      "name": "Verified TLS and nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Untrusted certificates and incorrect peer hostname fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Late installation failure rolls back every new object and preserves TestUsers",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent clean installations serialize; observer sees no partial schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact package repeats without metadata, record or ledger changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Altered, missing and noncontiguous migration history is rejected atomically",
+      "status": "PASS"
+    },
+    {
+      "name": "Advisory lock timeout aborts a competing installation without changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact Approval B preparation works as nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent browser, service and restricted runtime login sessions enforce grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime provisioning defaults and identity constraints preserve ordinary users",
+      "status": "PASS"
+    },
+    {
+      "name": "RLS independently denies browser rows; shared runtime requires server ownership checks",
+      "status": "PASS"
+    },
+    {
+      "name": "Competing authenticated runtime transactions cannot assign two Tool owners",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate TestUsers permission fix preserves two rows and denies browser reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate canonical identity provisions once across independent runtime sessions and rolls back conflicts",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate application owner queries and transactional Stack writes isolate two actual runtime identities",
+      "status": "PASS"
+    },
+    {
+      "name": "Real PostgreSQL historical upgrade preserves internal IDs and existing ownership",
+      "status": "PASS"
+    },
+    {
+      "name": "Native pg_dump/pg_dumpall preserve synthetic schema, ledgers, records and roles",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate instance restores equivalent metadata, counts, FKs, ledgers and permissions",
+      "status": "PASS"
+    },
+    {
+      "name": "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
+      "status": "PASS"
+    }
+  ],
+  "hostedModified": false,
+  "hostedAuthTested": false,
+  "disposableClustersStopped": true,
+  "source": "scripts/test-postgres-installation.ts",
+  "limitations": [
+    "Synthetic data only; no hosted provider or authenticated browser validation.",
+    "The separate hosted expanded recovery gate remains unchanged."
+  ]
+}

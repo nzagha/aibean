@@ -4,7 +4,7 @@ Implemented on `codex/supabase-foundation` without hosted mutations or Auth acti
 
 ## Changes
 
-- Header retains AI Tools, AI Skills, Events, Creators, Submit and For Vendors. Guests see Sign up/Login; authenticated accounts see My Account. The desktop Workspaces menu and mobile drawer expose Admin Dashboard, Creator workspace and Vendor workspace only from verified application capabilities/ownership. Account navigation is additive.
+- Header retains AI Tools, AI Skills, Events, Creators, Submit and For Vendors. Guests see Sign up/Login; authenticated accounts see My Account. Desktop shows Admin Dashboard directly for authorized Admins and offers Creator/Vendor links in the Workspaces menu. The mobile drawer exposes the same account links, including Sign up/Login for guests, without crowding the compact header. All workspace links come from verified application capabilities/ownership. Account navigation is additive.
 - Server-only navigation reads canonical User and Tool ownership records. It ignores URL and client role flags, fails closed on errors and uses a read-only identity lookup that does not provision an account while browsing. Destination routes still authorize independently.
 - `/register` displays a branded unavailable state in transitional password mode, with no signup or login form masquerading as registration. The existing inactive Supabase candidate still provisions ordinary accounts through the reviewed identity flow.
 - `/creators` links to `/creators/apply` with the intended application/review journey and an explicit applications-unavailable state. No application is accepted and no privilege is granted.
