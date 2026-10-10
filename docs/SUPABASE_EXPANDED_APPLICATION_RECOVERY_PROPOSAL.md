@@ -1,5 +1,7 @@
 # Expanded application recovery proposal before hosted Auth writes
 
+**Expanded recovery attempt — 10 October 2026: FAIL / STOPPED.** The owner-authorized unchanged package passed checksum/source prerequisites but stopped during local-target preparation before native export or restoration. No new encrypted archive exists. Both TestUsers records, installed history/RLS/grants and the original encrypted backup pass independent postflight. The failed local target is stopped and retained. A reproducible inet-address comparison defect and missing prerequisite coverage are documented in the [execution result](SUPABASE_EXPANDED_APPLICATION_RECOVERY_RESULT.md). Reviewed executable files remain unchanged; correction preparation and any retry require new owner approval. SMTP/Auth/fixture/cutover gates remain blocked. Earlier preparation and synthetic PASS entries below are dated evidence, not hosted recovery success.
+
 **READY for owner review, 10 October 2026. Hosted expanded export and restoration: NOT EXECUTED.** Target: `yfknxidgphhepdtwazhn / postgres`. The current preparation directive requires separate approval before exporting hosted record bodies. Preserve the original verified CMS-encrypted TestUsers archive, metadata and receipt; it predates A/C and does not cover the installed foundation/current browser grants. No private backup material is stored in this repository.
 
 ## Exact proposed scope and current inventory
