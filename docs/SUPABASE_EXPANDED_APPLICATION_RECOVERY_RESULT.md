@@ -1,5 +1,8 @@
 # aiBean expanded application recovery execution result
 
+**Correction preparation — 10 October 2026: PASS locally; hosted recovery remains FAIL / awaiting new execution approval.** The owner-authorized v2 correction normalizes the PostgreSQL address and completes source metadata/history and new local-target readiness before application body capture. All 70 automated tests and the exact shared executor's native PostgreSQL/CMS rehearsal pass. New manifest SHA-256: `5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec`. [Correction review and exact execution authorization](SUPABASE_EXPANDED_RECOVERY_CORRECTION_REVIEW.md). The original v1 manifest/failure evidence remain historical; no hosted retry, Auth activation or original retained-target modification occurred.
+
+
 **Recovery gate: FAIL — stopped before native hosted export.** Executed once on 10 October 2026 under the owner's explicit authorization, on branch `codex/supabase-foundation`, against project `yfknxidgphhepdtwazhn`, database `postgres`.
 
 Exact executed manifest SHA-256: `a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30`. All eleven reviewed executable/dependency hashes passed before execution and remain unchanged afterwards. The executor was `scripts/execute-expanded-recovery.ts`; no reviewed executable, prerequisite SQL or manifest was modified or retried. The exact scope remains the eighteen tables and two sequences in the [reviewed proposal](SUPABASE_EXPANDED_APPLICATION_RECOVERY_PROPOSAL.md).
@@ -33,7 +36,7 @@ This is a reproducible blocker in the failed stage. The executor intentionally r
 
 The prior synthetic native recovery test exercised dump/restore, permissions and data comparisons but **did not exercise this exact executor local-identity comparison**. Its PASS and the 66 automated tests do not establish successful hosted recovery. This coverage gap is now explicitly recorded.
 
-## Proposed correction — not applied
+## Historical proposed correction — subsequently implemented in v2
 
 The bounded local-address change is:
 
@@ -48,7 +51,7 @@ Also place all snapshot history/scope and local-target readiness checks before s
 
 These changes would alter reviewed executable hashes. They have **not** been made. After separate correction authorization, prepare and validate the changed package, regenerate its manifest and present its exact new SHA-256 for a separate execution decision. Preserve the stopped failed target and original backup unless cleanup is explicitly approved; the current success-only cleanup condition has not been met.
 
-## Retention, limitations and next authorization
+## Historical retention, limitations and preparation authorization
 
 The original pre-installation encrypted TestUsers archive remains the only verified hosted-data recovery point. It does not cover the installed application foundation. No new successful expanded backup exists. The failed disposable target and generated local secrets remain in the restricted, non-synchronized private directory; no backup material, private paths, certificates, credentials, personal records or row digests are published.
 

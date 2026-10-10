@@ -22,3 +22,6 @@ src/lib/db/tls-config.ts text eol=lf
 src/lib/db/connection-config.ts text eol=lf
 src/lib/db/runtime-config.ts text eol=lf
 src/lib/supabase/config.ts text eol=lf
+scripts/test-expanded-recovery-executor.ts text eol=lf
+scripts/prepare-synthetic-recovery-test.ps1 text eol=lf
+tests/expanded-recovery.test.ts text eol=lf

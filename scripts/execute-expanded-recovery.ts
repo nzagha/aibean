@@ -24,6 +24,7 @@ import {
   recoverySha,
   expandedDumpArguments,
   expandedPrivateSnapshot,
+  guardedExpandedCapture,
   compareExpandedSnapshots,
   validateExpandedToc,
   localPrerequisiteGrants,
@@ -35,7 +36,7 @@ import {
 } from "./expanded-recovery-scope";
 
 export const recoveryManifestPath =
-  "db/recovery/expanded-recovery-package.json";
+  "db/recovery/expanded-recovery-package-v2.json";
 export const requiredRecoveryFiles = [
   ".gitattributes",
   "scripts/execute-expanded-recovery.ts",
@@ -48,6 +49,9 @@ export const requiredRecoveryFiles = [
   "src/lib/db/connection-config.ts",
   "src/lib/db/runtime-config.ts",
   "src/lib/supabase/config.ts",
+  "scripts/test-expanded-recovery-executor.ts",
+  "scripts/prepare-synthetic-recovery-test.ps1",
+  "tests/expanded-recovery.test.ts",
 ].sort();
 type Manifest = {
   packageId: string;
@@ -84,7 +88,7 @@ export function inspectRecoveryPackage(approvedSha?: string) {
       approvedSha,
       "Reviewed recovery package hash differs",
     );
-  assert.equal(manifest.packageId, "aibean-expanded-recovery-v1");
+  assert.equal(manifest.packageId, "aibean-expanded-recovery-v2");
   assert.equal(manifest.targetProject, recoveryProject);
   assert.equal(manifest.database, "postgres");
   assert.deepEqual(manifest.scope, recoveryRelations);
@@ -343,7 +347,7 @@ async function checkSourceIdentity(tx: {
 }
 
 async function execute(approvedSha: string) {
-  const packageReview = inspectRecoveryPackage(approvedSha);
+  inspectRecoveryPackage(approvedSha);
   assert(
     process.env.AIBEAN_BACKUP_OPENSSL,
     "Reviewed OpenSSL path required privately",
@@ -435,408 +439,522 @@ async function execute(approvedSha: string) {
     process.env.DATABASE_CA_CERT_PATH!,
     true,
   );
-  stage = "source-readonly-preflight";
-  let capture: Awaited<ReturnType<typeof expandedPrivateSnapshot>> | undefined;
-  let originalIdentity:
-    Awaited<ReturnType<typeof checkSourceIdentity>> | undefined;
-  let restoredEnvironment: RecoveryRow | undefined;
-  const id = `${new Date().toISOString().replace(/[^0-9]/g, "")}-${randomBytes(5).toString("hex")}`;
-  const archiveName = `expanded-application-${id}.cms`,
-    metadataName = `expanded-metadata-${id}.cms`,
-    receiptName = `expanded-receipt-${id}.json`;
-  let archiveHash = "",
-    cipherHash = "",
-    metadataCipherHash = "",
-    archiveEntries = 0;
-  await source.begin(
-    "ISOLATION LEVEL REPEATABLE READ READ ONLY",
-    async (tx) => {
-      await tx
-        .unsafe(
-          "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
-        )
-        .simple();
-      originalIdentity = await checkSourceIdentity(tx);
-      assert(sourceHostnameVerified);
-      // Exact package authorization has passed before any source record body read.
-      capture = await expandedPrivateSnapshot(q(tx));
-      assert.equal(
-        capture.originalTestUsersDigest,
-        original.dataDigest,
-        "TestUsers private continuity drift",
-      );
-      stage = "new-local-target-preparation";
-      target = JSON.parse(
-        lifecycle({
-          mode: "prepare-target",
-          approvedPackage: packageReview.packageSha256,
-          openssl: process.env.AIBEAN_BACKUP_OPENSSL,
-        }),
-      );
-      assert(target);
-      inside(root(), target.directory);
-      inside(target.directory, target.data);
-      assert.equal(target.host, "127.0.0.1");
-      assert.equal(target.role, "recovery_operator");
-      assert.equal(target.database, "postgres");
-      assert.equal(target.packageSha256, approvedSha);
-      assert.equal(
-        lifecycle({ mode: "start-target", target: target.name }),
-        "OK",
-      );
-      const password = lifecycle({
-        mode: "target-password",
-        target: target.name,
-      });
-      let localHostnameVerified = false;
-      local = postgres({
-        host: "127.0.0.1",
-        port: target.port,
-        database: "postgres",
-        username: target.role,
-        password,
-        max: 1,
-        prepare: false,
-        connect_timeout: 10,
-        ssl: {
-          ca: readFileSync(target.ca, "utf8"),
-          rejectUnauthorized: true,
-          servername: "localhost",
-          checkServerIdentity: (_host: string, cert: PeerCertificate) => {
-            const error = checkServerIdentity("127.0.0.1", cert);
-            if (!error) localHostnameVerified = true;
-            return error;
-          },
-        },
-        connection: {
-          application_name: "aibean-expanded-isolated-restore",
-          timezone: "UTC",
-          statement_timeout: 60000,
-          lock_timeout: 5000,
-        },
-        onnotice: () => {},
-      });
-      const [localIdentity] = await q(local)(
-        "SELECT current_user AS role,current_database() AS database,inet_server_addr()::text AS host,current_setting('server_version') AS version,(SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()) AS tls",
-      );
-      assert.deepEqual(localIdentity, {
-        role: "recovery_operator",
-        database: "postgres",
-        host: "127.0.0.1",
-        version: "17.11",
-        tls: true,
-      });
-      assert(localHostnameVerified);
-      const pristine = await q(local)(
-        "SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','drizzle','aibean_private','auth') AND c.relkind IN ('r','p','S','v','m','f')",
-      );
-      assert.equal(pristine.length, 0);
-      const [snapshot] = await q(tx)("SELECT pg_export_snapshot() AS snapshot");
-      stage = "approved-scoped-export";
-      attemptedExport = true;
-      let archive = native(
-        profile,
-        "pg_dump",
-        expandedDumpArguments(String(snapshot.snapshot)),
-        sourceEnv,
-      );
-      assert(archive.length > 0 && archive.length <= maxArchiveBytes);
-      assert.equal(archive.subarray(0, 5).toString("ascii"), "PGDMP");
-      archiveEntries = validateExpandedToc(
-        native(
-          profile,
-          "pg_restore",
-          ["--list"],
-          childEnvironment(),
-          archive,
-        ).toString("utf8"),
-        native(
-          profile,
-          "pg_restore",
-          ["--schema-only", "--file=-"],
-          childEnvironment(),
-          archive,
-        ).toString("utf8"),
-        capture.catalog,
-      );
-      compareExpandedSnapshots(capture, await expandedPrivateSnapshot(q(tx)));
-      archiveHash = recoverySha(archive);
-      assert.equal(
-        crypto({
-          mode: "encrypt",
-          name: archiveName,
-          base64: archive.toString("base64"),
-        }),
-        "OK",
-      );
-      retainedArchive = true;
-      const metadata = Buffer.from(
-        JSON.stringify({
-          version: 1,
-          sourceProject: recoveryProject,
-          sourceDatabase: "postgres",
-          packageSha256: approvedSha,
-          archiveSha256: archiveHash,
-          capture,
-          sourceIdentity: originalIdentity,
-          createdAt: new Date().toISOString(),
-        }),
-      );
-      assert(metadata.length <= maxArchiveBytes);
-      assert.equal(
-        crypto({
-          mode: "encrypt",
-          name: metadataName,
-          base64: metadata.toString("base64"),
-        }),
-        "OK",
-      );
-      cipherHash = recoverySha(
-        readFileSync(join(profile.backups, archiveName)),
-      );
-      metadataCipherHash = recoverySha(
-        readFileSync(join(profile.backups, metadataName)),
-      );
-      const decryptedMetadata = Buffer.from(
-        crypto({ mode: "decrypt", name: metadataName }),
-        "base64",
-      );
-      assert.equal(recoverySha(decryptedMetadata), recoverySha(metadata));
-      decryptedMetadata.fill(0);
-      metadata.fill(0);
-      archive.fill(0);
-      archive = Buffer.from(
-        crypto({ mode: "decrypt", name: archiveName }),
-        "base64",
-      );
-      assert.equal(recoverySha(archive), archiveHash);
-      stage = "isolated-restore";
-      await local
-        .unsafe(
-          readFileSync(
-            "db/recovery/expanded-recovery-local-prerequisites.sql",
-            "utf8",
-          ),
-        )
-        .simple();
-      restoredEnvironment = await recoveryDatabaseEnvironment(q(local));
-      native(
-        profile,
-        "pg_restore",
-        [
-          "--no-password",
-          "--exit-on-error",
-          "--single-transaction",
-          "--dbname=postgres",
-        ],
-        pgEnvironment(
-          "127.0.0.1",
-          target.port,
-          target.role,
-          password,
-          target.ca,
-          false,
-        ),
-        archive,
-      );
-      archive.fill(0);
-      await local.begin(async (localTx) => {
-        for (const statement of localPrerequisiteGrants(capture!.catalog))
-          await localTx.unsafe(statement);
-      });
-      stage = "private-restore-validation";
-      await local.begin(
-        "ISOLATION LEVEL REPEATABLE READ READ ONLY",
-        async (localTx) => {
-          await localTx
-            .unsafe(
-              "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
-            )
-            .simple();
-          compareExpandedSnapshots(
-            capture!,
-            await expandedPrivateSnapshot(q(localTx)),
-          );
-        },
-      );
-      const localRoles = await q(local)(
-        "SELECT rolname,rolcanlogin,rolsuper,rolcreatedb,rolcreaterole,rolreplication FROM pg_roles WHERE rolname IN ('postgres','supabase_admin','anon','authenticated','dashboard_user','service_role','aibean_runtime','aibean_app_login') ORDER BY 1",
-      );
-      assert.equal(localRoles.length, 8);
-      assert(
-        localRoles.every(
-          (role) =>
-            role.rolcanlogin === false &&
-            role.rolsuper === false &&
-            role.rolcreatedb === false &&
-            role.rolcreaterole === false &&
-            role.rolreplication === false,
-        ),
-      );
-      for (const role of ["anon", "authenticated"]) {
-        await local.begin("READ ONLY", async (localTx) => {
-          await localTx.unsafe(`SET LOCAL ROLE ${role}`);
-          const permission = await q(localTx)(
-            `SELECT has_table_privilege(current_user,'public."TestUsers"','SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER,MAINTAIN') OR has_any_column_privilege(current_user,'public."TestUsers"','SELECT,INSERT,UPDATE,REFERENCES') AS access`,
-          );
-          assert.equal(permission[0].access, false);
-        });
-      }
-      const restoredRuntimeContract = await applicationRoleContract(
-        q(local),
-        true,
-      );
-      assert.deepEqual(
-        restoredRuntimeContract.inherited,
-        originalIdentity!.runtimeContract.inherited,
-      );
-      assert.deepEqual(
-        restoredRuntimeContract.restrictions,
-        originalIdentity!.runtimeContract.restrictions,
-      );
-      assert.deepEqual(
-        restoredRuntimeContract.roles.map((role) => ({
-          ...role,
-          rolcanlogin: false,
-        })),
-        originalIdentity!.runtimeContract.roles.map((role) => ({
-          ...role,
-          rolcanlogin: false,
-        })),
-      );
-      await local.begin("READ ONLY", async (localTx) => {
-        await localTx.unsafe("SET LOCAL ROLE aibean_app_login");
-        assert.equal(
-          Number(
-            (
-              await q(localTx)(
-                "SELECT count(*)::int AS count FROM public.users",
-              )
-            )[0].count,
-          ),
-          capture!.counts["public.users"],
-        );
-      });
-      assert.equal(
-        Number(
-          (await q(local)("SELECT count(*)::int AS count FROM auth.users"))[0]
-            .count,
-        ),
-        0,
-      );
-      compareExpandedSnapshots(capture, await expandedPrivateSnapshot(q(tx)));
-    },
-  );
-  assert(capture && target && local && originalIdentity);
-  stage = "fresh-source-continuity";
-  await source.begin(
-    "ISOLATION LEVEL REPEATABLE READ READ ONLY",
-    async (tx) => {
-      await tx
-        .unsafe(
-          "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
-        )
-        .simple();
-      assert.deepEqual(await checkSourceIdentity(tx), originalIdentity);
-      compareExpandedSnapshots(capture!, await expandedPrivateSnapshot(q(tx)));
-    },
-  );
-  assert.equal(recoverySha(readFileSync(".env.local")), envHash);
-  for (const preserved of original.preserved)
-    assert.equal(
-      recoverySha(readFileSync(join(profile.backups, preserved.name))),
-      preserved.hash,
-    );
-  const finalArchive = Buffer.from(
-    crypto({ mode: "decrypt", name: archiveName }),
-    "base64",
-  );
-  assert.equal(recoverySha(finalArchive), archiveHash);
-  finalArchive.fill(0);
-  const receipt = {
-    version: 1,
-    status: "PASS",
-    sourceProject: recoveryProject,
-    sourceDatabase: "postgres",
-    packageSha256: approvedSha,
-    archiveName,
-    metadataName,
-    archiveSha256: archiveHash,
-    ciphertextSha256: cipherHash,
-    metadataCiphertextSha256: metadataCipherHash,
-    verifiedAt: new Date().toISOString(),
-  };
-  assert(!existsSync(join(profile.backups, receiptName)));
-  writeFileSync(
-    join(profile.backups, receiptName),
-    JSON.stringify(receipt, null, 2),
-    { flag: "wx" },
-  );
-  writeFileSync(
-    join(target.directory, "completed.json"),
-    JSON.stringify({
-      result: "PASS",
-      target: target.name,
-      packageSha256: approvedSha,
-    }),
-    { flag: "wx" },
-  );
-  await local.end({ timeout: 5 });
-  local = undefined;
-  stage = "approved-transient-disposal";
-  assert.equal(lifecycle({ mode: "stop-target", target: target.name }), "OK");
-  assert.equal(
-    lifecycle({
-      mode: "dispose-passed-target",
-      target: target.name,
-      approvedPackage: approvedSha,
-      validationPassed: true,
-    }),
-    "OK",
-  );
-  const publicResult = {
-    recoveryGate: "PASS",
-    verifiedAt: receipt.verifiedAt,
-    project: recoveryProject,
-    database: "postgres",
-    packageSha256: approvedSha,
-    selectedTables: 18,
-    selectedSequences: 2,
-    archiveEntries,
-    archiveSha256: archiveHash,
-    encryptedArchiveSha256: cipherHash,
-    encryptedMetadataSha256: metadataCipherHash,
-    recordCounts: capture.counts,
-    testUsersRecords: 2,
-    identityMappings: 0,
-    rlsApplicationTables: 14,
-    foreignKeys: 18,
-    drizzleEntries: 2,
-    securityLedgerEntries: 1,
-    sourceAndRestoredPrivateIntegrityMatch: true,
-    ownersAclSchemasDefaultGrantsRlsPoliciesMatch: true,
-    sourceUnchanged: true,
-    originalArchivePreserved: true,
-    envUnchanged: true,
-    strictSourceAndLocalTlsHostnameVerified: true,
-    localNoLoginRoleSurrogates: true,
-    managedAuthExported: false,
-    realHostedAuthRecovered: false,
-    localAuthStructuralFixtureOnly: true,
-    sourceDatabaseEnvironment: originalIdentity.databaseEnvironment,
-    localDatabaseEnvironment: restoredEnvironment,
-    managedEnvironmentRecreated: false,
-    transientLocalRecoveryDisposed: true,
-    sourceWrites: false,
-    authSettingsChanged: false,
-    authAccountsCreated: false,
-    mailSent: false,
-  };
+  const publicResult = await executePreparedRecovery({
+    approvedSha,
+    source,
+    sourceEnv,
+    sourceHostnameVerified: () => sourceHostnameVerified,
+    profile,
+    privateRoot: root(),
+    openssl: process.env.AIBEAN_BACKUP_OPENSSL!,
+    original,
+    environmentUnchanged: () =>
+      recoverySha(readFileSync(".env.local")) === envHash,
+    lifecycle,
+    crypto,
+    native,
+  });
   writeFileSync(
     "docs/evidence/supabase-expanded-application-recovery-result.json",
     JSON.stringify(publicResult, null, 2) + "\n",
   );
   console.log(JSON.stringify(publicResult));
+}
+
+// The production CLI and synthetic native harness share this entire operation.
+// Transport adapters are supplied only by code, never by CLI/environment flags.
+// Production's credential/project/storage envelope above remains mandatory.
+export type PreparedRecoveryContext = {
+  approvedSha: string;
+  source: ReturnType<typeof postgres>;
+  sourceEnv: NodeJS.ProcessEnv;
+  sourceHostnameVerified: () => boolean;
+  profile: PrivateProfile;
+  privateRoot: string;
+  openssl: string;
+  original: ReturnType<typeof originalRecovery>;
+  environmentUnchanged: () => boolean;
+  lifecycle: typeof lifecycle;
+  crypto: typeof crypto;
+  native: typeof native;
+  onSourceQuery?: (text: string) => void;
+};
+export const localRecoveryIdentitySql =
+  "SELECT current_user AS role,current_database() AS database,host(inet_server_addr()) AS host,current_setting('server_version') AS version,(SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()) AS tls";
+export function assertLocalRecoveryIdentity(
+  identity: RecoveryRow,
+  hostnameVerified: boolean,
+) {
+  assert.deepEqual(identity, {
+    role: "recovery_operator",
+    database: "postgres",
+    host: "127.0.0.1",
+    version: "17.11",
+    tls: true,
+  });
+  assert(hostnameVerified, "Local TLS hostname verification required");
+}
+export async function verifyLocalRecoveryTarget(
+  query: RecoveryQuery,
+  hostnameVerified: () => boolean,
+) {
+  const [identity] = await query(localRecoveryIdentitySql);
+  assertLocalRecoveryIdentity(identity, hostnameVerified());
+}
+function resetPreparedState() {
+  target = undefined;
+  local = undefined;
+  attemptedExport = false;
+  retainedArchive = false;
+}
+export async function executePreparedRecovery(
+  context: PreparedRecoveryContext,
+) {
+  inspectRecoveryPackage(context.approvedSha);
+  const {
+    approvedSha,
+    source,
+    sourceEnv,
+    sourceHostnameVerified,
+    profile,
+    openssl,
+    original,
+    environmentUnchanged,
+    lifecycle,
+    crypto,
+    native,
+  } = context;
+  const root = () => resolve(context.privateRoot);
+  const sourceQuery =
+    (tx: { unsafe: (text: string) => PromiseLike<unknown> }): RecoveryQuery =>
+    async (text) => {
+      context.onSourceQuery?.(text);
+      return q(tx)(text);
+    };
+  resetPreparedState();
+  try {
+    stage = "source-readonly-preflight";
+    let capture:
+      Awaited<ReturnType<typeof expandedPrivateSnapshot>> | undefined;
+    let originalIdentity:
+      Awaited<ReturnType<typeof checkSourceIdentity>> | undefined;
+    let restoredEnvironment: RecoveryRow | undefined;
+    const id = `${new Date().toISOString().replace(/[^0-9]/g, "")}-${randomBytes(5).toString("hex")}`;
+    const archiveName = `expanded-application-${id}.cms`,
+      metadataName = `expanded-metadata-${id}.cms`,
+      receiptName = `expanded-receipt-${id}.json`;
+    let archiveHash = "",
+      cipherHash = "",
+      metadataCipherHash = "",
+      archiveEntries = 0;
+    await source.begin(
+      "ISOLATION LEVEL REPEATABLE READ READ ONLY",
+      async (tx) => {
+        await tx
+          .unsafe(
+            "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
+          )
+          .simple();
+        originalIdentity = await checkSourceIdentity(tx);
+        assert(
+          sourceHostnameVerified(),
+          "Source TLS hostname verification required",
+        );
+        capture = await guardedExpandedCapture(sourceQuery(tx), async () => {
+          stage = "new-local-target-preparation";
+          target = JSON.parse(
+            lifecycle({
+              mode: "prepare-target",
+              approvedPackage: approvedSha,
+              openssl: openssl,
+            }),
+          );
+          assert(target);
+          inside(root(), target.directory);
+          inside(target.directory, target.data);
+          inside(target.directory, target.ca);
+          assert(!lstatSync(target.ca).isSymbolicLink());
+          assert.equal(target.host, "127.0.0.1");
+          assert.equal(target.role, "recovery_operator");
+          assert.equal(target.database, "postgres");
+          assert.equal(target.packageSha256, approvedSha);
+          assert.equal(
+            lifecycle({ mode: "start-target", target: target.name }),
+            "OK",
+          );
+          const password = lifecycle({
+            mode: "target-password",
+            target: target.name,
+          });
+          let localHostnameVerified = false;
+          local = postgres({
+            host: "127.0.0.1",
+            port: target.port,
+            database: "postgres",
+            username: target.role,
+            password,
+            max: 1,
+            prepare: false,
+            connect_timeout: 10,
+            ssl: {
+              ca: readFileSync(target.ca, "utf8"),
+              rejectUnauthorized: true,
+              servername: "localhost",
+              checkServerIdentity: (_host: string, cert: PeerCertificate) => {
+                const error = checkServerIdentity("127.0.0.1", cert);
+                if (!error) localHostnameVerified = true;
+                return error;
+              },
+            },
+            connection: {
+              application_name: "aibean-expanded-isolated-restore",
+              timezone: "UTC",
+              statement_timeout: 60000,
+              lock_timeout: 5000,
+            },
+            onnotice: () => {},
+          });
+          await verifyLocalRecoveryTarget(
+            q(local),
+            () => localHostnameVerified,
+          );
+          const pristine = await q(local)(
+            "SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','drizzle','aibean_private','auth') AND c.relkind IN ('r','p','S','v','m','f')",
+          );
+          assert.equal(pristine.length, 0);
+        });
+        assert.equal(
+          capture.originalTestUsersDigest,
+          original.dataDigest,
+          "TestUsers private continuity drift",
+        );
+        assert(local && target);
+        const password = lifecycle({
+          mode: "target-password",
+          target: target.name,
+        });
+        const [snapshot] = await q(tx)(
+          "SELECT pg_export_snapshot() AS snapshot",
+        );
+        stage = "approved-scoped-export";
+        attemptedExport = true;
+        let archive = native(
+          profile,
+          "pg_dump",
+          expandedDumpArguments(String(snapshot.snapshot)),
+          sourceEnv,
+        );
+        assert(archive.length > 0 && archive.length <= maxArchiveBytes);
+        assert.equal(archive.subarray(0, 5).toString("ascii"), "PGDMP");
+        archiveEntries = validateExpandedToc(
+          native(
+            profile,
+            "pg_restore",
+            ["--list"],
+            childEnvironment(),
+            archive,
+          ).toString("utf8"),
+          native(
+            profile,
+            "pg_restore",
+            ["--schema-only", "--file=-"],
+            childEnvironment(),
+            archive,
+          ).toString("utf8"),
+          capture.catalog,
+        );
+        compareExpandedSnapshots(
+          capture,
+          await expandedPrivateSnapshot(sourceQuery(tx)),
+        );
+        archiveHash = recoverySha(archive);
+        assert.equal(
+          crypto({
+            mode: "encrypt",
+            name: archiveName,
+            base64: archive.toString("base64"),
+          }),
+          "OK",
+        );
+        retainedArchive = true;
+        const metadata = Buffer.from(
+          JSON.stringify({
+            version: 1,
+            sourceProject: recoveryProject,
+            sourceDatabase: "postgres",
+            packageSha256: approvedSha,
+            archiveSha256: archiveHash,
+            capture,
+            sourceIdentity: originalIdentity,
+            createdAt: new Date().toISOString(),
+          }),
+        );
+        assert(metadata.length <= maxArchiveBytes);
+        assert.equal(
+          crypto({
+            mode: "encrypt",
+            name: metadataName,
+            base64: metadata.toString("base64"),
+          }),
+          "OK",
+        );
+        cipherHash = recoverySha(
+          readFileSync(join(profile.backups, archiveName)),
+        );
+        metadataCipherHash = recoverySha(
+          readFileSync(join(profile.backups, metadataName)),
+        );
+        const decryptedMetadata = Buffer.from(
+          crypto({ mode: "decrypt", name: metadataName }),
+          "base64",
+        );
+        assert.equal(recoverySha(decryptedMetadata), recoverySha(metadata));
+        decryptedMetadata.fill(0);
+        metadata.fill(0);
+        archive.fill(0);
+        archive = Buffer.from(
+          crypto({ mode: "decrypt", name: archiveName }),
+          "base64",
+        );
+        assert.equal(recoverySha(archive), archiveHash);
+        stage = "isolated-restore";
+        await local
+          .unsafe(
+            readFileSync(
+              "db/recovery/expanded-recovery-local-prerequisites.sql",
+              "utf8",
+            ),
+          )
+          .simple();
+        restoredEnvironment = await recoveryDatabaseEnvironment(q(local));
+        native(
+          profile,
+          "pg_restore",
+          [
+            "--no-password",
+            "--exit-on-error",
+            "--single-transaction",
+            "--dbname=postgres",
+          ],
+          pgEnvironment(
+            "127.0.0.1",
+            target.port,
+            target.role,
+            password,
+            target.ca,
+            false,
+          ),
+          archive,
+        );
+        archive.fill(0);
+        await local.begin(async (localTx) => {
+          for (const statement of localPrerequisiteGrants(capture!.catalog))
+            await localTx.unsafe(statement);
+        });
+        stage = "private-restore-validation";
+        await local.begin(
+          "ISOLATION LEVEL REPEATABLE READ READ ONLY",
+          async (localTx) => {
+            await localTx
+              .unsafe(
+                "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
+              )
+              .simple();
+            compareExpandedSnapshots(
+              capture!,
+              await expandedPrivateSnapshot(q(localTx)),
+            );
+          },
+        );
+        const localRoles = await q(local)(
+          "SELECT rolname,rolcanlogin,rolsuper,rolcreatedb,rolcreaterole,rolreplication FROM pg_roles WHERE rolname IN ('postgres','supabase_admin','anon','authenticated','dashboard_user','service_role','aibean_runtime','aibean_app_login') ORDER BY 1",
+        );
+        assert.equal(localRoles.length, 8);
+        assert(
+          localRoles.every(
+            (role) =>
+              role.rolcanlogin === false &&
+              role.rolsuper === false &&
+              role.rolcreatedb === false &&
+              role.rolcreaterole === false &&
+              role.rolreplication === false,
+          ),
+        );
+        for (const role of ["anon", "authenticated"]) {
+          await local.begin("READ ONLY", async (localTx) => {
+            await localTx.unsafe(`SET LOCAL ROLE ${role}`);
+            const permission = await q(localTx)(
+              `SELECT has_table_privilege(current_user,'public."TestUsers"','SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER,MAINTAIN') OR has_any_column_privilege(current_user,'public."TestUsers"','SELECT,INSERT,UPDATE,REFERENCES') AS access`,
+            );
+            assert.equal(permission[0].access, false);
+          });
+        }
+        const restoredRuntimeContract = await applicationRoleContract(
+          q(local),
+          true,
+        );
+        assert.deepEqual(
+          restoredRuntimeContract.inherited,
+          originalIdentity!.runtimeContract.inherited,
+        );
+        assert.deepEqual(
+          restoredRuntimeContract.restrictions,
+          originalIdentity!.runtimeContract.restrictions,
+        );
+        assert.deepEqual(
+          restoredRuntimeContract.roles.map((role) => ({
+            ...role,
+            rolcanlogin: false,
+          })),
+          originalIdentity!.runtimeContract.roles.map((role) => ({
+            ...role,
+            rolcanlogin: false,
+          })),
+        );
+        await local.begin("READ ONLY", async (localTx) => {
+          await localTx.unsafe("SET LOCAL ROLE aibean_app_login");
+          assert.equal(
+            Number(
+              (
+                await q(localTx)(
+                  "SELECT count(*)::int AS count FROM public.users",
+                )
+              )[0].count,
+            ),
+            capture!.counts["public.users"],
+          );
+        });
+        assert.equal(
+          Number(
+            (await q(local)("SELECT count(*)::int AS count FROM auth.users"))[0]
+              .count,
+          ),
+          0,
+        );
+        compareExpandedSnapshots(
+          capture,
+          await expandedPrivateSnapshot(sourceQuery(tx)),
+        );
+      },
+    );
+    assert(capture && target && local && originalIdentity);
+    stage = "fresh-source-continuity";
+    await source.begin(
+      "ISOLATION LEVEL REPEATABLE READ READ ONLY",
+      async (tx) => {
+        await tx
+          .unsafe(
+            "SET LOCAL timezone='UTC'; SET LOCAL search_path=public,pg_catalog",
+          )
+          .simple();
+        assert.deepEqual(await checkSourceIdentity(tx), originalIdentity);
+        compareExpandedSnapshots(
+          capture!,
+          await expandedPrivateSnapshot(sourceQuery(tx)),
+        );
+      },
+    );
+    assert(environmentUnchanged(), "Private environment changed");
+    for (const preserved of original.preserved)
+      assert.equal(
+        recoverySha(readFileSync(join(profile.backups, preserved.name))),
+        preserved.hash,
+      );
+    const finalArchive = Buffer.from(
+      crypto({ mode: "decrypt", name: archiveName }),
+      "base64",
+    );
+    assert.equal(recoverySha(finalArchive), archiveHash);
+    finalArchive.fill(0);
+    const receipt = {
+      version: 1,
+      status: "PASS",
+      sourceProject: recoveryProject,
+      sourceDatabase: "postgres",
+      packageSha256: approvedSha,
+      archiveName,
+      metadataName,
+      archiveSha256: archiveHash,
+      ciphertextSha256: cipherHash,
+      metadataCiphertextSha256: metadataCipherHash,
+      verifiedAt: new Date().toISOString(),
+    };
+    assert(!existsSync(join(profile.backups, receiptName)));
+    writeFileSync(
+      join(profile.backups, receiptName),
+      JSON.stringify(receipt, null, 2),
+      { flag: "wx" },
+    );
+    writeFileSync(
+      join(target.directory, "completed.json"),
+      JSON.stringify({
+        result: "PASS",
+        target: target.name,
+        packageSha256: approvedSha,
+      }),
+      { flag: "wx" },
+    );
+    await local.end({ timeout: 5 });
+    local = undefined;
+    stage = "approved-transient-disposal";
+    assert.equal(lifecycle({ mode: "stop-target", target: target.name }), "OK");
+    assert.equal(
+      lifecycle({
+        mode: "dispose-passed-target",
+        target: target.name,
+        approvedPackage: approvedSha,
+        validationPassed: true,
+      }),
+      "OK",
+    );
+    const publicResult = {
+      recoveryGate: "PASS",
+      verifiedAt: receipt.verifiedAt,
+      project: recoveryProject,
+      database: "postgres",
+      packageSha256: approvedSha,
+      selectedTables: 18,
+      selectedSequences: 2,
+      archiveEntries,
+      archiveSha256: archiveHash,
+      encryptedArchiveSha256: cipherHash,
+      encryptedMetadataSha256: metadataCipherHash,
+      recordCounts: capture.counts,
+      testUsersRecords: 2,
+      identityMappings: 0,
+      rlsApplicationTables: 14,
+      foreignKeys: 18,
+      drizzleEntries: 2,
+      securityLedgerEntries: 1,
+      sourceAndRestoredPrivateIntegrityMatch: true,
+      ownersAclSchemasDefaultGrantsRlsPoliciesMatch: true,
+      sourceUnchanged: true,
+      originalArchivePreserved: true,
+      envUnchanged: true,
+      strictSourceAndLocalTlsHostnameVerified: true,
+      localNoLoginRoleSurrogates: true,
+      managedAuthExported: false,
+      realHostedAuthRecovered: false,
+      localAuthStructuralFixtureOnly: true,
+      sourceDatabaseEnvironment: originalIdentity.databaseEnvironment,
+      localDatabaseEnvironment: restoredEnvironment,
+      managedEnvironmentRecreated: false,
+      transientLocalRecoveryDisposed: true,
+      sourceWrites: false,
+      authSettingsChanged: false,
+      authAccountsCreated: false,
+      mailSent: false,
+    };
+    return publicResult;
+  } finally {
+    await Promise.allSettled([local?.end({ timeout: 5 })]);
+    local = undefined;
+    if (target && existsSync(target.directory))
+      assert.equal(
+        lifecycle({ mode: "stop-target", target: target.name }),
+        "OK",
+      );
+  }
 }
 
 async function main() {

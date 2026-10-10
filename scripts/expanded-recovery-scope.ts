@@ -253,10 +253,10 @@ export async function applicationRoleContract(
   return { roles, inherited, operatorAdministration, restrictions };
 }
 
-export async function expandedPrivateSnapshot(q: RecoveryQuery) {
+// Metadata, counts and reviewed ledger contents only. No application row bodies.
+export async function expandedMetadataPreflight(q: RecoveryQuery) {
   const catalog = await expandedCatalog(q);
   const counts: Record<string, number> = {};
-  const content: Record<string, string> = {};
   let totalRecords = 0;
   for (const table of recoveryTables) {
     const count = Number(
@@ -280,23 +280,6 @@ export async function expandedPrivateSnapshot(q: RecoveryQuery) {
     "Nonempty mappings need amended identity recovery approval",
   );
   assert.equal(counts["public.TestUsers"], 2);
-  for (const table of recoveryTables) {
-    const rows = await q(
-      `SELECT to_jsonb(t)::text AS record FROM ${qualifiedRelation(table)} t ORDER BY to_jsonb(t)::text COLLATE "C"`,
-    );
-    const canonical = rows.map((row) => String(row.record)).join("\n");
-    assert(
-      Buffer.byteLength(canonical) <= maxArchiveBytes,
-      "Private integrity input exceeds reviewed bound",
-    );
-    content[table] = recoverySha(canonical);
-  }
-  const originalRows = await q(
-    'SELECT row_to_json(t)::text AS row FROM public."TestUsers" t ORDER BY id',
-  );
-  const originalTestUsersDigest = recoverySha(
-    originalRows.map((row) => String(row.row)).join("\n"),
-  );
   const sequenceState: RecoveryRow[] = [];
   for (const name of recoverySequences)
     sequenceState.push({
@@ -310,26 +293,34 @@ export async function expandedPrivateSnapshot(q: RecoveryQuery) {
   const ledgers = await q(
     "SELECT hash,created_at::text FROM drizzle.__drizzle_migrations ORDER BY created_at",
   );
-  assert.deepEqual(ledgers, [
-    {
-      hash: "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
-      created_at: "1791247215670",
-    },
-    {
-      hash: "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
-      created_at: "1791249181547",
-    },
-  ]);
+  assert.deepEqual(
+    ledgers,
+    [
+      {
+        hash: "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+        created_at: "1791247215670",
+      },
+      {
+        hash: "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+        created_at: "1791249181547",
+      },
+    ],
+    "Migration history drift",
+  );
   const security = await q(
     "SELECT id,sql_sha256 FROM aibean_private.installations ORDER BY id",
   );
-  assert.deepEqual(security, [
-    {
-      id: "aibean-foundation-v1",
-      sql_sha256:
-        "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
-    },
-  ]);
+  assert.deepEqual(
+    security,
+    [
+      {
+        id: "aibean-foundation-v1",
+        sql_sha256:
+          "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+      },
+    ],
+    "Installation history drift",
+  );
   assert.equal(
     catalog.constraints.filter((row) => row.type === "f").length,
     18,
@@ -347,12 +338,44 @@ export async function expandedPrivateSnapshot(q: RecoveryQuery) {
   return {
     catalog,
     counts,
-    content,
-    originalTestUsersDigest,
     sequenceState,
     ledgers,
     security,
   };
+}
+
+export async function expandedPrivateSnapshot(q: RecoveryQuery) {
+  // Every snapshot (including postflight/restored snapshots) repeats ALL guards
+  // before its first body query; no caller can supply a stale preflight token.
+  const preflight = await expandedMetadataPreflight(q);
+  const content: Record<string, string> = {};
+  for (const table of recoveryTables) {
+    const rows = await q(
+      `SELECT to_jsonb(t)::text AS record FROM ${qualifiedRelation(table)} t ORDER BY to_jsonb(t)::text COLLATE "C"`,
+    );
+    const canonical = rows.map((row) => String(row.record)).join("\n");
+    assert(
+      Buffer.byteLength(canonical) <= maxArchiveBytes,
+      "Private integrity input exceeds reviewed bound",
+    );
+    content[table] = recoverySha(canonical);
+  }
+  const originalRows = await q(
+    'SELECT row_to_json(t)::text AS row FROM public."TestUsers" t ORDER BY id',
+  );
+  const originalTestUsersDigest = recoverySha(
+    originalRows.map((row) => String(row.row)).join("\n"),
+  );
+  return { ...preflight, content, originalTestUsersDigest };
+}
+
+export async function guardedExpandedCapture(
+  q: RecoveryQuery,
+  prepareLocal: () => Promise<void>,
+) {
+  await expandedMetadataPreflight(q);
+  await prepareLocal();
+  return expandedPrivateSnapshot(q);
 }
 
 export function compareExpandedSnapshots(

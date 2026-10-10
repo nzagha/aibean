@@ -8,8 +8,15 @@ import {
   recoveryTables,
   recoverySequences,
   validateExpandedToc,
+  guardedExpandedCapture,
+  expandedMetadataPreflight,
   type expandedCatalog,
 } from "../scripts/expanded-recovery-scope";
+import {
+  assertLocalRecoveryIdentity,
+  localRecoveryIdentitySql,
+  inspectRecoveryPackage,
+} from "../scripts/execute-expanded-recovery";
 
 const catalog = {
   relations: recoveryRelations.map((name) => ({
@@ -144,4 +151,132 @@ test("encrypted metadata ACL replay rejects injection and permits only reviewed 
       acl: [{ ...safe.acl[0], grantee: "unreviewed_admin" }],
     }),
   );
+});
+
+test("exact executor normalizes inet host and retains all local identity and TLS checks", () => {
+  assert.match(
+    localRecoveryIdentitySql,
+    /host\(inet_server_addr\(\)\) AS host/,
+  );
+  assert(!localRecoveryIdentitySql.includes("inet_server_addr()::text"));
+  const identity = {
+    role: "recovery_operator",
+    database: "postgres",
+    host: "127.0.0.1",
+    version: "17.11",
+    tls: true,
+  };
+  assert.doesNotThrow(() => assertLocalRecoveryIdentity(identity, true));
+  for (const change of [
+    { host: "127.0.0.1/32" },
+    { host: "192.0.2.1" },
+    { host: "::1" },
+    { host: null },
+    { role: "postgres" },
+    { database: "unapproved" },
+    { tls: false },
+    { version: "16.0" },
+  ])
+    assert.throws(() =>
+      assertLocalRecoveryIdentity({ ...identity, ...change }, true),
+    );
+  assert.throws(() => assertLocalRecoveryIdentity(identity, false));
+});
+
+// Narrow synthetic query contract exercises the real preflight/capture helper.
+function prerequisiteQuery(failure?: "history" | "scope") {
+  let bodyQueries = 0;
+  const query = async (text: string) => {
+    if (/AS record|row_to_json\(t\)/.test(text)) {
+      bodyQueries++;
+      return [];
+    }
+    if (text.includes("c.relkind IN ('r','p','S','v','m','f')")) {
+      return [
+        ...catalog.relations.map((row) => ({
+          ...row,
+          rls: row.schema === "public" && row.name !== "TestUsers",
+        })),
+        ...(failure === "scope"
+          ? [
+              {
+                schema: "public",
+                name: "unexpected",
+                kind: "r",
+                owner: "postgres",
+              },
+            ]
+          : []),
+      ];
+    }
+    if (text.includes("pg_constraint"))
+      return Array.from({ length: 18 }, () => ({ type: "f" }));
+    if (text.includes("pg_get_userbyid(n.nspowner)"))
+      return ["aibean_private", "drizzle", "public"].map((schema) => ({
+        schema,
+        owner: "postgres",
+      }));
+    if (text.includes("count(*)::int AS count"))
+      return [{ count: text.includes('"TestUsers"') ? 2 : 0 }];
+    if (text.includes("SELECT hash,created_at::text"))
+      return failure === "history"
+        ? []
+        : [
+            {
+              hash: "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+              created_at: "1791247215670",
+            },
+            {
+              hash: "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+              created_at: "1791249181547",
+            },
+          ];
+    if (text.includes("SELECT id,sql_sha256"))
+      return [
+        {
+          id: "aibean-foundation-v1",
+          sql_sha256:
+            "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+        },
+      ];
+    if (text.includes("last_value::text"))
+      return [{ last_value: "2", is_called: true }];
+    return [];
+  };
+  return { query, bodies: () => bodyQueries };
+}
+test("local target failure stops the actual capture boundary before body queries", async () => {
+  const fixture = prerequisiteQuery();
+  await assert.rejects(
+    guardedExpandedCapture(fixture.query, async () => {
+      throw new Error("local target failed");
+    }),
+    /local target failed/,
+  );
+  assert.equal(fixture.bodies(), 0);
+});
+test("ledger and object drift stop before local preparation or body queries", async () => {
+  for (const failure of ["history", "scope"] as const) {
+    const fixture = prerequisiteQuery(failure);
+    let localCalled = false;
+    await assert.rejects(
+      guardedExpandedCapture(fixture.query, async () => {
+        localCalled = true;
+      }),
+    );
+    assert.equal(fixture.bodies(), 0);
+    assert.equal(localCalled, false);
+  }
+});
+test("metadata preflight cannot capture records and approved manifest remains exact", async () => {
+  const fixture = prerequisiteQuery();
+  await expandedMetadataPreflight(fixture.query);
+  assert.equal(fixture.bodies(), 0);
+  const review = inspectRecoveryPackage();
+  assert.throws(() =>
+    inspectRecoveryPackage(
+      "a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30",
+    ),
+  );
+  assert.equal(review.manifest.packageId, "aibean-expanded-recovery-v2");
 });

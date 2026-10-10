@@ -1,5 +1,8 @@
 # Expanded application recovery proposal before hosted Auth writes
 
+**Correction preparation — 10 October 2026: PASS locally; hosted recovery remains FAIL / awaiting new execution approval.** The owner-authorized v2 correction normalizes the PostgreSQL address and completes source metadata/history and new local-target readiness before application body capture. All 70 automated tests and the exact shared executor's native PostgreSQL/CMS rehearsal pass. New manifest SHA-256: `5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec`. [Correction review and exact execution authorization](SUPABASE_EXPANDED_RECOVERY_CORRECTION_REVIEW.md). The original v1 manifest/failure evidence remain historical; no hosted retry, Auth activation or original retained-target modification occurred.
+
+
 **Expanded recovery attempt — 10 October 2026: FAIL / STOPPED.** The owner-authorized unchanged package passed checksum/source prerequisites but stopped during local-target preparation before native export or restoration. No new encrypted archive exists. Both TestUsers records, installed history/RLS/grants and the original encrypted backup pass independent postflight. The failed local target is stopped and retained. A reproducible inet-address comparison defect and missing prerequisite coverage are documented in the [execution result](SUPABASE_EXPANDED_APPLICATION_RECOVERY_RESULT.md). Reviewed executable files remain unchanged; correction preparation and any retry require new owner approval. SMTP/Auth/fixture/cutover gates remain blocked. Earlier preparation and synthetic PASS entries below are dated evidence, not hosted recovery success.
 
 **READY for owner review, 10 October 2026. Hosted expanded export and restoration: NOT EXECUTED.** Target: `yfknxidgphhepdtwazhn / postgres`. The current preparation directive requires separate approval before exporting hosted record bodies. Preserve the original verified CMS-encrypted TestUsers archive, metadata and receipt; it predates A/C and does not cover the installed foundation/current browser grants. No private backup material is stored in this repository.
@@ -82,9 +85,9 @@ This expanded export includes existing TestUsers personal records; future `users
 
 This archive preserves the **application database**, not Supabase identity-service passwords/sessions, Auth provider/SMTP settings, Vault secrets, Storage objects or runtime login credentials. A local Auth FK scaffold proves application restore structure, not real provider recovery. A later hosted recovery needs reviewed surviving-provider UUID continuity or a separate identity recovery strategy; arbitrary recreated users may have different UUIDs. Independent-device key recovery and off-device retention remain unverified. Supabase Free has no assumed managed daily recovery/PITR entitlement; manual retention and rehearsals are operator responsibilities. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups).
 
-## Concrete guarded package and checksums
+## Historical failed v1 package and checksums — superseded for execution by v2
 
-The [executor](../scripts/execute-expanded-recovery.ts) defaults to offline inspection: no environment loading, private storage access, connection, row-body read or local target creation. The exact reviewed [manifest](../db/recovery/expanded-recovery-package.json) is **`a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30` (SHA-256)**. Its hashed LF files are:
+The [executor](../scripts/execute-expanded-recovery.ts) defaults to offline inspection: no environment loading, private storage access, connection, row-body read or local target creation. The historical failed [v1 manifest](../db/recovery/expanded-recovery-package.json) was **`a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30` (SHA-256)**. Its hashed LF files are:
 
 | Reviewed file                                           | SHA-256                                                            |
 | ------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -106,7 +109,7 @@ Offline review command:
 npx --no-install tsx scripts/execute-expanded-recovery.ts --inspect
 ```
 
-Only after separate exact-package owner authorization, with previously approved private environment paths available in the operator terminal, the execution command is:
+Historical v1 attempt binding below is retained for provenance and must not be executed. The current command/approval is in the v2 correction review:
 
 ```powershell
 npx --no-install tsx scripts/execute-expanded-recovery.ts --execute-approved=a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30

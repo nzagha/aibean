@@ -4,6 +4,7 @@
 param([Parameter(Mandatory)][string]$Root)
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
+$stage='private-profile-validation'
 try {
   Add-Type -AssemblyName System.Security
   $Root=[IO.Path]::GetFullPath($Root).TrimEnd('\')
@@ -57,6 +58,7 @@ try {
   switch($request.mode){
     'check' {[Console]::Out.Write('OK')}
     'prepare-target' {
+      $stage='local-prerequisites'
       if($request.approvedPackage -notmatch '^[a-f0-9]{64}$'){throw 'Package acknowledgement missing'}
       $openssl=[IO.Path]::GetFullPath($request.openssl)
       if(-not (Test-Path -LiteralPath $openssl) -or [IO.Path]::GetFileName($openssl) -ne 'openssl.exe'){throw 'OpenSSL prerequisite'}
@@ -74,13 +76,16 @@ try {
       $protected=[Security.Cryptography.ProtectedData]::Protect($passwordBytes,$null,[Security.Cryptography.DataProtectionScope]::CurrentUser)
       [IO.File]::WriteAllBytes((Join-Path $directory 'operator-password.dpapi'),$protected)
       $passwordFile=Join-Path $directory 'bootstrap-password.tmp'
+      $stage='local-initdb'
       try{[IO.File]::WriteAllText($passwordFile,$password); $null=Native (Join-Path $profile.postgresBin 'initdb.exe') @('-D',$data,'-U','recovery_operator','--pwfile',$passwordFile,'--auth-host=scram-sha-256','--auth-local=scram-sha-256','--encoding=UTF8','--no-locale')}
       finally{[Array]::Clear($passwordBytes,0,$passwordBytes.Length); $password=$null; if(Test-Path -LiteralPath $passwordFile){Assert-Private $passwordFile; Remove-Item -LiteralPath $passwordFile -Force}}
       $ca=Join-Path $directory 'local-ca.crt'; $caKey=Join-Path $directory 'local-ca.key'
       $certificate=Join-Path $directory 'local-server.crt'; $key=Join-Path $directory 'local-server.key'; $csr=Join-Path $directory 'local-server.csr'; $extensions=Join-Path $directory 'local-server.ext'
       [IO.File]::WriteAllText($extensions,"subjectAltName=IP:127.0.0.1,DNS:localhost`nextendedKeyUsage=serverAuth`n")
+      $stage='local-ca-generation'
       $null=Native $openssl @('req','-x509','-newkey','rsa:3072','-nodes','-keyout',$caKey,'-out',$ca,'-days','30','-subj','/CN=aiBean expanded disposable recovery CA')
       $null=Native $openssl @('req','-newkey','rsa:3072','-nodes','-keyout',$key,'-out',$csr,'-subj','/CN=localhost')
+      $stage='local-server-signing'
       $null=Native $openssl @('x509','-req','-in',$csr,'-CA',$ca,'-CAkey',$caKey,'-CAcreateserial','-out',$certificate,'-days','30','-extfile',$extensions)
       $listener=[Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback,0); $listener.Start(); $port=$listener.LocalEndpoint.Port; $listener.Stop()
       function PgPath([string]$value){return $value.Replace('\','/').Replace("'","''")}
@@ -114,4 +119,4 @@ try {
     }
     default{throw 'Invalid local request'}
   }
-} catch {[Console]::Error.Write('Private expanded recovery lifecycle failed; details redacted.'); exit 1}
+} catch {[Console]::Error.Write(('Private expanded recovery lifecycle failed at '+$stage+'; details redacted.')); exit 1}

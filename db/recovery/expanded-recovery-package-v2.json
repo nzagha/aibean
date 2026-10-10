@@ -1,0 +1,158 @@
+{
+  "packageId": "aibean-expanded-recovery-v2",
+  "targetProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "scope": [
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers",
+    "public.TestUsers_id_seq",
+    "public.audit_logs",
+    "public.billing_webhook_receipts",
+    "public.claim_requests",
+    "public.featured_placements",
+    "public.orders",
+    "public.rate_limits",
+    "public.saved_tools",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tools",
+    "public.users",
+    "public.vendor_access"
+  ],
+  "limits": {
+    "tables": 18,
+    "sequences": 2,
+    "archiveBytes": 4194304,
+    "totalSelectedRecords": 10000,
+    "identityMappings": 0,
+    "authUsers": 0,
+    "testUsers": 2,
+    "queryTimeoutMilliseconds": 60000,
+    "lockTimeoutMilliseconds": 5000
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "sha256": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8"
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "sha256": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5"
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "sha256": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4"
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "sha256": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd"
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "sha256": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d"
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "sha256": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85"
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "sha256": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99"
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "sha256": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f"
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "sha256": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b"
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "sha256": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e"
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "sha256": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f"
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "sha256": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b"
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "sha256": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e"
+    }
+  ],
+  "previousSourceCommit": "f9e473913220f56e7e4721f6daa5a6aa5ad71a4d",
+  "previousManifest": {
+    "path": "db/recovery/expanded-recovery-package.json",
+    "sha256": "a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30",
+    "outcome": "FAILED 2026-10-10; not valid for corrected execution"
+  },
+  "changes": [
+    {
+      "path": ".gitattributes",
+      "previousSha256": "2cbc4b46ac73769b924cc99fc6f522fdab67e51e39048569720efd236a6e8865",
+      "newSha256": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "description": "Preserve LF bytes for new hashed tests and synthetic helpers."
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "previousSha256": "af670d7790357ab2f1d66dcb4c98ad1f3a75ad5b477331bbdf1d3f446fce0616",
+      "newSha256": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "description": "Normalize inet host; gate all source metadata and local readiness before capture; expose the identical prepared operation to an isolated native harness without a CLI bypass."
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "previousSha256": "0b6f2e8f587f5538d2fdcdcef23e9369e671b75e4f24a072d6cafb22e3c461d3",
+      "newSha256": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "description": "Split metadata/history validation from body capture; enforce full preflight on every snapshot."
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "previousSha256": null,
+      "newSha256": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd",
+      "description": "Create a new protected non-synchronized temporary synthetic root and independent one-day CMS certificate; cleanup only owned synthetic resources."
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "previousSha256": "e3de0be046b2aeb59c73d52164599ac05498422977e5583790af0a8d00ed2138",
+      "newSha256": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85",
+      "description": "Add sanitized lifecycle-stage diagnostics without private error contents or guard changes."
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "previousSha256": null,
+      "newSha256": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "description": "Execute the production prepared workflow with generated loopback PostgreSQL fixtures, real CMS and lifecycle bridges, negative guard and retention cases."
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "previousSha256": "d8976c4d9949f948b92f56f5ca87ebf6abfec4efa560c8244c5d67751d9131aa",
+      "newSha256": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "description": "Regression coverage for identity restrictions, failed readiness/history/scope before bodies, and exact v2 package binding."
+    }
+  ],
+  "validation": {
+    "unit": "npm test",
+    "native": "npx --no-install tsx scripts/test-expanded-recovery-executor.ts",
+    "evidence": "docs/evidence/supabase-expanded-recovery-correction-native.json",
+    "interpretation": "Synthetic validation only; hosted retry requires new exact-hash owner approval."
+  },
+  "limitations": [
+    "Managed Auth/Vault/Storage/Realtime data and settings excluded.",
+    "Original retained failed target must not be reused or deleted.",
+    "Independent-device key recovery and off-device backup retention unverified.",
+    "Native loopback fixtures do not establish hosted source TLS, identity, current inventory or actual recovery success."
+  ]
+}

@@ -64,5 +64,15 @@
     "publicationFilesScanned": 7,
     "privateValueMatches": 0,
     "hostedRecoveryStillFailed": true
+  },
+  "correctionPreparation": {
+    "packageId": "aibean-expanded-recovery-v2",
+    "packageSha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "result": "PASS_SYNTHETIC_LOCAL_ONLY",
+    "evidence": "docs/evidence/supabase-expanded-recovery-correction-native.json",
+    "review": "docs/SUPABASE_EXPANDED_RECOVERY_CORRECTION_REVIEW.md",
+    "hostedRetryExecuted": false,
+    "originalHistoricalFailurePreserved": true,
+    "ciStatus": "PENDING_PUBLICATION"
   }
 }
