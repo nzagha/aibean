@@ -1,0 +1,36 @@
+{
+  "manifestVersion": 1,
+  "registeredAt": "2026-10-10",
+  "archive": "aiBean_Source_Files_Git_Import.zip",
+  "archiveStatus": "two-originals-imported-and-verified",
+  "sources": [
+    {
+      "path": "docs/source-of-truth/aiBean_Taxonomy_Package_v1.xlsx",
+      "version": "v1",
+      "expectedSha256": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "verifiedSha256": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "status": "original-binary-byte-verified",
+      "authority": "Owner-provided taxonomy source; preserve provenance, not a replacement for any later approved v1.1 package"
+    },
+    {
+      "path": "docs/source-of-truth/aiBean_MVP_Development_Master_Plan_v0_3.docx",
+      "version": "v0.3",
+      "expectedSha256": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "verifiedSha256": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "status": "original-binary-byte-verified",
+      "authority": "Technical product source with owner amendments; historical Clerk recommendation superseded by approved Supabase Auth direction"
+    }
+  ],
+  "activeRepositoryTaxonomy": {
+    "path": "src/data/taxonomy.json",
+    "declaredSourceVersion": "v1 (provided workbook)",
+    "declaredSourceSha256": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+    "originalBinaryVerifiedInThisMilestone": true,
+    "laterV11BinaryVerified": false,
+    "policy": "Use existing stable IDs without normalization or invented records; reconcile a later approved v1.1 package separately",
+    "contentSha256BeforeAndAfterImport": "b52b7507ec28b3ee4561d6e94294fd868b22ef5519d8385120af362fb090a5fc"
+  },
+  "amendmentPolicy": "Record a new immutable source/version/checksum and owner authorization in CHANGELOG.md. Never overwrite original binaries or silently change active taxonomy.",
+  "archiveSha256": "d81f3eb112bb98e49c8fdc2089bd6e49acd9119dcb04773cb1bade2f2de4d538",
+  "verifiedAtUtc": "2026-10-10T22:52:26.7216531Z"
+}
