@@ -1,0 +1,65 @@
+# aiBean next-stage preparation result
+
+Prepared 10 October 2026 on `codex/supabase-foundation`. Target: development project `yfknxidgphhepdtwazhn`, database `postgres`. Official future production origin: `https://aibean.io`. This task prepares recovery and hosted Auth testing; it does not activate authentication or change the website.
+
+## Verified database and recovery baseline
+
+The separately protected operator connection passed strict TLS certificate and hostname checks. A fresh `REPEATABLE READ READ ONLY` inspection verified database `postgres`, operator `postgres`, hosted PostgreSQL 17.6, eighteen scoped tables and two sequences. All fourteen application tables have RLS; all eighteen expected application/mapping foreign keys, both original Drizzle migration entries and the security installation ledger match. The restricted runtime login also passed the existing PostgreSQL/Drizzle readiness check without elevated privileges. A/B/C were inspected, not repeated.
+
+Both original TestUsers records match the retained private integrity evidence. Their definitions, constraints, indexes, RLS, policies and sequence state are preserved. Browser table and column access is denied; deliberately retained sequence privileges and service-role access remain outside Approval C. No application records, internal Users, private identity mappings, hosted Auth users or Auth identities exist at this observation. Record bodies were not exported: the fresh TestUsers comparison computed its digest inside PostgreSQL and compared privately without publishing it. [Sanitized database evidence](evidence/supabase-next-stage-readiness.json).
+
+The original pre-installation TestUsers encrypted archive remains accessible, passes integrity verification and decrypts with the existing Windows CMS certificate. Its ciphertext and private metadata remain outside the repository and synchronized storage. It does not cover the installed application foundation; the original disposable restore environment has already been disposed.
+
+## Expanded execution package and approval boundary
+
+The guarded package selects exactly **eighteen tables and two sequences**: the fourteen existing `public` application tables, `public."TestUsers"` and its sequence, the Drizzle migration ledger and its sequence, and `aibean_private.installations` / `user_identities`. See the [complete selectors, reviewed hashes and execution procedure](SUPABASE_EXPANDED_APPLICATION_RECOVERY_PROPOSAL.md) and [executable manifest](../db/recovery/expanded-recovery-package.json).
+
+Its default invocation performs offline package/hash inspection only. The separately approved execution path binds authorization to the exact manifest SHA-256, validates the existing private encryption/operator configuration, takes a bounded read-only snapshot and scoped native dump, encrypts the archive and integrity metadata, inspects the archive selection, and restores only into a new private loopback PostgreSQL 17 cluster. Local prerequisites supply named non-login role/schema fixtures and an empty `auth.users(id uuid)` structural FK target. Nonempty mappings require amended recovery approval; no managed Auth credentials or session data are included.
+
+Acceptance compares counts, private canonical data integrity, definitions, constraints, indexes, sequence state, RLS/policies, owners, relation/column/schema/default grants, non-secret runtime role restrictions and both ledgers. Fresh source continuity, unchanged private environment and preservation of the original archive are required. Ciphertext is retained. Only the uniquely named, stopped transient target with matching success evidence can be removed; failure retains recovery artifacts for review. The reviewed native synthetic exercise establishes local procedure evidence, not recovery of actual hosted data. [Synthetic evidence](evidence/supabase-expanded-recovery-native-synthetic.json).
+
+**Hosted expanded export: NOT EXECUTED. Restoration of that hosted export: NOT EXECUTED.** The owner's current directive explicitly requires separate approval before exporting hosted record bodies. The exact authorization, manifest hash and command are in the recovery proposal. No hosted restore, account creation, email sending, provider/DNS/settings change, deployment, migration, seeding, A/B/C repeat or Auth cutover is included.
+
+Recovery limitations remain explicit: this is an application database archive, not a Supabase managed Auth/password/session/Storage/Vault recovery point. A local FK scaffold cannot prove provider identity recovery. Independent-device key recovery and off-device retention are unverified. Supabase Free does not supply an assumed managed daily-backup/PITR entitlement. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups).
+
+## Hosted Auth readiness
+
+The existing Supabase candidate is implemented and remains inactive. The website retains its current password mode; the ignored environment and provider-test gate are unchanged. Previous candidate evidence covers 62 automated tests and eighteen native PostgreSQL scenarios, not delivered hosted mail or provider acceptance.
+
+Existing authenticated dashboard access verified the Free plan, email signup enabled, confirmation required, custom SMTP disabled, built-in email quota **2/hour**, Site URL `http://localhost:3000` and an empty additional redirect allowlist. Password minimum is **6**; the character-policy selector is blank/default, and its effective Management API value remains unverified. JWT lifetime is 3,600 seconds, refresh rotation is enabled with a ten-second reuse interval, and optional session limits / leaked-password protection are plan-locked. Default confirmation/recovery templates use `ConfirmationURL`; their editor and Save control are visible, but save/customization entitlement was not exercised. [Sanitized configuration evidence](evidence/supabase-hosted-auth-configuration-readiness.json).
+
+The Supabase MCP read failed at OAuth refresh; authenticated visible dashboard inspection and strict PostgreSQL/public Auth read-only interfaces supplied the stated evidence. No tokens, raw template bodies, recipient details or SMTP credential fields were retained. Exact default sender identity, arbitrary-recipient delivery, recipient team eligibility, project age/template grandfathering and real provider journeys remain unverified. A reachable Auth endpoint is not email-delivery evidence.
+
+Required separately reviewed changes include a verified transactional sender, exact SMTP configuration/quotas, password-policy alignment, and a narrowly matched callback destination for the approved isolated candidate origin. An eight-character minimum plus the application's uppercase/digit/special rule must be reconciled with available provider presets; adding a lowercase requirement is an owner decision, not an assumed equivalence. Keep the production Site URL change separate from loopback testing. Templates require an approved handler contract and Free-plan entitlement check. No setting was changed. [Detailed email/configuration plan](SUPABASE_AUTH_EMAIL_READINESS.md).
+
+The [two-account test and cutover plan](SUPABASE_HOSTED_AUTH_TEST_AND_CUTOVER_PLAN.md) is prepared for review. Execution requires the real expanded recovery gate, approved settings, two privately supplied owner-controlled inboxes, and separate account/mail and exact fixture/cleanup approvals. It caps provider-triggered messages at five, preserves ordinary capability defaults and canonical User IDs, tests direct forged actions as well as UI, and retains the two account/mapping records after scoped business-fixture cleanup. Full acceptance is additionally blocked by missing ordinary Order access and positive Tool-scoped Vendor mutation workflows; a denied nonexistent route cannot establish their ownership security.
+
+Cutover remains unapproved. Required release work includes shared atomic rate limiting/replay controls, sensitive-action reauthentication, legacy identity continuity, a reviewed production release guard, HTTPS/cookie/cache verification, real delivery/provider/ownership acceptance and coordinated legacy issuance/cookie retirement. No parallel active website identity provider is introduced.
+
+## Domain and deployment
+
+Read-only checks against both authoritative nameservers verify `ns1.bluehost.com` and `ns2.bluehost.com`. Current apex A, `www` CNAME, mail A/MX and SPF records are documented; `_dmarc.aibean.io` was NXDOMAIN and no apex CAA/AAAA was returned. Private zone completeness, existing DKIM selectors, mailbox operation and Bluehost account permissions remain unverified. Preserve the independent mail A/MX records and review the current SPF `a` mechanism before an apex website move. [Domain, DNS, route, environment and rollback plan](SUPABASE_DOMAIN_AND_DEPLOYMENT_READINESS.md).
+
+Hosting is **not selected**. Evaluate Vercel Pro for the commercial Next.js application, starting at $20/month plus applicable seats/usage; validate this exact Next.js version, database TLS/runtime connections, SSR cookies and shared controls before choosing. Evaluate Resend for transactional email: Free 3,000/month with 100/day, or Pro $20/month for 50,000. These are researched planning options, not purchases or verified deployments. [Vercel pricing](https://vercel.com/pricing), [Resend pricing](https://resend.com/pricing).
+
+Planned production paths cover `/`, `/login`, `/register`, `/auth/callback`, `/auth/confirm`, `/confirm-email`, `/forgot-password` and `/reset-password`. Callback and confirmation contracts differ; application pages are not automatically Supabase redirect entries. Provider-generated DNS values, verified sender/reply addresses, exact allowlist behavior, HTTPS issuance and a reviewed production environment must precede separate DNS/deployment/cutover approvals. No addresses, target IPs, credentials or paid services were invented or provisioned.
+
+## Validation and publication
+
+The frozen recovery manifest SHA-256 is `a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30`. Offline inspection verifies all eleven required executable/dependency files and the exact eighteen-table/two-sequence scope. Executable/SQL hashes and the complete next authorization are in the recovery proposal.
+
+| Final local check                        | Result                                                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| ESLint                                   | PASS; zero warnings                                                                                    |
+| TypeScript / Next route generation       | PASS                                                                                                   |
+| Automated tests                          | 66 PASS, zero failures; includes four expanded-recovery guards                                         |
+| Production build                         | PASS; Next.js 16.3.8                                                                                   |
+| Runtime dependency audit                 | PASS; zero reported runtime vulnerabilities                                                            |
+| Native expanded recovery                 | PASS with synthetic local data on PostgreSQL 17.11; actual hosted expanded export/restore NOT EXECUTED |
+| PowerShell bridge/lifecycle parse        | All three scripts PASS                                                                                 |
+| Private configuration / existing archive | Hardened owner/ACL/path checks and original archive integrity/decryption PASS                          |
+| Fresh hosted read-only continuity        | PASS; captured 10 October at 17:08:32 UTC                                                              |
+
+Historical audits/version archives and original migration files remain unchanged. Only sanitized active documents, recovery tooling, local prerequisite SQL and aggregate evidence are published to the existing branch; private backups, `.env.local`, installed skills and ignored test artifacts remain excluded. GitHub publication and CI references are added after the remote accepts the reviewed commit.
+
+Recommended order: approve the exact expanded backup package; execute and verify its real hosted-data/local-restore gate; separately approve sender/password/redirect configuration; approve two-account mail testing and bounded ownership fixtures; implement and validate remaining ownership/release controls; then review an exclusive production cutover. Stop at each owner-defined boundary.

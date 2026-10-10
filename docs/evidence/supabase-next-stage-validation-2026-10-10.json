@@ -1,0 +1,39 @@
+{
+  "capturedAt": "2026-10-10T17:12:53.8539056Z",
+  "projectRef": "yfknxidgphhepdtwazhn",
+  "branch": "codex/supabase-foundation",
+  "baselineCommit": "540474009f2299718e73819269b3c0f297bd628f",
+  "recoveryPackageSha256": "a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30",
+  "recoveryPackageStatus": "READY_FOR_OWNER_REVIEW",
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "tests": {
+    "passed": 66,
+    "failed": 0,
+    "expandedRecoveryGuardTests": 4
+  },
+  "productionBuild": "PASS",
+  "nextVersion": "16.3.8",
+  "runtimeAudit": {
+    "result": "PASS",
+    "reportedVulnerabilities": 0
+  },
+  "nativeSyntheticRecovery": "PASS",
+  "powershellScriptsParse": "PASS",
+  "privateConfigurationGuards": "PASS",
+  "originalArchiveIntegrityAndDecryption": "PASS",
+  "hostedReadOnlyContinuity": "PASS",
+  "hostedExpandedExport": "NOT EXECUTED",
+  "hostedExpandedRestore": "NOT EXECUTED",
+  "authCandidate": "IMPLEMENTED_INACTIVE",
+  "hostedAccountsCreated": false,
+  "hostedMailSent": false,
+  "hostedFixturesCreated": false,
+  "authSettingsChanged": false,
+  "dnsChanged": false,
+  "deployed": false,
+  "privateEnvironmentChanged": false,
+  "websiteLayoutChanged": false,
+  "migrationsChanged": false,
+  "historicalAuditsChanged": false
+}

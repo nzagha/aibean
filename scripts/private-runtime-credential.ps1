@@ -10,7 +10,9 @@ try {
   $allowed=@($owner,'S-1-5-18','S-1-5-32-544')
   function Assert-Private([string]$path) {
     if(([IO.File]::GetAttributes($path) -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'Reparse point'}
-    foreach($rule in (Get-Acl -LiteralPath $path).Access){
+    $acl=Get-Acl -LiteralPath $path
+    if($acl.GetOwner([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe owner'}
+    foreach($rule in $acl.Access){
       if($rule.AccessControlType -eq 'Allow' -and $rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe ACL'}
     }
   }

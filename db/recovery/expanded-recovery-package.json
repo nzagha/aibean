@@ -1,0 +1,84 @@
+{
+  "packageId": "aibean-expanded-recovery-v1",
+  "targetProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "scope": [
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers",
+    "public.TestUsers_id_seq",
+    "public.audit_logs",
+    "public.billing_webhook_receipts",
+    "public.claim_requests",
+    "public.featured_placements",
+    "public.orders",
+    "public.rate_limits",
+    "public.saved_tools",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tools",
+    "public.users",
+    "public.vendor_access"
+  ],
+  "limits": {
+    "tables": 18,
+    "sequences": 2,
+    "archiveBytes": 4194304,
+    "totalSelectedRecords": 10000,
+    "identityMappings": 0,
+    "authUsers": 0,
+    "testUsers": 2,
+    "queryTimeoutMilliseconds": 60000,
+    "lockTimeoutMilliseconds": 5000
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "2cbc4b46ac73769b924cc99fc6f522fdab67e51e39048569720efd236a6e8865"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "sha256": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8"
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "sha256": "af670d7790357ab2f1d66dcb4c98ad1f3a75ad5b477331bbdf1d3f446fce0616"
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "sha256": "0b6f2e8f587f5538d2fdcdcef23e9369e671b75e4f24a072d6cafb22e3c461d3"
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "sha256": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d"
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "sha256": "e3de0be046b2aeb59c73d52164599ac05498422977e5583790af0a8d00ed2138"
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "sha256": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99"
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "sha256": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b"
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "sha256": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e"
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "sha256": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f"
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "sha256": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b"
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "capturedAt": "2026-10-10T17:08:32.352Z",
+  "projectRef": "yfknxidgphhepdtwazhn",
+  "status": "PASS",
+  "transaction": "REPEATABLE READ READ ONLY",
+  "hostnameVerified": true,
+  "identity": {
+    "database": "postgres",
+    "operator": "postgres",
+    "server_version": "17.6",
+    "read_only": "on",
+    "tls": true
+  },
+  "counts": {
+    "testusers": 2,
+    "application_users": 0,
+    "mappings": 0,
+    "auth_users": 0,
+    "auth_identities": 0
+  },
+  "permissions": [
+    {
+      "role": "anon",
+      "any_table_access": false,
+      "any_column_access": false,
+      "sequence_access": true
+    },
+    {
+      "role": "authenticated",
+      "any_table_access": false,
+      "any_column_access": false,
+      "sequence_access": true
+    }
+  ],
+  "objects": [
+    {
+      "schema": "aibean_private",
+      "name": "installations",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "aibean_private",
+      "name": "user_identities",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "drizzle",
+      "name": "__drizzle_migrations",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": false
+    },
+    {
+      "schema": "drizzle",
+      "name": "__drizzle_migrations_id_seq",
+      "kind": "S",
+      "owner": "postgres",
+      "rls": false
+    },
+    {
+      "schema": "public",
+      "name": "TestUsers",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "TestUsers_id_seq",
+      "kind": "S",
+      "owner": "postgres",
+      "rls": false
+    },
+    {
+      "schema": "public",
+      "name": "audit_logs",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "billing_webhook_receipts",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "claim_requests",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "featured_placements",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "orders",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "rate_limits",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "saved_tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "stack_tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "stacks",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "taxonomy",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "tool_reviews",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "users",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    },
+    {
+      "schema": "public",
+      "name": "vendor_access",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true
+    }
+  ],
+  "appTables": [
+    {
+      "tablename": "audit_logs",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "billing_webhook_receipts",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "claim_requests",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "featured_placements",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "orders",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "rate_limits",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "saved_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stack_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stacks",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "taxonomy",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tool_reviews",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "users",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "vendor_access",
+      "rowsecurity": true
+    }
+  ],
+  "foreignKeys": 18,
+  "drizzleHistory": [
+    {
+      "hash": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+      "created_at": "1791247215670"
+    },
+    {
+      "hash": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+      "created_at": "1791249181547"
+    }
+  ],
+  "securityHistory": [
+    {
+      "id": "aibean-foundation-v1",
+      "sql_sha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a"
+    }
+  ],
+  "publicAuth": {
+    "reachable": true,
+    "emailEnabled": true,
+    "confirmationRequired": true,
+    "signupEnabled": true,
+    "phoneEnabled": false,
+    "passkeysEnabled": false
+  },
+  "testUsersPrivateContinuity": true,
+  "testUsersDefinitionsPoliciesAndSequenceStatePreserved": true,
+  "originalArchiveAccessibleAndIntegrityVerified": true,
+  "originalArchiveDecryptVerified": true,
+  "existingSqlAndMigrationChecksumsVerified": true,
+  "runtimeRoleAndMembershipVerified": true,
+  "environmentUnchanged": true,
+  "activeAuthMode": "password",
+  "candidateProviderGateEnabled": false,
+  "hostedRecordBodiesExported": false,
+  "hostedWrites": false,
+  "expandedExportExecuted": false,
+  "expandedRestoreExecuted": false,
+  "privateDigestPublished": false
+}

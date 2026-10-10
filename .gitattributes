@@ -8,3 +8,17 @@ docs/audit/** -text
 db/migrations/*.sql text eol=lf
 db/install/*.sql text eol=lf
 db/install/*.json text eol=lf
+
+# The reviewed expanded recovery manifest hashes these exact executable bytes.
+.gitattributes text eol=lf
+db/recovery/*.sql text eol=lf
+db/recovery/*.json text eol=lf
+scripts/execute-expanded-recovery.ts text eol=lf
+scripts/expanded-recovery-scope.ts text eol=lf
+scripts/private-expanded-recovery.ps1 text eol=lf
+scripts/private-backup-crypto.ps1 text eol=lf
+scripts/private-runtime-credential.ps1 text eol=lf
+src/lib/db/tls-config.ts text eol=lf
+src/lib/db/connection-config.ts text eol=lf
+src/lib/db/runtime-config.ts text eol=lf
+src/lib/supabase/config.ts text eol=lf

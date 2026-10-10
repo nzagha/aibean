@@ -1,17 +1,17 @@
 # Expanded application recovery proposal before hosted Auth writes
 
-**Prepared only; export and restoration have not been executed or authorized by the Phase 2 implementation request.** Target: `yfknxidgphhepdtwazhn / postgres`. Preserve the original verified CMS-encrypted TestUsers archive, its metadata and receipt. The earlier archive predates A/C, so it neither covers the installed application foundation nor reproduces current TestUsers browser grants. No private backup material is stored in this repository.
+**READY for owner review, 10 October 2026. Hosted expanded export and restoration: NOT EXECUTED.** Target: `yfknxidgphhepdtwazhn / postgres`. The current preparation directive requires separate approval before exporting hosted record bodies. Preserve the original verified CMS-encrypted TestUsers archive, metadata and receipt; it predates A/C and does not cover the installed foundation/current browser grants. No private backup material is stored in this repository.
 
 ## Exact proposed scope and current inventory
 
-Fresh [restricted read-only inventory](evidence/supabase-auth-candidate-readiness-2026-10-09.json) found fourteen RLS application tables, `public."TestUsers"`, the Drizzle ledger, two private application tables and two owned sequences. Application records and private mappings are currently zero; the runtime intentionally cannot read TestUsers/Auth rows or ledger contents. Separate operator preflight must verify both original TestUsers records and complete histories against the retained private evidence before an export.
+Fresh [read-only operator evidence](evidence/supabase-next-stage-readiness.json), captured 10 October 2026, verifies all eighteen tables/two sequences, fourteen application RLS tables, eighteen FKs, both exact Drizzle entries and the security ledger. Application/mapping/Auth counts are zero. Both TestUsers records match private retained integrity evidence, their definitions/policies/sequence state are preserved, and the original encrypted archive is accessible, hash-verified and decryptable. The restricted Drizzle runtime remains verified; it cannot read TestUsers/Auth bodies or ledger contents. Execution independently repeats its guarded source preflight. No new hosted record bodies were exported.
 
-| Namespace | Approved proposal selectors |
-|---|---|
-| `public` application | `audit_logs`, `billing_webhook_receipts`, `claim_requests`, `featured_placements`, `orders`, `rate_limits`, `saved_tools`, `stack_tools`, `stacks`, `taxonomy`, `tool_reviews`, `tools`, `users`, `vendor_access` |
-| `public` existing data | `"TestUsers"`, `"TestUsers_id_seq"` |
-| `drizzle` | `__drizzle_migrations`, `__drizzle_migrations_id_seq` |
-| `aibean_private` | `installations`, `user_identities` |
+| Namespace              | Approved proposal selectors                                                                                                                                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `public` application   | `audit_logs`, `billing_webhook_receipts`, `claim_requests`, `featured_placements`, `orders`, `rate_limits`, `saved_tools`, `stack_tools`, `stacks`, `taxonomy`, `tool_reviews`, `tools`, `users`, `vendor_access` |
+| `public` existing data | `"TestUsers"`, `"TestUsers_id_seq"`                                                                                                                                                                               |
+| `drizzle`              | `__drizzle_migrations`, `__drizzle_migrations_id_seq`                                                                                                                                                             |
+| `aibean_private`       | `installations`, `user_identities`                                                                                                                                                                                |
 
 The operation selects **eighteen tables and two sequences**, together with definitions, indexes, constraints, RLS/policies, owners and relevant ACLs. It is not an unrestricted `--schema=public` or whole-project dump. Any unexpected table, dependency, sequence, routine, trigger or extension requires review; do not silently expand these selectors.
 
@@ -80,8 +80,52 @@ This expanded export includes existing TestUsers personal records; future `users
 
 This archive preserves the **application database**, not Supabase identity-service passwords/sessions, Auth provider/SMTP settings, Vault secrets, Storage objects or runtime login credentials. A local Auth FK scaffold proves application restore structure, not real provider recovery. A later hosted recovery needs reviewed surviving-provider UUID continuity or a separate identity recovery strategy; arbitrary recreated users may have different UUIDs. Independent-device key recovery and off-device retention remain unverified. Supabase Free has no assumed managed daily recovery/PITR entitlement; manual retention and rehearsals are operator responsibilities. [Supabase backup documentation](https://supabase.com/docs/guides/platform/backups).
 
-## Separate authorization wording
+## Concrete guarded package and checksums
 
-> I authorize the expanded scoped read-only backup of project yfknxidgphhepdtwazhn, database postgres, limited to the eighteen tables and two sequences enumerated in docs/SUPABASE_EXPANDED_APPLICATION_RECOVERY_PROPOSAL.md and their related application definitions, constraints, indexes, RLS/policies, owners, relevant grants, migration histories and private canonical identity mapping. I authorize the bounded encrypted application metadata capture, use of the existing private Windows CMS configuration and secure non-synced backup directory, and restoration only into a new disposable local PostgreSQL 17 recovery cluster with the documented local schema/NOLOGIN-role/Auth-FK structural prerequisites. Preserve the original verified archive. Verify private integrity, counts, policies, privileges, histories and unchanged hosted state; retain ciphertext and remove only approved transient recovery data after success. Do not export managed Auth/Vault/Storage records or credentials, upload private backup material, restore to hosted Supabase, create hosted accounts, send mail, change settings, apply migrations or activate Auth. Stop for amended approval if identity mappings are nonempty, source scope drifts or prerequisites fail. Publish sanitized evidence only.
+The [executor](../scripts/execute-expanded-recovery.ts) defaults to offline inspection: no environment loading, private storage access, connection, row-body read or local target creation. The exact reviewed [manifest](../db/recovery/expanded-recovery-package.json) is **`a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30` (SHA-256)**. Its hashed LF files are:
 
-Before executing after that authorization, produce and hash the concrete guarded operator script and exact local prerequisite SQL from the fresh catalog for final review. The current implementation has prepared this proposal only; it has not exported or restored the expanded scope.
+| Reviewed file                                           | SHA-256                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------ |
+| `.gitattributes`                                        | `2cbc4b46ac73769b924cc99fc6f522fdab67e51e39048569720efd236a6e8865` |
+| `db/recovery/expanded-recovery-local-prerequisites.sql` | `7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8` |
+| `scripts/execute-expanded-recovery.ts`                  | `af670d7790357ab2f1d66dcb4c98ad1f3a75ad5b477331bbdf1d3f446fce0616` |
+| `scripts/expanded-recovery-scope.ts`                    | `0b6f2e8f587f5538d2fdcdcef23e9369e671b75e4f24a072d6cafb22e3c461d3` |
+| `scripts/private-backup-crypto.ps1`                     | `63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d` |
+| `scripts/private-expanded-recovery.ps1`                 | `e3de0be046b2aeb59c73d52164599ac05498422977e5583790af0a8d00ed2138` |
+| `scripts/private-runtime-credential.ps1`                | `fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99` |
+| `src/lib/db/connection-config.ts`                       | `50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b` |
+| `src/lib/db/runtime-config.ts`                          | `44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e` |
+| `src/lib/db/tls-config.ts`                              | `3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f` |
+| `src/lib/supabase/config.ts`                            | `efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b` |
+
+Offline review command:
+
+```powershell
+npx --no-install tsx scripts/execute-expanded-recovery.ts --inspect
+```
+
+Only after separate exact-package owner authorization, with previously approved private environment paths available in the operator terminal, the execution command is:
+
+```powershell
+npx --no-install tsx scripts/execute-expanded-recovery.ts --execute-approved=a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30
+```
+
+The hash is a review binding, not consent by itself. Nothing runs on import, startup, CI, or ordinary website requests. The script checks exact branch, project/direct host/database/operator identity, trusted CA/hostname, original archive integrity/decryption, A/B/C evidence, role restrictions, table/column denial, counts, ledger hashes/timestamps and precise relation/dependency scope. Nonempty mappings or hosted Auth users/identities stop before body capture. Limits are 10,000 total selected records, a 4 MiB archive/metadata bound, 60-second queries/native operations and five-second lock waits. Unexpected routines, user triggers, external dependencies, archive entries, role/grant changes or sequence/source drift stop for review.
+
+The private lifecycle/helper files validate root/profile/file/key ownership and ACLs, ancestor reparse points, synchronization exclusions, NTFS capacity, create-new artifacts and captured pipes. Startup validates an existing log destination; the temporary bootstrap password is removed in a cleanup block, including partial-write failure. Failure attempts shutdown of the known owned target, retains evidence and ciphertext, and does not reset/delete/retry automatically. Successful cleanup requires exact generated path containment, a matching private completion witness, stopped process and recursive ACL/reparse checks. The operator/runtime credentials and existing certificate configuration are not replaced.
+
+## Local validation and documented differences
+
+[Native PostgreSQL 17.11 synthetic recovery evidence](evidence/supabase-expanded-recovery-native-synthetic.json) is PASS: an actual scoped custom dump and isolated restore verified all 18 tables/2 sequences, full synthetic data/sequence integrity, constraints/indexes/RLS, relation/column/schema/default grants and owners, migration/security history, browser denials and runtime restrictions. It rejected elevated memberships, a nonempty target and nonempty mapping before any body query. Four automated scope/TOC/injection/prerequisite guards pass. This evidence uses entirely synthetic local data and does not establish actual hosted recovery.
+
+The tightened private guard check and original archive decryption/integrity verification pass on the existing configuration. The new complete CMS/private-target lifecycle and hosted expanded restore acceptance remain unexecuted until approval.
+
+Local role surrogates are NOLOGIN and do not recreate passwords or Supabase managed-role elevation; only the isolated service-role fixture retains BYPASSRLS to reproduce its ACL context. The local database is owned by the NOLOGIN postgres surrogate so pg_database_owner retains its public-schema semantics. Operator administrative memberships are recorded in encrypted metadata but are not reproduced as credential lifecycle in the disposable target. Database-level hosted CONNECT/TEMP grants, managed-service roles, runtime credentials and provider service behavior are not recreated.
+
+The Windows target is PostgreSQL 17.11 / UTF8 / C locale; hosted PostgreSQL currently reports 17.6. The executor captures both database owner/encoding/locale/collation-provider/version descriptions in sanitized evidence. Relation definitions and default-collation identifiers can match while database locale/OS ordering semantics differ. Canonical integrity uses explicit C ordering. A later real hosted recovery must review platform/collation compatibility independently; this local rehearsal is not a byte-for-byte Supabase platform clone.
+
+## Separate exact authorization wording
+
+> I authorize execution of the expanded recovery package with manifest SHA-256 a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30 for Supabase project yfknxidgphhepdtwazhn, database postgres, limited to the eighteen tables and two sequences enumerated in docs/SUPABASE_EXPANDED_APPLICATION_RECOVERY_PROPOSAL.md and their related application definitions, constraints, indexes, RLS/policies, owners, relevant grants and migration histories. I authorize bounded encrypted application metadata capture using the existing private Windows CMS certificate, separate protected operator connection and secure non-synchronized directory, followed by restoration only into a new disposable loopback PostgreSQL 17 cluster with the reviewed local prerequisites. Preserve both TestUsers records and the original encrypted archive. Verify private integrity, counts, histories, owners, permissions, policies and unchanged hosted state. Retain ciphertext and remove only the approved transient target after successful validation and shutdown. Stop on nonempty identity mappings, scope/history drift or failed prerequisites. Do not export managed Auth/Vault/Storage/Realtime records, credentials or platform secrets; upload private backup contents; restore to hosted Supabase; create hosted accounts; send mail; change settings/DNS; apply migrations; activate Auth; repeat A/B/C; or deploy. Publish sanitized evidence only.
+
+This approval is limited to source read-only export and isolated local restoration. All account/email/provider-settings/fixtures/migrations/DNS/deployment/Auth cutover approvals remain independent. The execution package is now concrete and hash-bound; actual expanded recovery remains NOT EXECUTED.

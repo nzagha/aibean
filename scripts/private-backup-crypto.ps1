@@ -6,11 +6,9 @@ $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 try {
     $Root=[IO.Path]::GetFullPath($Root).TrimEnd('\')
-    $p=Get-Content -LiteralPath (Join-Path $Root 'preparation.json') -Raw | ConvertFrom-Json
-    if ([IO.Path]::GetFullPath($p.root).TrimEnd('\') -ne $Root -or $p.sourceProject -ne 'yfknxidgphhepdtwazhn') { throw 'Profile mismatch' }
     $owner=[Security.Principal.WindowsIdentity]::GetCurrent().User.Value
     $allowed=@($owner,'S-1-5-18','S-1-5-32-544')
-    foreach($path in @($Root,$p.backups,$p.recovery)) {
+    function Assert-PrivateFile([string]$path) {
         $resolved=[IO.Path]::GetFullPath($path)
         if($resolved -ne $Root -and -not $resolved.StartsWith($Root+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Directory mismatch'}
         $ancestor=$resolved
@@ -18,29 +16,38 @@ try {
             if((Test-Path -LiteralPath $ancestor) -and (([IO.File]::GetAttributes($ancestor) -band [IO.FileAttributes]::ReparsePoint) -ne 0)){throw 'Reparse point'}
             $ancestor=[IO.Path]::GetDirectoryName($ancestor)
         }
-        foreach($rule in (Get-Acl -LiteralPath $resolved).Access){
+        $acl=Get-Acl -LiteralPath $resolved
+        if($acl.GetOwner([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe owner'}
+        foreach($rule in $acl.Access){
             if($rule.AccessControlType -eq 'Allow' -and $rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe ACL'}
         }
     }
+    Assert-PrivateFile $Root
     if(-not (Get-Acl -LiteralPath $Root).AreAccessRulesProtected){throw 'Inherited root ACL'}
     foreach($excluded in @((Join-Path $PSScriptRoot '..'),$env:OneDrive,$env:OneDriveConsumer,$env:OneDriveCommercial)){
         if($excluded){$excluded=[IO.Path]::GetFullPath($excluded).TrimEnd('\'); if($Root -eq $excluded -or $Root.StartsWith($excluded+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Sync/repository root'}}
     }
+    $profileFile=Join-Path $Root 'preparation.json'; Assert-PrivateFile $profileFile
+    $p=Get-Content -LiteralPath $profileFile -Raw | ConvertFrom-Json
+    if ([IO.Path]::GetFullPath($p.root).TrimEnd('\') -ne $Root -or $p.sourceProject -ne 'yfknxidgphhepdtwazhn') { throw 'Profile mismatch' }
+    Assert-PrivateFile $p.backups
+    Assert-PrivateFile $p.recovery
     $cert=Get-Item ('Cert:\CurrentUser\My\'+$p.certificateThumbprint)
     if(-not $cert.HasPrivateKey -or $cert.NotAfter -le (Get-Date) -or $cert.NotBefore -gt (Get-Date)){throw 'Invalid certificate'}
     $rsa=[Security.Cryptography.X509Certificates.RSACertificateExtensions]::GetRSAPrivateKey($cert)
     if($rsa.KeySize -lt 3072){throw 'Insufficient key size'}
     $keyPath=Join-Path $env:APPDATA ('Microsoft\Crypto\Keys\'+$rsa.Key.UniqueName)
-    foreach($rule in (Get-Acl -LiteralPath $keyPath).Access){
+    $keyAncestor=[IO.Path]::GetFullPath($keyPath)
+    while($keyAncestor){
+        if(([IO.File]::GetAttributes($keyAncestor) -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'Reparse key path'}
+        $keyAncestor=[IO.Path]::GetDirectoryName($keyAncestor)
+    }
+    $keyAcl=Get-Acl -LiteralPath $keyPath
+    if($keyAcl.GetOwner([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe key owner'}
+    foreach($rule in $keyAcl.Access){
         if($rule.AccessControlType -eq 'Allow' -and $rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe key ACL'}
     }
     $request=[Console]::In.ReadToEnd() | ConvertFrom-Json
-    function Assert-PrivateFile([string]$path) {
-        if(([IO.File]::GetAttributes($path) -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'Reparse file'}
-        foreach($rule in (Get-Acl -LiteralPath $path).Access){
-            if($rule.AccessControlType -eq 'Allow' -and $rule.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value -notin $allowed){throw 'Unsafe file ACL'}
-        }
-    }
     switch($request.mode){
         'check' { [Console]::Out.Write('OK') }
         'encrypt' {
