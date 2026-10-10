@@ -1,0 +1,65 @@
+{
+  "stage": "Phase 1 Supabase authentication candidate",
+  "implementation": "COMPLETE_CANDIDATE_ONLY",
+  "branch": "codex/supabase-foundation",
+  "validatedCommit": "6a8d64e3b66eb6794dc3ab25c2a541862a946759",
+  "githubCi": {
+    "result": "PASS",
+    "runId": 38007482564,
+    "url": "https://github.com/nzagha/aibean/actions/runs/38007482564",
+    "lint": true,
+    "typecheck": true,
+    "automatedTestsPassed": 61,
+    "productionBuild": true,
+    "runtimeAudit": true
+  },
+  "localValidation": {
+    "lint": true,
+    "nextRouteTypeGenerationAndTypeScript": true,
+    "automatedTestsPassed": 61,
+    "productionBuild": true,
+    "runtimeVulnerabilities": 0,
+    "disposableNativePostgresVersion": "17.11",
+    "nativePostgresScenariosPassed": 18,
+    "nativeInstancesStopped": true,
+    "runtimeAuthModesVerified": 2,
+    "publicRoutesPerMode": 8,
+    "protectedGuestRoutesPerMode": 4,
+    "candidateProviderGateDenied": true,
+    "privateEnvironmentFileUnchanged": true
+  },
+  "publicationPrivacy": {
+    "completeImplementationFilesChecked": 52,
+    "protectedValueMatches": 0,
+    "privateBackupsCredentialsAndEnvironmentExcluded": true
+  },
+  "hostedVerification": {
+    "readOnlyPublicAuthSettings": true,
+    "readOnlyRestrictedTlsDrizzleInventory": true,
+    "actualRegistrationLoginRecoveryProviderJourney": false,
+    "actualEmailDelivery": false,
+    "actualTwoAccountIsolation": false,
+    "smtpSenderRedirectTemplatePasswordServerConfigurationVerified": false
+  },
+  "authorizationBoundaries": {
+    "websiteSupabaseModeActivated": false,
+    "existingPasswordModeChanged": false,
+    "hostedAccountsCreated": false,
+    "hostedMailSent": false,
+    "hostedBusinessFixturesWritten": false,
+    "hostedAuthSettingsChanged": false,
+    "newDatabaseMigrations": false,
+    "approvalsAbcRepeated": false,
+    "expandedBackupExecuted": false,
+    "legacyAuthRemoved": false,
+    "privilegedBootstrapPerformed": false
+  },
+  "remainingGates": [
+    "Expanded scoped encrypted application backup and isolated restore approval",
+    "Exact SMTP/sender/password policy/redirect/template configuration inspection and approval",
+    "Two named ordinary hosted accounts, bounded mail and fixture authorization",
+    "Real hosted provider, stable mapping, refresh/expiry/logout/recovery and two-user isolation tests",
+    "Shared atomic rate/replay controls, strict sensitive-session and step-up release acceptance",
+    "Reviewed HTTPS release/cutover and controlled legacy identity retirement"
+  ]
+}
