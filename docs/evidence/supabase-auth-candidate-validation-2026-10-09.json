@@ -2,22 +2,22 @@
   "stage": "Phase 1 Supabase authentication candidate",
   "implementation": "COMPLETE_CANDIDATE_ONLY",
   "branch": "codex/supabase-foundation",
-  "validatedCommit": "6a8d64e3b66eb6794dc3ab25c2a541862a946759",
+  "validatedCommit": "46a630e51d1294c90023b01a12fad612d444a16d",
   "githubCi": {
     "result": "PASS",
-    "runId": 38007482564,
-    "url": "https://github.com/nzagha/aibean/actions/runs/38007482564",
+    "runId": 38007800993,
+    "url": "https://github.com/nzagha/aibean/actions/runs/38007800993",
     "lint": true,
     "typecheck": true,
-    "automatedTestsPassed": 61,
+    "automatedTestsPassed": 62,
     "productionBuild": true,
     "runtimeAudit": true
   },
   "localValidation": {
     "lint": true,
     "nextRouteTypeGenerationAndTypeScript": true,
-    "automatedTestsPassed": 61,
-    "productionBuild": true,
+    "automatedTestsPassed": 62,
+    "productionBuild": false,
     "runtimeVulnerabilities": 0,
     "disposableNativePostgresVersion": "17.11",
     "nativePostgresScenariosPassed": 18,
@@ -26,10 +26,12 @@
     "publicRoutesPerMode": 8,
     "protectedGuestRoutesPerMode": 4,
     "candidateProviderGateDenied": true,
-    "privateEnvironmentFileUnchanged": true
+    "privateEnvironmentFileUnchanged": true,
+    "earlierSuccessfulProductionBuild": true,
+    "latestBuildLimitation": "Windows EPERM unlink cache lock; final source production build verified in clean GitHub CI"
   },
   "publicationPrivacy": {
-    "completeImplementationFilesChecked": 52,
+    "completeImplementationFilesChecked": 55,
     "protectedValueMatches": 0,
     "privateBackupsCredentialsAndEnvironmentExcluded": true
   },
