@@ -20,7 +20,7 @@
   "isolatedRestoration": "NOT EXECUTED",
   "originalArchiveAccessibleIntactAndDecryptable": true,
   "sourcePostflight": "PASS",
-  "sourcePostflightAt": "2026-10-10T20:42:41.510Z",
+  "sourcePostflightAt": "2026-10-10T20:42:41.51Z",
   "testUsersCount": 2,
   "testUsersPrivateContinuity": true,
   "sourceDefinitionsPoliciesSequenceStatePreserved": true,
@@ -51,5 +51,18 @@
   "authSmtpDnsDeploymentSettingsChanged": false,
   "privateEnvironmentChanged": false,
   "privateRecordsHashesPathsOrSecretsPublished": false,
-  "nextGate": "OWNER APPROVAL TO PREPARE CORRECTED PACKAGE, THEN SEPARATE EXECUTION AUTHORIZATION"
+  "nextGate": "OWNER APPROVAL TO PREPARE CORRECTED PACKAGE, THEN SEPARATE EXECUTION AUTHORIZATION",
+  "quality": {
+    "ciResult": "PASS",
+    "ciCommit": "3c85e50a52fa0651a3e53af45d86f47576f17a28",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38084997727",
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "automatedTestsPassed": 66,
+    "productionBuild": "PASS",
+    "runtimeAudit": "PASS",
+    "publicationFilesScanned": 7,
+    "privateValueMatches": 0,
+    "hostedRecoveryStillFailed": true
+  }
 }
