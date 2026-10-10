@@ -5,17 +5,20 @@ export function ModulePreview({
   title,
   description,
   items,
+  children,
 }: {
   scope: string;
   title: string;
   description: string;
   items: { title: string; text: string }[];
+  children?: React.ReactNode;
 }) {
   return (
     <div className="container py-16">
       <span className="eyebrow">{scope} · Next MVP stage</span>
       <h1 className="my-6 text-5xl font-display font-bold">{title}</h1>
       <p className="mb-8 max-w-2xl text-lg">{description}</p>
+      {children}
       <ScopedSearch scope={scope} />
       <p className="preview-notice my-8">
         This section is being prepared. Content creation, moderation, and

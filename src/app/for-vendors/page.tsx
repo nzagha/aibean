@@ -12,6 +12,7 @@ export default function Vendors() {
         discover your tool.
       </p>
       <div className="flex flex-wrap gap-4 mb-12">
+        <Link href="#get-started" className="button primary">Get Started as a Vendor →</Link>
         <Link href="/featured" className="button secondary">
           Feature your tool · $99 / 5 days →
         </Link>
@@ -22,6 +23,16 @@ export default function Vendors() {
           Vendor workspace
         </Link>
       </div>
+      <section id="get-started" className="mb-8 scroll-mt-28">
+        <h2 className="text-2xl">Start with a User account.</h2>
+        <p className="my-4 max-w-2xl">Check registration availability, then find or submit your Tool. Provide affiliation evidence through its claim form. Applicable payment and Admin approval are separate steps. Each Tool can have one approved owner; signing up or paying never grants ownership.</p>
+        <div className="flex flex-wrap gap-4">
+          <Link href="/register" className="text-link">User registration status →</Link>
+          <Link href="/submit/tool" className="text-link">Submit a Tool →</Link>
+          <Link href="/tools" className="text-link">Find a Tool to claim →</Link>
+        </div>
+        <p className="preview-notice mt-5">New account registration is subject to the active sign-in setup. Claim checkout is available only when sandbox billing is configured. Listing edits and verification requests are being prepared.</p>
+      </section>
       <div className="grid gap-6 md:grid-cols-3">
         {[
           [

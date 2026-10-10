@@ -12,6 +12,7 @@ import { DiscoverySections } from "@/components/discovery-sections";
 import { ScopedSearch } from "@/components/scoped-search";
 import { Newsletter } from "@/components/newsletter";
 import { FeaturedTools } from "@/components/featured-tools";
+import { ParticipationJourneys } from "@/components/participation-journeys";
 import {
   ActiveDot,
   ExplorationProgress,
@@ -235,6 +236,7 @@ export default function Home() {
           </p>
         </div>
       </section>
+      <ParticipationJourneys />
       <Newsletter />
     </>
   );

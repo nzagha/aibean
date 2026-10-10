@@ -5,8 +5,8 @@ import { Footer } from "@/components/footer";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { CompareProvider } from "@/components/compare-provider";
-import { authConfigured, getIdentity } from "@/lib/auth";
-import { authMode } from "@/lib/auth-mode";
+import { authConfigured } from "@/lib/auth";
+import { getAccountNavigation } from "@/lib/account-navigation-server";
 import { ExplorationProvider } from "@/components/exploration-provider";
 const satoshi = localFont({
   src: "../../public/brand/Satoshi.ttf",
@@ -44,19 +44,14 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const passwordSignedIn = ["password", "supabase"].includes(authMode())
-    ? Boolean(await getIdentity())
-    : false;
+  const accountLinks = await getAccountNavigation();
   const content = (
     <ExplorationProvider>
       <CompareProvider>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <Header
-          authEnabled={authConfigured()}
-          passwordSignedIn={passwordSignedIn}
-        />
+        <Header accountLinks={accountLinks} />
         <main id="main">{children}</main>
         <Footer />
       </CompareProvider>

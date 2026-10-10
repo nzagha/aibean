@@ -2,7 +2,7 @@ import "server-only";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "./db";
 import { users, vendorAccess } from "./db/schema";
 import { safeReturnPath } from "./catalog/filter";
@@ -16,7 +16,7 @@ import { ownerPredicates } from "./db/owned-resources";
 import { ACCESS_COOKIE, RECOVERY_COOKIE } from "./supabase/auth-proof";
 import { verifiedBusinessAccount } from "./supabase/business-session";
 export const authConfigured = () => authMode() === "clerk";
-export async function getIdentity() {
+export async function getIdentity(provision = true) {
   const mode = authMode();
   if (mode === "password") return passwordIdentity();
   if (mode === "clerk") return (await auth()).userId;
@@ -32,6 +32,12 @@ export async function getIdentity() {
     process.env.AIBEAN_RECOVERY_SECRET || "",
   );
   if (!authUserId) return null;
+  if (!provision) {
+    const [mapping] = await db().execute<{ user_id: string }>(sql`
+      SELECT user_id FROM aibean_private.user_identities
+      WHERE auth_user_id = ${authUserId}::uuid`);
+    return mapping?.user_id ?? null;
+  }
   return (await resolveSupabaseUser(db(), authUserId)).id;
 }
 export async function requireUser(

@@ -1,4 +1,5 @@
 import { ModulePreview } from "@/components/module-preview";
+import Link from "next/link";
 export const metadata = { title: "Creators" };
 export default function Page() {
   return (
@@ -20,6 +21,8 @@ export default function Page() {
           text: "Arrive from a creator’s campaign and find the specific template or workflow they shared.",
         },
       ]}
-    />
+    >
+      <Link href="/creators/apply" className="button primary mb-8">Become a Creator →</Link>
+    </ModulePreview>
   );
 }

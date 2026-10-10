@@ -2,27 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Menu, Search, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { Logo } from "./logo";
-import { UserButton, useUser } from "@clerk/nextjs";
+import {
+  guestNavigation,
+  type AccountNavigation,
+} from "@/lib/account-navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { EXPLORATION_SPRING } from "./exploration-provider";
-
-function AccountControl() {
-  const { isSignedIn } = useUser();
-  return isSignedIn ? (
-    <div className="flex items-center gap-3">
-      <Link href="/account" className="nav-link">
-        Account
-      </Link>
-      <UserButton />
-    </div>
-  ) : (
-    <Link href="/login" className="button primary">
-      Login
-    </Link>
-  );
-}
 
 const links = [
   ["AI Tools", "/tools"],
@@ -33,11 +20,9 @@ const links = [
   ["For Vendors", "/for-vendors"],
 ] as const;
 export function Header({
-  authEnabled = false,
-  passwordSignedIn = false,
+  accountLinks = guestNavigation,
 }: {
-  authEnabled?: boolean;
-  passwordSignedIn?: boolean;
+  accountLinks?: AccountNavigation;
 }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
@@ -85,16 +70,42 @@ export function Header({
           >
             <Search size={20} />
           </Link>
-          {passwordSignedIn ? (
-            <Link href="/account" className="button primary">
-              Account
-            </Link>
-          ) : authEnabled ? (
-            <AccountControl />
-          ) : (
-            <Link href="/login" className="button primary">
-              Login
-            </Link>
+          {accountLinks
+            .filter(
+              (link) =>
+                link.href === "/account" ||
+                link.href === "/register" ||
+                link.href === "/login",
+            )
+            .map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={
+                  link.href === "/register" ? "nav-link" : "button primary"
+                }
+              >
+                {link.label}
+              </Link>
+            ))}
+          {accountLinks.some((link) =>
+            ["/admin", "/creator", "/vendor"].includes(link.href),
+          ) && (
+            <details className="relative hidden md:block">
+              <summary className="nav-link cursor-pointer">Workspaces</summary>
+              <nav
+                aria-label="Account workspaces"
+                className="placeholder-card absolute right-0 top-full z-50 mt-3 flex min-w-56 flex-col gap-4"
+              >
+                {accountLinks
+                  .filter((link) => link.href !== "/account")
+                  .map((link) => (
+                    <Link key={link.href} href={link.href} className="nav-link">
+                      {link.label}
+                    </Link>
+                  ))}
+              </nav>
+            </details>
           )}
           <button
             type="button"
@@ -162,13 +173,16 @@ export function Header({
           <Link href="/industries" onClick={() => setOpen(false)}>
             AI for Your Business
           </Link>
-          <Link
-            href="/account"
-            className="button primary"
-            onClick={() => setOpen(false)}
-          >
-            My account <ArrowUpRight size={18} />
-          </Link>
+          {accountLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xl"
+              onClick={() => setOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
       </motion.dialog>
     </header>

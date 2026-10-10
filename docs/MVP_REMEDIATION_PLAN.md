@@ -61,3 +61,7 @@ Current Admin source has draft creation, publication/archive, review moderation,
 - Test evidence, stage status and remaining blockers: `FOUNDATION_PROGRESS.md`.
 
 Historical product exclusions remain: Discussions, Replies, News, Courses, Social Videos, direct messaging, native mobile/video hosting and Creator payouts. Preserve approved branding and $99/five-day sponsored placements. No live billing activation is part of the foundation.
+
+## Navigation milestone — 10 October 2026
+
+Entry points and capability-derived account navigation are implemented and locally tested (74 tests). Registration remains accurately unavailable in password mode; Creator application intake remains pending. Vendor onboarding links existing discovery/claim/submission routes. Next: continue server-enforced Control Panel operations against existing models, and separately review any new schema. No hosted migration or Auth activation is authorized by this milestone. Evidence: docs/NAVIGATION_AND_ONBOARDING_RESULT.md.

@@ -5,6 +5,7 @@ import { authMode } from "@/lib/auth-mode";
 import { safeReturnPath } from "@/lib/catalog/filter";
 import { passwordConfiguration } from "@/lib/password-auth";
 import { PasswordLogin } from "./password-login";
+import { RegistrationUnavailable } from "./registration-unavailable";
 import { SupabaseAuthForm, type SupabaseAuthView } from "./supabase-auth-form";
 export function AuthPage({
   register = false,
@@ -38,7 +39,7 @@ export function AuthPage({
               ? "A fresh start."
               : mode === "supabase" && supabaseView === "confirmation"
                 ? "You're almost there."
-                : register && !password
+                : register
                   ? "Build your next stack."
                   : "Welcome back."}
         </h1>
@@ -55,7 +56,7 @@ export function AuthPage({
                     : "Sign in to your aiBean account with your email and password."
             : password
               ? register
-                ? "New account registration is coming later. Sign in with your existing account."
+                ? "Discover what you can do with aiBean while account registration is being prepared."
                 : "Sign in to your aiBean account with your email and password."
               : "Sign in to save tools, create stacks, and share your experience."}
         </p>
@@ -68,6 +69,8 @@ export function AuthPage({
             field={field}
             loggedOut={loggedOut}
           />
+        ) : register && (password || !authConfigured()) ? (
+          <RegistrationUnavailable />
         ) : password ? (
           <PasswordLogin
             returnTo={destination}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WorkspaceNavigation } from "@/components/workspace-navigation";
 import { AccountSignOut } from "@/components/account-signout";
 import { eq } from "drizzle-orm";
 import { requireUser } from "@/lib/auth";
@@ -27,6 +28,7 @@ export default async function Account() {
       <div className="container py-16">
         <span className="eyebrow">Your aiBean</span>
         <h1 className="my-6 font-display text-5xl font-bold">Welcome back.</h1>
+        <WorkspaceNavigation />
         <section className="placeholder-card max-w-2xl">
           <h2 className="text-2xl">You are signed in.</h2>
           <p className="mt-4">
@@ -73,21 +75,14 @@ export default async function Account() {
         <AccountSignOut mode={authMode()} />
       </div>
       <h1 className="my-6 font-display text-5xl font-bold">Your next moves.</h1>
+      <WorkspaceNavigation />
       <div className="flex flex-wrap gap-5 mb-8">
         <Link href="/featured/manage" className="text-link">
           Featured placements →
         </Link>
-        <Link href="/vendor" className="text-link">
-          Vendor workspace →
-        </Link>
         <Link href="/pricing" className="text-link">
           Pricing →
         </Link>
-        {user.isAdmin && (
-          <Link href="/admin" className="text-link">
-            Admin →
-          </Link>
-        )}
       </div>
       <div className="grid gap-6 md:grid-cols-2">
         <section id="saved" className="placeholder-card">
