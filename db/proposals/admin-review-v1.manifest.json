@@ -2,7 +2,7 @@
   "packageId": "admin-review-v1",
   "status": "proposal-not-approved-for-hosted-execution",
   "sqlPath": "db/proposals/admin-review-v1.sql",
-  "sqlSha256": "b91caab17937c8db7b1d56b44b6c8a1d8262d8adecda995725d195e4e9acf935",
+  "sqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
   "tables": [
     "creator_applications",
     "creator_capability_requests",
@@ -12,5 +12,13 @@
   ],
   "privateLedger": "aibean_private.admin_review_installations",
   "capabilityFlagChanges": false,
-  "preservesBaselineMigrations": true
+  "preservesBaselineMigrations": true,
+  "preflightChecks": [
+    "database postgres",
+    "baseline hashes and migration timestamps",
+    "security installation ledger",
+    "14 baseline RLS tables",
+    "restricted NOLOGIN runtime role",
+    "no existing proposal objects"
+  ]
 }

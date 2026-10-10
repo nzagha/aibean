@@ -1,5 +1,9 @@
 # Supabase foundation: stage evidence and next milestone
 
+**Admin/source milestone — 10 October 2026:** Both original source files were imported unchanged, verified and published in `4718b514` (source-import CI PASS); active taxonomy is unchanged. Initial Admin Tool create/edit/private-preview/publication/taxonomy/trust/review/paid-claim/audit operations are implemented and isolated-tested. The Creator/Vendor/dispute package and conditional application/request interfaces are prepared; hosted installation, protected capability changes and paid request settlement remain gated. Lint, typecheck, 83 tests, production build, 22 native PostgreSQL scenarios and runtime audit pass. [Admin result](ADMIN_CONTROL_PANEL_IMPLEMENTATION_RESULT.md), [exact forward proposal](ADMIN_REVIEW_DATABASE_PROPOSAL.md), [current acceptance](MVP_ACCEPTANCE_MATRIX.md). No hosted migration, Auth activation, recovery retry or private configuration change occurred. The frozen corrected recovery package and all dependency hashes remain intact. Full Admin/MVP/provider acceptance remains incomplete.
+
+The dated entries below preserve earlier stage evidence; read the current Admin result for product status.
+
 **Correction preparation — 10 October 2026: PASS locally; hosted recovery remains FAIL / awaiting new execution approval.** The owner-authorized v2 correction normalizes the PostgreSQL address and completes source metadata/history and new local-target readiness before application body capture. All 70 automated tests and the exact shared executor's native PostgreSQL/CMS rehearsal pass. New manifest SHA-256: `5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec`. [Correction review and exact execution authorization](SUPABASE_EXPANDED_RECOVERY_CORRECTION_REVIEW.md). The original v1 manifest/failure evidence remain historical; no hosted retry, Auth activation or original retained-target modification occurred.
 
 

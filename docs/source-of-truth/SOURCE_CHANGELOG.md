@@ -15,3 +15,7 @@ Future amendments must name source/version, checksum, owner authority and effect
 ## 2026-10-10 — Original import
 
 Both owner-specified original binaries passed exact SHA-256 verification and were imported unchanged, preserving the archive's docs/source-of-truth/ relative paths. Active taxonomy was not replaced. Supabase Auth remains the owner-approved identity direction. Neither this import nor historical v1 provenance supersedes a later approved v1.1 package.
+
+## 2026-10-10 — Product implementation consumption
+
+The verified import was committed and pushed as `4718b514c2cc07f2554e3b38b4a9864e0505756b`; Git stored both exact original binary hashes and source-import CI passed. Admin implementation consumes Master Plan v0.3 sections 21–22 and 35–36 while following owner amendments. No original source byte, active taxonomy byte or source-authority priority changed. The manifest records the implementing report and corrected companion change-log filename. See `docs/ADMIN_CONTROL_PANEL_IMPLEMENTATION_RESULT.md` for implemented, isolated-tested and separately gated work.

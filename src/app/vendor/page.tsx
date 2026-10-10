@@ -20,8 +20,8 @@ export default async function Vendor() {
       <WorkspaceNavigation />
       <p className="mb-8">
         Access is granted per tool after payment and ownership review. Public
-        edits, verification, analytics, and promotion workflows are scheduled
-        for the next vendor stage.
+        edits and verification use independently reviewed requests. Paid
+        settlement and advanced analytics remain gated until integration.
       </p>
       <div className="flex flex-wrap gap-5 mb-8">
         <p>
@@ -41,6 +41,14 @@ export default async function Vendor() {
               <h2 className="text-2xl">{t.name}</h2>
               <p className="my-4">
                 {t.status} · {t.reviews} approved reviews
+              </p>
+              <p className="my-4">
+                <Link
+                  href={"/vendor/tools/" + encodeURIComponent(t.id)}
+                  className="text-link"
+                >
+                  Tool requests & history →
+                </Link>
               </p>
               {t.status === "published" && (
                 <Link href={`/tools/${t.slug}`} className="text-link mt-4">

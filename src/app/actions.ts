@@ -11,12 +11,9 @@ import {
   savedTools,
   stacks,
   reviews,
-  auditLogs,
-  claims,
-  orders,
   vendorAccess,
 } from "@/lib/db/schema";
-import { reviewInput, toolInput } from "@/lib/validation";
+import { reviewInput } from "@/lib/validation";
 import { safeReturnPath } from "@/lib/catalog/filter";
 import { rateLimit } from "@/lib/security";
 import { addOwnedStackTool, ownerPredicates } from "@/lib/db/owned-resources";
@@ -84,131 +81,28 @@ export async function submitReview(form: FormData) {
   revalidatePath("/account");
   redirect(`/tools/${tool.slug}?notice=review-pending`);
 }
+
 export async function createTool(form: FormData) {
-  const admin = await requireAdmin();
-  await rateLimit(admin.id, "admin-tool", 100);
-  const input = toolInput.parse(Object.fromEntries(form));
-  const id = randomUUID();
-  await db().transaction(async (tx) => {
-    await tx
-      .insert(tools)
-      .values({
-        id,
-        name: input.name,
-        slug: input.slug,
-        categoryId: input.categoryId,
-        status: "draft",
-        data: {
-          ...input,
-          id,
-          subcategoryId: null,
-          useCaseIds: [],
-          industries: [],
-          listingTypeId: "LST-01",
-          startingPrice: null,
-          freePlan: input.pricing === "free" ? true : null,
-          trial: null,
-          features: [],
-          integrations: [],
-          platforms: [],
-          pros: [],
-          limitations: [],
-          verification: "unverified",
-          verified: false,
-          lastVerified: null,
-          claimed: false,
-          rating: null,
-          reviewCount: 0,
-          demo: false,
-        },
-      });
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: admin.id,
-        action: "tool.created",
-        entityId: id,
-        detail: "Draft tool created",
-      });
-  });
-  revalidatePath("/admin");
-  redirect("/admin");
+  await requireAdmin();
+  const { createToolDraft } = await import("./admin/actions");
+  const result = await createToolDraft({}, form);
+  if (result.error) throw new Error(result.error);
 }
 export async function setToolStatus(form: FormData) {
-  const admin = await requireAdmin();
-  const id = z.string().min(1).max(100).parse(form.get("toolId"));
-  const status = z
-    .enum(["published", "archived", "draft"])
-    .parse(form.get("status"));
-  await db().transaction(async (tx) => {
-    await tx
-      .update(tools)
-      .set({ status, updatedAt: new Date() })
-      .where(eq(tools.id, id));
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: admin.id,
-        action: `tool.${status}`,
-        entityId: id,
-        detail: "Publication status updated",
-      });
-  });
-  revalidatePath("/tools");
-  revalidatePath("/admin");
+  await requireAdmin();
+  const { changeToolStatus } = await import("./admin/actions");
+  const result = await changeToolStatus({}, form);
+  if (result.error) throw new Error(result.error);
 }
 export async function moderateReview(form: FormData) {
-  const admin = await requireAdmin();
-  const id = z.string().uuid().parse(form.get("reviewId"));
-  const status = z.enum(["approved", "rejected"]).parse(form.get("status"));
-  const reason = z.string().trim().min(5).max(500).parse(form.get("reason"));
-  await db().transaction(async (tx) => {
-    await tx.update(reviews).set({ status }).where(eq(reviews.id, id));
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: admin.id,
-        action: `review.${status}`,
-        entityId: id,
-        detail: reason,
-      });
-  });
-  revalidatePath("/admin");
+  await requireAdmin();
+  const { reviewRating } = await import("./admin/actions");
+  const result = await reviewRating({}, form);
+  if (result.error) throw new Error(result.error);
 }
 export async function reviewClaim(form: FormData) {
-  const admin = await requireAdmin();
-  const id = z.string().uuid().parse(form.get("claimId"));
-  const decision = z.enum(["approved", "rejected"]).parse(form.get("decision"));
-  const reason = z.string().trim().min(5).max(500).parse(form.get("reason"));
-  await db().transaction(async (tx) => {
-    const [claim] = await tx
-      .select()
-      .from(claims)
-      .where(eq(claims.id, id))
-      .for("update");
-    const [order] = await tx
-      .select()
-      .from(orders)
-      .where(eq(orders.claimId, id));
-    if (!claim || claim.status !== "pending_review" || order?.status !== "paid")
-      throw new Error("A confirmed payment and pending claim are required.");
-    if (decision === "approved")
-      await tx
-        .insert(vendorAccess)
-        .values({ toolId: claim.toolId, userId: claim.userId });
-    await tx.update(claims).set({ status: decision }).where(eq(claims.id, id));
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: admin.id,
-        action: `claim.${decision}`,
-        entityId: id,
-        detail: reason,
-      });
-  });
-  revalidatePath("/admin");
+  await requireAdmin();
+  const { reviewOwnership } = await import("./admin/actions");
+  const result = await reviewOwnership({}, form);
+  if (result.error) throw new Error(result.error);
 }

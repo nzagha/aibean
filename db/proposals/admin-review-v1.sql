@@ -18,9 +18,11 @@ BEGIN
     OR NOT EXISTS (SELECT 1 FROM aibean_private.installations WHERE id='aibean-foundation-v1' AND sql_sha256='eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a')
     THEN RAISE EXCEPTION 'Unexpected security installation history'; END IF;
   IF (SELECT count(*) FROM drizzle.__drizzle_migrations) <> 2
-    OR NOT EXISTS (SELECT 1 FROM drizzle.__drizzle_migrations WHERE hash='b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468')
-    OR NOT EXISTS (SELECT 1 FROM drizzle.__drizzle_migrations WHERE hash='168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1')
+    OR NOT EXISTS (SELECT 1 FROM drizzle.__drizzle_migrations WHERE hash='b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468' AND created_at=1791247215670)
+    OR NOT EXISTS (SELECT 1 FROM drizzle.__drizzle_migrations WHERE hash='168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1' AND created_at=1791249181547)
     THEN RAISE EXCEPTION 'Unexpected baseline migration history'; END IF;
+  IF (SELECT count(*) FROM pg_tables WHERE schemaname='public' AND tablename IN ('taxonomy','users','tools','saved_tools','stacks','stack_tools','tool_reviews','vendor_access','claim_requests','orders','billing_webhook_receipts','audit_logs','rate_limits','featured_placements') AND rowsecurity) <> 14
+    THEN RAISE EXCEPTION 'Fourteen hardened baseline tables are required'; END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='aibean_runtime' AND NOT rolsuper AND NOT rolcanlogin AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolbypassrls AND NOT rolreplication)
     THEN RAISE EXCEPTION 'Restricted runtime role is required'; END IF;
   FOREACH object_name IN ARRAY ARRAY['public.creator_applications','public.creator_capability_requests','public.vendor_edit_requests','public.verification_requests','public.claim_disputes','aibean_private.admin_review_installations'] LOOP

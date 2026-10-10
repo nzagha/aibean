@@ -91,8 +91,12 @@ test("Review proposal stops on changed migration history and existing objects wi
       "SELECT set_config('aibean.review_install_sha256',$1,false)",
       [manifest.sqlSha256],
     );
-    const prior = await pg.query<{ id: number; hash: string }>(
-      "SELECT id,hash FROM drizzle.__drizzle_migrations ORDER BY id",
+    const prior = await pg.query<{
+      id: number;
+      hash: string;
+      created_at: number;
+    }>(
+      "SELECT id,hash,created_at FROM drizzle.__drizzle_migrations ORDER BY id",
     );
     await pg.exec(
       "UPDATE drizzle.__drizzle_migrations SET hash='changed' WHERE id=" +
@@ -114,6 +118,19 @@ test("Review proposal stops on changed migration history and existing objects wi
     await pg.query(
       "UPDATE drizzle.__drizzle_migrations SET hash=$1 WHERE id=$2",
       [prior.rows[0].hash, prior.rows[0].id],
+    );
+    await pg.exec(
+      "UPDATE drizzle.__drizzle_migrations SET created_at=0 WHERE id=" +
+        prior.rows[0].id,
+    );
+    await assert.rejects(
+      pg.exec(await reviewedSql()),
+      /Unexpected baseline migration history/,
+    );
+    await pg.exec("ROLLBACK");
+    await pg.query(
+      "UPDATE drizzle.__drizzle_migrations SET created_at=$1 WHERE id=$2",
+      [prior.rows[0].created_at, prior.rows[0].id],
     );
     await pg.exec("CREATE TABLE public.claim_disputes(id text)");
     await assert.rejects(

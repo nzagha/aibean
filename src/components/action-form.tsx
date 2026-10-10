@@ -1,8 +1,9 @@
 "use client";
 import { useActionState, type ReactNode } from "react";
 import { useFormStatus } from "react-dom";
+import Link from "next/link";
 
-export type ActionState = { error?: string; message?: string };
+export type ActionState = { error?: string; message?: string; href?: string };
 function Submit({ label }: { label: string }) {
   const { pending } = useFormStatus();
   return (
@@ -32,6 +33,13 @@ export function ActionForm({
       {state.message && (
         <p role="status" className="preview-notice my-4">
           {state.message}
+        </p>
+      )}
+      {state.href && (
+        <p className="my-4">
+          <Link className="text-link" href={state.href}>
+            Open saved draft →
+          </Link>
         </p>
       )}
       <Submit label={label} />
