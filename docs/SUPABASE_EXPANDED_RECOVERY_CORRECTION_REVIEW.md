@@ -42,6 +42,8 @@ Passing checks include:
 - The original synthetic encrypted backup remains intact through negative cases and successful recovery. The failed synthetic target is stopped, lacks a completion witness, rejects disposal, and remains untouched by a subsequent successful operation.
 - The passing target is stopped and disposed through the existing witness/path checks. The test owner subsequently removes its entire disposable synthetic fixture environment and temporary certificate. This does not remove the real retained failure or original encrypted backup.
 
+After successful validation, five earlier stopped synthetic harness environments and their uniquely marked temporary certificates were removed under exact temporary-root/marker/no-PID/no-reparse checks. The real retained target and original backup were outside that operation.
+
 The first sandbox invocation stopped at temporary ACL setup. Subsequent harness preparation corrections supplied a complete empty Auth metadata scaffold with correct operator ownership and a real operator backend. These were synthetic fixture issues; negative tests were tightened to require the intended failure rather than accepting any exception. Full workflow PASS was obtained and repeated against the final v2 manifest.
 
 Reproduce privately on Windows with native PostgreSQL 17.11, OpenSSL and PowerShell available:
@@ -57,7 +59,7 @@ This accepts binary paths only and creates generated loopback endpoints; it neve
 
 ## Quality and publication
 
-Lint, TypeScript, all **70 automated tests**, production build and runtime dependency audit pass; the audit reports zero vulnerabilities. Native PostgreSQL/CMS tests are local evidence and are not run by the Linux CI workflow. CI verifies lint/typecheck/tests/build/audit and the exact package checksums through automated tests. Windows sandbox canonicalization and audit network restrictions required the authorized local checks to run with normal operator permissions; they then passed. GitHub CI status is recorded in the correction evidence after publication.
+Lint, TypeScript, all **70 automated tests**, production build and runtime dependency audit pass; the audit reports zero vulnerabilities. Native PostgreSQL/CMS tests are local evidence and are not run by the Linux CI workflow. CI verifies lint/typecheck/tests/build/audit and the exact package checksums through automated tests. Windows sandbox canonicalization and audit network restrictions required the authorized local checks to run with normal operator permissions; they then passed. [GitHub Validate 38087029618](https://github.com/nzagha/aibean/actions/runs/38087029618) passed for implementation commit `129980a74d03ce6eb809d051996edd694516b08a`; the correction evidence records the verified result. A later documentation-only commit records CI without changing the frozen v2 package.
 
 Only executable changes, tests, versioned manifest and sanitized documentation/evidence are published. No temporary certificate, private key, plaintext/archive/CMS contents, private paths, credentials or personal records are part of the commit. Original SQL, Drizzle migrations, v1 manifest, application UI and active login configuration remain unchanged.
 
