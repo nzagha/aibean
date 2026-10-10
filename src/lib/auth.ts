@@ -15,6 +15,7 @@ import { resolveSupabaseUser } from "./supabase/identity";
 import { ownerPredicates } from "./db/owned-resources";
 import { ACCESS_COOKIE, RECOVERY_COOKIE } from "./supabase/auth-proof";
 import { verifiedBusinessAccount } from "./supabase/business-session";
+import { creatorPublishingAllowed } from "./admin/review-storage";
 export const authConfigured = () => authMode() === "clerk";
 export async function getIdentity(provision = true) {
   const mode = authMode();
@@ -65,7 +66,10 @@ export async function requireAdmin() {
 }
 export async function requireCreator() {
   const user = await requireUser("/creator");
-  if (!hasCapability(user, "creator"))
+  if (
+    !hasCapability(user, "creator") ||
+    !(await creatorPublishingAllowed(db(), user.id, user.isCreator))
+  )
     redirect("/account?notice=creator-required");
   return user;
 }

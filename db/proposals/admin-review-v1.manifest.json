@@ -1,0 +1,16 @@
+{
+  "packageId": "admin-review-v1",
+  "status": "proposal-not-approved-for-hosted-execution",
+  "sqlPath": "db/proposals/admin-review-v1.sql",
+  "sqlSha256": "b91caab17937c8db7b1d56b44b6c8a1d8262d8adecda995725d195e4e9acf935",
+  "tables": [
+    "creator_applications",
+    "creator_capability_requests",
+    "vendor_edit_requests",
+    "verification_requests",
+    "claim_disputes"
+  ],
+  "privateLedger": "aibean_private.admin_review_installations",
+  "capabilityFlagChanges": false,
+  "preservesBaselineMigrations": true
+}

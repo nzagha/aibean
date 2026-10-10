@@ -11,6 +11,14 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
 import { resolveSupabaseUser } from "../src/lib/supabase/identity";
+import {
+  setupAdminFixtures,
+  adminWorkflowContract,
+  adminReviewWorkflowContract,
+} from "../tests/fixtures/admin-workflow-contract";
+import { editAdminTool } from "../src/lib/admin/tool-workflows";
+import { readAdminTool } from "../src/lib/admin/queries";
+import { inspectReviewStorage } from "../src/lib/admin/review-storage";
 import { accountWorkflowContract } from "../tests/fixtures/account-workflow-contract";
 import {
   addOwnedStackTool,
@@ -972,6 +980,115 @@ async function main() {
     "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
     async () => {
       await accountWorkflowContract(drizzle(runtime));
+    },
+  );
+  let adminToolId = "";
+  await check(
+    "Admin lifecycle, rollback, moderation, paid ownership and pagination under native restricted runtime",
+    async () => {
+      await setupAdminFixtures(drizzle(operator));
+      adminToolId = await adminWorkflowContract(drizzle(runtime));
+    },
+  );
+  await check(
+    "Concurrent Admin edits accept exactly one current revision",
+    async () => {
+      const current = (await readAdminTool(
+        drizzle(runtime),
+        "admin-fixture",
+        adminToolId,
+      ))!;
+      const second = connect(source, "aibean_app_login", "admin-concurrency");
+      const input = {
+        ...current.data,
+        toolId: adminToolId,
+        revision: current.revision,
+        reason: "Synthetic concurrent editorial decision",
+      };
+      const results = await Promise.allSettled([
+        editAdminTool(drizzle(runtime), "admin-fixture", {
+          ...input,
+          name: "Concurrent synthetic A",
+        }),
+        editAdminTool(drizzle(second), "admin-fixture", {
+          ...input,
+          name: "Concurrent synthetic B",
+        }),
+      ]);
+      assert.equal(results.filter((r) => r.status === "fulfilled").length, 1);
+      assert.equal(results.filter((r) => r.status === "rejected").length, 1);
+      await second.end();
+    },
+  );
+  await check(
+    "Forward review proposal installs atomically; new RLS/grants and protected capability flags remain restricted",
+    async () => {
+      const reviewManifest = JSON.parse(
+        read("db/proposals/admin-review-v1.manifest.json"),
+      );
+      const reviewSql = read(reviewManifest.sqlPath);
+      assert.equal(sha(reviewSql), reviewManifest.sqlSha256);
+      const historyBefore = await operator.unsafe(
+        "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+      );
+      await operator.unsafe(
+        "SELECT set_config('aibean.review_install_sha256',$1,false)",
+        [reviewManifest.sqlSha256],
+      );
+      const baselineMetadata = () =>
+        operator.unsafe(
+          "SELECT c.relname,c.relrowsecurity,c.relowner,c.relacl::text FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname IN ('taxonomy','users','tools','saved_tools','stacks','stack_tools','tool_reviews','vendor_access','claim_requests','orders','billing_webhook_receipts','audit_logs','rate_limits','featured_placements','TestUsers') ORDER BY c.relname",
+        );
+      const beforeMetadata = await baselineMetadata();
+      const sourceData = () =>
+        operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        );
+      const existingTestUsers = await sourceData();
+      await operator.unsafe(reviewSql);
+      assert.deepEqual(await baselineMetadata(), beforeMetadata);
+      assert.deepEqual(await sourceData(), existingTestUsers);
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        historyBefore,
+      );
+      await adminReviewWorkflowContract(drizzle(runtime), adminToolId);
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const browser = connect(source, role);
+        for (const table of reviewManifest.tables) {
+          await denied(browser, "SELECT * FROM public." + table, "42501");
+        }
+        await browser.end();
+      }
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM pg_tables WHERE schemaname='public' AND tablename IN ('creator_applications','creator_capability_requests','vendor_edit_requests','verification_requests','claim_disputes') AND rowsecurity",
+          )
+        )[0].n,
+        5,
+      );
+      await operator.unsafe(
+        "GRANT SELECT ON public.creator_applications TO anon",
+      );
+      assert.equal(await inspectReviewStorage(drizzle(runtime)), false);
+      await operator.unsafe(
+        "REVOKE SELECT ON public.creator_applications FROM anon",
+      );
+      assert.equal(await inspectReviewStorage(drizzle(runtime)), true);
+      await denied(
+        runtime,
+        "UPDATE public.creator_capability_requests SET status='applied'",
+        "42501",
+      );
+      await denied(
+        runtime,
+        "DELETE FROM public.creator_capability_requests",
+        "42501",
+      );
+      await denied(runtime, "UPDATE public.users SET is_creator=true", "42501");
     },
   );
   const evidence = {
