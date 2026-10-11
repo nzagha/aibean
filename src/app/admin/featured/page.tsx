@@ -1,6 +1,11 @@
 import { requireAdmin } from "@/lib/auth";
 import { FeaturedAdmin } from "@/components/featured-admin";
-export default async function Featured() {
+import type { AdminParams } from "@/lib/admin/queries";
+export default async function Featured({
+  searchParams,
+}: {
+  searchParams: Promise<AdminParams>;
+}) {
   await requireAdmin();
-  return <FeaturedAdmin />;
+  return <FeaturedAdmin params={await searchParams} />;
 }

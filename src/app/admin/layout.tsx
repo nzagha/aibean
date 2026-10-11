@@ -18,6 +18,10 @@ const links = [
   ["/admin/edits", "Vendor edit requests"],
   ["/admin/verification", "Verification requests"],
   ["/admin/featured", "Featured placements"],
+  ["/admin/commerce/submissions", "Tool submissions"],
+  ["/admin/commerce/payments", "Sandbox payments"],
+  ["/admin/commerce/subscriptions", "Subscriptions"],
+  ["/admin/commerce/pricing", "Fees & plans"],
   ["/admin/taxonomy", "Taxonomy provenance"],
   ["/admin/audit", "Audit history"],
 ];

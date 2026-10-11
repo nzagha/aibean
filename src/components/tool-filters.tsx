@@ -14,7 +14,13 @@ import {
   activeUseCases,
 } from "@/lib/catalog/taxonomy";
 import { verificationStates, type CatalogFilters } from "@/lib/catalog/types";
-export function ToolFilters({ initial }: { initial: CatalogFilters }) {
+export function ToolFilters({
+  initial,
+  labels = {},
+}: {
+  initial: CatalogFilters;
+  labels?: Record<string, string>;
+}) {
   const [category, setCategory] = useState(initial.category || "");
   const [subcategory, setSubcategory] = useState(initial.subcategory || "");
   const router = useRouter();
@@ -65,7 +71,7 @@ export function ToolFilters({ initial }: { initial: CatalogFilters }) {
         <option value="">All</option>
         {options.map((o) => (
           <option key={o.id} value={o.id}>
-            {o.name}
+            {labels[o.id] || o.name}
           </option>
         ))}
       </select>
@@ -108,7 +114,7 @@ export function ToolFilters({ initial }: { initial: CatalogFilters }) {
           <option value="">All categories</option>
           {taxonomy.categories.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.name}
+              {labels[c.id] || c.name}
             </option>
           ))}
         </select>
@@ -126,7 +132,7 @@ export function ToolFilters({ initial }: { initial: CatalogFilters }) {
             .find((c) => c.id === category)
             ?.subcategories.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.name}
+                {labels[c.id] || c.name}
               </option>
             ))}
         </select>
@@ -189,6 +195,7 @@ export function ToolFilters({ initial }: { initial: CatalogFilters }) {
         ))}
       </details>
       {select("sort", "Sort by", [
+        { id: "rank", name: "Organic relevance" },
         { id: "name", name: "Name A–Z" },
         { id: "rating", name: "Highest rated" },
         { id: "freshness", name: "Recently verified" },

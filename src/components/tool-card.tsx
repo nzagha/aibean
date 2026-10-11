@@ -33,7 +33,7 @@ export function ToolCard({ tool }: { tool: Tool }) {
         </form>
       </div>
       <p className="mt-5 text-xs text-muted">
-        {categoryById(tool.categoryId)?.name}
+        {tool.categoryLabel || categoryById(tool.categoryId)?.name}
       </p>
       <h3 className="mt-2">
         <PreviewLink preview={preview}>{tool.name}</PreviewLink>

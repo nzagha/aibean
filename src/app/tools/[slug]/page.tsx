@@ -75,13 +75,33 @@ export default async function ToolPage({
       )}
       <div className="tool-detail-grid">
         <div>
-          <span className="eyebrow">{categoryById(t.categoryId)?.name}</span>
+          <span className="eyebrow">
+            {t.categoryLabel || categoryById(t.categoryId)?.name}
+          </span>
           <h1 className="my-5 flex items-center gap-4 font-display text-5xl font-bold">
             <ToolLogo tool={t} />
             <span>{t.name}</span>
           </h1>
           <p className="mb-6 max-w-2xl text-lg">{t.description}</p>
           <TrustStatus tool={t} />
+          {t.organicRanking && (
+            <details className="mt-4 text-sm">
+              <summary className="cursor-pointer">
+                Why this organic score? · {t.organicRanking.score}
+              </summary>
+              <p className="my-3">
+                General discovery · Version {t.organicRanking.version}. Payments
+                and sponsorship are excluded.
+              </p>
+              <ul>
+                {t.organicRanking.explanation.map((item) => (
+                  <li key={item.factor}>
+                    {item.factor}: {item.contribution.toFixed(2)}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
           <p className="mt-3 text-sm">
             Last verified: {t.lastVerified || "Not yet verified"} ·{" "}
             {t.reviewCount

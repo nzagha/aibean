@@ -25,6 +25,18 @@ import {
 } from "@/lib/admin/review-workflows";
 import { reviewWorkflowsAvailable } from "@/lib/admin/review-storage";
 import type { ActionState } from "@/components/action-form";
+import {
+  saveProduct,
+  reviewToolSubmission,
+} from "@/lib/admin/commerce-workflows";
+import { commerceAvailable } from "@/lib/admin/commerce-storage";
+import { stripeConfigured } from "@/lib/billing";
+import { sandboxSubscriptionProvider } from "@/lib/sandbox-subscriptions";
+import { requestSandboxCancellation } from "@/lib/admin/subscription-management";
+import {
+  editTaxonomy,
+  updateOrganicRanking,
+} from "@/lib/admin/catalog-controls";
 async function command(
   work: (actorId: string) => Promise<ActionState>,
   requiresReview = false,
@@ -163,4 +175,87 @@ export async function resolveDispute(_state: ActionState, form: FormData) {
     await resolveClaimDispute(db(), id, Object.fromEntries(form));
     return { message: "Ownership dispute resolved and audited." };
   }, true);
+}
+export async function saveTaxonomy(_state: ActionState, form: FormData) {
+  return command(async (id) => {
+    await editTaxonomy(db(), id, Object.fromEntries(form));
+    return {
+      message:
+        "Display metadata saved. Stable IDs, slugs, source and relationships preserved.",
+    };
+  });
+}
+export async function configureProduct(_state: ActionState, form: FormData) {
+  return command(async (id) => {
+    if (!(await commerceAvailable(db())))
+      return { error: "Commerce storage is not installed and enabled." };
+    await saveProduct(db(), id, {
+      ...Object.fromEntries(form),
+      revision: form.get("revision") || undefined,
+      active: form.get("active") === "on",
+    });
+    return {
+      message:
+        "Sandbox price saved. Existing orders keep their original amount.",
+    };
+  });
+}
+export async function cancelSandboxSubscription(
+  _state: ActionState,
+  form: FormData,
+) {
+  return command(async (id) => {
+    if (!(await commerceAvailable(db())) || !stripeConfigured())
+      return { error: "Reviewed sandbox commerce must be configured." };
+    await requestSandboxCancellation(
+      db(),
+      id,
+      Object.fromEntries(form),
+      "admin",
+      sandboxSubscriptionProvider(),
+    );
+    return {
+      message:
+        "Sandbox cancellation confirmed for the end of the billing period.",
+    };
+  });
+}
+export async function reviewSubmission(_state: ActionState, form: FormData) {
+  return command(async (id) => {
+    if (!(await commerceAvailable(db())))
+      return { error: "Commerce storage is not installed and enabled." };
+    const toolId = await reviewToolSubmission(
+      db(),
+      id,
+      Object.fromEntries(form),
+    );
+    return {
+      message: toolId
+        ? "Paid submission approved as a private draft. Publication and ownership require separate review."
+        : "Submission rejected and audited.",
+      ...(toolId ? { href: "/admin/tools/" + encodeURIComponent(toolId) } : {}),
+    };
+  });
+}
+export async function saveRanking(_state: ActionState, form: FormData) {
+  return command(async (id) => {
+    const result = await updateOrganicRanking(db(), id, {
+      ...Object.fromEntries(form),
+      weights: Object.fromEntries(
+        [
+          "editorial",
+          "context",
+          "verification",
+          "completeness",
+          "freshness",
+          "reviews",
+          "popularity",
+          "engagement",
+        ].map((key) => [key, form.get("weight_" + key)]),
+      ),
+    });
+    return {
+      message: `Organic score ${result.score} saved with its explanation and audit trail.`,
+    };
+  });
 }

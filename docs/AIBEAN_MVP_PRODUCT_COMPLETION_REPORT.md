@@ -1,5 +1,7 @@
 # aiBean MVP implementation status — 10 October 2026
 
+**Admin operations increment — 11 October 2026:** Safe taxonomy metadata, versioned organic ranking/explanations, Last Verified continuity, dashboard activity, paid Tool submission/edit/verification sandbox services, configurable prices, subscription lifecycle/cancellation and searchable commercial/featured administration are implemented. User billing/submission and Vendor checkout interfaces extend those workflows. Lint/typecheck, 88 tests, production build, 25 native PostgreSQL scenarios and runtime audit pass. [Result](ADMIN_OPERATIONS_IMPLEMENTATION_RESULT.md), [uninstalled forward migration](ADMIN_OPERATIONS_DATABASE_PROPOSAL.md), [sanitized evidence](evidence/admin-operations-native-validation.json). Hosted installation, operator capability activation, real provider/browser journeys and full Creator content/MVP remain incomplete. No hosted Auth/recovery/schema/data or private configuration action occurred.
+
 Status: verified source import and initial Admin Tool/trust/moderation operations delivered. All four Control Panels have implementation increments; the full MVP and hosted Supabase Auth are not operationally verified or complete.
 
 ## Current Admin milestone

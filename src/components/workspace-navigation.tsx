@@ -15,6 +15,16 @@ export async function WorkspaceNavigation() {
           Become a Creator →
         </Link>
       )}
+      {links.some((link) => link.href === "/account") && (
+        <>
+          <Link className="text-link" href="/account/billing">
+            Billing →
+          </Link>
+          <Link className="text-link" href="/account/submissions">
+            Tool submissions →
+          </Link>
+        </>
+      )}
       {!links.some((link) => link.href === "/vendor") && (
         <Link href="/for-vendors#get-started" className="text-link">
           Get Started as a Vendor →

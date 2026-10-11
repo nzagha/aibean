@@ -99,10 +99,10 @@ export default async function Queue({
           )}
           {["edits", "verification"].includes(kind) && (
             <p className="preview-notice">
-              Paid settlement is not yet integrated. Edits cannot be approved.
-              Only verification requested under an explicitly configured
-              zero-price promotion can be approved; the independent aiBean
-              Verified checklist remains separate.
+              Approval requires reconciled sandbox payment or an approved
+              zero-price verification promotion. The current Tool owner and
+              unchanged proposal are rechecked before applying a decision. The
+              aiBean Verified checklist remains separate.
             </p>
           )}
           {!rows.length && <p className="my-6">No items match this queue.</p>}
@@ -147,7 +147,8 @@ export default async function Queue({
               action = kind === "edits" ? reviewEdit : reviewVerification;
               canDecide = row.status === "pending";
               options =
-                kind === "verification" && row.payment_state === "promo_zero"
+                row.settled ||
+                (kind === "verification" && row.payment_state === "promo_zero")
                   ? ["approved", "rejected"]
                   : ["rejected"];
             }
@@ -164,6 +165,7 @@ export default async function Queue({
                 <p className="text-sm mt-3">
                   {row.status}
                   {row.payment_state ? " · Payment: " + row.payment_state : ""}
+                  {row.settled ? " · Reconciled sandbox payment" : ""}
                 </p>
                 {row.rating != null && (
                   <p className="my-3">Rating: {row.rating} / 5</p>

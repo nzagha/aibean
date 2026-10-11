@@ -4,7 +4,10 @@ import { db } from "@/lib/db";
 import { readAdminOverview } from "@/lib/admin/queries";
 export default async function Admin() {
   const admin = await requireAdmin();
-  const { counts, reviewReady } = await readAdminOverview(db(), admin.id);
+  const { counts, reviewReady, recent } = await readAdminOverview(
+    db(),
+    admin.id,
+  );
   return (
     <>
       <h2 className="text-2xl mb-6">Operations overview</h2>
@@ -40,6 +43,21 @@ export default async function Admin() {
           </p>
         </section>
       </div>
+      <section className="placeholder-card mt-8">
+        <h2 className="text-2xl">Recent activity</h2>
+        {!recent.length && <p className="my-5">No recorded operations yet.</p>}
+        {recent.map((item) => (
+          <div key={item.id} className="account-row">
+            <Link
+              className="text-link"
+              href={"/admin/audit?entity=" + encodeURIComponent(item.entity_id)}
+            >
+              {item.action}
+            </Link>
+            <p className="text-sm mt-2">{item.created_at}</p>
+          </div>
+        ))}
+      </section>
     </>
   );
 }

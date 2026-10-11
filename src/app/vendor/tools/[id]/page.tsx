@@ -4,6 +4,8 @@ import { db } from "@/lib/db";
 import { reviewWorkflowsAvailable } from "@/lib/admin/review-storage";
 import { readOwnedRequests } from "@/lib/admin/request-queries";
 import { ActionForm } from "@/components/action-form";
+import { commerceAvailable } from "@/lib/admin/commerce-storage";
+import { checkout } from "@/app/commerce/actions";
 import {
   requestVendorEdit,
   requestVerification,
@@ -35,6 +37,7 @@ export default async function Requests({
       </section>
     );
   const { tool, requests } = await readOwnedRequests(db(), user.id, id);
+  const commercialReady = await commerceAvailable(db());
   const keys = (
     <>
       <input type="hidden" name="toolId" value={id} />
@@ -45,10 +48,9 @@ export default async function Requests({
     <div className="container py-16">
       <h1 className="font-display text-4xl">Requests for {tool.name}</h1>
       <p className="preview-notice my-6">
-        Proposals preserve the current public listing. Paid edit/verification
-        approval awaits verified settlement; only an explicitly configured
-        zero-price verification promotion can proceed now. A request or payment
-        never awards aiBean Verified.
+        Proposals preserve the current public listing. Approval requires
+        reconciled sandbox payment or a configured zero-price verification
+        promotion. A request or payment never awards aiBean Verified.
       </p>
       <div className="grid gap-8 lg:grid-cols-2">
         <section className="placeholder-card">
@@ -160,6 +162,12 @@ export default async function Requests({
               Payment: {r.payment_state} · {r.created_at}
             </p>
             {r.review_reason && <p>{r.review_reason}</p>}
+            {commercialReady && r.status === "pending" && (
+              <ActionForm action={checkout} label="Prepare request checkout">
+                <input type="hidden" name="kind" value={r.kind} />
+                <input type="hidden" name="subjectId" value={r.id} />
+              </ActionForm>
+            )}
           </article>
         ))}
       </section>

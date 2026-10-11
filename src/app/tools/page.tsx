@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getTools, demoMode } from "@/lib/catalog/repository";
+import {
+  getTools,
+  demoMode,
+  getTaxonomyLabels,
+} from "@/lib/catalog/repository";
 import { filterTools } from "@/lib/catalog/filter";
 import { ToolCard } from "@/components/tool-card";
 import { ToolFilters } from "@/components/tool-filters";
@@ -19,6 +23,7 @@ export default async function ToolsPage({
       .map(([k, v]) => [k, (v as string).slice(0, 120)]),
   );
   const tools = filterTools(await getTools(), filters);
+  const labels = await getTaxonomyLabels();
   return (
     <div className="container pb-24">
       <div className="page-intro">
@@ -45,7 +50,11 @@ export default async function ToolsPage({
         </p>
       )}
       <div className="catalog-layout">
-        <ToolFilters key={JSON.stringify(filters)} initial={filters} />
+        <ToolFilters
+          key={JSON.stringify(filters)}
+          initial={filters}
+          labels={labels}
+        />
         <section aria-label="Tool results">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <h2 className="text-2xl">
