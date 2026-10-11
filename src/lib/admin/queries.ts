@@ -3,6 +3,7 @@ import type { IdentityDatabase } from "../supabase/identity";
 import { checkAdmin, resultRows, type AdminToolRecord } from "./tool-workflows";
 import { reviewWorkflowsAvailable } from "./review-storage";
 import { workspaceFilters } from "../workspace-filters";
+import { commerceAvailable } from "./commerce-storage";
 export type AdminParams = {
   q?: string;
   status?: string;
@@ -36,6 +37,7 @@ export type AdminRow = Record<string, unknown> & {
   user_id?: string;
   desired_state?: string;
   decision?: string;
+  settled?: boolean;
 };
 export const reviewQueues = [
   "reviews",
@@ -143,7 +145,33 @@ export async function readAdminOverview(
         sql`SELECT status||' Tools' AS label,count(*)::int AS value FROM public.tools GROUP BY status UNION ALL SELECT 'Pending reviews',count(*)::int FROM public.tool_reviews WHERE status='pending' UNION ALL SELECT 'Paid claims awaiting review',count(*)::int FROM public.claim_requests c JOIN public.orders o ON o.claim_id=c.id AND o.user_id=c.user_id WHERE c.status='pending_review' AND o.status='paid'`,
       ),
     );
-    return { counts, reviewReady: await reviewWorkflowsAvailable(tx) };
+    const reviewReady = await reviewWorkflowsAvailable(tx);
+    if (reviewReady)
+      counts.push(
+        ...resultRows<{ label: string; value: number }>(
+          await tx.execute(
+            sql`SELECT 'Creator applications' AS label,count(*)::int AS value FROM public.creator_applications WHERE status='pending' UNION ALL SELECT 'Vendor edits',count(*)::int FROM public.vendor_edit_requests WHERE status='pending' UNION ALL SELECT 'Verification requests',count(*)::int FROM public.verification_requests WHERE status='pending' UNION ALL SELECT 'Open disputes',count(*)::int FROM public.claim_disputes WHERE status='open'`,
+          ),
+        ),
+      );
+    counts.push(
+      ...resultRows<{ label: string; value: number }>(
+        await tx.execute(
+          sql`SELECT 'Featured awaiting review' AS label,count(*)::int AS value FROM public.featured_placements WHERE status='pending_review'`,
+        ),
+      ),
+    );
+    const recent = resultRows<{
+      id: string;
+      action: string;
+      entity_id: string;
+      created_at: string;
+    }>(
+      await tx.execute(
+        sql`SELECT id,action,entity_id,created_at::text FROM public.audit_logs ORDER BY public.audit_logs.created_at DESC,id LIMIT 10`,
+      ),
+    );
+    return { counts, reviewReady, recent };
   });
 }
 export async function readAdminQueue(
@@ -161,6 +189,8 @@ export async function readAdminQueue(
   return database.transaction(async (tx) => {
     await checkAdmin(tx, actorId);
     const ready = await reviewWorkflowsAvailable(tx);
+    const commercialReady =
+      ["edits", "verification"].includes(kind) && (await commerceAvailable(tx));
     if (!["reviews", "claims"].includes(kind) && !ready)
       return { ready: false, rows: [] as AdminRow[], total: 0, filters: f };
     const table = sql.identifier(tables[kind]);
@@ -181,7 +211,7 @@ export async function readAdminQueue(
           : sql`r.updated_at::text`;
     const rows = resultRows<AdminRow>(
       await tx.execute(
-        sql`SELECT r.*, ${revision} AS revision ${toolJoin ? sql`,t.name AS tool_name` : sql``} ${kind === "claims" ? sql`,o.status AS order_status, o.user_id=r.user_id AS order_matches` : sql``} ${from} ${where} ORDER BY r.created_at DESC,r.id LIMIT ${f.size} OFFSET ${(f.page - 1) * f.size}`,
+        sql`SELECT r.*, ${revision} AS revision ${toolJoin ? sql`,t.name AS tool_name` : sql``} ${kind === "claims" ? sql`,o.status AS order_status, o.user_id=r.user_id AS order_matches` : sql``} ${commercialReady ? sql`,EXISTS(SELECT 1 FROM public.billing_transactions p WHERE p.kind=${kind === "edits" ? "edit" : "verification"} AND p.subject_id=r.id AND p.user_id=r.user_id AND p.status='paid') AS settled` : sql``} ${from} ${where} ORDER BY r.created_at DESC,r.id LIMIT ${f.size} OFFSET ${(f.page - 1) * f.size}`,
       ),
     );
     const [total] = resultRows<{ value: number }>(

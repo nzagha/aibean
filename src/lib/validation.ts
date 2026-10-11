@@ -5,10 +5,14 @@ export const safeWebUrl = z
   .string()
   .url()
   .refine((s) => {
-    const u = new URL(s);
-    return (
-      ["https:", "http:"].includes(u.protocol) && !u.username && !u.password
-    );
+    try {
+      const u = new URL(s);
+      return (
+        ["https:", "http:"].includes(u.protocol) && !u.username && !u.password
+      );
+    } catch {
+      return false;
+    }
   }, "Use a public http or https URL without credentials.");
 export const reviewInput = z.object({
   toolId: z.string().min(1).max(100),

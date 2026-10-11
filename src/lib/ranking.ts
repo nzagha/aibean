@@ -12,17 +12,37 @@ export type RankingInputs = Record<keyof typeof weights, number> & {
   risk: number;
   adjustment: number;
 };
-export function calculateToolScore(input: RankingInputs) {
-  const explanation = Object.entries(weights).map(([factor, weight]) => ({
-    factor,
-    contribution:
-      Math.max(0, Math.min(100, input[factor as keyof typeof weights])) *
-      weight,
-  }));
+export type RankingWeights = Record<keyof typeof weights, number>;
+export function calculateToolScore(
+  input: RankingInputs,
+  configuration: { weights: RankingWeights; version: string } = {
+    weights,
+    version: "0.1",
+  },
+) {
+  const explanation = Object.entries(configuration.weights).map(
+    ([factor, weight]) => ({
+      factor,
+      contribution:
+        Math.max(0, Math.min(100, input[factor as keyof typeof weights])) *
+        weight,
+    }),
+  );
   const score =
     explanation.reduce((n, r) => n + r.contribution, 0) -
     Math.max(0, input.risk) +
     Math.max(-20, Math.min(20, input.adjustment));
-  return { score: Math.round(score * 100) / 100, version: "0.1", explanation };
+  explanation.push(
+    { factor: "risk", contribution: -Math.max(0, input.risk) },
+    {
+      factor: "manual adjustment",
+      contribution: Math.max(-20, Math.min(20, input.adjustment)),
+    },
+  );
+  return {
+    score: Math.round(score * 100) / 100,
+    version: configuration.version,
+    explanation,
+  };
 }
 // Claimed/paid/subscription/sponsorship fields are deliberately not accepted by the scorer.

@@ -19,6 +19,17 @@ import {
 import { editAdminTool } from "../src/lib/admin/tool-workflows";
 import { readAdminTool } from "../src/lib/admin/queries";
 import { inspectReviewStorage } from "../src/lib/admin/review-storage";
+import {
+  catalogControlsContract,
+  commerceContract,
+} from "../tests/fixtures/admin-operations-contract";
+import { inspectCommerceStorage } from "../src/lib/admin/commerce-storage";
+import {
+  preparePayment,
+  saveProduct,
+} from "../src/lib/admin/commerce-workflows";
+import { resultRows } from "../src/lib/admin/tool-workflows";
+import { sql } from "drizzle-orm";
 import { accountWorkflowContract } from "../tests/fixtures/account-workflow-contract";
 import {
   addOwnedStackTool,
@@ -1089,6 +1100,114 @@ async function main() {
         "42501",
       );
       await denied(runtime, "UPDATE public.users SET is_creator=true", "42501");
+    },
+  );
+  await check(
+    "Safe taxonomy metadata, explainable organic ranking and Last Verified continuity under native restricted runtime",
+    async () => {
+      await catalogControlsContract(drizzle(runtime));
+    },
+  );
+  await check(
+    "Forward commercial migration; paid submission/edit/verification and subscription lifecycle, isolation, rollback and RLS",
+    async () => {
+      const packageManifest = JSON.parse(
+        read("db/proposals/admin-operations-v2/manifest.json"),
+      );
+      const packageSql = read(packageManifest.sqlPath);
+      assert.equal(sha(packageSql), packageManifest.sqlSha256);
+      const histories = await operator.unsafe(
+        "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+      );
+      const existing = await operator.unsafe(
+        'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+      );
+      await operator.unsafe(
+        "SELECT set_config('aibean.operations_install_sha256',$1,false)",
+        [packageManifest.sqlSha256],
+      );
+      await operator.unsafe(packageSql);
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        histories,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        existing,
+      );
+      await commerceContract(drizzle(runtime));
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const browser = connect(source, role);
+        for (const table of packageManifest.tables)
+          await denied(browser, "SELECT * FROM public." + table, "42501");
+        await browser.end();
+      }
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM pg_tables WHERE schemaname='public' AND tablename IN ('billing_products','billing_transactions','tool_submissions','commerce_subscriptions') AND rowsecurity",
+          )
+        )[0].n,
+        4,
+      );
+      await operator.unsafe(
+        "GRANT SELECT(name) ON public.billing_products TO authenticated",
+      );
+      assert.equal(await inspectCommerceStorage(drizzle(runtime)), false);
+      await operator.unsafe(
+        "REVOKE SELECT(name) ON public.billing_products FROM authenticated",
+      );
+      assert.equal(await inspectCommerceStorage(drizzle(runtime)), true);
+    },
+  );
+  await check(
+    "Concurrent sandbox checkout preparation deduplicates orders; concurrent pricing edits accept one unchanged revision",
+    async () => {
+      const second = connect(
+        source,
+        "aibean_app_login",
+        "commerce-concurrency",
+      );
+      const a = drizzle(runtime),
+        b = drizzle(second);
+      const outcomes = await Promise.all([
+        preparePayment(
+          a,
+          "admin-vendor-a",
+          "vendor_subscription",
+          "admin-vendor-a",
+        ),
+        preparePayment(
+          b,
+          "admin-vendor-a",
+          "vendor_subscription",
+          "admin-vendor-a",
+        ),
+      ]);
+      assert.equal(outcomes[0].id, outcomes[1].id);
+      const [price] = resultRows<{ revision: string }>(
+        await a.execute(
+          sql`SELECT updated_at::text AS revision FROM public.billing_products WHERE id='submission'`,
+        ),
+      );
+      const input = {
+        kind: "submission",
+        name: "Concurrent sandbox price",
+        active: true,
+        revision: price.revision,
+        reason: "Synthetic concurrent fee update",
+      };
+      const updates = await Promise.allSettled([
+        saveProduct(a, "admin-fixture", { ...input, amount: 3000 }),
+        saveProduct(b, "admin-fixture", { ...input, amount: 4000 }),
+      ]);
+      assert.equal(updates.filter((r) => r.status === "fulfilled").length, 1);
+      assert.equal(updates.filter((r) => r.status === "rejected").length, 1);
+      await second.end();
     },
   );
   const evidence = {

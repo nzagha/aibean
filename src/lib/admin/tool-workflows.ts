@@ -207,8 +207,19 @@ export async function updateAdminTrust(
       ...tool.data,
       verification: input.verification,
       verified: input.verified,
-      lastVerified: checked ? new Date(input.checkedOn).toISOString() : null,
+      // A stale/deprecated state does not erase the last successful check.
+      lastVerified: checked
+        ? new Date(input.checkedOn).toISOString()
+        : tool.data.lastVerified,
     };
+    if (
+      checked &&
+      tool.data.lastVerified &&
+      Date.parse(data.lastVerified!) < Date.parse(tool.data.lastVerified)
+    )
+      throw new AdminWorkflowError(
+        "The check date cannot move Last Verified backwards.",
+      );
     await writeToolData(tx, tool, data);
     await audit(tx, actorId, "tool.trust-reviewed", tool.id, {
       from: tool.data.verification,

@@ -14,6 +14,7 @@ export type Tool = {
   description: string;
   website: string | null;
   categoryId: string;
+  categoryLabel?: string;
   subcategoryId: string | null;
   useCaseIds: string[];
   industries: {
@@ -40,6 +41,14 @@ export type Tool = {
   rating: number | null;
   reviewCount: number;
   demo: boolean;
+  organicRanking?: {
+    score: number;
+    version: string;
+    explanation: { factor: string; contribution: number }[];
+    factors: import("../ranking").RankingInputs;
+    weights: Record<string, number>;
+    reviewedAt: string;
+  };
 };
 export type CatalogFilters = {
   q?: string;

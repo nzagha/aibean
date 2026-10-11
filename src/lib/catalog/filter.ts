@@ -1,4 +1,29 @@
 import type { CatalogFilters, Tool } from "./types";
+import { calculateToolScore, type RankingWeights } from "../ranking";
+export function explainContextRank(tool: Tool, filters: CatalogFilters) {
+  const rank = tool.organicRanking;
+  if (!rank) return { score: 0, version: "unreviewed", explanation: [] };
+  const fit = filters.industry
+    ? (tool.industries.find((item) => item.id === filters.industry)
+        ?.relevance ?? 0)
+    : filters.subcategory
+      ? tool.subcategoryId === filters.subcategory
+        ? 100
+        : 0
+      : filters.useCase
+        ? tool.useCaseIds.includes(filters.useCase)
+          ? 100
+          : 0
+        : filters.category
+          ? tool.categoryId === filters.category
+            ? 100
+            : 0
+          : rank.factors.context;
+  return calculateToolScore(
+    { ...rank.factors, context: fit },
+    { weights: rank.weights as RankingWeights, version: rank.version },
+  );
+}
 export function filterTools(
   tools: Tool[],
   filters: CatalogFilters,
@@ -41,7 +66,11 @@ export function filterTools(
         ? (Date.parse(b.lastVerified || "") || 0) -
             (Date.parse(a.lastVerified || "") || 0) ||
           a.name.localeCompare(b.name)
-        : a.name.localeCompare(b.name),
+        : filters.sort === "rank"
+          ? explainContextRank(b, filters).score -
+              explainContextRank(a, filters).score ||
+            a.name.localeCompare(b.name)
+          : a.name.localeCompare(b.name),
   );
 }
 export function updateComparison(ids: string[], id: string): string[] {

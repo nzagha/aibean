@@ -1,0 +1,12 @@
+{
+  "packageId": "admin-operations-v2",
+  "status": "local-proposal-not-hosted-installed",
+  "sqlPath": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "requires": {"packageId":"admin-review-v1","sqlSha256":"5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca"},
+  "tables": ["billing_products","billing_transactions","tool_submissions","commerce_subscriptions"],
+  "privateLedger": "aibean_private.admin_operations_installations",
+  "preserves": ["both original Drizzle ledger entries", "baseline schemas/grants", "TestUsers", "Auth and identity mappings", "review-v1 package"],
+  "seeds": false,
+  "hostedApprovalRequired": true
+}

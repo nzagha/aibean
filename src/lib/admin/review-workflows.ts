@@ -13,6 +13,7 @@ import {
   reviewDecisionInput,
   disputeInput,
   disputeDecisionInput,
+  vendorEditInput,
 } from "./review-contracts";
 import {
   resultRows,
@@ -22,6 +23,7 @@ import {
   audit,
 } from "./tool-workflows";
 import { requireReviewStorage } from "./review-storage";
+import { requireSettledRequest } from "./commerce-workflows";
 
 async function checkOwner(
   tx: IdentityTransaction,
@@ -228,20 +230,25 @@ export async function reviewVendorRequest(
       );
     if (input.decision === "approved") {
       if (kind === "edit" || item.payment_state !== "promo_zero")
-        throw new AdminWorkflowError(
-          "Paid edit/verification settlement is not integrated. Only a server-configured zero-price verification promotion can be approved.",
-        );
+        await requireSettledRequest(tx, kind, input.id, item.user_id);
       await checkOwner(tx, item.user_id, tool.id);
       if (item.base_revision !== tool.revision)
         throw new AdminWorkflowError(
           "Canonical Tool content changed after this request. Reject it and request a fresh proposal.",
         );
-      verificationRequestInput.shape.evidence.parse(item.evidence);
-      await writeToolData(tx, tool, {
-        ...tool.data,
-        verification: "human_reviewed",
-        lastVerified: new Date().toISOString(),
-      });
+      if (kind === "edit")
+        await writeToolData(tx, tool, {
+          ...tool.data,
+          ...vendorEditInput.parse(item.proposed),
+        });
+      else {
+        verificationRequestInput.shape.evidence.parse(item.evidence);
+        await writeToolData(tx, tool, {
+          ...tool.data,
+          verification: "human_reviewed",
+          lastVerified: new Date().toISOString(),
+        });
+      }
     }
     await tx.execute(
       sql`UPDATE public.${table} SET status=${input.decision},reviewer_id=${actorId},review_reason=${input.reason},reviewed_at=now(),updated_at=GREATEST(clock_timestamp(),updated_at+interval '1 microsecond') WHERE id=${input.id}`,
@@ -251,6 +258,9 @@ export async function reviewVendorRequest(
       reason: input.reason,
       from: item.status,
       to: input.decision,
+      ...(kind === "verification"
+        ? { evidence: item.evidence }
+        : { proposed: item.proposed }),
     });
   });
 }
