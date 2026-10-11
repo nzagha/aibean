@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-11T12:10:53.595Z",
+  "environment": "Native disposable PostgreSQL; synthetic data only",
+  "version": "postgres (PostgreSQL) 17.11",
+  "tls": "Verified generated test CA, loopback hostname/IP, SCRAM authentication; hostnossl rejected",
+  "installationSqlSha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+  "securitySqlSha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+  "baselineMigrations": [
+    {
+      "path": "db/migrations/0000_numerous_skullbuster.sql",
+      "createdAt": 1791247215670,
+      "sha256": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468"
+    },
+    {
+      "path": "db/migrations/0001_hesitant_hardball.sql",
+      "createdAt": 1791249181547,
+      "sha256": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
+    }
+  ],
+  "applicationTables": 14,
+  "foreignKeys": 18,
+  "preservedTestUsers": 2,
+  "outcomes": [
+    {
+      "name": "Verified TLS and nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Untrusted certificates and incorrect peer hostname fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Late installation failure rolls back every new object and preserves TestUsers",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent clean installations serialize; observer sees no partial schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact package repeats without metadata, record or ledger changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Altered, missing and noncontiguous migration history is rejected atomically",
+      "status": "PASS"
+    },
+    {
+      "name": "Advisory lock timeout aborts a competing installation without changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact Approval B preparation works as nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent browser, service and restricted runtime login sessions enforce grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime provisioning defaults and identity constraints preserve ordinary users",
+      "status": "PASS"
+    },
+    {
+      "name": "RLS independently denies browser rows; shared runtime requires server ownership checks",
+      "status": "PASS"
+    },
+    {
+      "name": "Competing authenticated runtime transactions cannot assign two Tool owners",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate TestUsers permission fix preserves two rows and denies browser reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate canonical identity provisions once across independent runtime sessions and rolls back conflicts",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate application owner queries and transactional Stack writes isolate two actual runtime identities",
+      "status": "PASS"
+    },
+    {
+      "name": "Real PostgreSQL historical upgrade preserves internal IDs and existing ownership",
+      "status": "PASS"
+    },
+    {
+      "name": "Native pg_dump/pg_dumpall preserve synthetic schema, ledgers, records and roles",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate instance restores equivalent metadata, counts, FKs, ledgers and permissions",
+      "status": "PASS"
+    },
+    {
+      "name": "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Admin lifecycle, rollback, moderation, paid ownership and pagination under native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent Admin edits accept exactly one current revision",
+      "status": "PASS"
+    },
+    {
+      "name": "Forward review proposal installs atomically; new RLS/grants and protected capability flags remain restricted",
+      "status": "PASS"
+    },
+    {
+      "name": "Safe taxonomy metadata, explainable organic ranking and Last Verified continuity under native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Forward commercial migration; paid submission/edit/verification and subscription lifecycle, isolation, rollback and RLS",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent sandbox checkout preparation deduplicates orders; concurrent pricing edits accept one unchanged revision",
+      "status": "PASS"
+    },
+    {
+      "name": "Creator content forward proposal: 15 RLS tables, 39 foreign keys, restricted grants, protected history and full multi-account workflow",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent content edits and moderation accept one revision; parallel outbound increments preserve every request",
+      "status": "PASS"
+    },
+    {
+      "name": "Resource file forward proposal and restricted native workflows preserve owners, scan/review/download gates, failure compensation and RLS",
+      "status": "PASS"
+    }
+  ],
+  "hostedModified": false,
+  "hostedBackupVerified": false,
+  "proposals": [
+    {
+      "packageId": "admin-review-v1",
+      "sqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "tables": 5,
+      "newForeignKeys": null,
+      "hostedInstalled": false
+    },
+    {
+      "packageId": "admin-operations-v2",
+      "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "tables": 4,
+      "newForeignKeys": null,
+      "hostedInstalled": false
+    },
+    {
+      "packageId": "creator-content-v1",
+      "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "tables": 15,
+      "newForeignKeys": 39,
+      "hostedInstalled": false
+    },
+    {
+      "packageId": "creator-files-v1",
+      "sqlSha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "tables": 1,
+      "newForeignKeys": 5,
+      "hostedInstalled": false
+    }
+  ],
+  "resourceProvider": "Synthetic in-memory private Storage and scanner adapters; protocol fixture only. Real bucket/scanner/provider unverified.",
+  "localHttpSmoke": {
+    "passed": 11,
+    "authenticatedProviderVerified": false
+  },
+  "lateProposalRollback": "Deliberate pre-commit failure rolls back commercial/content/file proposal objects; baseline histories and synthetic TestUsers remain unchanged."
+}

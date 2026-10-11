@@ -36,6 +36,12 @@ export function placementLabel(
 ) {
   if (
     placement.status === "active" &&
+    placement.startsAt &&
+    placement.startsAt > now
+  )
+    return "Scheduled · paid";
+  if (
+    placement.status === "active" &&
     placement.endsAt &&
     placement.endsAt <= now
   )

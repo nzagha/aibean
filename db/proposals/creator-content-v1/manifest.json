@@ -1,0 +1,40 @@
+{
+  "packageId": "creator-content-v1",
+  "status": "local-proposal-not-hosted-installed",
+  "sqlPath": "db/proposals/creator-content-v1/reviewed-installation.sql",
+  "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+  "requires": "admin-operations-v2",
+  "tables": [
+    "account_notifications",
+    "account_profiles",
+    "ai_playbooks",
+    "ai_skills",
+    "creator_follows",
+    "creator_resources",
+    "event_tools",
+    "playbook_skills",
+    "playbook_tools",
+    "public_events",
+    "saved_entities",
+    "skill_tools",
+    "stack_settings",
+    "content_reports",
+    "engagement_counters"
+  ],
+  "newForeignKeys": 39,
+  "hostedApprovalRequired": true,
+  "migrations": [
+    {
+      "path": "db/proposals/creator-content-v1/0000_creator_content.sql",
+      "sha256": "d3ee3ee5ca4702ec8fef3ca7d0af0478c218a6a640b00d177aaaf02d503dfd93"
+    },
+    {
+      "path": "db/proposals/creator-content-v1/0001_content_taxonomy_foreign_keys.sql",
+      "sha256": "feb2169f99002d4d4398f102be60d33a676240daa2b70cc2b68fe2e05cd9cd4f"
+    },
+    {
+      "path": "db/proposals/creator-content-v1/0002_moderation_analytics.sql",
+      "sha256": "a7db48d32f8c6b25f548779352b8cc792c933ba8d8382894024f00dcf9353b8e"
+    }
+  ]
+}

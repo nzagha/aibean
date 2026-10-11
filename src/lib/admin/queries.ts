@@ -4,6 +4,7 @@ import { checkAdmin, resultRows, type AdminToolRecord } from "./tool-workflows";
 import { reviewWorkflowsAvailable } from "./review-storage";
 import { workspaceFilters } from "../workspace-filters";
 import { commerceAvailable } from "./commerce-storage";
+import { contentAvailable } from "../content/storage";
 export type AdminParams = {
   q?: string;
   status?: string;
@@ -146,6 +147,32 @@ export async function readAdminOverview(
       ),
     );
     const reviewReady = await reviewWorkflowsAvailable(tx);
+    const commercialReady = await commerceAvailable(tx);
+    const contentReady = await contentAvailable(tx);
+    if (commercialReady)
+      counts.push(
+        ...resultRows<{ label: string; value: number }>(
+          await tx.execute(
+            sql`SELECT 'Tool submissions' AS label,count(*)::int AS value FROM public.tool_submissions WHERE status='pending' UNION ALL SELECT 'Sandbox subscriptions',count(*)::int FROM public.commerce_subscriptions WHERE status IN ('active','trialing','past_due')`,
+          ),
+        ),
+      );
+    if (contentReady) {
+      for (const [table, label] of [
+        ["ai_skills", "AI Skills"],
+        ["ai_playbooks", "Playbooks"],
+        ["creator_resources", "Resource campaigns"],
+        ["public_events", "Events"],
+        ["account_profiles", "Creator profiles"],
+      ])
+        counts.push(
+          ...resultRows<{ label: string; value: number }>(
+            await tx.execute(
+              sql`SELECT ${label + " awaiting review"} AS label,count(*)::int AS value FROM public.${sql.identifier(table)} WHERE status='pending'`,
+            ),
+          ),
+        );
+    }
     if (reviewReady)
       counts.push(
         ...resultRows<{ label: string; value: number }>(
@@ -171,7 +198,7 @@ export async function readAdminOverview(
         sql`SELECT id,action,entity_id,created_at::text FROM public.audit_logs ORDER BY public.audit_logs.created_at DESC,id LIMIT 10`,
       ),
     );
-    return { counts, reviewReady, recent };
+    return { counts, reviewReady, commercialReady, contentReady, recent };
   });
 }
 export async function readAdminQueue(

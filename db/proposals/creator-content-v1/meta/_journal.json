@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791692135584,
+      "tag": "0000_creator_content",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791692179590,
+      "tag": "0001_content_taxonomy_foreign_keys",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791693394031,
+      "tag": "0002_moderation_analytics",
+      "breakpoints": true
+    }
+  ]
+}

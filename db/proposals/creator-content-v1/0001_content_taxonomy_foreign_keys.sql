@@ -1,0 +1,4 @@
+ALTER TABLE "ai_playbooks" ADD CONSTRAINT "ai_playbooks_category_id_taxonomy_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."taxonomy"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "ai_skills" ADD CONSTRAINT "ai_skills_category_id_taxonomy_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."taxonomy"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "creator_resources" ADD CONSTRAINT "creator_resources_category_id_taxonomy_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."taxonomy"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "public_events" ADD CONSTRAINT "public_events_category_id_taxonomy_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."taxonomy"("id") ON DELETE no action ON UPDATE no action;

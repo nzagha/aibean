@@ -41,6 +41,7 @@ export type Tool = {
   rating: number | null;
   reviewCount: number;
   demo: boolean;
+  similarToolIds?: string[];
   organicRanking?: {
     score: number;
     version: string;

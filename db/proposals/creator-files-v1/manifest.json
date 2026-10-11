@@ -1,0 +1,18 @@
+{
+  "status": "local-proposal-not-hosted-installed",
+  "sqlSha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+  "tables": [
+    "resource_files"
+  ],
+  "sqlPath": "db/proposals/creator-files-v1/reviewed-installation.sql",
+  "requires": "creator-content-v1",
+  "newForeignKeys": 5,
+  "packageId": "creator-files-v1",
+  "hostedApprovalRequired": true,
+  "migrations": [
+    {
+      "path": "db/proposals/creator-files-v1/0000_creator_files.sql",
+      "sha256": "98c91c817627016dfedefde5c8213b9c70363e24b54087153e779708386538ab"
+    }
+  ]
+}

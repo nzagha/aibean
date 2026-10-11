@@ -13,6 +13,7 @@ import { inspectReadinessCounts } from "../src/lib/db/readiness-inventory";
 import { resolveSupabaseUser } from "../src/lib/supabase/identity";
 import {
   setupAdminFixtures,
+  adminFixtureInput,
   adminWorkflowContract,
   adminReviewWorkflowContract,
 } from "../tests/fixtures/admin-workflow-contract";
@@ -31,6 +32,13 @@ import {
 import { resultRows } from "../src/lib/admin/tool-workflows";
 import { sql } from "drizzle-orm";
 import { accountWorkflowContract } from "../tests/fixtures/account-workflow-contract";
+import { contentWorkflowContract } from "../tests/fixtures/content-workflow-contract";
+import { inspectContentStorage } from "../src/lib/content/storage";
+import { saveContent, moderateContent } from "../src/lib/content/workflows";
+import { readContentDetail } from "../src/lib/content/queries";
+import { registerOutbound } from "../src/lib/content/analytics";
+import { resourceWorkflowContract } from "../tests/fixtures/resource-workflow-contract";
+import { inspectFileStorage } from "../src/lib/resources/storage";
 import {
   addOwnedStackTool,
   ownerPredicates,
@@ -1126,6 +1134,20 @@ async function main() {
         "SELECT set_config('aibean.operations_install_sha256',$1,false)",
         [packageManifest.sqlSha256],
       );
+      await assert.rejects(
+        operator.unsafe(
+          packageSql.replace(/\nCOMMIT;\s*$/, "\nSELECT 1/0;\nCOMMIT;\n"),
+        ),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.billing_products')::text AS name",
+          )
+        )[0].name,
+        null,
+      );
       await operator.unsafe(packageSql);
       assert.deepEqual(
         await operator.unsafe(
@@ -1208,6 +1230,260 @@ async function main() {
       assert.equal(updates.filter((r) => r.status === "fulfilled").length, 1);
       assert.equal(updates.filter((r) => r.status === "rejected").length, 1);
       await second.end();
+    },
+  );
+  await check(
+    "Creator content forward proposal: 15 RLS tables, 39 foreign keys, restricted grants, protected history and full multi-account workflow",
+    async () => {
+      const packageManifest = JSON.parse(
+        read("db/proposals/creator-content-v1/manifest.json"),
+      );
+      const packageSql = read(packageManifest.sqlPath);
+      assert.equal(sha(packageSql), packageManifest.sqlSha256);
+      const history = await operator.unsafe(
+        "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+      );
+      const existing = await operator.unsafe(
+        'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+      );
+      await operator.unsafe(
+        "INSERT INTO public.users(id,is_creator) VALUES('content-other',true)",
+      );
+      await operator.unsafe(
+        "SELECT set_config('aibean.content_install_sha256',$1,false)",
+        [packageManifest.sqlSha256],
+      );
+      await assert.rejects(
+        operator.unsafe(
+          packageSql.replace(/\nCOMMIT;\s*$/, "\nSELECT 1/0;\nCOMMIT;\n"),
+        ),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.ai_skills')::text AS name",
+          )
+        )[0].name,
+        null,
+      );
+      await operator.unsafe(packageSql);
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        history,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        existing,
+      );
+      assert.equal(await inspectContentStorage(drizzle(runtime)), true);
+      await contentWorkflowContract(drizzle(runtime));
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const browser = connect(source, role);
+        for (const table of packageManifest.tables)
+          await denied(browser, "SELECT * FROM public." + table, "42501");
+        await browser.end();
+      }
+      const metadata = await operator.unsafe(
+        "SELECT count(*)::int AS tables,bool_and(c.relrowsecurity) AS rls FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname=ANY($1::text[])",
+        [packageManifest.tables],
+      );
+      assert.equal(metadata[0].tables, 15);
+      assert.equal(metadata[0].rls, true);
+      const fks = await operator.unsafe(
+        "SELECT count(*)::int AS n FROM pg_constraint c JOIN pg_class t ON t.oid=c.conrelid JOIN pg_namespace n ON n.oid=t.relnamespace WHERE c.contype='f' AND n.nspname='public' AND t.relname=ANY($1::text[])",
+        [packageManifest.tables],
+      );
+      assert.equal(fks[0].n, 39);
+      await operator.unsafe(
+        "GRANT SELECT(bio) ON public.account_profiles TO anon",
+      );
+      assert.equal(await inspectContentStorage(drizzle(runtime)), false);
+      await operator.unsafe(
+        "REVOKE SELECT(bio) ON public.account_profiles FROM anon",
+      );
+      await denied(runtime, "DELETE FROM public.content_reports", "42501");
+      await denied(
+        runtime,
+        "UPDATE aibean_private.content_installations SET sql_sha256=repeat('0',64)",
+        "42501",
+      );
+    },
+  );
+  await check(
+    "Concurrent content edits and moderation accept one revision; parallel outbound increments preserve every request",
+    async () => {
+      const previous = process.env.AIBEAN_CONTENT_WORKFLOWS;
+      process.env.AIBEAN_CONTENT_WORKFLOWS = "1";
+      const second = connect(source, "aibean_app_login", "content-concurrency");
+      try {
+        const a = drizzle(runtime),
+          b = drizzle(second);
+        const input = {
+          title: "Concurrent Skill",
+          slug: "concurrent-skill",
+          summary:
+            "Synthetic concurrent content to exercise independent database connections.",
+          categoryId: adminFixtureInput.categoryId,
+          useCaseIds: [],
+          industryIds: [],
+          toolIds: [],
+          outcome: "A deterministic synthetic concurrency result.",
+          instructions:
+            "Follow the synthetic instructions to exercise concurrent database transactions.",
+          prompts: "",
+          examples: "",
+        };
+        const id = await saveContent(a, "content-other", "skills", input),
+          row = (await readContentDetail(
+            a,
+            "content-other",
+            "skills",
+            id,
+            "owner",
+          ))!;
+        const outcomes = await Promise.allSettled([
+          saveContent(
+            a,
+            "content-other",
+            "skills",
+            { ...input, title: "First concurrent title" },
+            { id, revision: row.revision },
+          ),
+          saveContent(
+            b,
+            "content-other",
+            "skills",
+            { ...input, title: "Second concurrent title" },
+            { id, revision: row.revision },
+          ),
+        ]);
+        assert.equal(
+          outcomes.filter((r) => r.status === "fulfilled").length,
+          1,
+        );
+        assert.equal(outcomes.filter((r) => r.status === "rejected").length, 1);
+        await runtime.unsafe(
+          "UPDATE public.ai_skills SET status='pending' WHERE id=$1",
+          [id],
+        );
+        const current = (await readContentDetail(
+            a,
+            "content-other",
+            "skills",
+            id,
+            "owner",
+          ))!,
+          decision = {
+            id,
+            revision: current.revision,
+            reason: "Synthetic concurrent editorial decision",
+          };
+        const reviews = await Promise.allSettled([
+          moderateContent(a, "admin-fixture", "skills", {
+            ...decision,
+            decision: "published",
+          }),
+          moderateContent(b, "admin-fixture", "skills", {
+            ...decision,
+            decision: "rejected",
+          }),
+        ]);
+        assert.equal(reviews.filter((r) => r.status === "fulfilled").length, 1);
+        assert.equal(reviews.filter((r) => r.status === "rejected").length, 1);
+        const before = await runtime.unsafe(
+          "SELECT coalesce(sum(requests),0)::int AS n FROM public.engagement_counters WHERE kind='tools' AND entity_id=(SELECT id FROM public.tools WHERE slug='content-stack-tool')",
+        );
+        await Promise.all([
+          registerOutbound(a, "tools", "content-stack-tool", "direct"),
+          registerOutbound(b, "tools", "content-stack-tool", "direct"),
+        ]);
+        const after = await runtime.unsafe(
+          "SELECT sum(requests)::int AS n FROM public.engagement_counters WHERE kind='tools' AND entity_id=(SELECT id FROM public.tools WHERE slug='content-stack-tool')",
+        );
+        assert.equal(after[0].n, before[0].n + 2);
+      } finally {
+        if (previous === undefined) delete process.env.AIBEAN_CONTENT_WORKFLOWS;
+        else process.env.AIBEAN_CONTENT_WORKFLOWS = previous;
+        await second.end();
+      }
+    },
+  );
+  await check(
+    "Resource file forward proposal and restricted native workflows preserve owners, scan/review/download gates, failure compensation and RLS",
+    async () => {
+      const m = JSON.parse(read("db/proposals/creator-files-v1/manifest.json")),
+        body = read(m.sqlPath);
+      assert.equal(sha(body), m.sqlSha256);
+      const history = await operator.unsafe(
+        "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+      );
+      const existing = await operator.unsafe(
+        'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+      );
+      await operator.unsafe(
+        "SELECT set_config('aibean.files_install_sha256',$1,false)",
+        [m.sqlSha256],
+      );
+      await assert.rejects(
+        operator.unsafe(
+          body.replace(/\nCOMMIT;\s*$/, "\nSELECT 1/0;\nCOMMIT;\n"),
+        ),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.resource_files')::text AS name",
+          )
+        )[0].name,
+        null,
+      );
+      await operator.unsafe(body);
+      assert.equal(await inspectFileStorage(drizzle(runtime)), true);
+      await resourceWorkflowContract(drizzle(runtime));
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const browser = connect(source, role);
+        await denied(browser, "SELECT * FROM public.resource_files", "42501");
+        await browser.end();
+      }
+      const [rls] = await operator.unsafe(
+        "SELECT relrowsecurity FROM pg_class WHERE oid='public.resource_files'::regclass",
+      );
+      assert.equal(rls.relrowsecurity, true);
+      const [fks] = await operator.unsafe(
+        "SELECT count(*)::int AS n FROM pg_constraint WHERE conrelid='public.resource_files'::regclass AND contype='f'",
+      );
+      assert.equal(fks.n, 5);
+      await denied(runtime, "DELETE FROM public.resource_files", "42501");
+      await denied(
+        runtime,
+        "UPDATE aibean_private.files_installations SET sql_sha256=repeat('0',64)",
+        "42501",
+      );
+      await operator.unsafe(
+        "GRANT SELECT(filename) ON public.resource_files TO authenticated",
+      );
+      assert.equal(await inspectFileStorage(drizzle(runtime)), false);
+      await operator.unsafe(
+        "REVOKE SELECT(filename) ON public.resource_files FROM authenticated",
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        history,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        existing,
+      );
     },
   );
   const evidence = {

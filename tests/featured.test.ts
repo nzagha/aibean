@@ -83,3 +83,23 @@ test("featured payment reconciliation rejects unpaid, mismatched and unrelated s
   );
   assert.equal(paymentMatches({ ...order, amount: null }, session), false);
 });
+
+import {
+  scheduledStart,
+  paidPlacementWindow,
+} from "../src/lib/featured/moderation";
+test("Admin scheduling preserves five full paid days and never makes a future placement live early", () => {
+  const now = new Date("2026-10-11T12:00:00Z"),
+    start = scheduledStart("2026-10-20T12:00:00Z", now)!;
+  assert.equal(scheduledStart("", now), null);
+  assert.throws(() => scheduledStart("2026-10-10T12:00:00Z", now));
+  assert.throws(() => scheduledStart("invalid", now));
+  const window = paidPlacementWindow(5, start, now);
+  assert.equal(window.startsAt.toISOString(), "2026-10-20T12:00:00.000Z");
+  assert.equal(window.endsAt.toISOString(), "2026-10-25T12:00:00.000Z");
+  const placement = { status: "active", paidAt: now, ...window };
+  assert.equal(placementIsActive(placement, now), false);
+  assert.equal(placementLabel(placement, now), "Scheduled · paid");
+  const late = paidPlacementWindow(5, start, new Date("2026-10-22T12:00:00Z"));
+  assert.equal(late.endsAt.toISOString(), "2026-10-27T12:00:00.000Z");
+});
