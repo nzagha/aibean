@@ -42,3 +42,7 @@ No hosted migration/seed, Auth activation/settings, recovery export, real accoun
 Both verified original binaries remain unchanged in source import `4718b514c2cc07f2554e3b38b4a9864e0505756b`. Active taxonomy bytes/IDs are preserved; approved v1.1 source reconciliation remains unresolved, and historical v1 was not substituted. The frozen corrected recovery manifest and all fourteen dependency hashes remain unchanged.
 
 Earlier snapshots under `docs/audit/` and version archives remain historical. Earlier implementation publications include `e9843b0`, `e8514d5`, `d9efdf1` and `b46e98a`; the latest content/services/UI publication and exact GitHub CI are recorded in the publication note after verification.
+
+## Publication verification
+
+Published to `codex/supabase-foundation`: [content/resource services c506d0a](https://github.com/nzagha/aibean/commit/c506d0a91a9d546e3089f59c448f8be2bb673550) and [Admin/four-panel interfaces de16a9f](https://github.com/nzagha/aibean/commit/de16a9f9aa356d6014e40de59bb8a30adb91187c). [GitHub Validate 38138769591](https://github.com/nzagha/aibean/actions/runs/38138769591) passed lint, TypeScript, automated tests, production build and runtime audit for the complete implementation. Native PostgreSQL and HTTP smoke evidence were generated locally; they are not GitHub provider tests.

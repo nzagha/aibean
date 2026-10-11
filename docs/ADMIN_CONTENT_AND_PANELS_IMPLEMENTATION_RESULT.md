@@ -53,3 +53,7 @@ Real Admin/category readiness, operator capability activation, provider configur
 MVP limitations: comparison shortlist remains browser-persistent; account security/provider settings are in the separately gated Auth plan. Refunds/proration/transfer exceptions, subscription quota entitlements, bulk content tooling and conversion/unique-visitor analytics are not offered as working controls. No excluded Discussions/News/Courses/Web3/SAML modules were activated.
 
 Provider reference: [Supabase private Storage access](https://supabase.com/docs/guides/storage/security/access-control), [signed downloads](https://supabase.com/docs/reference/javascript/storage-from-createsignedurl), [ClamAV daemon/scanning requirements](https://docs.clamav.net/manual/Usage/Scanning.html). The implemented checks must be exercised against approved real infrastructure before enabling uploads.
+
+## Publication verification
+
+Published to `codex/supabase-foundation`: [content/resource services c506d0a](https://github.com/nzagha/aibean/commit/c506d0a91a9d546e3089f59c448f8be2bb673550) and [Admin/four-panel interfaces de16a9f](https://github.com/nzagha/aibean/commit/de16a9f9aa356d6014e40de59bb8a30adb91187c). [GitHub Validate 38138769591](https://github.com/nzagha/aibean/actions/runs/38138769591) passed lint, TypeScript, automated tests, production build and runtime audit for the complete implementation. Native PostgreSQL and HTTP smoke evidence were generated locally; they are not GitHub provider tests.

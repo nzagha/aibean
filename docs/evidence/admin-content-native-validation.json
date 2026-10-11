@@ -171,5 +171,15 @@
     "passed": 11,
     "authenticatedProviderVerified": false
   },
-  "lateProposalRollback": "Deliberate pre-commit failure rolls back commercial/content/file proposal objects; baseline histories and synthetic TestUsers remain unchanged."
+  "lateProposalRollback": "Deliberate pre-commit failure rolls back commercial/content/file proposal objects; baseline histories and synthetic TestUsers remain unchanged.",
+  "publication": {
+    "branch": "codex/supabase-foundation",
+    "serviceCommit": "c506d0a91a9d546e3089f59c448f8be2bb673550",
+    "interfaceCommit": "de16a9f9aa356d6014e40de59bb8a30adb91187c",
+    "githubCI": {
+      "url": "https://github.com/nzagha/aibean/actions/runs/38138769591",
+      "result": "PASS",
+      "nativePostgresExecutedInCI": false
+    }
+  }
 }
