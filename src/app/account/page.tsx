@@ -3,7 +3,7 @@ import { WorkspaceNavigation } from "@/components/workspace-navigation";
 import { ActionForm } from "@/components/action-form";
 import { updateAccount } from "./actions";
 import { AccountSignOut } from "@/components/account-signout";
-import { eq } from "drizzle-orm";
+import { eq, sql, getTableColumns } from "drizzle-orm";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
@@ -14,7 +14,7 @@ import {
   reviews,
   claims,
 } from "@/lib/db/schema";
-import { createStack } from "@/app/actions";
+import { updateEngagement } from "@/app/engagement-actions";
 import { passwordConfiguration } from "@/lib/password-auth";
 import { authMode } from "@/lib/auth-mode";
 import { ownerPredicates } from "@/lib/db/owned-resources";
@@ -23,7 +23,20 @@ export const metadata = {
   title: "Your account",
   robots: { index: false, follow: false },
 };
-export default async function Account() {
+export default async function Account({
+  searchParams,
+}: {
+  searchParams: Promise<{ notice?: string }>;
+}) {
+  const { notice } = await searchParams;
+  const permissionNotice =
+    notice === "admin-required"
+      ? "Admin access is required for that workspace."
+      : notice === "creator-required"
+        ? "Approved Creator access is required for that workspace."
+        : notice === "vendor-required"
+          ? "Approved ownership of that Tool is required."
+          : null;
   const user = await requireUser("/account", false);
   if (!process.env.DATABASE_URL)
     return (
@@ -31,6 +44,11 @@ export default async function Account() {
         <span className="eyebrow">Your aiBean</span>
         <h1 className="my-6 font-display text-5xl font-bold">Welcome back.</h1>
         <WorkspaceNavigation />
+        {permissionNotice && (
+          <p role="status" className="preview-notice my-6">
+            {permissionNotice}
+          </p>
+        )}
         <section className="placeholder-card max-w-2xl">
           <h2 className="text-2xl">You are signed in.</h2>
           <p className="mt-4">
@@ -66,7 +84,13 @@ export default async function Account() {
       .innerJoin(tools, eq(savedTools.toolId, tools.id))
       .where(ownerPredicates(user.id).saves),
     db().select().from(stacks).where(ownerPredicates(user.id).stacks),
-    db().select().from(reviews).where(ownerPredicates(user.id).reviews),
+    db()
+      .select({
+        ...getTableColumns(reviews),
+        revision: sql<string>`xmin::text`,
+      })
+      .from(reviews)
+      .where(ownerPredicates(user.id).reviews),
     db().select().from(claims).where(ownerPredicates(user.id).claims),
   ]);
   const members = await db()
@@ -89,6 +113,11 @@ export default async function Account() {
       </div>
       <h1 className="my-6 font-display text-5xl font-bold">Your next moves.</h1>
       <WorkspaceNavigation />
+      {permissionNotice && (
+        <p role="status" className="preview-notice my-6">
+          {permissionNotice}
+        </p>
+      )}
       <div className="flex flex-wrap gap-5 mb-8">
         <Link href="/featured/manage" className="text-link">
           Featured placements →
@@ -187,7 +216,8 @@ export default async function Account() {
                 ))}
             </div>
           ))}
-          <form action={createStack} className="mt-5">
+          <ActionForm action={updateEngagement} label="Create stack">
+            <input type="hidden" name="operation" value="create-stack" />
             <label className="field">
               New stack name
               <input
@@ -198,8 +228,7 @@ export default async function Account() {
                 placeholder="My research stack"
               />
             </label>
-            <button className="button primary">Create stack</button>
-          </form>
+          </ActionForm>
         </section>
         <section id="reviews" className="placeholder-card">
           <h2 className="text-2xl">Your reviews</h2>
@@ -220,6 +249,7 @@ export default async function Account() {
                   >
                     <input type="hidden" name="operation" value="edit-review" />
                     <input type="hidden" name="reviewId" value={r.id} />
+                    <input type="hidden" name="revision" value={r.revision} />
                     <label className="field">
                       Rating
                       <select name="rating" defaultValue={r.rating}>

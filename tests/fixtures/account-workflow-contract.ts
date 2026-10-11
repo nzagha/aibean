@@ -98,6 +98,13 @@ export async function accountWorkflowContract(
   const edit = {
     operation: "edit-review",
     reviewId: "panel-review-a",
+    revision: String(
+      (
+        await resultRows(
+          sql`SELECT xmin::text AS revision FROM public.tool_reviews WHERE id='panel-review-a'`,
+        )
+      )[0].revision,
+    ),
     rating: 5,
     body: "Synthetic updated review waiting for moderation",
   };

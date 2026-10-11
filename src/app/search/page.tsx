@@ -25,8 +25,8 @@ export default async function SearchPage({
             : "Choose a search scope to begin."}
         </h2>
         <p className="my-4">
-          Tools, Skills, Playbooks, Creators, and Events have their own results.
-          The tool directory is available now.
+          Tools, Skills, Playbooks, Creators, and Events have their own scoped
+          results. Search published content in the directory that fits your task.
         </p>
         <Link href={scope ? `/${scope[0]}` : "/tools"} className="text-link">
           {scope ? `Visit ${scope[1]}` : "Explore AI Tools"} →

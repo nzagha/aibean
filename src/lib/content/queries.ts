@@ -11,6 +11,11 @@ import {
 } from "./contracts";
 import { contentAvailable, requireContentStorage } from "./storage";
 import { checkAuthor, readRelations } from "./workflows";
+import { comparisonContext } from "../catalog/comparison";
+export type CreatorFilters = AdminParams & {
+  useCase?: string;
+  industry?: string;
+};
 export const publicAuthor = (kind: ContentKind) =>
   sql`(u.is_admin OR u.is_creator AND NOT EXISTS(SELECT 1 FROM public.creator_applications a WHERE a.user_id=u.id AND a.status='suspension_requested') AND NOT EXISTS(SELECT 1 FROM public.account_profiles p WHERE p.user_id=u.id AND p.status='suspended') ${kind === "events" ? sql`OR EXISTS(SELECT 1 FROM public.vendor_access v WHERE v.user_id=u.id)` : sql``}) ${kind === "resources" ? sql`AND EXISTS(SELECT 1 FROM public.account_profiles p WHERE p.user_id=u.id AND p.status='published')` : sql``}`;
 export async function readContentList(
@@ -366,14 +371,29 @@ export async function updateStackSettings(
 
 export async function readPublicProfiles(
   database: IdentityDatabase,
-  params: AdminParams = {},
+  params: CreatorFilters = {},
 ) {
   const filters = adminFilters(params);
+  const context = comparisonContext(params);
   return database.transaction(async (tx) => {
     if (!(await contentAvailable(tx)))
       return { ready: false, rows: [] as ProfileRow[], total: 0, filters };
     const match = "%" + filters.q.replace(/[\\%_]/g, "\\$&") + "%";
-    const where = sql`WHERE p.status='published' AND ${publicAuthor("skills")} AND (p.display_name ILIKE ${match} OR p.bio ILIKE ${match})`;
+    const hasContext = Object.values(context).some(Boolean);
+    const contextual = hasContext
+      ? sql`AND EXISTS(SELECT 1 FROM (
+      ${sql.join(
+        contentKinds.map(
+          (kind) =>
+            sql`SELECT category_id,use_case_ids,industry_ids FROM public.${sql.identifier(contentTables[kind])} WHERE user_id=p.user_id AND status='published'`,
+        ),
+        sql` UNION ALL `,
+      )}
+      ) content WHERE (${context.category || null}::text IS NULL OR content.category_id=${context.category || null})
+      AND (${context.useCase || null}::text IS NULL OR content.use_case_ids ? ${context.useCase || ""})
+      AND (${context.industry || null}::text IS NULL OR content.industry_ids ? ${context.industry || ""}))`
+      : sql``;
+    const where = sql`WHERE p.status='published' AND ${publicAuthor("skills")} AND (p.display_name ILIKE ${match} OR p.bio ILIKE ${match}) ${contextual}`;
     const rows = resultRows<ProfileRow>(
       await tx.execute(
         sql`SELECT p.user_id,p.handle,p.display_name,p.bio,p.website,p.status FROM public.account_profiles p JOIN public.users u ON u.id=p.user_id ${where} ORDER BY p.display_name,p.user_id LIMIT ${filters.size} OFFSET ${(filters.page - 1) * filters.size}`,
@@ -412,7 +432,7 @@ export async function readCreatorPublicContent(
       );
     const stacks = resultRows<{ id: string; title: string; summary: string }>(
       await tx.execute(
-        sql`SELECT s.id,s.name AS title,x.note AS summary FROM public.stacks s JOIN public.stack_settings x ON x.stack_id=s.id JOIN public.users u ON u.id=s.user_id WHERE s.user_id=${user} AND x.visibility='public' AND ${publicAuthor("skills")} ORDER BY s.created_at DESC LIMIT 50`,
+        sql`SELECT s.id,s.name AS title,x.note AS summary FROM public.stacks s JOIN public.stack_settings x ON x.stack_id=s.id JOIN public.users u ON u.id=s.user_id WHERE s.user_id=${user} AND x.visibility='public' AND ${publicAuthor("skills")} ORDER BY x.created_at DESC,s.id LIMIT 50`,
       ),
     );
     return { ...output, stacks };
@@ -551,6 +571,37 @@ export async function readToolRelatedContent(
         ),
       );
     }
+    items.push(
+      ...resultRows<{ id: string; title: string; slug: string; kind: string }>(
+        await tx.execute(sql`
+      SELECT s.id,s.name AS title,s.id AS slug,'collections' AS kind
+      FROM public.stacks s JOIN public.stack_settings x ON x.stack_id=s.id
+      JOIN public.users u ON u.id=s.user_id JOIN public.account_profiles p ON p.user_id=s.user_id AND p.status='published'
+      WHERE x.visibility='public' AND ${publicAuthor("skills")}
+      AND EXISTS(SELECT 1 FROM public.stack_tools m WHERE m.stack_id=s.id AND m.tool_id=${tool})
+      ORDER BY x.created_at DESC,s.id LIMIT 6`),
+      ),
+    );
     return items;
+  });
+}
+
+export async function readSkillPlaybooks(
+  database: IdentityDatabase,
+  skillId: string,
+) {
+  return database.transaction(async (tx) => {
+    if (!(await contentAvailable(tx)))
+      return [] as { id: string; title: string; slug: string }[];
+    return resultRows<{ id: string; title: string; slug: string }>(
+      await tx.execute(sql`
+      SELECT r.id,r.title,r.slug FROM public.ai_playbooks r
+      JOIN public.playbook_skills l ON l.playbook_id=r.id
+      JOIN public.users u ON u.id=r.user_id
+      WHERE l.skill_id=${skillId} AND r.status='published' AND ${publicAuthor("playbooks")}
+      AND EXISTS(SELECT 1 FROM public.ai_skills k JOIN public.users u ON u.id=k.user_id
+        WHERE k.id=${skillId} AND k.status='published' AND ${publicAuthor("skills")})
+      ORDER BY r.published_at DESC,r.id LIMIT 20`),
+    );
   });
 }

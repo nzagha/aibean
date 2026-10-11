@@ -9,6 +9,9 @@ import { filterTools } from "@/lib/catalog/filter";
 import { ToolCard } from "@/components/tool-card";
 import { ToolFilters } from "@/components/tool-filters";
 import type { CatalogFilters } from "@/lib/catalog/types";
+import { catalogPage, catalogPageHref } from "@/lib/catalog/pagination";
+import { ScopeDiscovery } from "@/components/scope-discovery";
+import { comparisonRanks } from "@/lib/catalog/comparison";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "AI Tools" };
 export default async function ToolsPage({
@@ -23,6 +26,9 @@ export default async function ToolsPage({
       .map(([k, v]) => [k, (v as string).slice(0, 120)]),
   );
   const tools = filterTools(await getTools(), filters);
+  const { page, pages, shown } = catalogPage(tools, raw);
+  const pageHref = (number: number) => catalogPageHref(raw, number);
+  const ranks = comparisonRanks(tools, shown, filters);
   const labels = await getTaxonomyLabels();
   return (
     <div className="container pb-24">
@@ -49,6 +55,7 @@ export default async function ToolsPage({
           claims are implied.
         </p>
       )}
+      <ScopeDiscovery filters={filters} />
       <div className="catalog-layout">
         <ToolFilters
           key={JSON.stringify(filters)}
@@ -66,8 +73,14 @@ export default async function ToolsPage({
           </div>
           {tools.length ? (
             <div className="grid gap-5 md:grid-cols-2">
-              {tools.map((tool) => (
-                <ToolCard tool={tool} key={tool.id} />
+              {shown.map((tool, index) => (
+                <ToolCard
+                  tool={tool}
+                  key={tool.id}
+                  rankLabel={
+                    ranks[index].ranking ? ranks[index].label : undefined
+                  }
+                />
               ))}
             </div>
           ) : (
@@ -81,6 +94,26 @@ export default async function ToolsPage({
                 Clear filters
               </Link>
             </div>
+          )}
+          {pages > 1 && (
+            <nav
+              aria-label="Tool results pages"
+              className="flex flex-wrap items-center gap-5 mt-8"
+            >
+              {page > 1 && (
+                <Link className="text-link" href={pageHref(page - 1)}>
+                  Previous
+                </Link>
+              )}
+              <span>
+                Page {page} of {pages}
+              </span>
+              {page < pages && (
+                <Link className="text-link" href={pageHref(page + 1)}>
+                  Next
+                </Link>
+              )}
+            </nav>
           )}
         </section>
       </div>

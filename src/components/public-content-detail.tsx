@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { contentKinds, type ContentKind } from "@/lib/content/contracts";
-import { readContentDetail } from "@/lib/content/queries";
+import { readContentDetail, readSkillPlaybooks } from "@/lib/content/queries";
 import { sql } from "drizzle-orm";
 import { resultRows } from "@/lib/admin/tool-workflows";
 import { ActionForm } from "./action-form";
@@ -20,6 +20,8 @@ export async function PublicContentDetail({
   if (!contentKinds.includes(kind)) notFound();
   const row = await readContentDetail(db(), null, kind, slug, "public");
   if (!row) notFound();
+  const linkedPlaybooks =
+    kind === "skills" ? await readSkillPlaybooks(db(), row.id) : [];
   const linkedTools = row.toolIds.length
     ? resultRows<{ id: string; name: string; slug: string }>(
         await db().execute(
@@ -123,6 +125,7 @@ export async function PublicContentDetail({
                 method="post"
                 action={"/outbound/events/" + row.slug}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <button className="button primary">
                   Register with the organizer →
@@ -150,7 +153,7 @@ export async function PublicContentDetail({
             <input type="hidden" name="id" value={row.id} />
           </ActionForm>
           <p className="text-sm my-5">
-            Sign in to keep this in your personal collection.
+            Keep saved content in your personal account collection.
           </p>
           {linkedTools.length > 0 && (
             <>
@@ -176,6 +179,20 @@ export async function PublicContentDetail({
                   href={"/skills/" + s.slug}
                 >
                   {s.title} →
+                </Link>
+              ))}
+            </>
+          )}
+          {linkedPlaybooks.length > 0 && (
+            <>
+              <h3 className="text-xl mt-6">Use this Skill in a Playbook</h3>
+              {linkedPlaybooks.map((p) => (
+                <Link
+                  className="text-link block mt-4"
+                  key={p.id}
+                  href={"/playbooks/" + p.slug}
+                >
+                  {p.title} →
                 </Link>
               ))}
             </>

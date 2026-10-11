@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
 import { act, createElement, Fragment } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import { createRoot, hydrateRoot, type Root } from "react-dom/client";
+import { renderToString } from "react-dom/server";
 
 test("preview stays in context, preserves expanded insights, and restores return progress", async () => {
   const dom = new JSDOM('<div id="root"></div>', {
@@ -84,7 +85,27 @@ test("preview stays in context, preserves expanded insights, and restores return
         node.click();
       });
     };
-    await mount();
+    const container = dom.window.document.getElementById("root")!;
+    container.innerHTML = renderToString(app());
+    assert.equal(
+      container
+        .querySelector('a[aria-haspopup="dialog"]')
+        ?.getAttribute("tabindex"),
+      "0",
+    );
+    const hydrationErrors: unknown[] = [];
+    await act(async () => {
+      root = hydrateRoot(container, app(), {
+        onRecoverableError: (error) => hydrationErrors.push(error),
+      });
+    });
+    assert.deepEqual(hydrationErrors, []);
+    assert.equal(
+      container
+        .querySelector('a[aria-haspopup="dialog"]')
+        ?.getAttribute("tabindex"),
+      "0",
+    );
     assert.equal(
       dom.window.document
         .querySelector('[role="progressbar"]')

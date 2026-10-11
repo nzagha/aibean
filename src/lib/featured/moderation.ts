@@ -1,4 +1,5 @@
 import { sql } from "drizzle-orm";
+import { notifyDecision } from "../content/decision-notifications";
 import { z } from "zod";
 import type { IdentityDatabase } from "../supabase/identity";
 import { checkAdmin, audit, resultRows } from "../admin/tool-workflows";
@@ -34,11 +35,12 @@ export async function moderatePlacement(
     await checkAdmin(tx, actor);
     const [placement] = resultRows<{
       status: string;
+      user_id: string;
       starts_at: Date | null;
       paid_at: Date | null;
     }>(
       await tx.execute(
-        sql`SELECT status,starts_at,paid_at FROM public.featured_placements WHERE id=${input.id} FOR UPDATE`,
+        sql`SELECT status,user_id,starts_at,paid_at FROM public.featured_placements WHERE id=${input.id} FOR UPDATE`,
       ),
     );
     if (
@@ -63,6 +65,11 @@ export async function moderatePlacement(
       days: 5,
       activation: "verified sandbox payment only",
     });
+    await notifyDecision(
+      tx,
+      placement.user_id,
+      `Your sponsored placement is ${input.decision}. Activation requires confirmed payment; organic rank is independent.`,
+    );
   });
 }
 export function paidPlacementWindow(

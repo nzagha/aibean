@@ -44,6 +44,9 @@ export function PreviewLink({
       className={`${className || ""}${card ? " exploration-card" : ""}`}
       aria-label={label}
       aria-haspopup="dialog"
+      // Motion's tap handler adds tabindex during SSR but is disabled on a
+      // reduced-motion client. Keep the link's keyboard contract identical.
+      tabIndex={0}
       title={`Preview ${preview.title}`}
       whileHover={card && !reduced ? { y: -3 } : undefined}
       whileTap={!reduced ? { scale: 0.985 } : undefined}

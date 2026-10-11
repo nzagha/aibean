@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { readPublicProfile, readContentDetail } from "@/lib/content/queries";
 import { ReportContent } from "@/components/report-content";
 import { PublishedFiles } from "@/components/content-files";
+import { creatorHandle } from "@/lib/content/public-path";
 export const dynamic = "force-dynamic";
 export default async function Resource({
   params,
@@ -11,8 +12,9 @@ export default async function Resource({
   params: Promise<{ creator: string; resource: string }>;
 }) {
   const { creator, resource } = await params;
-  if (!creator.startsWith("@")) notFound();
-  const profile = await readPublicProfile(db(), creator.slice(1));
+  const handle = creatorHandle(creator);
+  if (!handle) notFound();
+  const profile = await readPublicProfile(db(), handle);
   if (!profile) notFound();
   const row = await readContentDetail(
     db(),
@@ -34,6 +36,7 @@ export default async function Resource({
           method="post"
           action={"/outbound/resources/" + row.slug}
           target="_blank"
+          rel="noopener noreferrer"
         >
           <button className="button primary">Open Creator’s resource →</button>
         </form>

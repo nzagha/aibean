@@ -232,7 +232,9 @@ export function ExplorationProvider({ children }: { children: ReactNode }) {
                           {detail.title}
                           <motion.span
                             animate={{ rotate: expanded ? 180 : 0 }}
-                            transition={EXPLORATION_SPRING}
+                            transition={
+                              reduced ? { duration: 0 } : EXPLORATION_SPRING
+                            }
                           >
                             <ChevronDown size={17} />
                           </motion.span>

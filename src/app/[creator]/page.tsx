@@ -7,6 +7,7 @@ import {
 } from "@/lib/content/queries";
 import { ActionForm } from "@/components/action-form";
 import { changeFollow } from "@/app/content-actions";
+import { creatorHandle } from "@/lib/content/public-path";
 export const dynamic = "force-dynamic";
 export default async function CreatorProfile({
   params,
@@ -14,8 +15,9 @@ export default async function CreatorProfile({
   params: Promise<{ creator: string }>;
 }) {
   const { creator } = await params;
-  if (!creator.startsWith("@")) notFound();
-  const profile = await readPublicProfile(db(), creator.slice(1));
+  const handle = creatorHandle(creator);
+  if (!handle) notFound();
+  const profile = await readPublicProfile(db(), handle);
   if (!profile) notFound();
   const content = await readCreatorPublicContent(db(), profile.user_id);
   return (

@@ -26,12 +26,10 @@ export function ContentEditor({
   admin?: boolean;
   actor: string;
 }) {
+  const Heading = admin ? "h2" : "h1";
   const keys = (
     <>
       <input type="hidden" name="kind" value={kind} />
-      {row && (
-        <ContentFiles kind={kind} row={row} actor={actor} admin={admin} />
-      )}
       {row && (
         <>
           <input type="hidden" name="id" value={row.id} />
@@ -43,9 +41,9 @@ export function ContentEditor({
   return (
     <>
       <section className="placeholder-card">
-        <h2 className="text-2xl">
+        <Heading className="text-2xl">
           {row ? "Edit " + row.title : "New " + kind}
-        </h2>
+        </Heading>
         {row && (
           <p className="my-4">
             {row.status} · {row.review_reason || "No editorial decision yet"}
@@ -60,6 +58,9 @@ export function ContentEditor({
           {admin && <ReasonField />}
         </ActionForm>
       </section>
+      {row && (
+        <ContentFiles kind={kind} row={row} actor={actor} admin={admin} />
+      )}
       {row && (
         <section className="placeholder-card mt-8">
           <h2 className="text-2xl">Editorial review</h2>

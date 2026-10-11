@@ -32,6 +32,8 @@ import {
 import { resultRows } from "../src/lib/admin/tool-workflows";
 import { sql } from "drizzle-orm";
 import { accountWorkflowContract } from "../tests/fixtures/account-workflow-contract";
+import { engagementWorkflowContract } from "../tests/fixtures/engagement-workflow-contract";
+import { mutateEngagement } from "../src/lib/db/engagement-workflows";
 import { contentWorkflowContract } from "../tests/fixtures/content-workflow-contract";
 import { inspectContentStorage } from "../src/lib/content/storage";
 import { saveContent, moderateContent } from "../src/lib/content/workflows";
@@ -999,9 +1001,60 @@ async function main() {
     "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
     async () => {
       await accountWorkflowContract(drizzle(runtime));
+      await engagementWorkflowContract(drizzle(runtime));
     },
   );
   let adminToolId = "";
+  await check(
+    "Concurrent User review edits accept one revision and audit failures roll back account creation",
+    async () => {
+      await runtime`UPDATE public.tools SET status='published' WHERE id='eng-tool'`;
+      const [review] =
+        await runtime`SELECT xmin::text AS revision FROM public.tool_reviews WHERE user_id='engagement-a' AND tool_id='eng-tool'`;
+      const second = connect(
+        source,
+        "aibean_app_login",
+        "engagement-concurrency",
+      );
+      try {
+        const input = {
+          operation: "review",
+          toolId: "eng-tool",
+          revision: review.revision,
+          rating: 4,
+          body: "Synthetic concurrent account review with sufficient detail.",
+        };
+        const outcomes = await Promise.allSettled([
+          mutateEngagement(drizzle(runtime), "engagement-a", input),
+          mutateEngagement(drizzle(second), "engagement-a", input),
+        ]);
+        assert.equal(
+          outcomes.filter((r) => r.status === "fulfilled").length,
+          1,
+        );
+        assert.equal(outcomes.filter((r) => r.status === "rejected").length, 1);
+      } finally {
+        await second.end();
+      }
+      await operator`REVOKE INSERT ON public.audit_logs FROM aibean_runtime`;
+      try {
+        await assert.rejects(
+          mutateEngagement(drizzle(runtime), "engagement-a", {
+            operation: "create-stack",
+            name: "Synthetic audit failure rollback",
+          }),
+        );
+        assert.equal(
+          (
+            await runtime`SELECT count(*)::int AS n FROM public.stacks WHERE name='Synthetic audit failure rollback'`
+          )[0].n,
+          0,
+        );
+      } finally {
+        await operator`GRANT INSERT ON public.audit_logs TO aibean_runtime`;
+      }
+    },
+  );
   await check(
     "Admin lifecycle, rollback, moderation, paid ownership and pagination under native restricted runtime",
     async () => {

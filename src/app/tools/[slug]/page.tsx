@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { eq, and } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
 import { getTool, getTools, getReviews } from "@/lib/catalog/repository";
 import { categoryById, industryById } from "@/lib/catalog/taxonomy";
 import { getIdentity } from "@/lib/auth";
@@ -9,7 +9,9 @@ import { stacks, savedTools } from "@/lib/db/schema";
 import { CompareButton } from "@/components/compare-provider";
 import { TrustStatus, ToolCard } from "@/components/tool-card";
 import { ToolLogo } from "@/components/tool-logo";
-import { saveTool, submitReview, addToStack } from "@/app/actions";
+import { updateEngagement } from "@/app/engagement-actions";
+import { ActionForm } from "@/components/action-form";
+import { resultRows } from "@/lib/admin/tool-workflows";
 import { ownerPredicates } from "@/lib/db/owned-resources";
 import { contentAvailable } from "@/lib/content/storage";
 import { readToolRelatedContent } from "@/lib/content/queries";
@@ -49,6 +51,17 @@ export default async function ToolPage({
       ).length > 0
     : false;
   const reviews = await getReviews(t.id);
+  const [ownReview] = canWrite
+    ? resultRows<{
+        rating: number;
+        body: string;
+        revision: string;
+        status: string;
+      }>(
+        await db().execute(sql`SELECT rating,body,status,xmin::text AS revision
+          FROM public.tool_reviews WHERE user_id=${userId!} AND tool_id=${t.id}`),
+      )
+    : [];
   const contentReady =
     !!process.env.DATABASE_URL && (await contentAvailable(db()));
   const related = contentReady ? await readToolRelatedContent(db(), t.id) : [];
@@ -178,33 +191,55 @@ export default async function ToolPage({
               <p className="mb-5">No approved reviews yet.</p>
             )}
             {canWrite ? (
-              <form action={submitReview} className="placeholder-card">
-                <input type="hidden" name="toolId" value={t.id} />
-                <label className="field">
-                  Your rating
-                  <select name="rating" required>
-                    <option value="">Choose a rating</option>
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <option key={n}>{n}</option>
-                    ))}
-                  </select>
-                </label>
-                <label className="field">
-                  Your experience
-                  <textarea
-                    name="body"
-                    required
-                    minLength={20}
-                    maxLength={4000}
-                    rows={4}
+              <div className="placeholder-card">
+                <ActionForm action={updateEngagement} label="Submit for review">
+                  <input type="hidden" name="operation" value="review" />
+                  <input
+                    type="hidden"
+                    name="returnTo"
+                    value={`/tools/${t.slug}`}
                   />
-                </label>
-                <p className="mb-4 text-xs">
-                  Submitting again updates your existing review and returns it
-                  to moderation.
-                </p>
-                <button className="button primary">Submit for review</button>
-              </form>
+                  <input
+                    type="hidden"
+                    name="revision"
+                    value={ownReview?.revision || ""}
+                  />
+                  <input type="hidden" name="toolId" value={t.id} />
+                  <label className="field">
+                    Your rating
+                    <select
+                      name="rating"
+                      required
+                      defaultValue={ownReview?.rating || ""}
+                    >
+                      <option value="">Choose a rating</option>
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option key={n}>{n}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="field">
+                    Your experience
+                    <textarea
+                      name="body"
+                      required
+                      minLength={20}
+                      maxLength={4000}
+                      rows={4}
+                      defaultValue={ownReview?.body || ""}
+                    />
+                  </label>
+                  <p className="mb-4 text-xs">
+                    Submitting again updates your existing review and returns it
+                    to moderation.
+                  </p>
+                  {ownReview && (
+                    <p className="mb-4 text-sm">
+                      Your review: {ownReview.status}
+                    </p>
+                  )}
+                </ActionForm>
+              </div>
             ) : (
               <Link className="button secondary" href={login}>
                 Sign in to rate and review
@@ -254,6 +289,7 @@ export default async function ToolPage({
                 method="post"
                 action={"/outbound/tools/" + t.slug}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <button className="button primary w-full">
                   Visit official website →
@@ -273,20 +309,29 @@ export default async function ToolPage({
             <CompareButton tool={t} />
           </div>
           {canWrite ? (
-            <form action={saveTool}>
+            <ActionForm
+              action={updateEngagement}
+              label={saved ? "Remove from saved" : "Save tool"}
+              submitClassName="button secondary w-full"
+            >
+              <input type="hidden" name="operation" value="save" />
+              <input type="hidden" name="returnTo" value={`/tools/${t.slug}`} />
               <input type="hidden" name="toolId" value={t.id} />
               <input type="hidden" name="remove" value={String(saved)} />
-              <button className="button secondary w-full">
-                {saved ? "Remove from saved" : "Save tool"}
-              </button>
-            </form>
+            </ActionForm>
           ) : (
             <Link className="button secondary w-full" href={login}>
               Sign in to save
             </Link>
           )}
           {canWrite && userStacks.length > 0 ? (
-            <form action={addToStack} className="mt-6">
+            <ActionForm
+              action={updateEngagement}
+              label="Add to stack"
+              submitClassName="button secondary w-full"
+            >
+              <input type="hidden" name="operation" value="add-stack" />
+              <input type="hidden" name="returnTo" value={`/tools/${t.slug}`} />
               <input type="hidden" name="toolId" value={t.id} />
               <label className="field">
                 Your stack
@@ -298,8 +343,7 @@ export default async function ToolPage({
                   ))}
                 </select>
               </label>
-              <button className="button secondary w-full">Add to stack</button>
-            </form>
+            </ActionForm>
           ) : (
             <Link className="text-link mt-5" href="/account">
               Create a personal stack →

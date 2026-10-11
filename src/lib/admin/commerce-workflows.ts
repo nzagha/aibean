@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
+import { notifyDecision } from "../content/decision-notifications";
 import type {
   IdentityDatabase,
   IdentityTransaction,
@@ -157,6 +158,11 @@ export async function reviewToolSubmission(
       publication: "independent-admin-review",
       ownership: "not-granted",
     });
+    await notifyDecision(
+      tx,
+      row.user_id,
+      `Your Tool submission was ${input.decision}. Publication and ownership remain separate decisions.`,
+    );
     return toolId;
   });
 }
@@ -393,6 +399,11 @@ export async function settleSandboxPayment(
         capabilitiesGranted: false,
       },
     );
+    await notifyDecision(
+      tx,
+      payment.user_id,
+      "Your sandbox payment was confirmed. Payment does not grant publication, verification, ownership or organic rank.",
+    );
   });
 }
 export async function reconcileSubscription(
@@ -429,6 +440,7 @@ export async function reconcileSubscription(
     await requireCommerceStorage(tx);
     const [item] = resultRows<{
       id: string;
+      user_id: string;
       provider_event_at: string | number;
       status: string;
     }>(
@@ -467,6 +479,11 @@ export async function reconcileSubscription(
         cancelAtPeriodEnd: event.cancelAtPeriodEnd,
         entitlements: "no-editorial-or-capability-bypass",
       },
+    );
+    await notifyDecision(
+      tx,
+      item.user_id,
+      `Your sandbox subscription is now ${event.status.replaceAll("_", " ")}. See your billing history for details.`,
     );
   });
 }

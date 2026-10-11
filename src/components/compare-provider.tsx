@@ -106,7 +106,7 @@ export function CompareProvider({ children }: { children: ReactNode }) {
           <p className="mt-2 text-xs" role="status">
             {message ||
               (available
-                ? "Shortlist saved in this browser. Sign in to save tools to your account."
+                ? "Shortlist saved in this browser. Account saves are managed from Tool pages."
                 : "Shortlist kept for this visit. Browser storage is unavailable.")}
           </p>
         </aside>

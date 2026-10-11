@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
+import { notifyDecision } from "../content/decision-notifications";
 import type {
   IdentityDatabase,
   IdentityTransaction,
@@ -143,6 +144,11 @@ export async function reviewCreatorApplication(
         capabilityActivation: "separately-authorized-operator-only",
       },
     );
+    await notifyDecision(
+      tx,
+      item.user_id,
+      `Your Creator application status is ${input.decision.replaceAll("_", " ")}. Approval does not activate protected Creator access automatically.`,
+    );
   });
 }
 export async function submitVendorEdit(
@@ -262,6 +268,11 @@ export async function reviewVendorRequest(
         ? { evidence: item.evidence }
         : { proposed: item.proposed }),
     });
+    await notifyDecision(
+      tx,
+      item.user_id,
+      `Your Tool ${kind} request was ${input.decision}. See your Vendor workspace for the decision.`,
+    );
   });
 }
 export async function openClaimDispute(
@@ -358,5 +369,10 @@ export async function resolveClaimDispute(
       claimId: item.claim_id,
       reason: input.reason,
     });
+    await notifyDecision(
+      tx,
+      item.owner_id,
+      `Your Tool ownership dispute was resolved: ${input.decision}. See your account for the decision.`,
+    );
   });
 }

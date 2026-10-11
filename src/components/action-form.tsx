@@ -9,10 +9,10 @@ export type ActionState = {
   href?: string;
   hrefLabel?: string;
 };
-function Submit({ label }: { label: string }) {
+function Submit({ label, className }: { label: string; className?: string }) {
   const { pending } = useFormStatus();
   return (
-    <button className="button primary" disabled={pending}>
+    <button className={className || "button primary"} disabled={pending}>
       {pending ? "Please wait…" : label}
     </button>
   );
@@ -22,11 +22,13 @@ export function ActionForm({
   children,
   label,
   confirmation,
+  submitClassName,
 }: {
   action: (state: ActionState, form: FormData) => Promise<ActionState>;
   children: ReactNode;
   label: string;
   confirmation?: string;
+  submitClassName?: string;
 }) {
   const preserveOnReset = useRef(false);
   const [state, formAction] = useActionState(
@@ -67,7 +69,7 @@ export function ActionForm({
           </Link>
         </p>
       )}
-      <Submit label={label} />
+      <Submit label={label} className={submitClassName} />
     </form>
   );
 }

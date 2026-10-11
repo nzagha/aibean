@@ -30,8 +30,14 @@ import {
   markNotificationRead,
   updateStackSettings,
   readPublicStack,
+  readCreatorPublicContent,
+  readToolRelatedContent,
   readOwnedStackSettings,
+  readSkillPlaybooks,
+  readPublicProfiles,
 } from "../../src/lib/content/queries";
+import { notifyDecision } from "../../src/lib/content/decision-notifications";
+import { moderateAdminReview } from "../../src/lib/admin/tool-workflows";
 import { skillInput, eventInput } from "../../src/lib/content/contracts";
 import {
   createContentReport,
@@ -47,6 +53,7 @@ import {
   readCreatorAnalytics,
 } from "../../src/lib/content/analytics";
 import { moderatePlacement } from "../../src/lib/featured/moderation";
+import { taxonomy, activeUseCases } from "../../src/lib/catalog/taxonomy";
 type Database = IdentityDatabase & IdentityTransaction;
 export async function contentWorkflowContract(database: Database) {
   const previous = process.env.AIBEAN_CONTENT_WORKFLOWS;
@@ -56,13 +63,102 @@ export async function contentWorkflowContract(database: Database) {
       creator = "admin-creator",
       ordinary = "admin-ordinary",
       other = "content-other";
+    {
+      // Decisions notify only the affected account; failed notification writes
+      // must roll back the real moderation update and transactional audit.
+      const notificationTool = await createAdminTool(database, admin, {
+        ...adminFixtureInput,
+        slug: "notification-regression-tool",
+      });
+      await database.execute(
+        sql`INSERT INTO public.tool_reviews(id,tool_id,user_id,rating,body,status) VALUES('notification-review',${notificationTool},${ordinary},4,'Synthetic notification review integrity.','pending')`,
+      );
+      const [reviewVersion] = resultRows<{ revision: string }>(
+        await database.execute(
+          sql`SELECT xmin::text AS revision FROM public.tool_reviews WHERE id='notification-review'`,
+        ),
+      );
+      const decision = {
+        reviewId: "notification-review",
+        revision: reviewVersion.revision,
+        status: "approved",
+        reason: "Synthetic notification decision",
+      };
+      const beforeNotices = (await readEngagement(database, ordinary))
+        .notifications.length;
+      const failing: IdentityDatabase = {
+        transaction: (work) =>
+          database.transaction((tx) =>
+            work({
+              execute: async (query) => {
+                // Reproduce a SQL failure at the notification insert without
+                // changing grants or schema in either PostgreSQL test environment.
+                const dialect = await import("drizzle-orm/pg-core");
+                if (
+                  new dialect.PgDialect()
+                    .sqlToQuery(query)
+                    .sql.includes("INSERT INTO public.account_notifications")
+                )
+                  return tx.execute(sql`SELECT 1/0`);
+                return tx.execute(query);
+              },
+            }),
+          ),
+      };
+      await assert.rejects(moderateAdminReview(failing, admin, decision));
+      const [unchangedReview] = resultRows<{ status: string }>(
+        await database.execute(
+          sql`SELECT status FROM public.tool_reviews WHERE id='notification-review'`,
+        ),
+      );
+      assert.equal(unchangedReview.status, "pending");
+      assert.equal(
+        resultRows(
+          await database.execute(
+            sql`SELECT id FROM public.audit_logs WHERE entity_id='notification-review'`,
+          ),
+        ).length,
+        0,
+      );
+      assert.equal(
+        (await readEngagement(database, ordinary)).notifications.length,
+        beforeNotices,
+      );
+      await moderateAdminReview(database, admin, decision);
+      assert.equal(
+        (await readEngagement(database, ordinary)).notifications.length,
+        beforeNotices + 1,
+      );
+      assert.equal(
+        (await readEngagement(database, other)).notifications.length,
+        0,
+      );
+      await assert.rejects(moderateAdminReview(database, admin, decision));
+      assert.equal(
+        (await readEngagement(database, ordinary)).notifications.length,
+        beforeNotices + 1,
+      );
+      process.env.AIBEAN_CONTENT_WORKFLOWS = "";
+      await database.transaction((tx) =>
+        notifyDecision(
+          tx,
+          ordinary,
+          "Must not be stored before installation activation",
+        ),
+      );
+      process.env.AIBEAN_CONTENT_WORKFLOWS = "1";
+      assert.equal(
+        (await readEngagement(database, ordinary)).notifications.length,
+        beforeNotices + 1,
+      );
+    }
     const base = {
       title: "Synthetic Skill",
       slug: "synthetic-skill",
       summary: "A synthetic content summary for isolated publishing tests.",
       categoryId: adminFixtureInput.categoryId,
-      useCaseIds: [],
-      industryIds: [],
+      useCaseIds: [activeUseCases[0].id],
+      industryIds: [taxonomy.industries[0].id],
       toolIds: [],
       outcome: "A concrete synthetic outcome with a measurable result.",
       instructions:
@@ -152,6 +248,15 @@ export async function contentWorkflowContract(database: Database) {
         .status,
       "published",
     );
+    const publicCreatorContent = await readCreatorPublicContent(
+      database,
+      creator,
+    );
+    assert.equal(
+      publicCreatorContent.skills.some((item) => item.id === id),
+      true,
+    );
+    assert.equal(publicCreatorContent.stacks.length, 0);
     const book = {
       ...base,
       title: "Synthetic Playbook",
@@ -175,6 +280,7 @@ export async function contentWorkflowContract(database: Database) {
       paid: true,
     };
     const bookId = await saveContent(database, creator, "playbooks", book);
+    assert.equal((await readSkillPlaybooks(database, id)).length, 0);
     let pb = (await readContentDetail(
       database,
       creator,
@@ -197,6 +303,7 @@ export async function contentWorkflowContract(database: Database) {
       decision: "published",
       reason: "Synthetic free Playbook editorial review",
     });
+    assert.equal((await readSkillPlaybooks(database, id))[0]?.id, bookId);
     assert.equal(
       (await readContentDetail(
         database,
@@ -233,12 +340,39 @@ export async function contentWorkflowContract(database: Database) {
     let profile = (await readProfile(database, creator))!;
     await submitProfile(database, creator, profile.revision);
     profile = (await readProfile(database, creator))!;
+    assert.equal(
+      (await readPublicProfiles(database, { category: base.categoryId })).total,
+      0,
+    );
     await moderateProfile(database, admin, {
       id: creator,
       revision: profile.revision,
       decision: "published",
       reason: "Synthetic profile editorial approval",
     });
+    assert.equal(
+      (
+        await readPublicProfiles(database, {
+          category: base.categoryId,
+          industry: base.industryIds[0],
+          useCase: base.useCaseIds[0],
+        })
+      ).rows[0]?.user_id,
+      creator,
+    );
+    await saveContent(database, creator, "skills", {
+      ...base,
+      slug: "private-context-skill",
+      industryIds: [taxonomy.industries[1].id],
+    });
+    assert.equal(
+      (
+        await readPublicProfiles(database, {
+          industry: taxonomy.industries[1].id,
+        })
+      ).total,
+      0,
+    );
     profile = (await readProfile(database, creator))!;
     assert.equal(
       (await readPublicProfile(database, profile.handle))!.user_id,
@@ -457,6 +591,18 @@ export async function contentWorkflowContract(database: Database) {
       (await readPublicStack(database, "content-creator-stack"))!.members
         .length,
       1,
+    );
+    assert.deepEqual(
+      (await readCreatorPublicContent(database, creator)).stacks.map(
+        (s) => s.id,
+      ),
+      ["content-creator-stack"],
+    );
+    assert.deepEqual(
+      (await readToolRelatedContent(database, toolId))
+        .filter((i) => i.kind === "collections")
+        .map((s) => s.id),
+      ["content-creator-stack"],
     );
     assert.equal(
       await readOwnedStackSettings(database, other, "content-user-stack"),
@@ -684,6 +830,7 @@ export async function contentWorkflowContract(database: Database) {
       decision: "suspended",
       reason: "Synthetic publishing suspension",
     });
+    assert.equal((await readSkillPlaybooks(database, id)).length, 0);
     assert.equal(
       await readPublicProfile(database, "synthetic-creator"),
       undefined,

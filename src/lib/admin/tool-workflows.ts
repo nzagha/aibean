@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
+import { notifyDecision } from "../content/decision-notifications";
 import {
   adminToolInput,
   initialTool,
@@ -301,6 +302,11 @@ export async function moderateAdminReview(
       to: value.status,
       reason,
     });
+    await notifyDecision(
+      tx,
+      review.user_id,
+      `Your Tool review is now ${value.status}. See your account for the review status.`,
+    );
   });
 }
 export async function moderateAdminClaim(
@@ -390,5 +396,10 @@ export async function moderateAdminClaim(
       reason,
       toolId: claim.tool_id,
     });
+    await notifyDecision(
+      tx,
+      claim.user_id,
+      `Your Tool ownership claim was ${value.decision}. See your account for the decision.`,
+    );
   });
 }

@@ -12,25 +12,21 @@ import {
 import { safeReturnPath } from "@/lib/catalog/filter";
 import { authMode } from "@/lib/auth-mode";
 import { candidateAuthPost } from "@/lib/supabase/auth-handler";
+import { isSameOrigin, requestOrigin } from "@/lib/request-origin";
 export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   const mode = authMode();
   if (mode === "supabase") return candidateAuthPost("login", request);
-  if (mode !== "password") return new Response("Login is unavailable", { status: 503 });
-  const allowedOrigins = new Set([
-    request.nextUrl.origin,
-    process.env.NEXT_PUBLIC_APP_URL
-      ? new URL(process.env.NEXT_PUBLIC_APP_URL).origin
-      : request.nextUrl.origin,
-  ]);
-  if (!allowedOrigins.has(request.headers.get("origin") || ""))
+  if (mode !== "password")
+    return new Response("Login is unavailable", { status: 503 });
+  if (!isSameOrigin(request))
     return new Response("Invalid request origin", { status: 403 });
   const config = passwordConfiguration();
   if (!config)
     return new Response("Password login is not configured", { status: 503 });
   if (!allowPasswordAttempt())
     return NextResponse.redirect(
-      new URL("/login?error=rate", request.url),
+      new URL("/login?error=rate", requestOrigin(request)),
       303,
     );
   const body = await request.text();
@@ -42,13 +38,13 @@ export async function POST(request: NextRequest) {
   const destination = safeReturnPath(form.get("returnTo"));
   const matches = await verifyPassword(password, config.hash);
   if (email !== config.email || !matches) {
-    const target = new URL("/login", request.url);
+    const target = new URL("/login", requestOrigin(request));
     target.searchParams.set("error", "credentials");
     target.searchParams.set("returnTo", destination);
     return NextResponse.redirect(target, 303);
   }
   const response = NextResponse.redirect(
-    new URL(destination, request.url),
+    new URL(destination, requestOrigin(request)),
     303,
   );
   response.cookies.set(
@@ -57,7 +53,7 @@ export async function POST(request: NextRequest) {
     {
       httpOnly: true,
       sameSite: "lax",
-      secure: request.nextUrl.protocol === "https:",
+      secure: requestOrigin(request).startsWith("https:"),
       path: "/",
       maxAge: SESSION_SECONDS,
     },

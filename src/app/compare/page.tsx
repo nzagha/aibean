@@ -1,13 +1,18 @@
 import Link from "next/link";
 import { ToolLogo } from "@/components/tool-logo";
 import { getTools } from "@/lib/catalog/repository";
-import { categoryById } from "@/lib/catalog/taxonomy";
+import { categoryById, taxonomy, activeUseCases } from "@/lib/catalog/taxonomy";
+import {
+  comparisonContext,
+  comparisonRanks,
+  comparisonVerdict,
+} from "@/lib/catalog/comparison";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Compare AI Tools" };
 export default async function ComparePage({
   searchParams,
 }: {
-  searchParams: Promise<{ tools?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const p = await searchParams;
   const slugs = [
@@ -16,6 +21,7 @@ export default async function ComparePage({
     ),
   ];
   const catalog = await getTools();
+  const context = comparisonContext(p);
   const selected = slugs
     .map((s) => catalog.find((t) => t.slug === s))
     .filter((t) => !!t);
@@ -36,6 +42,7 @@ export default async function ComparePage({
       </div>
     );
   const rows: [string, (t: (typeof selected)[number]) => string][] = [
+    ["Description", (t) => t.description],
     ["Category", (t) => categoryById(t.categoryId)?.name || "Unknown"],
     ["Best for", (t) => t.bestFor],
     ["Not best for", (t) => t.notBestFor],
@@ -77,7 +84,26 @@ export default async function ComparePage({
     ["aiBean Verified", (t) => (t.verified ? "Yes" : "No")],
     ["Owner claimed", (t) => (t.claimed ? "Yes" : "No")],
     ["Last verified", (t) => t.lastVerified || "Not yet verified"],
-    ["Context rank", () => "Not scored yet"],
+    [
+      "Use cases",
+      (t) =>
+        t.useCaseIds
+          .map((id) => activeUseCases.find((c) => c.id === id)?.name || id)
+          .join(", ") || "Unknown / not verified",
+    ],
+    [
+      "Industries",
+      (t) =>
+        t.industries
+          .map(
+            (i) =>
+              (taxonomy.industries.find((c) => c.id === i.id)?.name || i.id) +
+              ": " +
+              i.fit,
+          )
+          .join("; ") || "Unknown / not verified",
+    ],
+    ["Context rank", (t) => comparisonRanks(catalog, [t], context)[0].label],
   ];
   return (
     <div className="container py-16">
@@ -95,6 +121,37 @@ export default async function ComparePage({
           recommendation.
         </p>
       )}
+      <form
+        className="grid gap-5 mb-8 sm:grid-cols-3"
+        aria-label="Comparison context"
+      >
+        <input type="hidden" name="tools" value={slugs.join(",")} />
+        {(
+          [
+            ["category", "Category", taxonomy.categories],
+            ["useCase", "Use case", activeUseCases],
+            ["industry", "Industry", taxonomy.industries],
+          ] as const
+        ).map(([key, label, options]) => (
+          <label className="field" key={key}>
+            {label}
+            <select name={key} defaultValue={context[key] || ""}>
+              <option value="">All {label.toLowerCase()} contexts</option>
+              {options.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+        <button className="button secondary justify-self-start">
+          Compare in this context
+        </button>
+      </form>
+      <p className="preview-notice mb-8">
+        {comparisonVerdict(catalog, selected, context)}
+      </p>
       <div
         className="compare-scroll"
         tabIndex={0}
@@ -130,6 +187,29 @@ export default async function ComparePage({
           </tbody>
         </table>
       </div>
+      <section className="mt-8" aria-label="Reviewed ranking explanations">
+        {comparisonRanks(catalog, selected, context).map(
+          (result, i) =>
+            result.ranking && (
+              <details className="my-4" key={selected[i].id}>
+                <summary className="text-link cursor-pointer">
+                  Why {selected[i].name} has this score
+                </summary>
+                <p className="my-4">
+                  {result.label} · Reviewed scores are grouped by scoring
+                  version. Paid placements and ownership are excluded.
+                </p>
+                <ul>
+                  {result.ranking.explanation.map((e) => (
+                    <li key={e.factor}>
+                      {e.factor}: {e.contribution.toFixed(2)}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ),
+        )}
+      </section>
       <Link href="/tools" className="button secondary mt-8">
         Choose different tools
       </Link>

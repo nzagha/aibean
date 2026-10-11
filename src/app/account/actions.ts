@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { updateOwnedAccount, accountCommand } from "@/lib/db/account-workflows";
 import { rateLimit } from "@/lib/security";
 import type { ActionState } from "@/components/action-form";
+import { refreshAfterCommit } from "@/lib/admin/contracts";
 
 export async function updateAccount(
   _state: ActionState,
@@ -26,13 +27,17 @@ export async function updateAccount(
         "This item could not be updated. It may be unavailable or you may have reached the request limit. Refresh and try again.",
     };
   }
-  revalidatePath("/account");
-  revalidatePath("/creator");
-  revalidatePath("/tools", "layout");
-  return {
-    message:
-      input.data.operation === "edit-review"
-        ? "Review resubmitted for moderation."
-        : "Your changes are saved.",
-  };
+  return refreshAfterCommit(
+    {
+      message:
+        input.data.operation === "edit-review"
+          ? "Review resubmitted for moderation."
+          : "Your changes are saved.",
+    },
+    () => {
+      revalidatePath("/account");
+      revalidatePath("/creator");
+      revalidatePath("/tools", "layout");
+    },
+  );
 }

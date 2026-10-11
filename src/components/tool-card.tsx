@@ -1,8 +1,8 @@
-import { ArrowUpRight, Bookmark } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { Tool } from "@/lib/catalog/types";
 import { categoryById } from "@/lib/catalog/taxonomy";
 import { CompareButton } from "./compare-provider";
-import { saveTool } from "@/app/actions";
+import { ToolSave } from "./tool-save";
 import { ToolLogo } from "./tool-logo";
 import { PreviewCard, PreviewLink } from "./interactive-preview";
 import { toolPreview } from "@/lib/catalog/tool-preview";
@@ -17,23 +17,26 @@ export function TrustStatus({ tool }: { tool: Tool }) {
     </div>
   );
 }
-export function ToolCard({ tool }: { tool: Tool }) {
+export function ToolCard({
+  tool,
+  rankLabel,
+}: {
+  tool: Tool;
+  rankLabel?: string;
+}) {
   const preview = toolPreview(tool);
   return (
     <PreviewCard className="tool-card" preview={preview}>
       <div className="flex items-center justify-between">
         <ToolLogo tool={tool} />
         {tool.demo && <span className="badge">Example listing</span>}
-        <form action={saveTool}>
-          <input type="hidden" name="toolId" value={tool.id} />
-          <input type="hidden" name="returnTo" value={`/tools/${tool.slug}`} />
-          <button aria-label={`Save ${tool.name}`} className="icon-button">
-            <Bookmark size={18} />
-          </button>
-        </form>
+        <ToolSave id={tool.id} slug={tool.slug} name={tool.name} />
       </div>
       <p className="mt-5 text-xs text-muted">
         {tool.categoryLabel || categoryById(tool.categoryId)?.name}
+        {rankLabel && (
+          <span className="block mt-1">Context rank: {rankLabel}</span>
+        )}
       </p>
       <h3 className="mt-2">
         <PreviewLink preview={preview}>{tool.name}</PreviewLink>

@@ -12,12 +12,13 @@ import {
   resourceProviderConfigured,
 } from "./providers";
 import { revalidatePath } from "next/cache";
+import { isSameOrigin } from "../request-origin";
 const MAX_MULTIPART = 6 * 1024 * 1024;
 export async function resourceUploadHandler(
   request: NextRequest,
   admin = false,
 ) {
-  if (request.headers.get("origin") !== request.nextUrl.origin)
+  if (!isSameOrigin(request))
     return NextResponse.json(
       { error: "Request origin did not match." },
       { status: 403 },
