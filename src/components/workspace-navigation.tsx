@@ -17,6 +17,12 @@ export async function WorkspaceNavigation() {
       )}
       {links.some((link) => link.href === "/account") && (
         <>
+          <Link className="text-link" href="/account/profile">
+            Profile →
+          </Link>
+          <Link className="text-link" href="/account/activity">
+            Saved content & notifications →
+          </Link>
           <Link className="text-link" href="/account/billing">
             Billing →
           </Link>

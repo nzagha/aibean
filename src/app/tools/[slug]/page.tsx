@@ -11,6 +11,9 @@ import { TrustStatus, ToolCard } from "@/components/tool-card";
 import { ToolLogo } from "@/components/tool-logo";
 import { saveTool, submitReview, addToStack } from "@/app/actions";
 import { ownerPredicates } from "@/lib/db/owned-resources";
+import { contentAvailable } from "@/lib/content/storage";
+import { readToolRelatedContent } from "@/lib/content/queries";
+import { ReportContent } from "@/components/report-content";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
@@ -46,8 +49,17 @@ export default async function ToolPage({
       ).length > 0
     : false;
   const reviews = await getReviews(t.id);
+  const contentReady =
+    !!process.env.DATABASE_URL && (await contentAvailable(db()));
+  const related = contentReady ? await readToolRelatedContent(db(), t.id) : [];
   const similar = (await getTools())
-    .filter((x) => x.id !== t.id && x.categoryId === t.categoryId)
+    .filter(
+      (x) =>
+        x.id !== t.id &&
+        (t.similarToolIds?.length
+          ? t.similarToolIds.includes(x.id)
+          : x.categoryId === t.categoryId),
+    )
     .slice(0, 3);
   const login = `/login?returnTo=/tools/${t.slug}`;
   return (
@@ -159,6 +171,7 @@ export default async function ToolPage({
                 <article className="placeholder-card mb-4" key={r.id}>
                   <strong>{r.rating} / 5</strong>
                   <p className="mt-3 whitespace-pre-wrap">{r.body}</p>
+                  {contentReady && <ReportContent kind="reviews" id={r.id} />}
                 </article>
               ))
             ) : (
@@ -212,6 +225,15 @@ export default async function ToolPage({
                 Playbooks →
               </Link>
             </div>
+            {related.map((item) => (
+              <Link
+                className="text-link block mt-5"
+                key={item.id}
+                href={"/" + item.kind + "/" + item.slug}
+              >
+                {item.title} →
+              </Link>
+            ))}
           </section>
         </div>
         <aside className="placeholder-card h-fit">
@@ -226,16 +248,27 @@ export default async function ToolPage({
             <br />
             Trial: {t.trial === null ? "Unknown" : t.trial ? "Yes" : "No"}
           </p>
-          {t.website && (
-            <a
-              href={t.website}
-              className="button primary w-full"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Visit official website →
-            </a>
-          )}
+          {t.website &&
+            (contentReady && !t.demo ? (
+              <form
+                method="post"
+                action={"/outbound/tools/" + t.slug}
+                target="_blank"
+              >
+                <button className="button primary w-full">
+                  Visit official website →
+                </button>
+              </form>
+            ) : (
+              <a
+                href={t.website}
+                className="button primary w-full"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Visit official website →
+              </a>
+            ))}
           <div className="my-4">
             <CompareButton tool={t} />
           </div>

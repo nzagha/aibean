@@ -10,7 +10,7 @@ export default async function SearchPage({
   const p = await searchParams;
   const scope = scopes.find(([s]) => s === p.scope);
   const q = typeof p.q === "string" ? p.q.slice(0, 120) : "";
-  if (scope?.[0] === "tools") redirect(`/tools?q=${encodeURIComponent(q)}`);
+  if (scope) redirect(`/${scope[0]}?q=${encodeURIComponent(q)}`);
   return (
     <div className="container py-16">
       <span className="eyebrow">Choose your direction</span>

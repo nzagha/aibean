@@ -2,7 +2,8 @@ import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { stripeClient, stripeConfigured } from "@/lib/billing";
 import { revalidatePath } from "next/cache";
-import { paymentMatches, placementWindow } from "@/lib/featured/rules";
+import { paymentMatches } from "@/lib/featured/rules";
+import { paidPlacementWindow } from "@/lib/featured/moderation";
 import { db } from "@/lib/db";
 import { commerceAvailable } from "@/lib/admin/commerce-storage";
 import {
@@ -149,7 +150,11 @@ export async function POST(request: Request) {
         .set({
           status: publishable ? "active" : "suspended",
           paidAt: now,
-          ...placementWindow(placement.durationDays, now),
+          ...paidPlacementWindow(
+            placement.durationDays,
+            placement.startsAt,
+            now,
+          ),
           ...(publishable
             ? {}
             : {

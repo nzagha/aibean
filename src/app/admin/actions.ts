@@ -1,5 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { updateSimilarTools } from "@/lib/content/operations";
 import { requireAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/security";
@@ -256,6 +257,18 @@ export async function saveRanking(_state: ActionState, form: FormData) {
     });
     return {
       message: `Organic score ${result.score} saved with its explanation and audit trail.`,
+    };
+  });
+}
+
+export async function saveSimilarTools(_state: ActionState, form: FormData) {
+  return command(async (id) => {
+    await updateSimilarTools(db(), id, {
+      ...Object.fromEntries(form),
+      relatedIds: form.getAll("relatedIds").map(String),
+    });
+    return {
+      message: "Similar-Tool relationships saved with an audit reason.",
     };
   });
 }

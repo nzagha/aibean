@@ -127,6 +127,12 @@ export default async function Account() {
                 <summary className="text-link cursor-pointer">
                   Manage stack
                 </summary>
+                <Link
+                  className="text-link inline-block mt-4"
+                  href={"/account/stacks/" + s.id}
+                >
+                  Order, notes & visibility →
+                </Link>
                 <ActionForm action={updateAccount} label="Rename stack">
                   <input type="hidden" name="operation" value="rename-stack" />
                   <input type="hidden" name="stackId" value={s.id} />

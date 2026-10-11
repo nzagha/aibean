@@ -21,7 +21,7 @@ export default async function Vendor() {
       <p className="mb-8">
         Access is granted per tool after payment and ownership review. Public
         edits and verification use independently reviewed requests. Paid
-        settlement and advanced analytics remain gated until integration.
+        settlement opens when the reviewed sandbox commerce package is enabled.
       </p>
       <div className="flex flex-wrap gap-5 mb-8">
         <p>
@@ -33,6 +33,11 @@ export default async function Vendor() {
         <Link href="/featured/manage" className="text-link">
           My sponsored placements →
         </Link>
+        {catalog.length > 0 && (
+          <Link href="/creator/content/events" className="text-link">
+            My Events →
+          </Link>
+        )}
       </div>
       {catalog.length ? (
         catalog.map((t) => {

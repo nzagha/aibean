@@ -118,6 +118,20 @@ export async function FeaturedAdmin({ params = {} }: { params?: AdminParams }) {
                 Reason (visible to applicant)
                 <input name="reason" required minLength={5} maxLength={500} />
               </label>
+              {p.status === "pending_review" && (
+                <label className="field">
+                  Scheduled start (optional, UTC)
+                  <input
+                    name="scheduledStart"
+                    maxLength={100}
+                    placeholder="2026-11-01T12:00:00Z"
+                  />
+                  <span className="text-sm">
+                    Leave empty to start after payment. A later payment shifts
+                    the full five-day window forward.
+                  </span>
+                </label>
+              )}
             </ActionForm>
           )}
         </article>

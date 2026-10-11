@@ -1,4 +1,6 @@
 "use server";
+import { moderatePlacement } from "@/lib/featured/moderation";
+import { adminMessage, refreshAfterCommit } from "@/lib/admin/contracts";
 import { randomUUID } from "node:crypto";
 import { and, eq, or, gt, inArray } from "drizzle-orm";
 import { z } from "zod";
@@ -57,24 +59,20 @@ export async function requestFeatured(
     if (existing)
       return "This tool already has an open request or an unexpired placement. Try again when it is complete.";
     const id = randomUUID();
-    await tx
-      .insert(featuredPlacements)
-      .values({
-        id,
-        userId: user.id,
-        toolId: tool.id,
-        sponsorName: input.data.sponsorName,
-        note: input.data.note,
-      });
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: user.id,
-        entityId: id,
-        action: "featured.requested",
-        detail: "Homepage sponsorship requested; approval and payment required",
-      });
+    await tx.insert(featuredPlacements).values({
+      id,
+      userId: user.id,
+      toolId: tool.id,
+      sponsorName: input.data.sponsorName,
+      note: input.data.note,
+    });
+    await tx.insert(auditLogs).values({
+      id: randomUUID(),
+      actorId: user.id,
+      entityId: id,
+      action: "featured.requested",
+      detail: "Homepage sponsorship requested; approval and payment required",
+    });
     return null;
   });
   if (result) return { error: result };
@@ -91,50 +89,27 @@ export async function moderateFeatured(
   form: FormData,
 ): Promise<ActionState> {
   const user = await requireAdmin();
-  const input = z
-    .object({
-      id: z.string().uuid(),
-      decision: z.enum(["approved", "rejected", "suspended"]),
-      reason: z.string().trim().min(5).max(500),
-    })
-    .safeParse(Object.fromEntries(form));
-  if (!input.success)
-    return {
-      error: "Choose a decision and add a reason of at least five characters.",
-    };
-  const error = await db().transaction(async (tx) => {
-    const [placement] = await tx
-      .select()
-      .from(featuredPlacements)
-      .where(eq(featuredPlacements.id, input.data.id))
-      .for("update");
-    if (!placement) return "Placement not found.";
-    const expected =
-      input.data.decision === "suspended" ? "active" : "pending_review";
-    if (placement.status !== expected)
-      return "This request has changed. Refresh before reviewing it.";
-    await tx
-      .update(featuredPlacements)
-      .set({ status: input.data.decision, reviewReason: input.data.reason })
-      .where(eq(featuredPlacements.id, placement.id));
-    await tx
-      .insert(auditLogs)
-      .values({
-        id: randomUUID(),
-        actorId: user.id,
-        entityId: placement.id,
-        action: `featured.${input.data.decision}`,
-        detail: input.data.reason,
-      });
-    return null;
-  });
-  if (error) return { error };
-  revalidatePath("/admin");
-  revalidatePath("/featured/manage");
-  revalidatePath("/");
-  return { message: "Placement updated." };
+  try {
+    await rateLimit(user.id, "featured-moderation", 100);
+    await moderatePlacement(db(), user.id, {
+      ...Object.fromEntries(form),
+      scheduledStart: String(form.get("scheduledStart") || ""),
+    });
+    return refreshAfterCommit(
+      {
+        message:
+          "Placement review saved. Payment is required before its scheduled window can start.",
+      },
+      () => {
+        revalidatePath("/admin");
+        revalidatePath("/featured/manage");
+        revalidatePath("/");
+      },
+    );
+  } catch (error) {
+    return { error: adminMessage(error) };
+  }
 }
-
 export async function checkoutFeatured(
   _state: ActionState,
   form: FormData,

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { readAdminTool } from "@/lib/admin/queries";
+import { readAdminTool, readAdminTools } from "@/lib/admin/queries";
 import { verificationStates } from "@/lib/catalog/types";
 import { ActionForm } from "@/components/action-form";
 import { AdminToolFields } from "@/components/admin-tool-fields";
@@ -12,17 +12,29 @@ import {
   changeToolStatus,
   reviewTrust,
   saveRanking,
+  saveSimilarTools,
 } from "../../actions";
 import { weights } from "@/lib/ranking";
 export default async function ToolEditor({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ relatedSearch?: string }>;
 }) {
   const admin = await requireAdmin();
   const { id } = await params;
   const tool = await readAdminTool(db(), admin.id, id);
   if (!tool) notFound();
+  const relatedQuery = await searchParams;
+  const relatedOptions = await readAdminTools(db(), admin.id, {
+    q:
+      typeof relatedQuery.relatedSearch === "string"
+        ? relatedQuery.relatedSearch
+        : "",
+    status: "published",
+    sort: "name",
+  });
   const keys = (
     <>
       <input type="hidden" name="toolId" value={tool.id} />
@@ -134,6 +146,47 @@ export default async function ToolEditor({
         </ActionForm>
       </section>
       <div className="grid gap-8 lg:grid-cols-2 mt-8">
+        <section className="placeholder-card">
+          <h2 className="text-2xl">Similar Tools</h2>
+          <p className="my-5 text-sm">
+            Curate up to 12 related published Tools. Search the catalog below;
+            existing selections remain available.
+          </p>
+          <form className="my-5">
+            <label className="field">
+              Find a related Tool
+              <input
+                name="relatedSearch"
+                defaultValue={relatedOptions.filters.q}
+                maxLength={100}
+              />
+            </label>
+            <button className="button secondary">Search related Tools</button>
+          </form>
+          <ActionForm action={saveSimilarTools} label="Save related Tools">
+            {keys}
+            {Array.from(
+              new Set([
+                ...(tool.data.similarToolIds || []),
+                ...relatedOptions.rows
+                  .filter((t) => t.id !== id && !t.data.demo)
+                  .map((t) => t.id),
+              ]),
+            ).map((target) => (
+              <label className="my-4 flex gap-3" key={target}>
+                <input
+                  type="checkbox"
+                  name="relatedIds"
+                  value={target}
+                  defaultChecked={tool.data.similarToolIds?.includes(target)}
+                />
+                {relatedOptions.rows.find((r) => r.id === target)?.name ||
+                  "Previously selected Tool"}
+              </label>
+            ))}
+            <ReasonField />
+          </ActionForm>
+        </section>
         <section className="placeholder-card">
           <h2 className="text-2xl">Publication</h2>
           <ActionForm

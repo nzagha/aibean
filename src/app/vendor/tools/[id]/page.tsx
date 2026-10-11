@@ -47,6 +47,12 @@ export default async function Requests({
   return (
     <div className="container py-16">
       <h1 className="font-display text-4xl">Requests for {tool.name}</h1>
+      <Link
+        className="text-link inline-block my-5"
+        href={"/vendor/tools/" + id + "/analytics"}
+      >
+        Tool analytics →
+      </Link>
       <p className="preview-notice my-6">
         Proposals preserve the current public listing. Approval requires
         reconciled sandbox payment or a configured zero-price verification

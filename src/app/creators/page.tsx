@@ -1,12 +1,21 @@
 import { ModulePreview } from "@/components/module-preview";
 import Link from "next/link";
+import { PublicCreatorResults } from "@/components/public-creator-results";
+import type { AdminParams } from "@/lib/admin/queries";
+export const dynamic = "force-dynamic";
 export const metadata = { title: "Creators" };
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<AdminParams>;
+}) {
+  const params = await searchParams;
   return (
     <ModulePreview
       scope="creators"
       title="Learn from people who do the work."
       description="Find the people behind useful AI Skills, practical Playbooks, and thoughtfully assembled tool stacks."
+      results={<PublicCreatorResults params={params} />}
       items={[
         {
           title: "Creator profiles",
@@ -22,7 +31,9 @@ export default function Page() {
         },
       ]}
     >
-      <Link href="/creators/apply" className="button primary mb-8">Become a Creator →</Link>
+      <Link href="/creators/apply" className="button primary mb-8">
+        Become a Creator →
+      </Link>
     </ModulePreview>
   );
 }

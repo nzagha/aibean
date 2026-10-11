@@ -1,11 +1,20 @@
 import { ModulePreview } from "@/components/module-preview";
+import { PublicContentResults } from "@/components/public-content-results";
+import type { AdminParams } from "@/lib/admin/queries";
+export const dynamic = "force-dynamic";
 export const metadata = { title: "AI Skills" };
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<AdminParams>;
+}) {
+  const params = await searchParams;
   return (
     <ModulePreview
       scope="skills"
       title="Make the next task easier."
       description="Focused AI Skills connect a specific outcome to the tools, prompts, and steps that help you get there."
+      results={<PublicContentResults kind="skills" params={params} />}
       items={[
         {
           title: "A clear outcome",

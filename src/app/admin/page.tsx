@@ -4,10 +4,8 @@ import { db } from "@/lib/db";
 import { readAdminOverview } from "@/lib/admin/queries";
 export default async function Admin() {
   const admin = await requireAdmin();
-  const { counts, reviewReady, recent } = await readAdminOverview(
-    db(),
-    admin.id,
-  );
+  const { counts, reviewReady, commercialReady, contentReady, recent } =
+    await readAdminOverview(db(), admin.id);
   return (
     <>
       <h2 className="text-2xl mb-6">Operations overview</h2>
@@ -36,10 +34,13 @@ export default async function Admin() {
               : "Creator applications, Vendor requests and disputes await separately approved database installation and validation."}
           </p>
           <p className="text-sm text-muted">
-            Paid edits and paid verification await payment settlement
-            integration. Creator activation remains a separate operator
-            approval. Skills, Playbooks, resources and Events need their own
-            reviewed persistence packages.
+            {commercialReady
+              ? "Sandbox payment and subscription storage is ready."
+              : "Sandbox commerce awaits its separately reviewed database package."}{" "}
+            {contentReady
+              ? "Skills, Playbooks, profiles, campaigns and Events are ready for editorial review."
+              : "Content publishing awaits its separately reviewed database package."}{" "}
+            Creator activation remains a separate operator approval.
           </p>
         </section>
       </div>
