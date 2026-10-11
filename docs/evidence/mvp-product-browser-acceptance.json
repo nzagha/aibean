@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-11",
+  "method": "Observed interactions through Codex in-app browser; not an automated all-action browser suite",
+  "target": "Fresh disposable loopback PostgreSQL 17 and synthetic Next.js fixtures",
+  "hostedAccess": false,
+  "accounts": ["synthetic ordinary User", "synthetic Admin with additive Creator and one Tool-scoped Vendor capability"],
+  "viewports": [
+    {"width":1280,"height":900,"sampledDocumentWidth":1265,"result":"PASS"},
+    {"width":768,"height":1024,"sampledDocumentWidth":753,"result":"PASS"},
+    {"width":390,"height":844,"sampledDocumentWidth":375,"result":"PASS"}
+  ],
+  "journeys": [
+    {"name":"Synthetic password login and canonical account/workspace navigation","result":"PASS"},
+    {"name":"Ordinary User creates Stack, saves Tool and reloads persisted account state","result":"PASS"},
+    {"name":"Tool preview and full detail; review submission to pending; add Tool to owned Stack","result":"PASS"},
+    {"name":"Ordinary User denied Admin and sees explicit account feedback","result":"PASS"},
+    {"name":"Admin approves ordinary User review; public Tool rating changes to 4 with one approved review","result":"PASS"},
+    {"name":"Creator resource draft/save/submit; Admin publication; actual public @handle campaign","result":"PASS"},
+    {"name":"Creator published Skill editor and Tool-scoped Vendor workspace inventory","result":"PASS"},
+    {"name":"Compare two Tools, actual matrix, reload-persistent tray and ArrowRight container scroll","result":"PASS"},
+    {"name":"Mobile showModal navigation focuses Close; Escape closes and returns focus to Open navigation","result":"PASS"},
+    {"name":"Reduced-motion session produces no hydration mismatch","result":"PASS"},
+    {"name":"Hydrated content/submission editors: zero nested forms and unlabelled controls on sampled pages","result":"PASS"},
+    {"name":"Creator category filter retains published result; combined unmatched industry shows truthful empty state","result":"PASS"}
+  ],
+  "screenshots": [
+    "docs/evidence/mvp-creator-resource-desktop.jpg",
+    "docs/evidence/mvp-admin-mobile.jpg",
+    "docs/evidence/mvp-user-tablet.jpg",
+    "docs/evidence/mvp-compare-mobile.jpg"
+  ],
+  "limits": [
+    "Separate non-Admin Creator/Vendor capability boundaries verified in native database contracts, not inferred from combined Admin browser account.",
+    "Real Supabase Auth, email, Stripe, Storage and malware engine not exercised.",
+    "Upload provider disabled in browser fixture; enabled-provider form/upload/download journey remains gated.",
+    "No full WCAG certification, complete screen-reader/contrast/device matrix or production load claim.",
+    "Motion informational reduced-motion warnings were expected; no hydration error observed in corrected fixture.",
+    "Each agent-created tab closed, viewport overrides reset and new fixture processes stopped; original user tabs/dev process and retained recovery targets untouched."
+  ]
+}

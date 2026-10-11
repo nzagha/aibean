@@ -1,5 +1,19 @@
 # aiBean MVP product completion report — 11 October 2026
 
+**Current acceptance publication verified:** Published corrective implementation 675c1ec65f5b512fc5cc17117db48da35d7e0320 and isolated acceptance harness 3f4ff7cf3ee202cc0dc062ab0697b5b42cddde36 to codex/supabase-foundation. [GitHub Validate 38162615660](https://github.com/nzagha/aibean/actions/runs/38162615660) passed lint, TypeScript, all automated tests, production build and runtime dependency audit on that exact complete code. Native PostgreSQL, HTTP and browser evidence were executed locally with synthetic fixtures; CI does not establish hosted/provider acceptance.
+
+## Independent product acceptance update
+
+**Current acceptance is local and bounded; full hosted MVP is incomplete.** Actual corrections address @handle/campaign routing, Creator Stack SQL, reduced-motion hydration, resource form nesting, actual loopback request origins, stateful saves/Stacks/review resubmission and concurrent review rejection. Discovery now includes bounded Tool pagination, context explanations, parent-aware stable subcategories, contextual Creators, reverse Skill/Playbook links and public Creator Stacks. Admin/commercial decisions notify affected accounts transactionally using the existing content model.
+
+Final local checks: **104/104 automated tests, 29/29 native PostgreSQL scenarios, lint/TypeScript/build PASS and zero runtime vulnerabilities**. Exact HTTP outcomes and actual synthetic desktop/tablet/mobile journeys are linked below. Browser checks include User save/Stack/review, Admin moderation, Creator campaign publication, Vendor owned inventory, modal focus/Escape, reduced motion, labels and contained comparison scrolling. Native tests independently cover non-Admin Creator/Vendor boundaries, concurrent revision rejection and notification/decision/audit rollback.
+
+This supersedes the earlier unverified-browser statement only for sampled local journeys. Real Supabase/Stripe/Storage/scanner operation remains unverified. Authenticated durable comparisons are **required incomplete MVP functionality**, not optional. Broader follows, behavioral/campaign analytics, affiliates, subscription entitlements/exceptions, profile/campaign media extensions and identity release engineering need reviewed models/contracts or provider setup. Approved v1.1 reconciliation remains unresolved. No hosted connection, migration, Auth activation, real accounts/mail, DNS, live payment or recovery retry occurred.
+
+[Corrections, prioritized gaps and exact approvals](MVP_PRODUCT_ACCEPTANCE_AND_UX_RESULT.md), [matrix](MVP_ACCEPTANCE_MATRIX.md), [route coverage](MVP_ROUTE_FUNCTIONAL_COVERAGE.md), [HTTP](evidence/mvp-product-http-acceptance.json), [native PostgreSQL](evidence/mvp-product-native-acceptance.json), [browser observations/screenshots](evidence/mvp-product-browser-acceptance.json).
+
+The following sections retain the earlier implementation snapshot and dated 94-test/28-native/11-HTTP evidence; the update above is current.
+
 Status: Admin implementation milestone passes local functional acceptance; User, Vendor and Creator panel workflows have been extended and tested. Full hosted MVP release acceptance remains incomplete because installation, identity/provider, Storage and operational approvals are separate gates.
 
 ## What is implemented and verified

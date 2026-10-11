@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-11T18:01:54.719Z",
+  "hostedAccess": false,
+  "results": [
+    {
+      "path": ".gitattributes",
+      "expected": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "actual": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "pass": true
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "expected": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8",
+      "actual": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8",
+      "pass": true
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "expected": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "actual": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "pass": true
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "expected": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "actual": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "pass": true
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "expected": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd",
+      "actual": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "expected": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d",
+      "actual": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "expected": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85",
+      "actual": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "expected": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99",
+      "actual": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99",
+      "pass": true
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "expected": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "actual": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "expected": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b",
+      "actual": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "expected": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e",
+      "actual": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "expected": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f",
+      "actual": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f",
+      "pass": true
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "expected": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b",
+      "actual": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b",
+      "pass": true
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "expected": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "actual": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "pass": true
+    },
+    {
+      "path": "docs/source-of-truth/aiBean_Taxonomy_Package_v1.xlsx",
+      "expected": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "actual": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "pass": true
+    },
+    {
+      "path": "docs/source-of-truth/aiBean_MVP_Development_Master_Plan_v0_3.docx",
+      "expected": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "actual": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "pass": true
+    },
+    {
+      "path": "src/data/taxonomy.json",
+      "expected": "b52b7507ec28b3ee4561d6e94294fd868b22ef5519d8385120af362fb090a5fc",
+      "actual": "b52b7507ec28b3ee4561d6e94294fd868b22ef5519d8385120af362fb090a5fc",
+      "pass": true
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v2.json",
+      "expected": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+      "actual": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-review-v1.sql",
+      "expected": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "actual": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "expected": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "actual": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "expected": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "actual": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+      "expected": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "actual": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "pass": true
+    }
+  ],
+  "productionTraceCheck": {
+    "traceFiles": 83,
+    "testArtifactReferences": 0
+  },
+  "localChecks": {
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "tests": {
+      "pass": 104,
+      "fail": 0,
+      "skipped": 0
+    },
+    "nativePostgreSQL": {
+      "pass": 29,
+      "fail": 0
+    },
+    "productionBuild": "PASS",
+    "runtimeAuditVulnerabilities": 0,
+    "http": {
+      "pass": 119,
+      "fail": 0,
+      "pagePatterns": 65
+    }
+  },
+  "publication": {
+    "implementationCommit": "675c1ec65f5b512fc5cc17117db48da35d7e0320",
+    "harnessCommit": "3f4ff7cf3ee202cc0dc062ab0697b5b42cddde36",
+    "ciRun": 38162615660,
+    "ciConclusion": "success",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38162615660"
+  }
+}

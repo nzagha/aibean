@@ -1,0 +1,1283 @@
+{
+  "date": "2026-10-11T18:02:14.201Z",
+  "target": "new disposable loopback PostgreSQL 17 fixture",
+  "hostedAccess": false,
+  "results": [
+    {
+      "route": "/account/activity",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/billing",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/profile",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/stacks/32e93aad-9d1a-44a1-a718-b95f312c8ad9",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 404,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/submissions",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 1,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/analytics",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/audit",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/commerce/payments",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/commerce/subscriptions",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/commerce/submissions",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/commerce/pricing",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/skills",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/playbooks",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/events",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/resources",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/skills/f6ef4166-6883-4cfb-aad7-60125d4732cb",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/playbooks/f47b41bb-9265-4198-9613-91fa30774f27",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/events/fabe1ee8-7b99-41a6-a549-213636834d0f",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/featured",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/files",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust.",
+        "Resource file review"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/profiles",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/reports",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/taxonomy",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/tools/new",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/tools",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/tools/e26913a2-955d-4791-afd4-42744e63449c",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 1,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/tools/e26913a2-955d-4791-afd4-42744e63449c/preview",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/reviews",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/claims",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/creators",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/edits",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/verification",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/disputes",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/capabilities",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Content and trust."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/categories/chatbots-assistants-and-copilots",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/claim/acceptance-tool-1",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Claim Acceptance synthetic Tool 1.",
+        "This tool already has an owner."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/collections",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/collections/32e93aad-9d1a-44a1-a718-b95f312c8ad9",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 404,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/compare",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "A clearer choice."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/confirm-email",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/analytics",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/skills",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/playbooks",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/events",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/resources",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/skills/f6ef4166-6883-4cfb-aad7-60125d4732cb",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/playbooks/new",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/resources/new",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/events/new",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creators/apply",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Become a Creator",
+        "1. Start with your account",
+        "2. Apply for review",
+        "3. Publish after approval"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creators",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Learn from people who do the work.",
+        "Find a Creator",
+        "Creator profiles",
+        "Purpose-built stacks",
+        "The exact resource"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/events",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Find your next room.",
+        "Discover events",
+        "Online or in person",
+        "Know before you go",
+        "Register with the organizer"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/events/acceptance-event",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Acceptance synthetic Event",
+        "Synthetic organizer",
+        "Make it yours"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/explore",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/featured/manage",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Your tool. In the spotlight.",
+        "Request a featured spot",
+        "Your placements"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/featured",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Good tools deservea little spotlight.",
+        "$99 USD / 5 days",
+        "01 · Pick your tool",
+        "02 · Get approved",
+        "03 · Take the spotlight"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/for-vendors",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Give your tool a clear home.",
+        "Start with a User account.",
+        "1. Prove your affiliation",
+        "2. Pay for review",
+        "3. Manage responsibly"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/forgot-password",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/industries",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "AI for Your Business.",
+        "Creators, Influencers & Solopreneurs →",
+        "Marketing Agencies & Growth Teams →",
+        "SaaS & Software Companies →",
+        "E-commerce & Retail →",
+        "Education & Online Learning →"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/industries/creators-influencers-and-solopreneurs",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "AI for Creators, Influencers & Solopreneurs.",
+        "This industry is ready for its first listings."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/knowledge",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/login",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Welcome back.",
+        "Sign in with email"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Find.Compare.Master.",
+        "Featured AI Tools",
+        "Big ideas. The right tools.",
+        "AI for Your Business.",
+        "A clearer route to better work.",
+        "For the oneswho get things done."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/playbooks",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "From first step to finished work.",
+        "Discover playbooks",
+        "See the whole route",
+        "Follow ordered steps",
+        "Build your own stack"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/playbooks/acceptance-playbook",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Acceptance synthetic Playbook",
+        "A concrete synthetic workflow outcome.",
+        "Make it yours"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/pricing",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Membership & services."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/register",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Build your next stack.",
+        "Registration is not open yet."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/reset-password",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/search",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Find the right kind of answer.",
+        "Choose a search scope to begin."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/skills",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Make the next task easier.",
+        "Discover skills",
+        "A clear outcome",
+        "Tools and instructions",
+        "A route to more"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/skills/acceptance-skill",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Acceptance synthetic Skill",
+        "What you’ll achieve",
+        "Instructions",
+        "Make it yours"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/subcategories/general-ai-chat-assistants",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/submit",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Bring your work to aiBean.",
+        "AI Tool",
+        "Skill or Playbook",
+        "Event"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/submit/tool",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Your Tool submissions",
+        "Submit a Tool",
+        "Submission history"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/tools",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/tools/acceptance-tool-1",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/use-cases/find-the-best-ai-tool-for-a-specific-task",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor/tools/e26913a2-955d-4791-afd4-42744e63449c/analytics",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor/tools/e26913a2-955d-4791-afd4-42744e63449c",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/@acceptance-creator",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Acceptance synthetic Creator",
+        "skills",
+        "playbooks",
+        "resources",
+        "events",
+        "stacks"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/@acceptance-creator/not-published",
+      "role": "synthetic-admin-creator-vendor",
+      "status": 404,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/profile",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/activity",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/billing",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/submissions",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creators/apply",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Become a Creator",
+        "1. Start with your account",
+        "2. Apply for review",
+        "3. Publish after approval",
+        "Your application"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/submit/tool",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Your Tool submissions",
+        "Submit a Tool",
+        "Submission history"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/featured/manage",
+      "role": "ordinary-user",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Your tool. In the spotlight.",
+        "Request a featured spot",
+        "Your placements"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin",
+      "role": "ordinary-user-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/tools",
+      "role": "ordinary-user-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin/content/skills",
+      "role": "ordinary-user-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator/content/skills",
+      "role": "ordinary-user-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor/tools/e26913a2-955d-4791-afd4-42744e63449c",
+      "role": "ordinary-user-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/admin",
+      "role": "anonymous-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account",
+      "role": "anonymous-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creator",
+      "role": "anonymous-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/vendor",
+      "role": "anonymous-denial",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/skills?q=not-a-match",
+      "role": "public-empty-filter",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Make the next task easier.",
+        "Discover skills",
+        "A clear outcome",
+        "Tools and instructions",
+        "A route to more"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/skills?category=CAT-01",
+      "role": "public-context-filter",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Make the next task easier.",
+        "Discover skills",
+        "A clear outcome",
+        "Tools and instructions",
+        "A route to more"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/compare?tools=acceptance-tool-1,acceptance-tool-2&category=CAT-01",
+      "role": "public-comparison",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "See the differences."
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/tools/not-published",
+      "role": "public-unavailable",
+      "status": 404,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creators?category=CAT-01",
+      "role": "creator-context-filter",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Learn from people who do the work.",
+        "Find a Creator",
+        "Creator profiles",
+        "Purpose-built stacks",
+        "The exact resource"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/creators?industry=VER-01",
+      "role": "creator-empty-context-filter",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Learn from people who do the work.",
+        "Find a Creator",
+        "Creator profiles",
+        "Purpose-built stacks",
+        "The exact resource"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/subcategories/knowledge-base-assistants",
+      "role": "ambiguous-historical-subcategory",
+      "status": 404,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/subcategories/knowledge-base-assistants?category=CAT-01",
+      "role": "explicit-parent-subcategory",
+      "status": 307,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/account/stacks/32e93aad-9d1a-44a1-a718-b95f312c8ad9",
+      "role": "ordinary-user-owned-stack",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/@acceptance-creator/acceptance-resource",
+      "role": "public-published-resource",
+      "status": 200,
+      "outcome": "PASS",
+      "headings": [
+        "Acceptance synthetic resource",
+        "Get this resource"
+      ],
+      "unlabelled": 0,
+      "nestedForms": 0
+    },
+    {
+      "route": "/outbound/tools/acceptance-tool-1",
+      "role": "same-origin-outbound",
+      "status": 303,
+      "outcome": "PASS",
+      "headings": []
+    },
+    {
+      "route": "/outbound/tools/acceptance-tool-1",
+      "role": "cross-origin-denial",
+      "status": 403,
+      "outcome": "PASS",
+      "headings": []
+    },
+    {
+      "route": "/outbound/events/acceptance-event",
+      "role": "same-origin-outbound",
+      "status": 303,
+      "outcome": "PASS",
+      "headings": []
+    },
+    {
+      "route": "/outbound/events/acceptance-event",
+      "role": "cross-origin-denial",
+      "status": 403,
+      "outcome": "PASS",
+      "headings": []
+    },
+    {
+      "route": "/outbound/resources/acceptance-resource",
+      "role": "same-origin-outbound",
+      "status": 303,
+      "outcome": "PASS",
+      "headings": []
+    },
+    {
+      "route": "/outbound/resources/acceptance-resource",
+      "role": "cross-origin-denial",
+      "status": 403,
+      "outcome": "PASS",
+      "headings": []
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "checks": 119,
+    "pass": 119,
+    "fail": 0
+  }
+}
