@@ -1,3 +1,4 @@
+import { notifyFollowers } from "../discovery/follows";
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
 import { notifyDecision } from "../content/decision-notifications";
@@ -183,6 +184,7 @@ export async function transitionAdminTool(
     await tx.execute(
       sql`UPDATE public.tools SET status=${value.status}, updated_at=GREATEST(clock_timestamp(),updated_at + interval '1 microsecond') WHERE id=${id}`,
     );
+    await notifyFollowers(tx, "tools", id, value.status === "published");
     await audit(tx, actorId, `tool.${value.status}`, id, {
       from: tool.status,
       to: value.status,

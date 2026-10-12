@@ -1,3 +1,4 @@
+import { notifyFollowers, notifyCancelledEvent } from "../discovery/follows";
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
 import type {
@@ -417,6 +418,9 @@ export async function moderateContent(
       row.user_id,
       `${row.title}: ${input.decision}. ${input.reason}`,
     );
+    await notifyFollowers(tx, kind, input.id, input.decision === "published");
+    if (kind === "events" && input.decision === "canceled")
+      await notifyCancelledEvent(tx, input.id, row.status === "published");
     await audit(tx, actor, kind + ".moderated", input.id, {
       from: row.status,
       to: input.decision,
@@ -528,6 +532,12 @@ export async function moderateProfile(
       tx,
       row.user_id,
       "Creator profile: " + input.decision + ". " + input.reason,
+    );
+    await notifyFollowers(
+      tx,
+      "creators",
+      row.user_id,
+      input.decision === "published",
     );
     await audit(tx, actor, "profile.moderated", row.user_id, {
       decision: input.decision,

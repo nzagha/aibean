@@ -1,3 +1,16 @@
+import {
+  setupDiscoveryFixtures,
+  comparisonContract,
+  followsContract,
+  notificationContract,
+  analyticsContract,
+} from "../tests/fixtures/discovery-workflow-contract";
+import {
+  mutateComparison,
+  readComparisons,
+} from "../src/lib/discovery/comparisons";
+import { mutateFollow } from "../src/lib/discovery/follows";
+import { discoveryAvailable } from "../src/lib/discovery/storage";
 // Disposable native PostgreSQL only. Deliberately does not load dotenv, accept
 // DATABASE_URL, import the application DB, or connect to any supplied endpoint.
 import assert from "node:assert/strict";
@@ -1536,6 +1549,165 @@ async function main() {
           'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
         ),
         existing,
+      );
+    },
+  );
+  const discoveryHistory = await operator.unsafe(
+    "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+  );
+  const discoveryExisting = await operator.unsafe(
+    'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+  );
+  await check(
+    "Discovery proposal rolls back late failure; exact history and RLS/grants stay guarded",
+    async () => {
+      const proposal = JSON.parse(
+          read("db/proposals/discovery-v1/manifest.json"),
+        ),
+        body = read(proposal.sqlPath);
+      assert.equal(sha(body), proposal.sqlSha256);
+      await operator.unsafe(
+        "SELECT set_config('aibean.discovery_install_sha256',$1,false)",
+        [proposal.sqlSha256],
+      );
+      await denied(
+        operator,
+        body.replace(/COMMIT;\s*$/, "SELECT 1/0; COMMIT;"),
+        "22012",
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.saved_comparisons')::text AS name",
+          )
+        )[0].name,
+        null,
+      );
+      await operator.unsafe(body);
+      process.env.AIBEAN_CONTENT_WORKFLOWS = "1";
+      process.env.AIBEAN_DISCOVERY_WORKFLOWS = "true";
+      assert.equal(await discoveryAvailable(drizzle(runtime)), true);
+      await setupDiscoveryFixtures(drizzle(operator));
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const browser = connect(source, role);
+        for (const table of proposal.tables)
+          await denied(browser, "SELECT * FROM public." + table, "42501");
+        await browser.end();
+      }
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM pg_class WHERE relnamespace='public'::regnamespace AND relname IN ('saved_comparisons','comparison_tools','account_follows','analytics_events') AND relrowsecurity",
+          )
+        )[0].n,
+        4,
+      );
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM pg_constraint WHERE conrelid IN ('public.saved_comparisons'::regclass,'public.comparison_tools'::regclass,'public.account_follows'::regclass,'public.analytics_events'::regclass) AND contype='f'",
+          )
+        )[0].n,
+        11,
+      );
+      await denied(
+        runtime,
+        "UPDATE aibean_private.discovery_installations SET sql_sha256=repeat('0',64)",
+        "42501",
+      );
+      await denied(
+        runtime,
+        "INSERT INTO public.saved_comparisons(id,user_id,name) VALUES('bad-size','dis-a','Empty comparison')",
+        "23514",
+      );
+      await operator.unsafe(
+        "GRANT SELECT(name) ON public.saved_comparisons TO anon",
+      );
+      assert.equal(await discoveryAvailable(drizzle(runtime)), false);
+      await operator.unsafe(
+        "REVOKE SELECT(name) ON public.saved_comparisons FROM anon",
+      );
+    },
+  );
+  await check(
+    "Durable comparisons: independent accounts, ordered membership, archived Tools, revision and audit rollback",
+    () => comparisonContract(drizzle(runtime)),
+  );
+  await check(
+    "Six follow targets, suspended-content privacy, duplicate prevention and transactional notification delivery",
+    async () => {
+      await followsContract(drizzle(runtime));
+      await notificationContract(drizzle(runtime));
+    },
+  );
+  await check(
+    "Behavioral analytics: verified attribution, deduplication, throttle, retention and Creator/Vendor isolation",
+    () => analyticsContract(drizzle(runtime)),
+  );
+  await check(
+    "Independent sessions serialize comparison revisions and duplicate follows without losing data",
+    async () => {
+      const value = {
+        operation: "save",
+        name: "Concurrent comparison",
+        toolIds: ["dis-t1", "dis-t2"],
+        context: {},
+      };
+      const id = await mutateComparison(drizzle(runtime), "dis-a", value),
+        second = connect(source, "aibean_app_login", "discovery-concurrency");
+      const results = await Promise.allSettled([
+        mutateComparison(drizzle(runtime), "dis-a", {
+          ...value,
+          id,
+          revision: 1,
+          name: "First update",
+        }),
+        mutateComparison(drizzle(second), "dis-a", {
+          ...value,
+          id,
+          revision: 1,
+          name: "Second update",
+        }),
+      ]);
+      assert.equal(results.filter((r) => r.status === "fulfilled").length, 1);
+      assert.equal(
+        (await readComparisons(drizzle(second), "dis-a", 1, id)).rows[0]
+          .revision,
+        2,
+      );
+      await Promise.all([
+        mutateFollow(drizzle(runtime), "dis-b", {
+          kind: "tools",
+          id: "dis-t1",
+          remove: false,
+        }),
+        mutateFollow(drizzle(second), "dis-b", {
+          kind: "tools",
+          id: "dis-t1",
+          remove: false,
+        }),
+      ]);
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM public.account_follows WHERE user_id='dis-b' AND kind='tools' AND target_id='dis-t1'",
+          )
+        )[0].n,
+        1,
+      );
+      await second.end();
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        discoveryHistory,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        discoveryExisting,
       );
     },
   );

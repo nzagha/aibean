@@ -200,6 +200,7 @@ async function main() {
     "db/proposals/admin-operations-v2/manifest.json",
     "db/proposals/creator-content-v1/manifest.json",
     "db/proposals/creator-files-v1/manifest.json",
+    "db/proposals/discovery-v1/manifest.json",
   ]) {
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
     const path = manifest.sqlPath || "db/install/reviewed-installation.sql";
@@ -216,6 +217,7 @@ async function main() {
         "admin-operations-v2": "operations",
         "creator-content-v1": "content",
         "creator-files-v1": "files",
+        "discovery-v1": "discovery",
       } as Record<string, string>
     )[manifest.packageId];
     if (setting)
@@ -359,7 +361,11 @@ async function main() {
       database,
       actor,
       kind,
-      kind === "playbooks" ? { ...input, skillIds: [skillId] } : input,
+      kind === "playbooks"
+        ? { ...input, skillIds: [skillId] }
+        : kind === "resources"
+          ? { ...input, skillId }
+          : input,
     );
     if (kind === "skills") skillId = id;
     let row = await readContentDetail(database, actor, kind, id, "owner");
@@ -422,6 +428,8 @@ async function main() {
       AIBEAN_REVIEW_WORKFLOWS: "1",
       AIBEAN_COMMERCE_WORKFLOWS: "1",
       AIBEAN_CONTENT_WORKFLOWS: "1",
+      AIBEAN_DISCOVERY_WORKFLOWS: "true",
+      AIBEAN_ANALYTICS_SECRET: randomBytes(32).toString("hex"),
       AIBEAN_RESOURCE_UPLOADS: "",
       AIBEAN_SUPABASE_PROVIDER_TEST_APPROVED: "",
       STRIPE_SECRET_KEY: "",

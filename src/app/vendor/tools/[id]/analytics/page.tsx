@@ -1,3 +1,5 @@
+import { readBehaviorAnalytics } from "@/lib/discovery/analytics";
+import { BehaviorAnalyticsTable } from "@/components/behavior-analytics-table";
 import Link from "next/link";
 import { requireVendorCapability } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -16,6 +18,7 @@ export default async function Analytics({
   const { id } = await params,
     user = await requireVendorCapability(id),
     data = await readVendorAnalytics(db(), user.id, id);
+  const behavior = await readBehaviorAnalytics(db(), user.id, "vendor", id);
   return (
     <div className="container py-16">
       <Link className="text-link" href={"/vendor/tools/" + id}>
@@ -30,6 +33,7 @@ export default async function Analytics({
         ) : (
           <AnalyticsTable rows={data.rows} />
         )}
+        <BehaviorAnalyticsTable ready={behavior.ready} rows={behavior.rows} />
       </section>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { emitAnalytics } from "./analytics-beacon";
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { X, Columns3 } from "lucide-react";
 import { updateComparison } from "@/lib/catalog/filter";
@@ -48,6 +49,12 @@ export function CompareProvider({ children }: { children: ReactNode }) {
       setMessage("Your comparison has 4 tools. Remove one to add another.");
       return;
     }
+    if (!items.some((x) => x.id === item.id))
+      emitAnalytics({
+        event: "comparison_add",
+        kind: "tools",
+        targetId: item.id,
+      });
     setMessage("");
     inspect("feature:compare");
     setItems((current) => {

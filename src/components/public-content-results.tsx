@@ -1,3 +1,5 @@
+import { AnalyticsBeacon } from "./analytics-beacon";
+import { selectedAnalyticsFilters } from "@/lib/discovery/analytics-contracts";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { readContentList } from "@/lib/content/queries";
@@ -30,6 +32,18 @@ export async function PublicContentResults({
   return (
     <section className="my-8" aria-label={"Published " + kind}>
       <h2 className="text-2xl">Discover {kind}</h2>
+      <AnalyticsBeacon
+        value={{
+          event: Object.keys(params).some(
+            (k) => params[k as keyof typeof params],
+          )
+            ? "search"
+            : "discovery_view",
+          kind: "discovery",
+          targetId: kind,
+          filters: selectedAnalyticsFilters(params),
+        }}
+      />
       <form className="grid gap-x-5 mt-5 sm:grid-cols-2 lg:grid-cols-3">
         <label className="field">
           Search

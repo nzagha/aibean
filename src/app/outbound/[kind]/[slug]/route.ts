@@ -1,3 +1,4 @@
+import { analyticsSession } from "@/lib/discovery/analytics-session";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { registerOutbound } from "@/lib/content/analytics";
@@ -28,6 +29,7 @@ export async function POST(
       kind as "tools" | "resources" | "events",
       slug,
       source,
+      await analyticsSession(),
     );
     const response = NextResponse.redirect(destination, 303);
     response.headers.set("Cache-Control", "no-store");

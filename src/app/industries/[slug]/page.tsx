@@ -1,3 +1,4 @@
+import { FollowControl } from "@/components/follow-control";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { taxonomy } from "@/lib/catalog/taxonomy";
@@ -23,6 +24,11 @@ export default async function IndustryPage({
         AI for {industry.name}.
       </h1>
       <p className="mb-6 text-lg">{industry.description}</p>
+      <FollowControl
+        kind="industries"
+        id={industry.id}
+        returnTo={"/industries/" + industry.slug}
+      />
       <div className="flex flex-wrap gap-2 mb-8">
         {industry.needs.map((n) => (
           <span className="badge" key={n}>

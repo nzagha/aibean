@@ -1,3 +1,5 @@
+import { readBehaviorAnalytics } from "@/lib/discovery/analytics";
+import { BehaviorAnalyticsTable } from "@/components/behavior-analytics-table";
 import { requireApprovedCreator } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { contentAvailable } from "@/lib/content/storage";
@@ -16,6 +18,9 @@ export default async function Analytics() {
     allowed =
       ready && (await db().transaction((tx) => authorAllowed(tx, user.id)));
   const rows = allowed ? await readCreatorAnalytics(db(), user.id) : [];
+  const behavior = allowed
+    ? await readBehaviorAnalytics(db(), user.id, "creator")
+    : { ready: false, rows: [] };
   return (
     <div className="container py-16">
       <WorkspaceNavigation />
@@ -29,6 +34,7 @@ export default async function Analytics() {
         ) : (
           <AnalyticsTable rows={rows} />
         )}
+        <BehaviorAnalyticsTable ready={behavior.ready} rows={behavior.rows} />
       </section>
     </div>
   );

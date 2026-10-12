@@ -1,3 +1,5 @@
+import { FollowControl } from "@/components/follow-control";
+import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { eq, and, sql } from "drizzle-orm";
@@ -307,6 +309,14 @@ export default async function ToolPage({
             ))}
           <div className="my-4">
             <CompareButton tool={t} />
+            <FollowControl
+              kind="tools"
+              id={t.id}
+              returnTo={"/tools/" + t.slug}
+            />
+            <AnalyticsBeacon
+              value={{ event: "tool_view", kind: "tools", targetId: t.id }}
+            />
           </div>
           {canWrite ? (
             <ActionForm

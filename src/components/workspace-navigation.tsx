@@ -23,6 +23,12 @@ export async function WorkspaceNavigation() {
           <Link className="text-link" href="/account/activity">
             Saved content & notifications →
           </Link>
+          <Link className="text-link" href="/account/comparisons">
+            Saved comparisons →
+          </Link>
+          <Link className="text-link" href="/account/following">
+            Following →
+          </Link>
           <Link className="text-link" href="/account/billing">
             Billing →
           </Link>

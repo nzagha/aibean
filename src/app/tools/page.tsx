@@ -1,3 +1,5 @@
+import { AnalyticsBeacon } from "@/components/analytics-beacon";
+import { selectedAnalyticsFilters } from "@/lib/discovery/analytics-contracts";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -32,6 +34,18 @@ export default async function ToolsPage({
   const labels = await getTaxonomyLabels();
   return (
     <div className="container pb-24">
+      <AnalyticsBeacon
+        value={{
+          event: Object.keys(filters).some(
+            (k) => filters[k as keyof CatalogFilters],
+          )
+            ? "search"
+            : "discovery_view",
+          kind: "discovery",
+          targetId: "tools",
+          filters: selectedAnalyticsFilters(filters),
+        }}
+      />
       <div className="page-intro">
         <span className="eyebrow">Discover. Evaluate. Decide.</span>
         <h1>Find your next edge.</h1>

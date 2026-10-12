@@ -1,3 +1,5 @@
+import { readResourceCampaignLinks } from "@/lib/discovery/campaigns";
+import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
@@ -24,8 +26,17 @@ export default async function Resource({
     "public",
   );
   if (!row || row.user_id !== profile.user_id) notFound();
+  const links = await readResourceCampaignLinks(db(), row.id);
   return (
     <div className="container py-16">
+      <AnalyticsBeacon
+        value={{
+          event: "resource_view",
+          kind: "resources",
+          targetId: row.id,
+          campaignId: row.id,
+        }}
+      />
       <span className="eyebrow">Resource from {profile.display_name}</span>
       <h1 className="my-6 font-display text-5xl font-bold">{row.title}</h1>
       <p className="max-w-3xl text-lg mb-8">{row.summary}</p>
@@ -40,6 +51,13 @@ export default async function Resource({
         >
           <button className="button primary">Open Creator’s resource →</button>
         </form>
+        {links.map((link) => (
+          <p className="my-5" key={link.id}>
+            <Link className="text-link" href={link.href}>
+              Related implementation: {link.title} →
+            </Link>
+          </p>
+        ))}
         <ReportContent kind="resources" id={row.id} />
         <PublishedFiles kind="resources" id={row.id} />
         <p className="text-sm mt-5">

@@ -1,0 +1,43 @@
+{
+  "packageId": "discovery-v1",
+  "status": "local-proposal-not-hosted-installed",
+  "sqlPath": "db/proposals/discovery-v1/reviewed-installation.sql",
+  "sqlSha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+  "migrationSha256": "788a9bd583f6ed52ffefc02f2fe5339e12e2b5afdb8df5808ab95a200d3c907d",
+  "tables": [
+    "saved_comparisons",
+    "comparison_tools",
+    "account_follows",
+    "analytics_events"
+  ],
+  "dependencies": [
+    {
+      "id": "admin-review-v1",
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "ledger": "admin_review_installations"
+    },
+    {
+      "id": "admin-operations-v2",
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "ledger": "admin_operations_installations"
+    },
+    {
+      "id": "creator-content-v1",
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "ledger": "content_installations"
+    },
+    {
+      "id": "creator-files-v1",
+      "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+      "sha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "ledger": "files_installations"
+    }
+  ],
+  "backfill": "Copies existing Creator follows, preserving the legacy table.",
+  "runtimeFlag": "AIBEAN_DISCOVERY_WORKFLOWS=true",
+  "analyticsSecret": "Private independently generated AIBEAN_ANALYTICS_SECRET (minimum 32 characters); never commit.",
+  "recovery": "Four additional application tables and private discovery ledger must join the separately approved recovery scope. No previous recovery authorization covers them."
+}

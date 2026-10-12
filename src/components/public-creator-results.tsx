@@ -1,3 +1,5 @@
+import { AnalyticsBeacon } from "./analytics-beacon";
+import { selectedAnalyticsFilters } from "@/lib/discovery/analytics-contracts";
 import Link from "next/link";
 import { db } from "@/lib/db";
 import { readPublicProfiles } from "@/lib/content/queries";
@@ -23,6 +25,16 @@ export async function PublicCreatorResults({
   const context = comparisonContext(params);
   return (
     <section className="my-8">
+      <AnalyticsBeacon
+        value={{
+          event: Object.values(params).some(Boolean)
+            ? "search"
+            : "discovery_view",
+          kind: "discovery",
+          targetId: "creators",
+          filters: selectedAnalyticsFilters(params),
+        }}
+      />
       <h2 className="text-2xl">Find a Creator</h2>
       <form className="flex flex-wrap items-end gap-5 mt-5">
         <label className="field">

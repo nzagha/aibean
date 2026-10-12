@@ -1,3 +1,6 @@
+import { recordAnalytics } from "../discovery/analytics";
+import { visibleTarget } from "../discovery/targets";
+import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { sql } from "drizzle-orm";
 import { z } from "zod";
 import type {
@@ -240,6 +243,7 @@ export async function downloadResource(
   user: string | null,
   id: string,
   store: ResourceStore,
+  session?: AnalyticsSession,
 ) {
   recordId.parse(id);
   return database.transaction(async (tx) => {
@@ -281,6 +285,18 @@ export async function downloadResource(
         throw new AdminWorkflowError("File unavailable.");
     }
     await store.assertPrivate();
-    return store.sign(row.object_key, row.filename);
+    const destination = await store.sign(row.object_key, row.filename);
+    if (
+      session &&
+      row.status === "approved" &&
+      (await visibleTarget(tx, kind, target))
+    )
+      await recordAnalytics(tx, session, {
+        event: "resource_download",
+        kind,
+        targetId: target,
+        ...(kind === "resources" ? { campaignId: target } : {}),
+      });
+    return destination;
   });
 }

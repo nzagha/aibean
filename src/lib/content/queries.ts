@@ -1,3 +1,6 @@
+import { discoveryAvailable } from "../discovery/storage";
+import type { AnalyticsSession } from "../discovery/analytics-contracts";
+import { recordAnalytics } from "../discovery/analytics";
 import { sql } from "drizzle-orm";
 import type { IdentityDatabase } from "../supabase/identity";
 import { audit, checkAdmin, resultRows } from "../admin/tool-workflows";
@@ -167,6 +170,7 @@ export async function saveEntity(
   kind: "skills" | "playbooks" | "events",
   id: string,
   remove = false,
+  session?: AnalyticsSession,
 ) {
   recordId.parse(id);
   if (!["skills", "playbooks", "events"].includes(kind))
@@ -183,6 +187,7 @@ export async function saveEntity(
     await tx.execute(
       sql`SELECT pg_advisory_xact_lock(hashtextextended(${"save:" + user + ":" + kind + ":" + id},0))`,
     );
+    let inserted = false;
     if (remove)
       await tx.execute(
         sql`DELETE FROM public.saved_entities WHERE user_id=${user} AND ${column}=${id}`,
@@ -204,11 +209,15 @@ export async function saveEntity(
             sql`SELECT id FROM public.saved_entities WHERE user_id=${user} AND ${column}=${id}`,
           ),
         ).length
-      )
+      ) {
+        inserted = true;
         await tx.execute(
           sql`INSERT INTO public.saved_entities(id,user_id,${column}) VALUES(${crypto.randomUUID()},${user},${id})`,
         );
+      }
     }
+    if (inserted)
+      await recordAnalytics(tx, session, { event: "save", kind, targetId: id });
     await audit(
       tx,
       user,
@@ -224,6 +233,14 @@ export async function followCreator(
   target: string,
   remove = false,
 ) {
+  if (process.env.AIBEAN_DISCOVERY_WORKFLOWS === "true") {
+    const { mutateFollow } = await import("../discovery/follows");
+    return mutateFollow(database, user, {
+      kind: "creators",
+      id: target,
+      remove,
+    });
+  }
   recordId.parse(target);
   await database.transaction(async (tx) => {
     await requireContentStorage(tx);
@@ -271,13 +288,16 @@ export async function readEngagement(database: IdentityDatabase, user: string) {
         sql`SELECT s.id,CASE WHEN s.skill_id IS NOT NULL THEN 'skills' WHEN s.playbook_id IS NOT NULL THEN 'playbooks' ELSE 'events' END AS kind,coalesce(s.skill_id,s.playbook_id,s.event_id) AS target_id,coalesce(k.title,p.title,e.title,'Unavailable saved content') AS title,coalesce(k.slug,p.slug,e.slug) AS slug,coalesce(k.status,p.status,e.status,'unavailable')='published' AS available FROM public.saved_entities s LEFT JOIN public.ai_skills k ON k.id=s.skill_id AND k.status='published' AND EXISTS(SELECT 1 FROM public.users u WHERE u.id=k.user_id AND ${publicAuthor("skills")}) LEFT JOIN public.ai_playbooks p ON p.id=s.playbook_id AND p.status='published' AND EXISTS(SELECT 1 FROM public.users u WHERE u.id=p.user_id AND ${publicAuthor("playbooks")}) LEFT JOIN public.public_events e ON e.id=s.event_id AND e.status='published' AND EXISTS(SELECT 1 FROM public.users u WHERE u.id=e.user_id AND ${publicAuthor("events")}) WHERE s.user_id=${user} ORDER BY s.created_at DESC,s.id LIMIT 100`,
       ),
     );
+    const followTable = (await discoveryAvailable(tx))
+      ? sql`public.account_follows`
+      : sql`public.creator_follows`;
     const follows = resultRows<{
       creator_id: string;
       display_name: string;
       handle: string | null;
     }>(
       await tx.execute(
-        sql`SELECT f.creator_id,coalesce(p.display_name,'Unavailable Creator') AS display_name,p.handle FROM public.creator_follows f LEFT JOIN public.account_profiles p ON p.user_id=f.creator_id AND p.status='published' AND EXISTS(SELECT 1 FROM public.users u WHERE u.id=p.user_id AND ${publicAuthor("skills")}) WHERE f.user_id=${user} ORDER BY f.created_at DESC LIMIT 100`,
+        sql`SELECT f.creator_id,coalesce(p.display_name,'Unavailable Creator') AS display_name,p.handle FROM ${followTable} f LEFT JOIN public.account_profiles p ON p.user_id=f.creator_id AND p.status='published' AND EXISTS(SELECT 1 FROM public.users u WHERE u.id=p.user_id AND ${publicAuthor("skills")}) WHERE f.user_id=${user} AND f.creator_id IS NOT NULL ORDER BY f.created_at DESC LIMIT 100`,
       ),
     );
     const notifications = resultRows<{
@@ -524,7 +544,9 @@ export async function readCreatorWorkspaceSummary(
     );
     const [following] = resultRows<{ followers: number }>(
       await tx.execute(
-        sql`SELECT count(*)::int AS followers FROM public.creator_follows WHERE creator_id=${user}`,
+        (await discoveryAvailable(tx))
+          ? sql`SELECT count(*)::int AS followers FROM public.account_follows WHERE creator_id=${user}`
+          : sql`SELECT count(*)::int AS followers FROM public.creator_follows WHERE creator_id=${user}`,
       ),
     );
     const [saved] = resultRows<{ saves: number }>(

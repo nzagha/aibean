@@ -5,8 +5,8 @@ import {
   readPublicProfile,
   readCreatorPublicContent,
 } from "@/lib/content/queries";
-import { ActionForm } from "@/components/action-form";
-import { changeFollow } from "@/app/content-actions";
+import { FollowControl } from "@/components/follow-control";
+import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { creatorHandle } from "@/lib/content/public-path";
 export const dynamic = "force-dynamic";
 export default async function CreatorProfile({
@@ -39,9 +39,19 @@ export default async function CreatorProfile({
           Visit website →
         </a>
       )}
-      <ActionForm action={changeFollow} label="Follow Creator">
-        <input type="hidden" name="id" value={profile.user_id} />
-      </ActionForm>
+      <FollowControl
+        kind="creators"
+        id={profile.user_id}
+        returnTo={"/@" + profile.handle}
+      />
+      <AnalyticsBeacon
+        value={{
+          event: "creator_view",
+          kind: "creators",
+          targetId: profile.user_id,
+        }}
+      />
+
       <div className="grid gap-6 md:grid-cols-3 mt-8">
         {Object.entries(content).map(([kind, items]) => (
           <section className="placeholder-card" key={kind}>

@@ -1,4 +1,5 @@
 "use server";
+import { analyticsSession } from "@/lib/discovery/analytics-session";
 import { requireUser, requireAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/security";
@@ -176,6 +177,7 @@ export async function changeSavedContent(_state: ActionState, form: FormData) {
       kind,
       String(form.get("id")),
       form.get("remove") === "true",
+      await analyticsSession(),
     );
     return { message: "Saved content updated." };
   });

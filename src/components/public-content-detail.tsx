@@ -1,3 +1,5 @@
+import { FollowControl } from "./follow-control";
+import { AnalyticsBeacon } from "./analytics-beacon";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
@@ -13,9 +15,11 @@ import { PublishedFiles } from "./content-files";
 export async function PublicContentDetail({
   kind,
   slug,
+  campaignId,
 }: {
   kind: Exclude<ContentKind, "resources">;
   slug: string;
+  campaignId?: string;
 }) {
   if (!contentKinds.includes(kind)) notFound();
   const row = await readContentDetail(db(), null, kind, slug, "public");
@@ -65,6 +69,24 @@ export async function PublicContentDetail({
         {kind === "playbooks" ? " · Free to read" : ""}
       </span>
       <h1 className="my-6 font-display text-5xl font-bold">{row.title}</h1>
+      <AnalyticsBeacon
+        value={{
+          event:
+            kind === "skills"
+              ? "skill_view"
+              : kind === "playbooks"
+                ? "playbook_view"
+                : "event_view",
+          kind,
+          targetId: row.id,
+          ...(campaignId ? { campaignId } : {}),
+        }}
+      />
+      <FollowControl
+        kind={kind}
+        id={row.id}
+        returnTo={"/" + kind + "/" + row.slug}
+      />
       <p className="max-w-3xl text-lg mb-8">{row.summary}</p>
       {profile && (
         <Link className="text-link" href={"/@" + profile.handle}>

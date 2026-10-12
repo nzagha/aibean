@@ -65,6 +65,9 @@ export default async function Activity() {
         </section>
         <section className="placeholder-card">
           <h2 className="text-2xl">Following</h2>
+          <Link href="/account/following" className="text-link">
+            Manage all followed targets →
+          </Link>
           {!data.follows.length && (
             <p className="my-5">
               Follow approved Creators from their public profiles.

@@ -1,4 +1,5 @@
 "use server";
+import { analyticsSession } from "@/lib/discovery/analytics-session";
 import { requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/security";
@@ -27,7 +28,12 @@ export async function updateEngagement(
       "engagement-" + input.data.operation,
       input.data.operation === "review" ? 10 : 60,
     );
-    const message = await mutateEngagement(db(), user.id, input.data);
+    const message = await mutateEngagement(
+      db(),
+      user.id,
+      input.data,
+      await analyticsSession(),
+    );
     return refreshAfterCommit({ message }, () => {
       revalidatePath("/account", "layout");
       revalidatePath("/tools", "layout");

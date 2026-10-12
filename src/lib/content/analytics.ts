@@ -1,3 +1,5 @@
+import { recordAnalytics } from "../discovery/analytics";
+import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { sql } from "drizzle-orm";
 import { z } from "zod";
 import type { IdentityDatabase } from "../supabase/identity";
@@ -11,6 +13,7 @@ export async function registerOutbound(
   kind: "tools" | "resources" | "events",
   slug: string,
   source: "internal" | "direct" | "external",
+  session?: AnalyticsSession,
 ) {
   z.enum(["tools", "resources", "events"]).parse(kind);
   z.enum(["internal", "direct", "external"]).parse(source);
@@ -48,6 +51,17 @@ export async function registerOutbound(
         sql`INSERT INTO public.engagement_counters(kind,entity_id,day,source) VALUES(${kind},${row.id},(now() AT TIME ZONE 'UTC')::date,${source}) ON CONFLICT(kind,entity_id,day,source) DO UPDATE SET requests=engagement_counters.requests+1`,
       );
     }
+    await recordAnalytics(tx, session, {
+      event:
+        kind === "tools"
+          ? "tool_outbound"
+          : kind === "events"
+            ? "event_outbound"
+            : "resource_outbound",
+      kind,
+      targetId: row.id,
+      ...(kind === "resources" ? { campaignId: row.id } : {}),
+    });
     return destination;
   });
 }

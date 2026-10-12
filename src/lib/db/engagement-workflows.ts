@@ -1,3 +1,5 @@
+import { recordAnalytics } from "../discovery/analytics";
+import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { sql } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
@@ -26,6 +28,7 @@ export async function mutateEngagement(
   database: IdentityDatabase,
   userId: string,
   value: unknown,
+  session?: AnalyticsSession,
 ) {
   const input = engagementInput.parse(value);
   return database.transaction(async (tx) => {
@@ -66,15 +69,31 @@ export async function mutateEngagement(
     if (tool.status !== "published")
       throw new AdminWorkflowError("This Tool is unavailable.");
     if (input.operation === "save") {
-      await tx.execute(
-        sql`INSERT INTO public.saved_tools(user_id,tool_id) VALUES(${userId},${tool.id}) ON CONFLICT DO NOTHING`,
+      const inserted = resultRows(
+        await tx.execute(
+          sql`INSERT INTO public.saved_tools(user_id,tool_id) VALUES(${userId},${tool.id}) ON CONFLICT DO NOTHING RETURNING user_id`,
+        ),
       );
+      if (inserted.length)
+        await recordAnalytics(tx, session, {
+          event: "save",
+          kind: "tools",
+          targetId: tool.id,
+        });
       return "Tool saved to your account.";
     }
     if (input.operation === "add-stack") {
-      await tx.execute(
-        sql`INSERT INTO public.stack_tools(stack_id,tool_id) VALUES(${input.stackId},${tool.id}) ON CONFLICT DO NOTHING`,
+      const inserted = resultRows(
+        await tx.execute(
+          sql`INSERT INTO public.stack_tools(stack_id,tool_id) VALUES(${input.stackId},${tool.id}) ON CONFLICT DO NOTHING RETURNING stack_id`,
+        ),
       );
+      if (inserted.length)
+        await recordAnalytics(tx, session, {
+          event: "stack_add",
+          kind: "tools",
+          targetId: tool.id,
+        });
       return "Tool added to your stack.";
     }
     if (
