@@ -1,5 +1,7 @@
 # aiBean MVP product completion report — 12 October 2026
 
+**Current publication verified:** [Code 44aeb58](https://github.com/nzagha/aibean/commit/44aeb58e4b25ff5a1ea8c86f1b1590a8ecbc6d45) and [evidence c34e280](https://github.com/nzagha/aibean/commit/c34e2802db9179cdc3ae763f52484bf33bc14699) are pushed. [GitHub Validate 38285106755](https://github.com/nzagha/aibean/actions/runs/38285106755) passed all configured checks on exact final implementation/evidence source. Hosted installation/provider gates remain separate.
+
 ## Current milestone: durable comparisons, complete follows and behavioral reporting
 
 **Implemented and locally verified; pending hosted schema/enablement and provider acceptance.** Account-backed private comparison CRUD/context/ordered 2–4 members and revision isolation; six-target shared follow controls/account Following with transactional public-update notices; minimized signed-session analytics and verified Resource/Skill/Playbook attribution are implemented. User, Creator, Tool-scoped Vendor and Admin panels use actual owner-scoped recorded aggregates, accurate no-data/configuration states and bounded audited retention cleanup.

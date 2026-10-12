@@ -1,7 +1,9 @@
 {
   "date": "2026-10-12",
   "branch": "codex/supabase-foundation",
-  "implementationCommit": "44aeb58",
+  "implementationCommit": "44aeb58e4b25ff5a1ea8c86f1b1590a8ecbc6d45",
+  "evidenceCommit": "c34e2802db9179cdc3ae763f52484bf33bc14699",
+  "ci": {"run":38285106755,"conclusion":"success","headSha":"c34e2802db9179cdc3ae763f52484bf33bc14699","url":"https://github.com/nzagha/aibean/actions/runs/38285106755","scope":"lint, TypeScript, 107 tests, build, runtime audit; native/HTTP/browser executed locally"},
   "hostedAccess": false,
   "discoverySqlSha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
   "lint": "PASS",
@@ -12,7 +14,7 @@
   "productionBuild": {"status":"PASS","next":"16.3.8"},
   "runtimeAudit": {"vulnerabilities":0},
   "frozenFileChecks": {"passed":22,"failed":0},
-  "publicationProtectedValueScan": "PASS (59 implementation files)",
+  "publicationProtectedValueScan": "PASS (59 implementation and 14 evidence/documentation files)",
   "browserLimit": "Interactive deletion dialog and cleanup CDP timed out; native deletion and automated confirmation tests pass. See browser evidence for actual sampled coverage.",
   "operationalLimits": ["No hosted installation or feature enablement", "No real identity/provider or cross-device acceptance", "No physical retention scheduler configured", "No recovery retry or managed-scope export"]
 }
