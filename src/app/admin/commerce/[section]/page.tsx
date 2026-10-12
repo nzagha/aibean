@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { readCommercialAdmin } from "@/lib/admin/commerce-queries";
 import { normalizeAdminParams, type AdminParams } from "@/lib/admin/queries";
 import { productKinds } from "@/lib/admin/commerce-contracts";
+import { AdminPricing } from "@/components/admin-pricing";
 import { ActionForm } from "@/components/action-form";
 import { ReasonField, AdminPages } from "@/components/admin-shared";
 import {
@@ -43,68 +44,76 @@ export default async function Commercial({
         access, verification or organic rank. Featured placements retain their
         separate $99/five-day approval workflow.
       </p>
+      {section === "pricing" && <AdminPricing admin={admin.id} />}
       {!data.ready ? (
         <p className="my-5">
           The reviewed admin-operations-v2 database migration and private enable
           flag are required.
         </p>
       ) : section === "pricing" ? (
-        productKinds.map((kind) => {
-          const product = data.products.find((p) => p.id === kind);
-          return (
-            <details className="account-row" key={kind}>
-              <summary className="cursor-pointer">
-                {kind.replaceAll("_", " ")} ·{" "}
-                {product
-                  ? `$${(product.amount / 100).toFixed(2)}` +
-                    (product.active ? " · Enabled" : " · Disabled")
-                  : "Not configured"}
-              </summary>
-              <ActionForm action={configureProduct} label="Save sandbox price">
-                <input type="hidden" name="kind" value={kind} />
-                {product && (
-                  <input
-                    type="hidden"
-                    name="revision"
-                    value={product.revision}
-                  />
-                )}
-                <label className="field">
-                  Product name
-                  <input
-                    name="name"
-                    required
-                    minLength={3}
-                    maxLength={100}
-                    defaultValue={product?.name || kind.replaceAll("_", " ")}
-                  />
-                </label>
-                <label className="field">
-                  USD cents{" "}
-                  {kind.endsWith("subscription") ? "per month" : "per request"}
-                  <input
-                    type="number"
-                    name="amount"
-                    required
-                    min={kind === "verification" ? 0 : 1}
-                    max={1000000}
-                    step={1}
-                    defaultValue={product?.amount}
-                  />
-                </label>
-                <label className="flex gap-3 my-4">
-                  <input
-                    type="checkbox"
-                    name="active"
-                    defaultChecked={product?.active}
-                  />
-                  Enable this sandbox product
-                </label>
-                <ReasonField />
-              </ActionForm>
-            </details>
-          );
-        })
+        process.env.AIBEAN_PRICING_WORKFLOWS === "true" ? null : (
+          productKinds.map((kind) => {
+            const product = data.products.find((p) => p.id === kind);
+            return (
+              <details className="account-row" key={kind}>
+                <summary className="cursor-pointer">
+                  {kind.replaceAll("_", " ")} ·{" "}
+                  {product
+                    ? `$${(product.amount / 100).toFixed(2)}` +
+                      (product.active ? " · Enabled" : " · Disabled")
+                    : "Not configured"}
+                </summary>
+                <ActionForm
+                  action={configureProduct}
+                  label="Save sandbox price"
+                >
+                  <input type="hidden" name="kind" value={kind} />
+                  {product && (
+                    <input
+                      type="hidden"
+                      name="revision"
+                      value={product.revision}
+                    />
+                  )}
+                  <label className="field">
+                    Product name
+                    <input
+                      name="name"
+                      required
+                      minLength={3}
+                      maxLength={100}
+                      defaultValue={product?.name || kind.replaceAll("_", " ")}
+                    />
+                  </label>
+                  <label className="field">
+                    USD cents{" "}
+                    {kind.endsWith("subscription")
+                      ? "per month"
+                      : "per request"}
+                    <input
+                      type="number"
+                      name="amount"
+                      required
+                      min={kind === "verification" ? 0 : 1}
+                      max={1000000}
+                      step={1}
+                      defaultValue={product?.amount}
+                    />
+                  </label>
+                  <label className="flex gap-3 my-4">
+                    <input
+                      type="checkbox"
+                      name="active"
+                      defaultChecked={product?.active}
+                    />
+                    Enable this sandbox product
+                  </label>
+                  <ReasonField />
+                </ActionForm>
+              </details>
+            );
+          })
+        )
       ) : (
         <>
           <form className="my-5 grid gap-x-5 sm:grid-cols-2">

@@ -6,6 +6,7 @@ import { contentAvailable } from "@/lib/content/storage";
 import { authorAllowed } from "@/lib/content/workflows";
 import { readCreatorWorkspaceSummary } from "@/lib/content/queries";
 import Link from "next/link";
+import { MembershipSummary } from "@/components/membership-summary";
 export const metadata = {
   title: "Creator workspace",
   robots: { index: false, follow: false },
@@ -108,6 +109,7 @@ export default async function Creator() {
           </div>
         </section>
       </div>
+      <MembershipSummary user={user.id} />
     </div>
   );
 }

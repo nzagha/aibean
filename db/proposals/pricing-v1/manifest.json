@@ -1,0 +1,49 @@
+{
+  "packageId": "pricing-v1",
+  "sqlPath": "db/proposals/pricing-v1/reviewed-installation.sql",
+  "sqlSha256": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+  "migrationSha256": "7e12efe330ffc969d5f2d449fd20d2399a0eeee97b70f4c1a9dba679e3a2d6e6",
+  "tables": [
+    "pricing_releases",
+    "pricing_quotes",
+    "membership_bindings",
+    "membership_changes",
+    "pricing_refunds"
+  ],
+  "dependencies": [
+    {
+      "id": "admin-review-v1",
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "ledger": "admin_review_installations"
+    },
+    {
+      "id": "admin-operations-v2",
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "ledger": "admin_operations_installations"
+    },
+    {
+      "id": "creator-content-v1",
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "ledger": "content_installations"
+    },
+    {
+      "id": "creator-files-v1",
+      "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+      "sha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "ledger": "files_installations"
+    },
+    {
+      "id": "discovery-v1",
+      "path": "db/proposals/discovery-v1/reviewed-installation.sql",
+      "sha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+      "ledger": "discovery_installations"
+    }
+  ],
+  "status": "proposal-not-hosted-installed",
+  "runtimeFlag": "AIBEAN_PRICING_WORKFLOWS=true",
+  "activation": "Exact AIBEAN_PRICING_APPROVED_SHA256 + independently verified test-mode prices; no live activation",
+  "recovery": "Five additional application tables/private ledger, no existing migration or records altered"
+}

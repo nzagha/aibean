@@ -2,6 +2,8 @@ import { discoveryAvailable } from "../discovery/storage";
 import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { recordAnalytics } from "../discovery/analytics";
 import { sql } from "drizzle-orm";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
 import type { IdentityDatabase } from "../supabase/identity";
 import { audit, checkAdmin, resultRows } from "../admin/tool-workflows";
 import { AdminWorkflowError, recordId } from "../admin/contracts";
@@ -184,6 +186,7 @@ export async function saveEntity(
           ? "playbook_id"
           : "event_id",
     );
+    await entitlementLock(tx, user);
     await tx.execute(
       sql`SELECT pg_advisory_xact_lock(hashtextextended(${"save:" + user + ":" + kind + ":" + id},0))`,
     );
@@ -211,6 +214,7 @@ export async function saveEntity(
         ).length
       ) {
         inserted = true;
+        await assertQuota(tx, user, "saves");
         await tx.execute(
           sql`INSERT INTO public.saved_entities(id,user_id,${column}) VALUES(${crypto.randomUUID()},${user},${id})`,
         );

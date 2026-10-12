@@ -1,4 +1,7 @@
 import type { AnalyticsSession } from "./analytics-contracts";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
+import { PROPOSED_PRICING } from "../pricing/config";
 import { recordAnalytics } from "./analytics";
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
@@ -79,6 +82,7 @@ export async function mutateComparison(
   return database.transaction(async (tx) => {
     await requireDiscovery(tx);
     await canonicalUser(tx, user);
+    await entitlementLock(tx, user);
     // Serialize account quota and mutations; revision remains explicit across devices.
     await tx.execute(
       sql`SELECT pg_advisory_xact_lock(hashtextextended(${"discovery-account:" + user},0))`,
@@ -104,12 +108,13 @@ export async function mutateComparison(
       return key;
     }
     if (!old) {
+      await assertQuota(tx, user, "comparisons");
       const [n] = resultRows<{ n: number }>(
         await tx.execute(
           sql`SELECT count(*)::int AS n FROM public.saved_comparisons WHERE user_id=${user}`,
         ),
       );
-      if (n.n >= 100)
+      if (n.n >= PROPOSED_PRICING.plans[0].quotas.comparisons)
         throw new AdminWorkflowError(
           "You can keep up to 100 saved comparisons. Delete one first.",
         );

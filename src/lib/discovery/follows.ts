@@ -1,4 +1,7 @@
 import { randomUUID } from "node:crypto";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
+import { PROPOSED_PRICING } from "../pricing/config";
 import { sql } from "drizzle-orm";
 import { z } from "zod";
 import type {
@@ -33,6 +36,7 @@ export async function mutateFollow(
   return database.transaction(async (tx) => {
     await requireDiscovery(tx);
     await canonicalUser(tx, user);
+    await entitlementLock(tx, user);
     await tx.execute(
       sql`SELECT pg_advisory_xact_lock(hashtextextended(${"discovery-account:" + user},0))`,
     );
@@ -58,7 +62,8 @@ export async function mutateFollow(
           sql`SELECT target_id FROM public.account_follows WHERE user_id=${user} AND kind=${input.kind} AND target_id=${input.id}`,
         ),
       ).length;
-      if (count.n >= 1000 && !duplicate)
+      if (!duplicate) await assertQuota(tx, user, "follows");
+      if (count.n >= PROPOSED_PRICING.plans[0].quotas.follows && !duplicate)
         throw new AdminWorkflowError(
           "Following limit reached. Unfollow something first.",
         );

@@ -1,4 +1,6 @@
 import { recordAnalytics } from "../discovery/analytics";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
 import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { sql } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
@@ -40,6 +42,7 @@ export async function mutateEngagement(
     )
       throw new AdminWorkflowError("Sign in with an available account.");
     if (input.operation === "create-stack") {
+      await assertQuota(tx, userId, "stacks");
       const stackId = randomUUID();
       await tx.execute(
         sql`INSERT INTO public.stacks(id,user_id,name) VALUES(${stackId},${userId},${input.name})`,
@@ -53,6 +56,7 @@ export async function mutateEngagement(
       );
       return "Removed from your saved tools.";
     }
+    await entitlementLock(tx, userId);
     if (input.operation === "add-stack") {
       if (
         !resultRows(
@@ -69,6 +73,14 @@ export async function mutateEngagement(
     if (tool.status !== "published")
       throw new AdminWorkflowError("This Tool is unavailable.");
     if (input.operation === "save") {
+      if (
+        !resultRows(
+          await tx.execute(
+            sql`SELECT tool_id FROM public.saved_tools WHERE user_id=${userId} AND tool_id=${tool.id}`,
+          ),
+        ).length
+      )
+        await assertQuota(tx, userId, "saves");
       const inserted = resultRows(
         await tx.execute(
           sql`INSERT INTO public.saved_tools(user_id,tool_id) VALUES(${userId},${tool.id}) ON CONFLICT DO NOTHING RETURNING user_id`,

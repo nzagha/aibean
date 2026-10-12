@@ -1,4 +1,6 @@
 import { recordAnalytics } from "../discovery/analytics";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
 import { visibleTarget } from "../discovery/targets";
 import type { AnalyticsSession } from "../discovery/analytics-contracts";
 import { sql } from "drizzle-orm";
@@ -81,7 +83,20 @@ export async function uploadResource(
       "The malware scanner rejected this file. Nothing was uploaded.",
     );
   await database.transaction(async (tx) => {
+    let quotaOwner = user;
+    if (admin) {
+      await checkAdmin(tx, user);
+      const [p] = resultRows<{ user_id: string }>(
+        await tx.execute(
+          sql`SELECT user_id FROM public.${sql.identifier(contentTables[parent.kind])} WHERE id=${parent.id}`,
+        ),
+      );
+      if (p) quotaOwner = p.user_id;
+    }
+    await entitlementLock(tx, quotaOwner);
     const owner = await ownedParent(tx, user, parent, admin);
+    await assertQuota(tx, owner.user_id, "files");
+    await assertQuota(tx, owner.user_id, "storageBytes", metadata.bytes);
     await tx.execute(
       sql`INSERT INTO public.resource_files(id,user_id,${sql.identifier(columns[parent.kind])},object_key,filename,mime,bytes,sha256,scan_status) VALUES(${metadata.id},${owner.user_id},${parent.id},${metadata.objectKey},${metadata.filename},${metadata.mime},${metadata.bytes},${metadata.sha256},'clean')`,
     );

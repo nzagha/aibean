@@ -11,6 +11,11 @@ import {
 } from "../src/lib/discovery/comparisons";
 import { mutateFollow } from "../src/lib/discovery/follows";
 import { discoveryAvailable } from "../src/lib/discovery/storage";
+import {
+  setupPricingFixtures,
+  pricingWorkflowContract,
+} from "../tests/fixtures/pricing-contract";
+import { pricingAvailable } from "../src/lib/pricing/storage";
 // Disposable native PostgreSQL only. Deliberately does not load dotenv, accept
 // DATABASE_URL, import the application DB, or connect to any supplied endpoint.
 import assert from "node:assert/strict";
@@ -1711,6 +1716,124 @@ async function main() {
       );
     },
   );
+  const pricingManifest = JSON.parse(
+    readFileSync("db/proposals/pricing-v1/manifest.json", "utf8"),
+  );
+  const pricingSql = readFileSync(pricingManifest.sqlPath, "utf8").replaceAll(
+    "\r\n",
+    "\n",
+  );
+  assert.equal(sha(pricingSql), pricingManifest.sqlSha256);
+  await operator`SELECT set_config('aibean.pricing_install_sha256',${pricingManifest.sqlSha256},false)`;
+  await check(
+    "Pricing proposal: late failure rolls back all five new tables without changing baseline/history",
+    async () => {
+      await assert.rejects(
+        operator.unsafe(pricingSql.replace("COMMIT;", "SELECT 1/0;COMMIT;")),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.pricing_releases') AS t",
+          )
+        )[0].t,
+        null,
+      );
+      await operator.unsafe(pricingSql);
+      const [objects] = await operator.unsafe(
+        "SELECT count(*)::int AS n,bool_and(relrowsecurity) AS rls FROM pg_class WHERE relnamespace='public'::regnamespace AND relname IN ('pricing_releases','pricing_quotes','membership_bindings','membership_changes','pricing_refunds')",
+      );
+      assert.equal(objects.n, 5);
+      assert(objects.rls);
+      const [fks] = await operator.unsafe(
+        "SELECT count(*)::int AS n FROM pg_constraint WHERE contype='f' AND conrelid IN ('public.pricing_releases'::regclass,'public.pricing_quotes'::regclass,'public.membership_bindings'::regclass,'public.membership_changes'::regclass,'public.pricing_refunds'::regclass)",
+      );
+      assert.equal(fks.n, 15);
+    },
+  );
+  await setupPricingFixtures(drizzle(operator));
+  process.env.AIBEAN_PRICING_WORKFLOWS = "true";
+  delete process.env.AIBEAN_PRICING_APPROVED_SHA256;
+  await check(
+    "Independent roles enforce pricing RLS/grants and private read-only installation history",
+    async () => {
+      assert(await pricingAvailable(drizzle(runtime)));
+      for (const role of ["anon", "authenticated", "service_role"])
+        for (const table of pricingManifest.tables) {
+          const [r] = await operator.unsafe(
+            `SELECT has_table_privilege('${role}','public.${table}','SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER') OR has_any_column_privilege('${role}','public.${table}','SELECT,INSERT,UPDATE,REFERENCES') AS access`,
+          );
+          assert.equal(r.access, false);
+        }
+      await assert.rejects(
+        runtime.unsafe(
+          "UPDATE aibean_private.pricing_installations SET sql_sha256=repeat('a',64)",
+        ),
+      );
+    },
+  );
+  await check(
+    "Native versioned pricing, monthly/annual quotes, discounts, quota denial, invoice renewals/expiry, refunds and payment/capability separation",
+    async () => {
+      await pricingWorkflowContract(drizzle(runtime));
+    },
+  );
+  await check(
+    "Independent native sessions serialize usage quotas and deduplicate priced checkout",
+    async () => {
+      const peer = connect(source, "aibean_app_login", "pricing-concurrency");
+      const answers = await Promise.allSettled([
+        mutateEngagement(drizzle(runtime), "pr-peer", {
+          operation: "create-stack",
+          name: "Concurrent quota first",
+        }),
+        mutateEngagement(drizzle(peer), "pr-peer", {
+          operation: "create-stack",
+          name: "Concurrent quota second",
+        }),
+      ]);
+      assert.equal(answers.filter((a) => a.status === "fulfilled").length, 1);
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT count(*)::int AS n FROM public.stacks WHERE user_id='pr-peer'",
+          )
+        )[0].n,
+        1,
+      );
+      await operator.unsafe(
+        "UPDATE public.vendor_edit_requests SET status='rejected',reviewer_id='pr-admin',review_reason='Synthetic completed test preparation',reviewed_at=now() WHERE id='pr-edit'",
+      );
+      await operator.unsafe(
+        "INSERT INTO public.vendor_edit_requests(id,user_id,tool_id,base_revision,proposed,note) VALUES('pr-edit-parallel','pr-vendor','dis-t2','1','{}','Synthetic parallel request')",
+      );
+      const payments = await Promise.all([
+        preparePayment(
+          drizzle(runtime),
+          "pr-vendor",
+          "edit",
+          "pr-edit-parallel",
+        ),
+        preparePayment(drizzle(peer), "pr-vendor", "edit", "pr-edit-parallel"),
+      ]);
+      assert.equal(payments[0].id, payments[1].id);
+      assert.equal(payments[0].amount, 950);
+      await peer.end();
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        discoveryHistory,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        discoveryExisting,
+      );
+    },
+  );
   const evidence = {
     date: new Date().toISOString(),
     environment: "Native disposable PostgreSQL; synthetic data only",
@@ -1727,6 +1850,7 @@ async function main() {
     outcomes,
     hostedModified: false,
     hostedBackupVerified: false,
+    pricingSqlSha256: pricingManifest.sqlSha256,
   };
   writeFileSync(
     join(root, "evidence.json"),

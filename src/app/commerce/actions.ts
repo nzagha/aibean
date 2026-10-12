@@ -20,6 +20,9 @@ import { revalidatePath } from "next/cache";
 import { requestSandboxCancellation } from "@/lib/admin/subscription-management";
 import { sandboxSubscriptionProvider } from "@/lib/sandbox-subscriptions";
 import type { ActionState } from "@/components/action-form";
+import type { PlanId } from "@/lib/pricing/config";
+import { sql } from "drizzle-orm";
+import { resultRows } from "@/lib/admin/tool-workflows";
 function origin() {
   const value = process.env.NEXT_PUBLIC_APP_URL;
   if (!value) throw new Error("Application origin is not configured.");
@@ -81,6 +84,10 @@ export async function checkout(
       user.id,
       kind,
       String(form.get("subjectId") || ""),
+      {
+        planId: String(form.get("planId") || "") as PlanId,
+        interval: String(form.get("interval") || "") as "month" | "year",
+      },
     );
     if (payment.status === "paid")
       return {
@@ -106,6 +113,21 @@ export async function checkout(
       return { href: previous.url, hrefLabel: "Open sandbox checkout →" };
     }
     const subscription = kind.endsWith("_subscription");
+    const pinned =
+      process.env.AIBEAN_PRICING_WORKFLOWS === "true"
+        ? await db().transaction(
+            async (tx) =>
+              resultRows<{
+                interval: "month" | "year";
+                plan_id: string;
+                provider_prices: Record<string, string>;
+              }>(
+                await tx.execute(
+                  sql`SELECT q.interval,q.plan_id,r.provider_prices FROM public.pricing_quotes q JOIN public.pricing_releases r ON r.id=q.release_id WHERE q.payment_id=${payment.id} AND q.user_id=${user.id}`,
+                ),
+              )[0],
+          )
+        : null;
     const session = await stripe.checkout.sessions.create(
       {
         mode: subscription ? "subscription" : "payment",
@@ -120,14 +142,23 @@ export async function checkout(
           : {}),
         line_items: [
           {
-            price_data: {
-              currency: payment.currency,
-              unit_amount: payment.amount,
-              product_data: { name: kind.replaceAll("_", " ") },
-              ...(subscription
-                ? { recurring: { interval: "month" as const } }
-                : {}),
-            },
+            ...(subscription && pinned
+              ? {
+                  price:
+                    pinned.provider_prices[
+                      pinned.plan_id + "_" + pinned.interval
+                    ],
+                }
+              : {
+                  price_data: {
+                    currency: payment.currency,
+                    unit_amount: payment.amount,
+                    product_data: { name: kind.replaceAll("_", " ") },
+                    ...(subscription
+                      ? { recurring: { interval: "month" as const } }
+                      : {}),
+                  },
+                }),
             quantity: 1,
           },
         ],

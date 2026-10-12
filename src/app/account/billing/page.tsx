@@ -6,6 +6,7 @@ import { readOwnCommerce } from "@/lib/admin/commerce-queries";
 import { ActionForm } from "@/components/action-form";
 import { checkout, cancelSubscription } from "@/app/commerce/actions";
 import { WorkspaceNavigation } from "@/components/workspace-navigation";
+import { MembershipSummary } from "@/components/membership-summary";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Billing",
@@ -23,6 +24,7 @@ export default async function Billing() {
         Sandbox payments only. Membership remains free. Purchases do not award
         editorial approval, ownership or capabilities.
       </p>
+      <MembershipSummary user={user.id} />
       {!data ? (
         <p>
           Billing workflows await the reviewed commercial database installation.
@@ -46,6 +48,16 @@ export default async function Billing() {
                     label="Prepare sandbox checkout"
                   >
                     <input type="hidden" name="kind" value={p.kind} />
+                    {p.plan_id && (
+                      <>
+                        <input type="hidden" name="planId" value={p.plan_id} />
+                        <input
+                          type="hidden"
+                          name="interval"
+                          value={p.billing_interval || "month"}
+                        />
+                      </>
+                    )}
                     <input
                       type="hidden"
                       name="subjectId"
@@ -60,8 +72,17 @@ export default async function Billing() {
           </section>
           <section className="placeholder-card">
             <h2 className="text-2xl">Subscriptions</h2>
+            {process.env.AIBEAN_PRICING_WORKFLOWS === "true" && (
+              <Link href="/pricing" className="text-link inline-block my-5">
+                Monthly & annual membership plans →
+              </Link>
+            )}
             {data.products
-              .filter((p) => p.id.endsWith("subscription"))
+              .filter(
+                (p) =>
+                  process.env.AIBEAN_PRICING_WORKFLOWS !== "true" &&
+                  p.id.endsWith("subscription"),
+              )
               .map((p) => (
                 <div className="account-row" key={p.id}>
                   <h3>

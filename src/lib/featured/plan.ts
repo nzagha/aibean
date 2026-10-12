@@ -1,10 +1,6 @@
 // Approved by the product owner. Amount is in Stripe's minor currency units.
-export const FEATURED_PLAN = {
-  amount: 9900,
-  currency: "usd",
-  days: 5,
-  label: "$99",
-} as const;
+import { APPROVED_PLACEMENT } from "../pricing/config";
+export const FEATURED_PLAN = APPROVED_PLACEMENT;
 
 export function validFeaturedPrice(price: {
   active: boolean;

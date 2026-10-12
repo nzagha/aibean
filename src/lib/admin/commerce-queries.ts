@@ -1,4 +1,5 @@
 import { sql } from "drizzle-orm";
+import { pricingAvailable } from "../pricing/storage";
 import type { IdentityDatabase } from "../supabase/identity";
 import { checkAdmin, resultRows } from "./tool-workflows";
 import { commerceAvailable, requireCommerceStorage } from "./commerce-storage";
@@ -69,9 +70,10 @@ export async function readOwnCommerce(
 ) {
   return database.transaction(async (tx) => {
     await requireCommerceStorage(tx);
+    const priced = await pricingAvailable(tx);
     const payments = resultRows<CommercePayment>(
       await tx.execute(
-        sql`SELECT *,updated_at::text AS revision,created_at::text FROM public.billing_transactions WHERE user_id=${user} ORDER BY public.billing_transactions.created_at DESC,id LIMIT 50`,
+        sql`SELECT p.*,p.updated_at::text AS revision,p.created_at::text ${priced ? sql`,q.plan_id,q.interval AS billing_interval` : sql``} FROM public.billing_transactions p ${priced ? sql`LEFT JOIN public.pricing_quotes q ON q.payment_id=p.id` : sql``} WHERE p.user_id=${user} ORDER BY p.created_at DESC,p.id LIMIT 50`,
       ),
     );
     const subscriptions = resultRows<Subscription>(

@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { AdminWorkflowError } from "../admin/contracts";
-export const MAX_RESOURCE_BYTES = 5 * 1024 * 1024;
+import { PROPOSED_PRICING } from "../pricing/config";
+export const MAX_RESOURCE_BYTES = PROPOSED_PRICING.fileMaxBytes;
 const types: Record<string, string> = {
   pdf: "application/pdf",
   txt: "text/plain",

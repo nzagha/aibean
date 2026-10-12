@@ -19,6 +19,8 @@ import {
 } from "../admin/contracts";
 import { creatorPublishingAllowed } from "../admin/review-storage";
 import { requireContentStorage } from "./storage";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
 import {
   schemas,
   contentTables,
@@ -246,6 +248,8 @@ export async function saveContent(
     await requireContentStorage(tx);
     if (admin) await checkAdmin(tx, user);
     else await checkAuthor(tx, user, kind);
+    await entitlementLock(tx, user);
+    if (!key && !admin) await assertQuota(tx, user, kind);
     const table = sql.identifier(contentTables[kind]);
     let owner = user;
     if (key) {

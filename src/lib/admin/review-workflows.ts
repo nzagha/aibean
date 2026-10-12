@@ -1,5 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
+import { assertQuota } from "../pricing/entitlements";
+import { entitlementLock } from "../pricing/storage";
 import { notifyDecision } from "../content/decision-notifications";
 import type {
   IdentityDatabase,
@@ -159,8 +161,10 @@ export async function submitVendorEdit(
   const input = vendorRequestInput.parse(value);
   return database.transaction(async (tx) => {
     await requireReviewStorage(tx);
+    await entitlementLock(tx, userId);
     await lockedTool(tx, input.toolId, input.baseRevision);
     await checkOwner(tx, userId, input.toolId);
+    await assertQuota(tx, userId, "editsMonthly");
     const id = randomUUID();
     await tx.execute(
       sql`INSERT INTO public.vendor_edit_requests(id,tool_id,user_id,base_revision,proposed,note) VALUES (${id},${input.toolId},${userId},${input.baseRevision},${JSON.stringify(input.proposed)}::jsonb,${input.note})`,
@@ -179,10 +183,13 @@ export async function submitVerificationRequest(
   const input = verificationRequestInput.parse(value);
   return database.transaction(async (tx) => {
     await requireReviewStorage(tx);
+    await entitlementLock(tx, userId);
     await lockedTool(tx, input.toolId, input.baseRevision);
     await checkOwner(tx, userId, input.toolId);
+    await assertQuota(tx, userId, "verificationsMonthly");
     const id = randomUUID();
     const paymentState =
+      process.env.AIBEAN_PRICING_WORKFLOWS !== "true" &&
       process.env.AIBEAN_VERIFICATION_PROMO_ZERO === "1"
         ? "promo_zero"
         : "required";

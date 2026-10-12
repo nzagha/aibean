@@ -40,6 +40,8 @@ export type CommerceProduct = {
   revision: string;
 };
 export type CommercePayment = {
+  plan_id?: string | null;
+  billing_interval?: "month" | "year" | null;
   id: string;
   user_id: string;
   kind: ProductKind;

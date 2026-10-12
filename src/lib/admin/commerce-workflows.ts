@@ -1,4 +1,12 @@
 import { randomUUID } from "node:crypto";
+import { entitlementLock } from "../pricing/storage";
+import { assertQuota } from "../pricing/entitlements";
+import {
+  commercialQuote,
+  persistQuote,
+  bindMembership,
+  type PlanSelection,
+} from "../pricing/payments";
 import { sql } from "drizzle-orm";
 import { notifyDecision } from "../content/decision-notifications";
 import type {
@@ -63,6 +71,10 @@ export async function saveProduct(
   value: unknown,
 ) {
   const input = productInput.parse(value);
+  if (process.env.AIBEAN_PRICING_WORKFLOWS === "true")
+    throw new AdminWorkflowError(
+      "Use versioned pricing proposals to change commercial settings.",
+    );
   await database.transaction(async (tx) => {
     await checkAdmin(tx, actor);
     await requireCommerceStorage(tx);
@@ -97,11 +109,13 @@ export async function submitToolProposal(
   await database.transaction(async (tx) => {
     await requireCommerceStorage(tx);
     await ordinary(tx, userId);
+    await entitlementLock(tx, userId);
     if (!(await toolSubmissionEligible(tx, userId)))
       throw new AdminWorkflowError(
         "Approved Creator, Vendor or Admin capability is required to submit Tools.",
       );
     await assertCategory(tx, proposed.categoryId);
+    await assertQuota(tx, userId, "submissionsMonthly");
     await tx.execute(
       sql`INSERT INTO public.tool_submissions(id,user_id,proposed) VALUES(${id},${userId},${JSON.stringify(proposed)}::jsonb)`,
     );
@@ -173,6 +187,17 @@ export async function requireSettledRequest(
   user: string,
 ) {
   await requireCommerceStorage(tx);
+  if (
+    process.env.AIBEAN_PRICING_WORKFLOWS === "true" &&
+    resultRows(
+      await tx.execute(
+        sql`SELECT f.id FROM public.pricing_refunds f JOIN public.billing_transactions p ON p.id=f.payment_id WHERE p.kind=${kind} AND p.subject_id=${subject} AND p.user_id=${user} AND f.status='refunded'`,
+      ),
+    ).length
+  )
+    throw new AdminWorkflowError(
+      "This payment was refunded and cannot authorize review fulfillment.",
+    );
   const [payment] = resultRows<CommercePayment>(
     await tx.execute(
       sql`SELECT * FROM public.billing_transactions WHERE kind=${kind} AND subject_id=${subject} AND user_id=${user} AND status='paid' AND (amount>0 AND stripe_session_id IS NOT NULL OR kind='verification' AND amount=0) FOR UPDATE`,
@@ -188,11 +213,13 @@ export async function preparePayment(
   user: string,
   kind: ProductKind,
   subject: string,
+  selection: PlanSelection = {},
 ) {
   recordId.parse(subject);
   return database.transaction(async (tx) => {
     await requireCommerceStorage(tx);
     await ordinary(tx, user);
+    await entitlementLock(tx, user);
     await tx.execute(
       sql`SELECT pg_advisory_xact_lock(hashtextextended(${"payment:" + kind + ":" + subject},0))`,
     );
@@ -273,11 +300,37 @@ export async function preparePayment(
     if (old) {
       if (old.user_id !== user)
         throw new AdminWorkflowError("Payment owner does not match.");
+      if (process.env.AIBEAN_PRICING_WORKFLOWS === "true") {
+        const [quote] = resultRows<{
+          plan_id: string | null;
+          interval: string | null;
+        }>(
+          await tx.execute(
+            sql`SELECT plan_id,interval FROM public.pricing_quotes WHERE payment_id=${old.id}`,
+          ),
+        );
+        if (!quote)
+          throw new AdminWorkflowError(
+            "Legacy pending checkout requires independent reconciliation; its historical price was preserved.",
+          );
+        if (
+          subscription &&
+          (quote.plan_id !== selection.planId ||
+            quote.interval !== selection.interval)
+        )
+          throw new AdminWorkflowError(
+            "Another plan/interval checkout is pending. Resolve it before starting a different checkout.",
+          );
+      }
       return old;
     }
+    const quote =
+      process.env.AIBEAN_PRICING_WORKFLOWS === "true"
+        ? await commercialQuote(tx, user, kind, selection)
+        : null;
     const [product] = resultRows<CommerceProduct>(
       await tx.execute(
-        sql`SELECT * FROM public.billing_products WHERE id=${kind} AND active=true FOR SHARE`,
+        sql`SELECT * FROM public.billing_products WHERE id=${kind} AND (${!!quote} OR active=true) FOR SHARE`,
       ),
     );
     if (!product)
@@ -286,14 +339,16 @@ export async function preparePayment(
       );
     const id = randomUUID();
     const storedSubject = subscription ? user + ":" + id : subject;
-    const status = product.amount === 0 ? "paid" : "created";
+    const amount = quote?.amount ?? product.amount;
+    const status = amount === 0 ? "paid" : "created";
     await tx.execute(
-      sql`INSERT INTO public.billing_transactions(id,user_id,product_id,kind,subject_id,amount,currency,status) VALUES(${id},${user},${kind},${kind},${storedSubject},${product.amount},${product.currency},${status})`,
+      sql`INSERT INTO public.billing_transactions(id,user_id,product_id,kind,subject_id,amount,currency,status) VALUES(${id},${user},${kind},${kind},${storedSubject},${amount},${product.currency},${status})`,
     );
+    if (quote) await persistQuote(tx, id, user, quote);
     await audit(tx, user, "commerce.payment-prepared", id, {
       kind,
       subject,
-      amount: product.amount,
+      amount,
       currency: product.currency,
       status,
     });
@@ -302,7 +357,7 @@ export async function preparePayment(
       user_id: user,
       kind,
       subject_id: storedSubject,
-      amount: product.amount,
+      amount,
       currency: product.currency,
       status,
       stripe_session_id: null,
@@ -387,6 +442,8 @@ export async function settleSandboxPayment(
       await tx.execute(
         sql`INSERT INTO public.commerce_subscriptions(id,user_id,product_id,stripe_subscription_id,status) VALUES(${randomUUID()},${payment.user_id},${payment.kind},${event.subscriptionId!},'incomplete')`,
       );
+    if (isSubscription)
+      await bindMembership(tx, payment, event.subscriptionId!);
     await audit(
       tx,
       "stripe-webhook",

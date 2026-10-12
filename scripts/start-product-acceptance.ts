@@ -201,6 +201,7 @@ async function main() {
     "db/proposals/creator-content-v1/manifest.json",
     "db/proposals/creator-files-v1/manifest.json",
     "db/proposals/discovery-v1/manifest.json",
+    "db/proposals/pricing-v1/manifest.json",
   ]) {
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
     const path = manifest.sqlPath || "db/install/reviewed-installation.sql";
@@ -218,6 +219,7 @@ async function main() {
         "creator-content-v1": "content",
         "creator-files-v1": "files",
         "discovery-v1": "discovery",
+        "pricing-v1": "pricing",
       } as Record<string, string>
     )[manifest.packageId];
     if (setting)
@@ -429,6 +431,7 @@ async function main() {
       AIBEAN_COMMERCE_WORKFLOWS: "1",
       AIBEAN_CONTENT_WORKFLOWS: "1",
       AIBEAN_DISCOVERY_WORKFLOWS: "true",
+      AIBEAN_PRICING_WORKFLOWS: "true",
       AIBEAN_ANALYTICS_SECRET: randomBytes(32).toString("hex"),
       AIBEAN_RESOURCE_UPLOADS: "",
       AIBEAN_SUPABASE_PROVIDER_TEST_APPROVED: "",

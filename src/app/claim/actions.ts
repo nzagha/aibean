@@ -8,10 +8,28 @@ import { tools, claims, orders, vendorAccess } from "@/lib/db/schema";
 import { claimInput } from "@/lib/validation";
 import { stripeClient } from "@/lib/billing";
 import { rateLimit } from "@/lib/security";
+import { assertQuota } from "@/lib/pricing/entitlements";
+import { requirePricing, entitlementLock } from "@/lib/pricing/storage";
+import { currentPricing } from "@/lib/pricing/releases";
 export async function startClaim(form: FormData) {
   const user = await requireUser();
   await rateLimit(user.id, "claim", 3, 86400);
   const input = claimInput.parse(Object.fromEntries(form));
+  const offer =
+    process.env.AIBEAN_PRICING_WORKFLOWS === "true"
+      ? await db().transaction(async (tx) => {
+          await requirePricing(tx);
+          const r = await currentPricing(tx);
+          if (
+            !r ||
+            process.env.AIBEAN_PRICING_APPROVED_SHA256 !== r.config_sha256
+          )
+            throw new Error(
+              "Claim pricing remains proposed; approved sandbox activation is required.",
+            );
+          return { amount: r.config.fees.claim, release: r.id };
+        })
+      : null;
   const [tool] = await db()
     .select()
     .from(tools)
@@ -31,22 +49,23 @@ export async function startClaim(form: FormData) {
     !price.active ||
     price.type !== "one_time" ||
     !price.unit_amount ||
-    price.unit_amount <= 0
+    price.unit_amount <= 0 ||
+    (offer && (price.unit_amount !== offer.amount || price.currency !== "usd"))
   )
     throw new Error("Configure a fixed, one-time test price.");
   const claimId = randomUUID();
   const orderId = randomUUID();
   await db().transaction(async (tx) => {
+    await entitlementLock(tx, user.id);
+    await assertQuota(tx, user.id, "claimsMonthly");
     await tx.insert(claims).values({ id: claimId, userId: user.id, ...input });
-    await tx
-      .insert(orders)
-      .values({
-        id: orderId,
-        userId: user.id,
-        claimId,
-        amount: price.unit_amount!,
-        currency: price.currency,
-      });
+    await tx.insert(orders).values({
+      id: orderId,
+      userId: user.id,
+      claimId,
+      amount: price.unit_amount!,
+      currency: price.currency,
+    });
   });
   const origin = new URL(
     process.env.NEXT_PUBLIC_APP_URL || "http://127.0.0.1:3000",

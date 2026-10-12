@@ -4,6 +4,7 @@ import { readVendorTools } from "@/lib/db/vendor-workspace";
 import { db } from "@/lib/db";
 import { WorkspaceNavigation } from "@/components/workspace-navigation";
 import Link from "next/link";
+import { MembershipSummary } from "@/components/membership-summary";
 export const metadata = {
   title: "Vendor workspace",
   robots: { index: false, follow: false },
@@ -74,6 +75,7 @@ export default async function Vendor() {
           </Link>
         </div>
       )}
+      <MembershipSummary user={user.id} />
     </div>
   );
 }

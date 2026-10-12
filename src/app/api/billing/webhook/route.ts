@@ -6,6 +6,7 @@ import { paymentMatches } from "@/lib/featured/rules";
 import { paidPlacementWindow } from "@/lib/featured/moderation";
 import { db } from "@/lib/db";
 import { commerceAvailable } from "@/lib/admin/commerce-storage";
+import { recordPaidMembershipInvoice } from "@/lib/pricing/lifecycle";
 import {
   settleSandboxPayment,
   reconcileSubscription,
@@ -34,6 +35,61 @@ export async function POST(request: Request) {
     return new Response("Invalid signature", { status: 400 });
   }
   if (event.livemode) return new Response("Test billing only", { status: 400 });
+  if (
+    event.type === "invoice.payment_succeeded" &&
+    process.env.AIBEAN_PRICING_WORKFLOWS === "true"
+  ) {
+    try {
+      const stripe = stripeClient(),
+        invoice = await stripe.invoices.retrieve(event.data.object.id),
+        raw = invoice.parent?.subscription_details?.subscription,
+        subscriptionId = typeof raw === "string" ? raw : raw?.id;
+      if (!subscriptionId) return Response.json({ received: true });
+      const s = await stripe.subscriptions.retrieve(subscriptionId);
+      if (s.metadata.kind !== "commerce")
+        return Response.json({ received: true });
+      const line = invoice.lines.data[0],
+        price = line?.pricing?.price_details?.price;
+      if (
+        invoice.livemode ||
+        s.livemode ||
+        invoice.status !== "paid" ||
+        invoice.lines.data.length !== 1 ||
+        line.quantity !== 1 ||
+        !price
+      )
+        throw new Error("Unsupported invoice contract");
+      await reconcileSubscription(db(), {
+        id: event.id + ".state",
+        created: Math.floor(Date.now() / 1000),
+        livemode: s.livemode,
+        subscriptionId: s.id,
+        status: s.status,
+        cancelAtPeriodEnd: s.cancel_at_period_end,
+        endsAt: s.items.data[0]?.current_period_end ?? null,
+      });
+      await recordPaidMembershipInvoice(db(), {
+        eventId: event.id,
+        invoiceId: invoice.id,
+        subscriptionId,
+        created: event.created,
+        livemode: invoice.livemode,
+        paid: true,
+        currency: invoice.currency,
+        amount: invoice.amount_paid,
+        priceId: typeof price === "string" ? price : price.id,
+        periodStart: line.period.start,
+        periodEnd: line.period.end,
+      });
+      revalidatePath("/account/membership");
+      revalidatePath("/account/billing");
+      return Response.json({ received: true });
+    } catch {
+      return new Response("Membership invoice reconciliation requires retry", {
+        status: 500,
+      });
+    }
+  }
   if (
     event.type === "customer.subscription.updated" ||
     event.type === "customer.subscription.deleted" ||

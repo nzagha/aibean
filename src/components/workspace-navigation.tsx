@@ -32,6 +32,9 @@ export async function WorkspaceNavigation() {
           <Link className="text-link" href="/account/billing">
             Billing →
           </Link>
+          <Link className="text-link" href="/account/membership">
+            Membership & usage →
+          </Link>
           <Link className="text-link" href="/account/submissions">
             Tool submissions →
           </Link>
