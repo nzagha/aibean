@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-12T21:18:36.526Z",
+  "environment": "New loopback fixture; synthetic identities only",
+  "hostedAccess": false,
+  "providerCalls": false,
+  "total": 17,
+  "results": [
+    {
+      "check": "Guest denial /admin/affiliates",
+      "pass": true
+    },
+    {
+      "check": "Guest denial /creator/profile/preview",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User denial /admin/affiliates",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User denial /creator/profile/preview",
+      "pass": true
+    },
+    {
+      "check": "Admin affiliate configuration and no verified revenue fabrication",
+      "pass": true
+    },
+    {
+      "check": "Creator profile presentation fields and gated uploads",
+      "pass": true
+    },
+    {
+      "check": "Owned Creator profile preview",
+      "pass": true
+    },
+    {
+      "check": "Working ordered campaign builder",
+      "pass": true
+    },
+    {
+      "check": "Private owned campaign preview",
+      "pass": true
+    },
+    {
+      "check": "Admin editorial campaign preview",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User cannot inspect private campaign",
+      "pass": true
+    },
+    {
+      "check": "Public approved campaign canonical references",
+      "pass": true
+    },
+    {
+      "check": "Public Creator profile remains available",
+      "pass": true
+    },
+    {
+      "check": "Fact-backed fit inspection is additive",
+      "pass": true
+    },
+    {
+      "check": "Creator and Vendor reports distinguish unverified commissions",
+      "pass": true
+    },
+    {
+      "check": "Unrelated campaign stops outbound without redirect",
+      "pass": true
+    },
+    {
+      "check": "Missing private media is unavailable",
+      "pass": true
+    }
+  ]
+}

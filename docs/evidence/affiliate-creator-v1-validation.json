@@ -1,0 +1,16 @@
+{
+ "date":"2026-10-12","branch":"codex/supabase-foundation",
+ "hostedAccess":false,"providerCalls":false,"privateConfigurationChanged":false,"liveUploads":false,"productionActivated":false,
+ "sqlSha256":"0a06cae4801d6c8f4493694c9fe537c412d61b4d33c89d3a7926df45c701704a",
+ "schema":{"publicTables":8,"foreignKeys":25,"rlsTables":8,"privateLedger":"affiliate_creator_installations"},
+ "lint":"PASS","typescript":"PASS","productionBuild":"PASS",
+ "automatedTests":{"passed":112,"failed":0,"skipped":0},
+ "nativePostgres":{"version":"17.11","passed":43,"failed":0,"syntheticOnly":true,"stoppedAfterRun":true},
+ "newHttpChecks":{"passed":17,"failed":0},
+ "runtimeAudit":{"vulnerabilities":0},
+ "browser":"PASS sampled actual profile/campaign/Admin mutations, previews and responsive navigation",
+ "preservation":"PASS; exact original source/recovery bytes and canonical Git baseline/six previous proposal files verified in preservation evidence",
+ "initialFailures":["Restricted-shell full tests denied Windows junction/loopback scanner; unchanged existing tests passed with required local permissions","Native runner initially lacked public binary-path settings; supplied previously verified local paths","Native fixture private-rejection case was already published by prior tests; synthetic pending state restored without weakening privacy"],
+ "limits":["No hosted installation/recovery acceptance","No real affiliate provider or Storage/scanner activation/acceptance","Proposed commission rules and pricing remain preview","Full factual fit inputs, v1.1 reconciliation, identity/session/cutover, operational retention and launch gates remain separate"],
+ "ci":"Publication verification to be recorded after push"
+}

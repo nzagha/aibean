@@ -1,0 +1,449 @@
+{
+  "date": "2026-10-12T21:34:28.862Z",
+  "hostedAccess": false,
+  "referenceCommit": "a74ff8689377bd6f158dd4f3efde4360841d58fd",
+  "total": 63,
+  "results": [
+    {
+      "path": ".gitattributes",
+      "expected": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "actual": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "expected": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8",
+      "actual": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "expected": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "actual": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "expected": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "actual": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "expected": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd",
+      "actual": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "expected": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d",
+      "actual": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "expected": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85",
+      "actual": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "expected": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99",
+      "actual": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "expected": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "actual": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "expected": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b",
+      "actual": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "expected": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e",
+      "actual": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "expected": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f",
+      "actual": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "expected": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b",
+      "actual": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "expected": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "actual": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "docs/source-of-truth/aiBean_Taxonomy_Package_v1.xlsx",
+      "expected": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "actual": "3adb157a616c8a4acecef8d0f9fce05b9f7e67982fce25314259ed52b5436cf6",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "docs/source-of-truth/aiBean_MVP_Development_Master_Plan_v0_3.docx",
+      "expected": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "actual": "681babdd70cbf6d969c3ef21803bb8c0588436de2d2a711397f4350c412c6989",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "src/data/taxonomy.json",
+      "expected": "b52b7507ec28b3ee4561d6e94294fd868b22ef5519d8385120af362fb090a5fc",
+      "actual": "b52b7507ec28b3ee4561d6e94294fd868b22ef5519d8385120af362fb090a5fc",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v2.json",
+      "expected": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+      "actual": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-review-v1.sql",
+      "expected": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "actual": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "expected": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "actual": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "expected": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "actual": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+      "expected": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "actual": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/discovery-v1/reviewed-installation.sql",
+      "expected": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+      "actual": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+      "mode": "original reviewed bytes",
+      "pass": true
+    },
+    {
+      "path": "db/install/identity-and-security.sql",
+      "expected": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+      "actual": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/install/manifest.json",
+      "expected": "fa67cad272008510be34ada709740393107965d49836ca6e6de35e57a711d5f5",
+      "actual": "fa67cad272008510be34ada709740393107965d49836ca6e6de35e57a711d5f5",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/install/reviewed-installation.sql",
+      "expected": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+      "actual": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/install/runtime-login-proposal.sql",
+      "expected": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+      "actual": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/install/testusers-security-proposal.sql",
+      "expected": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+      "actual": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/install/validation-read-only.sql",
+      "expected": "61466aa36b8a3cf252396580fed0b086fa3d1a51a7c83b850365abeca7120771",
+      "actual": "61466aa36b8a3cf252396580fed0b086fa3d1a51a7c83b850365abeca7120771",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/migrations/0000_numerous_skullbuster.sql",
+      "expected": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+      "actual": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/migrations/0001_hesitant_hardball.sql",
+      "expected": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+      "actual": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/migrations/meta/0000_snapshot.json",
+      "expected": "91286005519cf07640fa8c0deb52b5b0c1600739281f8daeecf51d51c54475dc",
+      "actual": "91286005519cf07640fa8c0deb52b5b0c1600739281f8daeecf51d51c54475dc",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/migrations/meta/0001_snapshot.json",
+      "expected": "c31dc16d798369d33af4b6134ae1403f91cc987542a056a4223ecc9621756649",
+      "actual": "c31dc16d798369d33af4b6134ae1403f91cc987542a056a4223ecc9621756649",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/migrations/meta/_journal.json",
+      "expected": "32252d81ef4d23aa9b7f0b83e40128d75f021b5642f51d42793ad843b86f9091",
+      "actual": "32252d81ef4d23aa9b7f0b83e40128d75f021b5642f51d42793ad843b86f9091",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/.gitattributes",
+      "expected": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "actual": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/.gitattributes",
+      "expected": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "actual": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/manifest.json",
+      "expected": "e62d14a8f480e57315a26ea410e102d9c046435def79f560d3bfc98067e71017",
+      "actual": "e62d14a8f480e57315a26ea410e102d9c046435def79f560d3bfc98067e71017",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/meta/_journal.json",
+      "expected": "2bad2d3603aeae5ef34a77110723498273da607a5d6954e619a1ff7672183c58",
+      "actual": "2bad2d3603aeae5ef34a77110723498273da607a5d6954e619a1ff7672183c58",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/admin-review-v1.manifest.json",
+      "expected": "33c50b4a2484d3f264f4cadd5e200fb977219f55e68a50303ce05a6c84971e30",
+      "actual": "33c50b4a2484d3f264f4cadd5e200fb977219f55e68a50303ce05a6c84971e30",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/.gitattributes",
+      "expected": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "actual": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/0000_creator_content.sql",
+      "expected": "d3ee3ee5ca4702ec8fef3ca7d0af0478c218a6a640b00d177aaaf02d503dfd93",
+      "actual": "d3ee3ee5ca4702ec8fef3ca7d0af0478c218a6a640b00d177aaaf02d503dfd93",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/0001_content_taxonomy_foreign_keys.sql",
+      "expected": "feb2169f99002d4d4398f102be60d33a676240daa2b70cc2b68fe2e05cd9cd4f",
+      "actual": "feb2169f99002d4d4398f102be60d33a676240daa2b70cc2b68fe2e05cd9cd4f",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/0002_moderation_analytics.sql",
+      "expected": "a7db48d32f8c6b25f548779352b8cc792c933ba8d8382894024f00dcf9353b8e",
+      "actual": "a7db48d32f8c6b25f548779352b8cc792c933ba8d8382894024f00dcf9353b8e",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/manifest.json",
+      "expected": "0724c8fa4f3bd08c386abd0d201d248cfd849dbf6aa8d58a9b40ed87e9bdfb8c",
+      "actual": "0724c8fa4f3bd08c386abd0d201d248cfd849dbf6aa8d58a9b40ed87e9bdfb8c",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/meta/0000_snapshot.json",
+      "expected": "cdc27968c8a7e33b1403120030e607a95c6425a37f9de726ee1e25c06145883a",
+      "actual": "cdc27968c8a7e33b1403120030e607a95c6425a37f9de726ee1e25c06145883a",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/meta/0001_snapshot.json",
+      "expected": "dd11f8b8c269aced3a0929a6718909678d5dca3706a5127cff6aea2e60c4a60a",
+      "actual": "dd11f8b8c269aced3a0929a6718909678d5dca3706a5127cff6aea2e60c4a60a",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/meta/0002_snapshot.json",
+      "expected": "15131b33c16003b1de23fa2bb8509b8d2d80b497a4bdc7b75a3496a5b4a1fc7e",
+      "actual": "15131b33c16003b1de23fa2bb8509b8d2d80b497a4bdc7b75a3496a5b4a1fc7e",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-content-v1/meta/_journal.json",
+      "expected": "3857a699521f5db367fcd58b7d364a2e61dfd6fddc9cfaae0bd7c22b6cfe4720",
+      "actual": "3857a699521f5db367fcd58b7d364a2e61dfd6fddc9cfaae0bd7c22b6cfe4720",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/.gitattributes",
+      "expected": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "actual": "b676529378a2f637b304088647afea494152ba996f18976dc39f475851dcd77f",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/0000_creator_files.sql",
+      "expected": "98c91c817627016dfedefde5c8213b9c70363e24b54087153e779708386538ab",
+      "actual": "98c91c817627016dfedefde5c8213b9c70363e24b54087153e779708386538ab",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/manifest.json",
+      "expected": "df7848a361f90e39388013f98cba68c511b5449a7cbbe40439e0690183ee6715",
+      "actual": "df7848a361f90e39388013f98cba68c511b5449a7cbbe40439e0690183ee6715",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/meta/0000_snapshot.json",
+      "expected": "9e876cc24cd0492ca5bf7325a41697c2ebde228d47efa5b9040b1e41bcfcda07",
+      "actual": "9e876cc24cd0492ca5bf7325a41697c2ebde228d47efa5b9040b1e41bcfcda07",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/creator-files-v1/meta/_journal.json",
+      "expected": "a247d1cf3cf4e5c4a9d0a689d48f6f94ca530fe0b3effc8277def096a4f3375c",
+      "actual": "a247d1cf3cf4e5c4a9d0a689d48f6f94ca530fe0b3effc8277def096a4f3375c",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/discovery-v1/.gitattributes",
+      "expected": "76a2d43a3c277c6848bb6e66c78e873143d78af18dd89d1026f495b9c6faa243",
+      "actual": "76a2d43a3c277c6848bb6e66c78e873143d78af18dd89d1026f495b9c6faa243",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/discovery-v1/0000_discovery.sql",
+      "expected": "788a9bd583f6ed52ffefc02f2fe5339e12e2b5afdb8df5808ab95a200d3c907d",
+      "actual": "788a9bd583f6ed52ffefc02f2fe5339e12e2b5afdb8df5808ab95a200d3c907d",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/discovery-v1/manifest.json",
+      "expected": "db51c8dd639e853da6b1577e0a7936f017e03c9d3f627d33e8c0d78ab243428b",
+      "actual": "db51c8dd639e853da6b1577e0a7936f017e03c9d3f627d33e8c0d78ab243428b",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/discovery-v1/meta/_journal.json",
+      "expected": "216a126c26599bd3ab3066dfeaa1cc6ca054fa1c2bbe5eab76754a00b166ae0c",
+      "actual": "216a126c26599bd3ab3066dfeaa1cc6ca054fa1c2bbe5eab76754a00b166ae0c",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/pricing-v1/.gitattributes",
+      "expected": "76a2d43a3c277c6848bb6e66c78e873143d78af18dd89d1026f495b9c6faa243",
+      "actual": "76a2d43a3c277c6848bb6e66c78e873143d78af18dd89d1026f495b9c6faa243",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/pricing-v1/0000_pricing.sql",
+      "expected": "7e12efe330ffc969d5f2d449fd20d2399a0eeee97b70f4c1a9dba679e3a2d6e6",
+      "actual": "7e12efe330ffc969d5f2d449fd20d2399a0eeee97b70f4c1a9dba679e3a2d6e6",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/pricing-v1/manifest.json",
+      "expected": "d44ccd975d12d629b656d12110bfe0dd38d354b6e030d616a4f35cef220e1b21",
+      "actual": "d44ccd975d12d629b656d12110bfe0dd38d354b6e030d616a4f35cef220e1b21",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/pricing-v1/meta/_journal.json",
+      "expected": "1a58816e3040d9786c935fc3b72618887a90059855a6bc2a7f10f7e1349e69e8",
+      "actual": "1a58816e3040d9786c935fc3b72618887a90059855a6bc2a7f10f7e1349e69e8",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "db/proposals/pricing-v1/reviewed-installation.sql",
+      "expected": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+      "actual": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+      "mode": "canonical Git text",
+      "pass": true
+    },
+    {
+      "path": "src/lib/pricing/config.ts",
+      "expected": "2acb6b7a8b68e9a88f31100ffd4808c92c4f91ef989dd9643fde636bb110c755",
+      "actual": "2acb6b7a8b68e9a88f31100ffd4808c92c4f91ef989dd9643fde636bb110c755",
+      "mode": "canonical Git text",
+      "pass": true
+    }
+  ]
+}

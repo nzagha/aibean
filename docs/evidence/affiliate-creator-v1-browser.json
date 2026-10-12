@@ -1,0 +1,15 @@
+{
+ "date":"2026-10-12",
+ "environment":"New disposable loopback Next.js/PostgreSQL fixture; synthetic Admin with approved Creator/Tool ownership and ordinary User",
+ "hostedAccess":false,"providerCalls":false,"liveUploads":false,"commercialActivation":false,
+ "observations":[
+  {"check":"Profile headline, structured biography and allowlisted social URL saved in a private draft and persisted in private preview","status":"PASS"},
+  {"check":"Campaign add/remove/up/down reorder submits the actual state; save persists changed order and returns published campaign to draft","status":"PASS"},
+  {"check":"Admin creates inactive program, adjusts rate in a revision, full configuration digest changes, program remains disabled","status":"PASS"},
+  {"check":"390px mobile Admin navigation opens; document client/scroll widths both 375px; no nested forms","status":"PASS"},
+  {"check":"Existing desktop branding, header/footer, typography and grid classes retained; synthetic screenshots visually inspected","status":"PASS"}
+ ],
+ "screenshots":["affiliate-creator-profile-preview.png","affiliate-creator-campaign-builder.png","affiliate-creator-admin-program.png","affiliate-creator-mobile.png"],
+ "limits":["Distinct non-Admin Creator and separate Vendor isolation covered in automated/native tests, not separate browser identities","Real provider activation, receipt delivery, private Storage/scanner and image rendering not browser-tested","Sampled responsiveness is not full WCAG/device conformance","Two navigation calls timed out during development compilation; loaded pages were inspected successfully","Two Playwright labels were unavailable; observed native accessibility controls succeeded without bypass"],
+ "cleanup":"Agent-created tab closed, viewport reset and only the new acceptance Next/PostgreSQL fixture stopped; earlier retained targets/backups untouched"
+}
