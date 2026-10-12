@@ -12,5 +12,6 @@
  "preservation":"PASS; exact original source/recovery bytes and canonical Git baseline/six previous proposal files verified in preservation evidence",
  "initialFailures":["Restricted-shell full tests denied Windows junction/loopback scanner; unchanged existing tests passed with required local permissions","Native runner initially lacked public binary-path settings; supplied previously verified local paths","Native fixture private-rejection case was already published by prior tests; synthetic pending state restored without weakening privacy"],
  "limits":["No hosted installation/recovery acceptance","No real affiliate provider or Storage/scanner activation/acceptance","Proposed commission rules and pricing remain preview","Full factual fit inputs, v1.1 reconciliation, identity/session/cutover, operational retention and launch gates remain separate"],
- "ci":"Publication verification to be recorded after push"
+ "publication":{"implementationCommit":"7dbc4a7ae37bb780a7b037d299a77114ad4bd2f4","reportsEvidenceCommit":"21f1037988f32fec51bf5e31723275695bb48256","protectedValueScan":"PASS","publishedFiles":61,"preservationChecks":63},
+ "ci":{"status":"PASS","headSha":"21f1037988f32fec51bf5e31723275695bb48256","url":"https://github.com/nzagha/aibean/actions/runs/38311893528","checks":["lint","typescript","112 automated tests","production build","runtime dependency audit"],"nativeHttpBrowser":"Verified locally only"}
 }
