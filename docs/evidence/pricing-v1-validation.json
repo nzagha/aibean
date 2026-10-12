@@ -17,5 +17,6 @@
  "preservationChecks":{"passed":23,"failed":0},
  "browser":"PASS sampled preview, User usage, Admin create/adjust/review, Creator/Vendor summaries and desktop/mobile containment",
  "limits":["Real Stripe activation/checkout/invoices/schedules/refunds not executed", "Hosted dependent/pricing schemas not installed", "No customer-facing production approval", "Global provider storage/launch identity and recovery gates remain separate"],
- "ci":"Publication verification recorded in active progress after push"
+ "publication":{"implementationCommit":"43bf09b57050e9d9951392f26ef26f5d33a1d2fa","modelEvidenceCommit":"cd8d73bf8d45c98c3d0b07627f0baf03eed09e79","protectedValueScan":"PASS","publishedFiles":62},
+ "ci":{"status":"PASS","headSha":"cd8d73bf8d45c98c3d0b07627f0baf03eed09e79","url":"https://github.com/nzagha/aibean/actions/runs/38305249235","checks":["lint","typescript","109 automated tests","production build","runtime dependency audit"],"nativePostgresHttpBrowser":"Verified locally only"}
 }
