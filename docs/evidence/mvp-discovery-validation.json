@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-12",
+  "branch": "codex/supabase-foundation",
+  "implementationCommit": "44aeb58",
+  "hostedAccess": false,
+  "discoverySqlSha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+  "lint": "PASS",
+  "typescript": "PASS",
+  "automatedTests": {"passed":107,"failed":0,"skipped":0},
+  "nativePostgres": {"version":"17.11","passed":34,"failed":0,"syntheticOnly":true},
+  "newHttpChecks": {"passed":27,"failed":0,"previous119CheckAuditRepeated":false},
+  "productionBuild": {"status":"PASS","next":"16.3.8"},
+  "runtimeAudit": {"vulnerabilities":0},
+  "frozenFileChecks": {"passed":22,"failed":0},
+  "publicationProtectedValueScan": "PASS (59 implementation files)",
+  "browserLimit": "Interactive deletion dialog and cleanup CDP timed out; native deletion and automated confirmation tests pass. See browser evidence for actual sampled coverage.",
+  "operationalLimits": ["No hosted installation or feature enablement", "No real identity/provider or cross-device acceptance", "No physical retention scheduler configured", "No recovery retry or managed-scope export"]
+}

@@ -1,4 +1,14 @@
-# aiBean MVP product completion report — 11 October 2026
+# aiBean MVP product completion report — 12 October 2026
+
+## Current milestone: durable comparisons, complete follows and behavioral reporting
+
+**Implemented and locally verified; pending hosted schema/enablement and provider acceptance.** Account-backed private comparison CRUD/context/ordered 2–4 members and revision isolation; six-target shared follow controls/account Following with transactional public-update notices; minimized signed-session analytics and verified Resource/Skill/Playbook attribution are implemented. User, Creator, Tool-scoped Vendor and Admin panels use actual owner-scoped recorded aggregates, accurate no-data/configuration states and bounded audited retention cleanup.
+
+Validation: **107 automated tests, 34 native PostgreSQL scenarios, 27 new HTTP checks**, lint/TypeScript/production build PASS, zero runtime vulnerabilities, 22 frozen-source/recovery/proposal checks PASS. Browser comparison save/reload/rename/context and Tool follow/unfollow/Following pass at desktop/mobile sizes. The browser deletion dialog timed out; native deletion and automated confirmation behavior pass. No full provider, multi-device or accessibility claim. No hosted connection/configuration/migration or private environment change occurred.
+
+[Complete milestone result and exact remaining features](MVP_DISCOVERY_COMPARISONS_FOLLOWS_ANALYTICS_RESULT.md), [separate discovery-v1 proposal](DISCOVERY_V1_DATABASE_PROPOSAL.md), [updated matrix](MVP_ACCEPTANCE_MATRIX.md), [new route coverage](MVP_ROUTE_FUNCTIONAL_COVERAGE.md). New SQL SHA-256: `c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3`. Four earlier uninstalled packages and the 14-table baseline remain unchanged. Full MVP release remains incomplete: commercial quota/discount entitlements and exceptions, affiliate administration, campaign/profile media relationships, reviewed full fit inputs, v1.1 reconciliation and recovery/identity/provider/launch gates. No cleanup scheduler configured; physical expired analytics require writes/manual cleanup until operational scheduling.
+
+The sections below are **dated 11 October evidence**, superseded for comparisons/follows/analytics by this update; their recorded runs and historical limitations are preserved.
 
 **Current acceptance publication verified:** Published corrective implementation 675c1ec65f5b512fc5cc17117db48da35d7e0320 and isolated acceptance harness 3f4ff7cf3ee202cc0dc062ab0697b5b42cddde36 to codex/supabase-foundation. [GitHub Validate 38162615660](https://github.com/nzagha/aibean/actions/runs/38162615660) passed lint, TypeScript, all automated tests, production build and runtime dependency audit on that exact complete code. Native PostgreSQL, HTTP and browser evidence were executed locally with synthetic fixtures; CI does not establish hosted/provider acceptance.
 

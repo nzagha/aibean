@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-12T17:20:56.324Z",
+  "environment": "New native loopback fixture; synthetic records only",
+  "hostedAccess": false,
+  "total": 27,
+  "results": [
+    {
+      "check": "Guest denied /account/comparisons",
+      "pass": true
+    },
+    {
+      "check": "Guest denied /account/following",
+      "pass": true
+    },
+    {
+      "check": "Guest denied /account/comparisons/[id]",
+      "pass": true
+    },
+    {
+      "check": "User owns /account/comparisons",
+      "pass": true
+    },
+    {
+      "check": "User owns /account/following",
+      "pass": true
+    },
+    {
+      "check": "User owns /account/comparisons/[id]",
+      "pass": true
+    },
+    {
+      "check": "User owns /account/activity",
+      "pass": true
+    },
+    {
+      "check": "Admin cannot read another account comparison",
+      "pass": true
+    },
+    {
+      "check": "User denied Admin analytics",
+      "pass": true
+    },
+    {
+      "check": "User denied Creator analytics",
+      "pass": true
+    },
+    {
+      "check": "Tool owner analytics",
+      "pass": true
+    },
+    {
+      "check": "Vendor cannot read unowned Tool analytics",
+      "pass": true
+    },
+    {
+      "check": "Creator recorded engagement",
+      "pass": true
+    },
+    {
+      "check": "Admin instrumentation and retention",
+      "pass": true
+    },
+    {
+      "check": "Cross-origin event denied",
+      "pass": true
+    },
+    {
+      "check": "Untrusted event body rejected",
+      "pass": true
+    },
+    {
+      "check": "Client cannot forge completed save",
+      "pass": true
+    },
+    {
+      "check": "Raw search text rejected",
+      "pass": true
+    },
+    {
+      "check": "Payload size bounded",
+      "pass": true
+    },
+    {
+      "check": "DNT prevents recording and session cookie",
+      "pass": true
+    },
+    {
+      "check": "Valid public Tool view recorded with signed cookie",
+      "pass": true
+    },
+    {
+      "check": "Duplicate event deduplicated",
+      "pass": true
+    },
+    {
+      "check": "Unknown Tool target denied",
+      "pass": true
+    },
+    {
+      "check": "Unrelated campaign attribution denied",
+      "pass": true
+    },
+    {
+      "check": "Published Resource Page self-attribution accepted",
+      "pass": true
+    },
+    {
+      "check": "Anonymous comparison remains available",
+      "pass": true
+    },
+    {
+      "check": "Verified Resource Page to related Skill attribution accepted",
+      "pass": true
+    }
+  ]
+}

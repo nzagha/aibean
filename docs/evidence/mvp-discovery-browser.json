@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-12",
+  "environment": "Two new isolated loopback fixtures; synthetic ordinary User records only",
+  "hostedAccess": false,
+  "observations": [
+    {"check": "Save named comparison, open private detail and reload", "status": "PASS"},
+    {"check": "Rename comparison and persist selected industry context", "status": "PASS"},
+    {"check": "Under-two selection shows validation and retains submitted fields", "status": "PASS"},
+    {"check": "Tool follow gives one follower and Unfollow control", "status": "PASS"},
+    {"check": "Following lists owned Tool then unfollow yields zero and empty state", "status": "PASS"},
+    {"check": "Desktop 1440 and mobile 390 comparison render; contained table overflow, existing branding and no nested forms", "status": "PASS"},
+    {"check": "Interactive delete confirmation", "status": "UNVERIFIED", "reason": "In-app browser CDP click/dialog handling timed out. Native deletion and automated ActionForm confirmation tests pass."}
+  ],
+  "screenshots": ["mvp-discovery-comparison-desktop.jpg", "mvp-discovery-comparison-mobile.jpg"],
+  "limits": [
+    "No actual hosted Auth, cross-device, private Storage/scanner, payment, email or provider test.",
+    "Six follow kinds and reporting isolation verified natively; other five follow controls and Creator/Vendor/Admin report pages were not individually visually tested.",
+    "Sampled responsiveness is not full accessibility or device conformance.",
+    "Browser automation timed out during final dialog cleanup; temporary tabs were not marked to persist. Both new local fixture process groups stopped and original generated project declarations restored."
+  ]
+}

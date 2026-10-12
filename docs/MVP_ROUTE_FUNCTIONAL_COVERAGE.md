@@ -1,4 +1,22 @@
-# Route-by-route functional coverage — 11 October 2026
+# Route-by-route functional coverage — 12 October 2026
+
+## New discovery milestone coverage
+
+**27/27 new HTTP checks PASS**, distinct from the dated 119-check audit below. [Exact evidence](evidence/mvp-discovery-http.json), [native workflows](evidence/mvp-discovery-native-postgres.json), [actual browser coverage and limits](evidence/mvp-discovery-browser.json). Synthetic loopback PostgreSQL only; no hosted migration/provider activation.
+
+| Route / action | Verified behavior | Limits |
+| --- | --- | --- |
+| `/account/comparisons` | User list/empty state/navigation; guest denied; native bounded owner pagination. Browser save/reload. | Hosted discovery package pending. |
+| `/account/comparisons/[id]` | Private detail; cross-account Admin 404; ordered matrix/editor; rename/context/invalid selection browser feedback. Native add/remove/delete/CAS/rollback/concurrent winner and archived hiding. | Browser native delete dialog timed out; automated confirmation behavior and native delete pass. |
+| `/compare` | Anonymous matrix/context/shortlist retained; authenticated save editor adds account-backed persistence. Unknown facts preserved. | Reviewed full fact/fit inputs still incomplete; no invented recommendation. |
+| `/account/following` | User list/type filter/unfollow/visibility; guest denial. Actual browser Tool follow/count/list/unfollow/zero state. Native six kinds/duplicates/privacy/isolation and transactional notices. | Other target controls are service/HTTP-verified, not individually browser-clicked. |
+| `/tools/[slug]`, `/skills/[slug]`, `/playbooks/[slug]`, `/events/[slug]`, `/@handle`, `/industries/[slug]` | Shared follow control and view instrumentation; strict public target validation. | Industry rows must actually exist in approved taxonomy; no invented target. Hosted dependencies pending. |
+| Directories and Resource Pages | Scoped selected-filter/search/view beacons; verified Resource self/Skill/Playbook relationships. HTTP actual related Skill campaign passes. | No external traffic/conversion/affiliate attribution claim. |
+| `/api/analytics` POST | Same-origin 204 valid, 403 foreign origin, 400 invalid/PII/forged save/raw search/unknown target/unrelated campaign, 413 >4-KB body; signed HTTP-only session, DNT no-cookie/no-event, dedup. | Browser requests are not proof of unique/human activity; private recording config pending. |
+| Saves, Stack additions, outbound and download actions | Record only actual accepted mutation/new membership and validated canonical destinations; native duplicate/isolation/rollback pass. | Actual private Storage/scanner downloads/provider tests pending. |
+| `/creator/analytics`, `/vendor/tools/[id]/analytics`, `/admin/analytics` | HTTP actual aggregate/status pages, ordinary User denial, wrong-Tool Vendor denial. Native scoped aggregate/privacy/retention/audit/cleanup. | Not individually visually verified; no fabricated stats or hosted/provider acceptance. No cleanup scheduler. |
+
+The remaining sections record the **11 October route audit** unchanged; comparisons/follows/analytics gaps in that dated table are superseded by the working increment above.
 
 Synthetic loopback fixture only. 119/119 HTTP checks PASS; no hosted connection. Transport 200 can contain Next streamed redirect/not-found: effective statuses below follow those signals. HTTP PASS is render/routing/denial evidence, not complete mutation or accessibility coverage.
 

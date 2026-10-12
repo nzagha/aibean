@@ -1,4 +1,4 @@
-# MVP acceptance matrix — 11 October 2026
+# MVP acceptance matrix — 12 October 2026
 
 Available local workflows pass bounded acceptance; **full hosted MVP acceptance is incomplete**. Local execution does not imply hosted installation/provider readiness. This supersedes the earlier 94-test snapshot; historical audit/version documents remain unchanged.
 
@@ -21,10 +21,11 @@ The required classifications below are literal. An incomplete portion is listed 
 | Subscription quotas/discount entitlements and commercial exceptions | Incomplete implementation | Reviewed entitlement/exception contracts/persistence and approved plan values missing. |
 | User Tool saves, owned Stacks and review submit/edit feedback | Implemented and locally verified | Browser saves/create/add/review/reload; native cross-account, stale CAS and atomic audit. |
 | User profiles/content saves, Stack order/notes/visibility | Implemented but awaiting hosted installation | Content package; native owner/privacy/order/confirmation tests and actual User journey. |
-| Durable authenticated saved comparisons and complete fit model | Incomplete implementation | Missing account comparison/member model and reviewed fact/fit inputs. Required MVP, not optional. |
+| Durable authenticated named comparisons, ordered 2–4 Tools, context/rename/delete/private detail | Implemented but awaiting hosted installation | Separate discovery-v1; native owner/CAS/concurrency/audit/moved-member rollback, archived privacy and actual browser persistence/editor pass. Live multi-device/provider acceptance pending. |
+| Complete fit/fact inputs | Incomplete implementation | Existing reviewed scoring reused; missing facts remain unknown and no recommendation is fabricated. |
 | Browser comparison persistence/context explanation/keyboard table | Implemented and locally verified | Four-item bound/reload, missing facts, current verification/version checks, contained scrolling. |
 | Creator follows and account-scoped in-app decision notifications | Implemented but awaiting hosted installation | Existing content model; recipient isolation, stale/no-duplicate and notification/decision/audit rollback. No mail. |
-| Tool/Skill/Playbook/Event/industry follows and update fan-out | Incomplete implementation | creator_follows is Creator-only; additional target/fan-out model needed. |
+| Tool/Skill/Playbook/Creator/Event/industry follows and update fan-out | Implemented but awaiting hosted installation | Shared six-target service/control, duplicate/isolation/suspension/query bounds and transactional publication/canceled-Event delivery; private/unpublished excluded. Actual taxonomy rows required. |
 | Separate Skills/free Playbooks, steps and relationships | Implemented but awaiting hosted installation | Native moderation/privacy; public detail HTTP; reverse Skill → published Playbooks added. |
 | Creator profiles/resources/campaigns/public Stacks | Implemented but awaiting hosted installation | Actual @handle/profile/resource publication; private/suspended excluded; Stack relationship query passes. |
 | Campaign Tool/Stack/Event/media blocks and profile media/social metadata | Incomplete implementation | Current external CTA and Skill/Playbook links work; additive relationship/media/profile storage needed. |
@@ -35,7 +36,9 @@ The required classifications below are literal. An incomplete portion is listed 
 | Real private Storage policies/scoped secrets/malware engine | Implemented but awaiting provider testing | Synthetic adapters/protocol pass; actual bucket/engine/signatures/provider behavior unverified. |
 | Vendor owned inventory/requests/Events/aggregates | Implemented but awaiting hosted installation | Native Tool scope/HTTP denial, browser owned inventory; proposals and Stripe provider gate. |
 | Daily outbound aggregates and operational summaries | Implemented but awaiting hosted installation | engagement_counters/concurrency/account isolation; synthetic evidence only. |
-| Behavioral/campaign/conversion analytics and aiBean affiliate management | Incomplete implementation | analytics_events, attribution/session/affiliate configuration models and privacy/retention contracts missing. |
+| Behavioral analytics and verified on-platform campaign context | Implemented but awaiting hosted installation | Separate analytics_events, signed minimized sessions, strict contracts/DNT/throttle/dedup, scoped real aggregates, no-data states and audited retention cleanup. Requires private signing configuration; no worker configured. |
+| Real behavioral instrumentation/provider and second-device verification | Implemented but awaiting provider testing | Local native/HTTP/browser evidence is synthetic; real identity, download/Storage and hosted recording remain unverified. |
+| Conversions, external affiliate administration and reconciliation | Incomplete implementation | No unique-visitor/conversion/affiliate metrics fabricated. Config/disclosure/destination/ledger/reconciliation contracts missing. |
 | Production identity/session engineering and exclusive Supabase cutover | Incomplete implementation | Shared Auth throttle/replay, recent-auth/revocation guarantees, legacy continuity and release mode still need engineering. |
 | Hosted email/recovery/social/MFA/account-security behavior | Implemented but awaiting provider testing | Inactive candidate only; concrete SMTP/password/redirect/provider and two-account/mail approval. |
 | Full accessibility conformance and indexed production load | Incomplete implementation | Sampled keyboard/focus/reduced-motion/responsive checks pass; no full WCAG/scale claim. |
@@ -43,6 +46,6 @@ The required classifications below are literal. An incomplete portion is listed 
 | Discussions/Replies/News/Courses/Social Videos, DM/native video/payouts | Outside approved MVP scope | No excluded historical listing-type modules activated. External course/resource links allowed. |
 | Enterprise/SAML, anonymous identities and Web3 | Outside approved MVP scope | Owner exclusions; public anonymous browsing remains allowed. |
 
-Current evidence: **104 automated tests**, **29 native PostgreSQL scenarios**, lint/TypeScript/build PASS and **zero runtime vulnerabilities**. Exact HTTP count/outcomes: [route evidence](evidence/mvp-product-http-acceptance.json). Actual browser journeys and limits: [browser evidence](evidence/mvp-product-browser-acceptance.json). No skipped tests or fabricated provider PASS.
+Current evidence: **107 automated tests**, **34 native PostgreSQL scenarios**, **27 new HTTP checks**, lint/TypeScript/build PASS and **zero runtime vulnerabilities**. [New HTTP evidence](evidence/mvp-discovery-http.json), [native evidence](evidence/mvp-discovery-native-postgres.json), [browser observations/limits](evidence/mvp-discovery-browser.json), [full result](MVP_DISCOVERY_COMPARISONS_FOLLOWS_ANALYTICS_RESULT.md). The earlier 119-check HTTP audit and dated prior browser evidence remain historical; they were not repeated. Interactive deletion confirmation was blocked by browser dialog handling; native deletion and automated form confirmations pass. No skipped automated tests or fabricated provider PASS.
 
 [Corrections, prioritized gaps and external approvals](MVP_PRODUCT_ACCEPTANCE_AND_UX_RESULT.md), [route-by-route coverage](MVP_ROUTE_FUNCTIONAL_COVERAGE.md), [native evidence](evidence/mvp-product-native-acceptance.json), [completion report](AIBEAN_MVP_PRODUCT_COMPLETION_REPORT.md).

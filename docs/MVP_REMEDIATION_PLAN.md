@@ -1,5 +1,11 @@
 # Active MVP remediation plan
 
+## Current increment — 12 October 2026
+
+Durable private account comparisons, multi-target follows/transactional publication notifications and distinct behavioral analytics with four-panel integration are implemented and locally verified. **107 automated tests, 34 native PostgreSQL scenarios, 27 new HTTP checks**, lint/typecheck/build and runtime audit pass. [Complete result](MVP_DISCOVERY_COMPARISONS_FOLLOWS_ANALYTICS_RESULT.md) records browser coverage and the deletion-dialog limitation. [Separate discovery proposal](DISCOVERY_V1_DATABASE_PROPOSAL.md) depends on all four unchanged earlier packages and requires new exact hosted approval/recovery review; no hosted/provider execution, private configuration or Auth activation occurred.
+
+Next implementation priorities: approved commercial quotas/discounts/entitlement snapshots and downgrade/expiry/exception reconciliation; affiliate configuration/disclosures/click ledger/reconciliation; campaign Tool/Stack/Event/media and profile media/social fields; reviewed full fit inputs and independent v1.1 reconciliation. Next operational gates: current full-scope recovery/inventory, exact dependency/discovery installations, operator capabilities, SMTP/password/redirect/two-account identity tests, exclusive Supabase release hardening, actual Stripe sandbox/Storage/scanner testing, scheduled analytics retention/privacy notice, curated content, accessibility/load/deployment/DNS/monitoring/release. Do not repeat working comparison/follow/outbound workflows or A/B/C. Earlier dated entries below preserve their stage evidence; missing comparisons/follows/behavioral models in them are superseded by this increment.
+
 **Current acceptance publication verified:** Published corrective implementation 675c1ec65f5b512fc5cc17117db48da35d7e0320 and isolated acceptance harness 3f4ff7cf3ee202cc0dc062ab0697b5b42cddde36 to codex/supabase-foundation. [GitHub Validate 38162615660](https://github.com/nzagha/aibean/actions/runs/38162615660) passed lint, TypeScript, all automated tests, production build and runtime dependency audit on that exact complete code. Native PostgreSQL, HTTP and browser evidence were executed locally with synthetic fixtures; CI does not establish hosted/provider acceptance.
 
 ## Current product acceptance continuation — 11 October 2026
