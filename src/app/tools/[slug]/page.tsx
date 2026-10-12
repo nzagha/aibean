@@ -18,6 +18,9 @@ import { ownerPredicates } from "@/lib/db/owned-resources";
 import { contentAvailable } from "@/lib/content/storage";
 import { readToolRelatedContent } from "@/lib/content/queries";
 import { ReportContent } from "@/components/report-content";
+import { AffiliateDisclosure } from "@/components/creator-enhancements";
+import { enhancementsAvailable } from "@/lib/creator-enhancements/storage";
+import { campaignContains } from "@/lib/creator-enhancements/affiliates";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,
@@ -32,11 +35,13 @@ export default async function ToolPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ notice?: string }>;
+  searchParams: Promise<{ notice?: string; campaign?: string }>;
 }) {
   const t = await getTool((await params).slug);
   if (!t) notFound();
-  const notice = (await searchParams).notice;
+  const incoming = await searchParams;
+  const notice = incoming.notice;
+  const campaign = typeof incoming.campaign === "string" && incoming.campaign.length <= 100 && process.env.DATABASE_URL && await db().transaction(async tx=>await enhancementsAvailable(tx)&&await campaignContains(tx,incoming.campaign!,"tools",t.id)) ? incoming.campaign : undefined;
   const userId = await getIdentity();
   const canWrite = !!userId && !!process.env.DATABASE_URL;
   const userStacks = canWrite
@@ -293,6 +298,8 @@ export default async function ToolPage({
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                {campaign && <input type="hidden" name="campaign" value={campaign}/>}
+                <AffiliateDisclosure tool={t.id} campaign={campaign}/>
                 <button className="button primary w-full">
                   Visit official website →
                 </button>

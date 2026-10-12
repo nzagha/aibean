@@ -7,6 +7,7 @@ import { readCreatorAnalytics } from "@/lib/content/analytics";
 import { authorAllowed } from "@/lib/content/workflows";
 import { WorkspaceNavigation } from "@/components/workspace-navigation";
 import { AnalyticsTable } from "@/components/analytics-table";
+import { AffiliateReport } from "@/components/affiliate-report";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Creator analytics",
@@ -36,6 +37,7 @@ export default async function Analytics() {
         )}
         <BehaviorAnalyticsTable ready={behavior.ready} rows={behavior.rows} />
       </section>
+      {allowed && <AffiliateReport actor={user.id} scope="creator"/>}
     </div>
   );
 }

@@ -14,6 +14,8 @@ export async function registerOutbound(
   slug: string,
   source: "internal" | "direct" | "external",
   session?: AnalyticsSession,
+  campaignId?: string,
+  disclosureHash?: string,
 ) {
   z.enum(["tools", "resources", "events"]).parse(kind);
   z.enum(["internal", "direct", "external"]).parse(source);
@@ -36,6 +38,29 @@ export async function registerOutbound(
           );
     if (!row) throw new AdminWorkflowError("This content is not available.");
     const destination = safeWebUrl.parse(row.destination);
+    if (kind === "tools") {
+      const { affiliateOutbound, campaignContains } =
+        await import("../creator-enhancements/affiliates");
+      const { enhancementsAvailable } =
+        await import("../creator-enhancements/storage");
+      if (
+        campaignId &&
+        (!(await enhancementsAvailable(tx)) ||
+          !(await campaignContains(tx, campaignId, "tools", row.id)))
+      )
+        throw new AdminWorkflowError(
+          "Unavailable or unrelated campaign context.",
+        );
+      const affiliate = await affiliateOutbound(
+        tx,
+        row.id,
+        campaignId,
+        session,
+        disclosureHash,
+      );
+      // Affiliate requests are recorded separately; they are not ordinary outbound counts or ranking inputs.
+      if (affiliate) return affiliate;
+    }
     if (ready) {
       const bucket = Math.floor(Date.now() / 60000);
       const [budget] = resultRows<{ count: number }>(
@@ -60,7 +85,11 @@ export async function registerOutbound(
             : "resource_outbound",
       kind,
       targetId: row.id,
-      ...(kind === "resources" ? { campaignId: row.id } : {}),
+      ...(kind === "resources"
+        ? { campaignId: row.id }
+        : campaignId
+          ? { campaignId }
+          : {}),
     });
     return destination;
   });

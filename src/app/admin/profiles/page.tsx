@@ -5,6 +5,8 @@ import { ActionForm } from "@/components/action-form";
 import { ReasonField, AdminPages } from "@/components/admin-shared";
 import { reviewCreatorProfile } from "@/app/content-actions";
 import type { AdminParams } from "@/lib/admin/queries";
+import { readPresentation } from "@/lib/creator-enhancements/presentation";
+import { PresentationDetails } from "@/components/creator-enhancements";
 export default async function Profiles({
   searchParams,
 }: {
@@ -43,12 +45,13 @@ export default async function Profiles({
             </button>
           </form>
           {!data.rows.length && <p className="my-5">No matching profiles.</p>}
-          {data.rows.map((row) => (
+          {await Promise.all(data.rows.map(async (row) => (
             <article className="account-row" key={row.user_id}>
               <h3 className="text-xl">
                 {row.display_name} · @{row.handle}
               </h3>
               <p className="my-4">{row.bio}</p>
+              <PresentationDetails presentation={await readPresentation(db(),row.user_id,"admin",admin.id)}/>
               <p>
                 {row.status} · {row.review_reason || "No review decision yet"}
               </p>
@@ -79,7 +82,7 @@ export default async function Profiles({
                 </ActionForm>
               )}
             </article>
-          ))}
+          )))}
           <AdminPages
             base="/admin/profiles"
             total={data.total}

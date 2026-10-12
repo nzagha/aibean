@@ -76,7 +76,17 @@ export async function recordAnalytics(
         sql`SELECT id FROM public.creator_resources WHERE id=${input.campaignId} AND (${input.kind === "resources" && input.targetId === input.campaignId} OR ${input.kind === "skills"} AND skill_id=${input.targetId} OR ${input.kind === "playbooks"} AND playbook_id=${input.targetId})`,
       ),
     );
-    if (!link)
+    const structured =
+      !link &&
+      (await import("../creator-enhancements/storage")).enhancementsAvailable;
+    const linked =
+      !!link ||
+      (!!structured &&
+        (await structured(tx)) &&
+        (await (
+          await import("../creator-enhancements/affiliates")
+        ).campaignContains(tx, input.campaignId, input.kind, input.targetId)));
+    if (!linked)
       throw new AdminWorkflowError("Campaign is unrelated to this content.");
     campaign = input.campaignId;
   }

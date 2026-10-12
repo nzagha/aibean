@@ -59,6 +59,13 @@ export function privateResourceStore(): ResourceStore {
         throw new Error("Invalid signed download destination.");
       return url.href;
     },
+    signImage: async (key) => {
+      const {data,error}=await target.createSignedUrl(key,60);
+      if(error||!data)throw new Error("Private image unavailable.");
+      const url=new URL(data.signedUrl);
+      if(url.origin!==SUPABASE_PROJECT_URL||!url.pathname.startsWith("/storage/v1/object/sign/"+bucket+"/"))throw new Error("Invalid private image origin.");
+      return url.href;
+    },
   };
 }
 export { loopbackResourceScanner } from "./clamav";

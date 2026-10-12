@@ -33,6 +33,7 @@ import {
 import { readContentDetail, readProfile } from "../src/lib/content/queries";
 import { updateOrganicRanking } from "../src/lib/admin/catalog-controls";
 import { mutateEngagement } from "../src/lib/db/engagement-workflows";
+import { saveCampaignBlocks } from "../src/lib/creator-enhancements/presentation";
 
 const run = randomBytes(16).toString("hex");
 const root = resolve("test-results", "product-acceptance-" + run);
@@ -202,6 +203,7 @@ async function main() {
     "db/proposals/creator-files-v1/manifest.json",
     "db/proposals/discovery-v1/manifest.json",
     "db/proposals/pricing-v1/manifest.json",
+    "db/proposals/affiliate-creator-v1/manifest.json",
   ]) {
     const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
     const path = manifest.sqlPath || "db/install/reviewed-installation.sql";
@@ -220,6 +222,7 @@ async function main() {
         "creator-files-v1": "files",
         "discovery-v1": "discovery",
         "pricing-v1": "pricing",
+        "affiliate-creator-v1": "affiliate_creator",
       } as Record<string, string>
     )[manifest.packageId];
     if (setting)
@@ -240,6 +243,9 @@ async function main() {
   process.env.AIBEAN_REVIEW_WORKFLOWS = "1";
   process.env.AIBEAN_COMMERCE_WORKFLOWS = "1";
   process.env.AIBEAN_CONTENT_WORKFLOWS = "1";
+  process.env.AIBEAN_PRICING_WORKFLOWS = "true";
+  process.env.AIBEAN_DISCOVERY_WORKFLOWS = "true";
+  process.env.AIBEAN_AFFILIATE_CREATOR_WORKFLOWS = "true";
   const tools = [] as string[];
   for (let i = 1; i <= 2; i++) {
     const id = await createAdminTool(database, actor, {
@@ -371,6 +377,23 @@ async function main() {
     );
     if (kind === "skills") skillId = id;
     let row = await readContentDetail(database, actor, kind, id, "owner");
+    if (kind === "resources") {
+      await saveCampaignBlocks(database, actor, id, row!.revision, [
+        {
+          kind: "tools",
+          targetId: tools[0],
+          title: "Campaign Tool",
+          description: "Synthetic canonical Tool reference",
+        },
+        {
+          kind: "skills",
+          targetId: skillId,
+          title: "Campaign Skill",
+          description: "Synthetic implementation reference",
+        },
+      ]);
+      row = await readContentDetail(database, actor, kind, id, "owner");
+    }
     await submitContent(database, actor, kind, id, row!.revision);
     row = await readContentDetail(database, actor, kind, id, "owner");
     await moderateContent(database, actor, kind, {
@@ -432,6 +455,10 @@ async function main() {
       AIBEAN_CONTENT_WORKFLOWS: "1",
       AIBEAN_DISCOVERY_WORKFLOWS: "true",
       AIBEAN_PRICING_WORKFLOWS: "true",
+      AIBEAN_AFFILIATE_CREATOR_WORKFLOWS: "true",
+      AIBEAN_AFFILIATE_APPROVED_PROGRAMS: "",
+      AIBEAN_AFFILIATE_PROVIDER_VERIFIED: "",
+      AIBEAN_AFFILIATE_RECEIPT_KEYS: "",
       AIBEAN_ANALYTICS_SECRET: randomBytes(32).toString("hex"),
       AIBEAN_RESOURCE_UPLOADS: "",
       AIBEAN_SUPABASE_PROVIDER_TEST_APPROVED: "",

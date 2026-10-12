@@ -16,6 +16,13 @@ import {
   pricingWorkflowContract,
 } from "../tests/fixtures/pricing-contract";
 import { pricingAvailable } from "../src/lib/pricing/storage";
+import {
+  setupAffiliateFixtures,
+  affiliateCreatorContract,
+  sourceRevision,
+} from "../tests/fixtures/affiliate-creator-contract";
+import { saveCampaignBlocks } from "../src/lib/creator-enhancements/presentation";
+import { enhancementsAvailable } from "../src/lib/creator-enhancements/storage";
 // Disposable native PostgreSQL only. Deliberately does not load dotenv, accept
 // DATABASE_URL, import the application DB, or connect to any supplied endpoint.
 import assert from "node:assert/strict";
@@ -1834,6 +1841,192 @@ async function main() {
       );
     },
   );
+  const affiliateManifest = JSON.parse(
+    readFileSync("db/proposals/affiliate-creator-v1/manifest.json", "utf8"),
+  );
+  const affiliateSql = readFileSync(
+    affiliateManifest.sqlPath,
+    "utf8",
+  ).replaceAll("\r\n", "\n");
+  assert.equal(sha(affiliateSql), affiliateManifest.sqlSha256);
+  await operator`SELECT set_config('aibean.affiliate_creator_install_sha256',${affiliateManifest.sqlSha256},false)`;
+  await check(
+    "Affiliate/Creator proposal late failure is atomic; eight RLS tables and canonical FKs install in isolation",
+    async () => {
+      await assert.rejects(
+        operator.unsafe(affiliateSql.replace("COMMIT;", "SELECT 1/0;COMMIT;")),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regclass('public.affiliate_programs') AS t",
+          )
+        )[0].t,
+        null,
+      );
+      await operator.unsafe(affiliateSql);
+      const tables = affiliateManifest.tables
+        .map((t: string) => "'" + t + "'")
+        .join(",");
+      const [r] = await operator.unsafe(
+        "SELECT count(*)::int AS n,bool_and(relrowsecurity) AS rls FROM pg_class WHERE relnamespace='public'::regnamespace AND relname IN (" +
+          tables +
+          ")",
+      );
+      assert.equal(r.n, 8);
+      assert(r.rls);
+      const [f] = await operator.unsafe(
+        "SELECT count(*)::int AS n FROM pg_constraint k JOIN pg_class c ON c.oid=k.conrelid WHERE k.contype='f' AND c.relnamespace='public'::regnamespace AND c.relname IN (" +
+          tables +
+          ")",
+      );
+      assert.equal(f.n, 25);
+    },
+  );
+  process.env.AIBEAN_AFFILIATE_CREATOR_WORKFLOWS = "true";
+  await setupAffiliateFixtures(drizzle(operator));
+  await check(
+    "Independent browser/service roles deny Affiliate/Creator tables and runtime cannot alter private installation ledger",
+    async () => {
+      assert(await enhancementsAvailable(drizzle(runtime)));
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const p = connect(source, role, "affiliate-denial");
+        try {
+          for (const table of affiliateManifest.tables)
+            await assert.rejects(p.unsafe("SELECT * FROM public." + table));
+        } finally {
+          await p.end();
+        }
+      }
+      await assert.rejects(
+        runtime.unsafe(
+          "UPDATE aibean_private.affiliate_creator_installations SET sql_sha256=repeat('a',64)",
+        ),
+      );
+    },
+  );
+  await check(
+    "Native affiliate URLs, reviewed activation, deduplicated clicks, signed-contract reconciliation, profile/campaign moderation and privacy",
+    async () => {
+      await affiliateCreatorContract(drizzle(runtime));
+      delete process.env.AIBEAN_AFFILIATE_APPROVED_PROGRAMS;
+      delete process.env.AIBEAN_AFFILIATE_PROVIDER_VERIFIED;
+    },
+  );
+  await check(
+    "Independent campaign edits enforce a single revision winner",
+    async () => {
+      const peer = connect(source, "aibean_app_login", "affiliate-concurrency"),
+        rev = await sourceRevision(
+          drizzle(runtime),
+          "creator_resources",
+          "dis-resource",
+        );
+      try {
+        const attempts = await Promise.allSettled([
+          saveCampaignBlocks(
+            drizzle(runtime),
+            "dis-creator",
+            "dis-resource",
+            rev,
+            [
+              {
+                kind: "text",
+                targetId: null,
+                title: "First native draft",
+                description: "",
+              },
+            ],
+          ),
+          saveCampaignBlocks(
+            drizzle(peer),
+            "dis-creator",
+            "dis-resource",
+            rev,
+            [
+              {
+                kind: "text",
+                targetId: null,
+                title: "Second native draft",
+                description: "",
+              },
+            ],
+          ),
+        ]);
+        assert.equal(
+          attempts.filter((a) => a.status === "fulfilled").length,
+          1,
+        );
+      } finally {
+        await peer.end();
+      }
+    },
+  );
+  await check(
+    "Audit failure rolls back block replacement, draft revision and history; baseline TestUsers/migrations unchanged",
+    async () => {
+      const before = await operator.unsafe(
+          "SELECT * FROM public.campaign_blocks WHERE campaign_id='dis-resource'",
+        ),
+        rev = await sourceRevision(
+          drizzle(runtime),
+          "creator_resources",
+          "dis-resource",
+        );
+      await operator.unsafe(
+        "CREATE FUNCTION public.synthetic_campaign_audit_failure() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN IF NEW.action='campaign.blocks-saved' THEN RAISE EXCEPTION 'Synthetic rollback'; END IF; RETURN NEW; END $$; CREATE TRIGGER synthetic_campaign_audit_failure BEFORE INSERT ON public.audit_logs FOR EACH ROW EXECUTE FUNCTION public.synthetic_campaign_audit_failure()",
+      );
+      try {
+        await assert.rejects(
+          saveCampaignBlocks(
+            drizzle(runtime),
+            "dis-creator",
+            "dis-resource",
+            rev,
+            [
+              {
+                kind: "text",
+                targetId: null,
+                title: "Never committed",
+                description: "",
+              },
+            ],
+          ),
+        );
+        assert.deepEqual(
+          await operator.unsafe(
+            "SELECT * FROM public.campaign_blocks WHERE campaign_id='dis-resource'",
+          ),
+          before,
+        );
+        assert.equal(
+          await sourceRevision(
+            drizzle(runtime),
+            "creator_resources",
+            "dis-resource",
+          ),
+          rev,
+        );
+      } finally {
+        await operator.unsafe(
+          "DROP TRIGGER synthetic_campaign_audit_failure ON public.audit_logs;DROP FUNCTION public.synthetic_campaign_audit_failure()",
+        );
+      }
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        discoveryHistory,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        discoveryExisting,
+      );
+    },
+  );
   const evidence = {
     date: new Date().toISOString(),
     environment: "Native disposable PostgreSQL; synthetic data only",
@@ -1851,6 +2044,7 @@ async function main() {
     hostedModified: false,
     hostedBackupVerified: false,
     pricingSqlSha256: pricingManifest.sqlSha256,
+    affiliateCreatorSqlSha256: affiliateManifest.sqlSha256,
   };
   writeFileSync(
     join(root, "evidence.json"),

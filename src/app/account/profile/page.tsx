@@ -6,6 +6,7 @@ import { readProfile } from "@/lib/content/queries";
 import { authorAllowed } from "@/lib/content/workflows";
 import { ActionForm } from "@/components/action-form";
 import { WorkspaceNavigation } from "@/components/workspace-navigation";
+import { ProfilePresentationEditor } from "@/components/creator-enhancements";
 import { editMyProfile, requestProfileReview } from "@/app/content-actions";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -111,6 +112,7 @@ export default async function Profile() {
           </p>
         )}
       </section>
+      {canPublish && row && <ProfilePresentationEditor user={user.id} revision={row.revision}/>}
     </div>
   );
 }

@@ -19,6 +19,7 @@ const links = [
   ["/admin/reviews", "Reviews & ratings"],
   ["/admin/reports", "Reported content"],
   ["/admin/analytics", "Operational analytics"],
+  ["/admin/affiliates", "Affiliate programs"],
   ["/admin/claims", "Tool claims"],
   ["/admin/disputes", "Ownership disputes"],
   ["/admin/creators", "Creator applications"],

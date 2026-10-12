@@ -291,6 +291,11 @@ export async function saveContent(
         )})`,
       );
     await replaceRelations(tx, id, kind, data);
+    if (kind === "resources") {
+      const { recordCampaignRevision } =
+        await import("../creator-enhancements/presentation");
+      await recordCampaignRevision(tx, user, id);
+    }
     await audit(tx, user, kind + ".draft-saved", id, {
       fields: entries.map(([key]) => key),
       editorialReviewRequired: true,
@@ -368,6 +373,11 @@ export async function submitContent(
     await readRelations(tx, row, kind);
     const data = payload(kind, rowPayload(row));
     await validateReferences(tx, row.user_id, kind, data);
+    if (kind === "resources") {
+      const { validateCampaignBlocks } =
+        await import("../creator-enhancements/presentation");
+      await validateCampaignBlocks(tx, target, row.user_id);
+    }
     await tx.execute(
       sql`UPDATE public.${table} SET status='pending',updated_at=GREATEST(clock_timestamp(),updated_at+interval '1 microsecond') WHERE id=${target}`,
     );
@@ -405,6 +415,11 @@ export async function moderateContent(
       throw new AdminWorkflowError("Invalid or stale moderation transition.");
     if (input.decision === "published") {
       await checkAuthor(tx, row.user_id, kind);
+      if (kind === "resources") {
+        const { validateCampaignBlocks } =
+          await import("../creator-enhancements/presentation");
+        await validateCampaignBlocks(tx, input.id, row.user_id);
+      }
       await readRelations(tx, row, kind);
       await validateReferences(
         tx,
@@ -474,6 +489,9 @@ export async function saveProfile(
       fields: Object.keys(input),
       status: old?.status === "suspended" ? "suspended" : "draft",
     });
+    const { recordProfileRevision } =
+      await import("../creator-enhancements/presentation");
+    await recordProfileRevision(tx, user, user);
   });
 }
 export async function submitProfile(
@@ -527,8 +545,12 @@ export async function moderateProfile(
       throw new AdminWorkflowError(
         "Invalid or stale profile review transition.",
       );
-    if (input.decision === "published")
+    if (input.decision === "published") {
       await checkAuthor(tx, row.user_id, "skills");
+      const { validatePresentation } =
+        await import("../creator-enhancements/presentation");
+      await validatePresentation(tx, row.user_id);
+    }
     await tx.execute(
       sql`UPDATE public.account_profiles SET status=${input.decision},reviewer_id=${actor},review_reason=${input.reason},published_at=CASE WHEN ${input.decision}='published' THEN now() ELSE published_at END,updated_at=GREATEST(clock_timestamp(),updated_at+interval '1 microsecond') WHERE user_id=${row.user_id}`,
     );

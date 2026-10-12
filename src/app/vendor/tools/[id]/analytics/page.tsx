@@ -5,6 +5,7 @@ import { requireVendorCapability } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { readVendorAnalytics } from "@/lib/content/analytics";
 import { AnalyticsTable } from "@/components/analytics-table";
+import { AffiliateReport } from "@/components/affiliate-report";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Tool analytics",
@@ -35,6 +36,7 @@ export default async function Analytics({
         )}
         <BehaviorAnalyticsTable ready={behavior.ready} rows={behavior.rows} />
       </section>
+      <AffiliateReport actor={user.id} scope="vendor" tool={id}/>
     </div>
   );
 }

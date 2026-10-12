@@ -7,6 +7,7 @@ import { readPublicProfile, readContentDetail } from "@/lib/content/queries";
 import { ReportContent } from "@/components/report-content";
 import { PublishedFiles } from "@/components/content-files";
 import { creatorHandle } from "@/lib/content/public-path";
+import { CampaignBlocks } from "@/components/creator-enhancements";
 export const dynamic = "force-dynamic";
 export default async function Resource({
   params,
@@ -40,6 +41,7 @@ export default async function Resource({
       <span className="eyebrow">Resource from {profile.display_name}</span>
       <h1 className="my-6 font-display text-5xl font-bold">{row.title}</h1>
       <p className="max-w-3xl text-lg mb-8">{row.summary}</p>
+      <CampaignBlocks id={row.id}/>
       <section className="placeholder-card max-w-3xl">
         <h2 className="text-2xl">Get this resource</h2>
         <p className="my-5">{String(row.disclosure)}</p>

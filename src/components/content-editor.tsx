@@ -3,6 +3,7 @@ import { ActionForm } from "./action-form";
 import { ContentFields } from "./content-fields";
 import { ReasonField } from "./admin-shared";
 import { ContentFiles } from "./content-files";
+import { CampaignBuilder } from "./creator-enhancements";
 import type { ContentKind, ContentRow } from "@/lib/content/contracts";
 import type { ReferenceOptions } from "./content-fields";
 import {
@@ -61,6 +62,7 @@ export function ContentEditor({
       {row && (
         <ContentFiles kind={kind} row={row} actor={actor} admin={admin} />
       )}
+      {row && kind === "resources" && <CampaignBuilder row={row} actor={actor} admin={admin}/>}
       {row && (
         <section className="placeholder-card mt-8">
           <h2 className="text-2xl">Editorial review</h2>

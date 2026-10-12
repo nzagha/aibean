@@ -4,6 +4,7 @@ import { ToolLogo } from "@/components/tool-logo";
 import type { Tool, CatalogFilters } from "@/lib/catalog/types";
 import { categoryById, taxonomy, activeUseCases } from "@/lib/catalog/taxonomy";
 import { comparisonRanks, comparisonVerdict } from "@/lib/catalog/comparison";
+import { SupportedFit } from "./supported-fit";
 export function ComparisonPresentation({
   catalog,
   selected,
@@ -146,6 +147,7 @@ export function ComparisonPresentation({
           ? "Recommendations are withheld while selected Tools are unavailable."
           : comparisonVerdict(catalog, selected, context)}
       </p>
+      <SupportedFit selected={selected} context={context}/>
       <div
         className="compare-scroll"
         tabIndex={0}

@@ -8,6 +8,8 @@ import {
 import { FollowControl } from "@/components/follow-control";
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { creatorHandle } from "@/lib/content/public-path";
+import { readPresentation } from "@/lib/creator-enhancements/presentation";
+import { PresentationDetails } from "@/components/creator-enhancements";
 export const dynamic = "force-dynamic";
 export default async function CreatorProfile({
   params,
@@ -29,6 +31,7 @@ export default async function CreatorProfile({
       <p className="max-w-3xl text-lg mb-8 whitespace-pre-wrap">
         {profile.bio}
       </p>
+      <PresentationDetails presentation={await readPresentation(db(),profile.user_id,"public")}/>
       {profile.website && (
         <a
           className="text-link"

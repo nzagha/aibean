@@ -82,6 +82,7 @@ export function validateResource(file: {
   };
 }
 export type ResourceStore = {
+  signImage?: (key: string) => Promise<string>;
   assertPrivate: () => Promise<void>;
   upload: (key: string, bytes: Uint8Array, mime: string) => Promise<void>;
   remove: (key: string) => Promise<void>;
