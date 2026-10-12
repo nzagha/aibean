@@ -1,0 +1,13 @@
+# PRD/technical amendment — proposed subscriptions v1
+
+12 October 2026. Additive amendment to Master Plan v0.3 sections 21–24/27 and active MVP scope, under the owner's revised subscription directive. Original source documents, approved taxonomy and prior SQL are unchanged.
+
+**Product:** five tiers (User Free, Creator Free/Pro, Vendor Free/Pro), recommended $19/$190 and $39/$390 Pro billing, fixed owner-approved $99/five-day Tool placement, server quotas/fee discounts, versioned auditable Admin proposal review and independently authorized sandbox activation. Full Pricing remains authenticated per section 23.3. Free browsing/membership/community features and separate editorial/ownership/verification/ranking decisions are preserved. [Every numeric decision/provenance and complete benefit/lifecycle matrix](AIBEAN_SUBSCRIPTION_PRICING_AND_ENTITLEMENTS.md).
+
+**Architecture:** Drizzle remains primary ORM; stable User and existing commerce subscription IDs. Separate five-table/15-FK RLS proposal, pinned price/benefit versions, canonical server ownership, transaction-level account quota locks and independent audit records. Verified test-mode checkout is followed by matched paid-invoice proof before Pro benefits. Existing lifecycle/cancellation reused; interval schedules and approved refund contracts extend it. Status alone, client amount, redirects or metadata cannot grant entitlements/capabilities.
+
+**Surfaces:** shared `/pricing`, `/account/membership`/billing, Creator/Vendor membership summaries and `/admin/commerce/pricing` use the same versioned configuration/services. Preview remains visible until production approval; only separately approved/verified sandbox configuration can prepare test checkout. No live offering is implemented or activated.
+
+**Acceptance:** price/discount integer validation, five tiers, ordinary/Creator/Tool-Vendor/Admin boundaries, current paid-period/expiry/renewal/cancellation behavior, grandfathered purchased benefits/quotes, monthly quota queries, actual content/Stack/pre-upload denial, downgrade preservation, review/activation separation, concurrent single winners/idempotent provider intents and atomic audit rollback. [Result/evidence and exact schema gate](PRICING_V1_DATABASE_PROPOSAL.md).
+
+**Release dependencies:** current expanded recovery/inventory and exact uninstalled packages; private owner config approval/test price/webhook/schedule/refund verification; real identity/Storage/scanner capacity tests and coordinated deployment/launch approval. No parallel auth, hosted installation, recovery retry, real provider action, real email/account, DNS or live charge is authorized by this implementation amendment.

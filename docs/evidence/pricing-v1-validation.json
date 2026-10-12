@@ -1,0 +1,21 @@
+{
+ "date":"2026-10-12",
+ "branch":"codex/supabase-foundation",
+ "hostedAccess":false,
+ "providerCalls":false,
+ "privateConfigurationChanged":false,
+ "productionActivated":false,
+ "pricingSqlSha256":"80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+ "recommendedConfigSha256":"263f3fdd0343f31f1cbaaf6ce516855b356b8416272c646ca36a9c83937a3ff6",
+ "lint":"PASS",
+ "typescript":"PASS",
+ "automatedTests":{"passed":109,"failed":0,"skipped":0},
+ "nativePostgres":{"version":"17.11","passed":38,"failed":0,"syntheticOnly":true},
+ "newHttpChecks":{"passed":12,"failed":0},
+ "productionBuild":{"status":"PASS","next":"16.3.8"},
+ "runtimeAudit":{"vulnerabilities":0},
+ "preservationChecks":{"passed":23,"failed":0},
+ "browser":"PASS sampled preview, User usage, Admin create/adjust/review, Creator/Vendor summaries and desktop/mobile containment",
+ "limits":["Real Stripe activation/checkout/invoices/schedules/refunds not executed", "Hosted dependent/pricing schemas not installed", "No customer-facing production approval", "Global provider storage/launch identity and recovery gates remain separate"],
+ "ci":"Publication verification recorded in active progress after push"
+}

@@ -1,5 +1,7 @@
 # Staged delivery
 
+> 12 October proposed pricing amendment: [versioned PRD/technical amendment](PRD_SUBSCRIPTION_ENTITLEMENTS_AMENDMENT_v1.md) and [complete pricing/entitlement recommendations](AIBEAN_SUBSCRIPTION_PRICING_AND_ENTITLEMENTS.md) define the locally implemented five-tier commercial model. Original source requirements and the historical stage descriptions below are preserved. No hosted installation/provider or live activation is implied.
+
 > October 8 amendment: the active nine-stage implementation sequence is `MVP_REMEDIATION_PLAN.md`. Supabase Auth is the sole approved target identity provider, replacing the legacy Clerk/custom-login references below after verified identity migration. Historical implementation descriptions below do not establish current configuration or end-to-end readiness. See `FOUNDATION_PROGRESS.md`.
 
 ## Stage 1 — Tool discovery and foundation

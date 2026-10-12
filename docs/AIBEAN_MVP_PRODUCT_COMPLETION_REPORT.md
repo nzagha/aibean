@@ -1,5 +1,15 @@
 # aiBean MVP product completion report — 12 October 2026
 
+## Current increment: proposed subscription pricing and entitlements
+
+**Implemented locally; proposed commercial values, no live activation.** Five centralized tiers include User/Creator/Vendor Free, Creator Pro $19/month or $190/year and Vendor Pro $39/month or $390/year. Quotas, non-stacking fee discounts, pinned price/benefit snapshots, invoice-backed renewal/expiry, downgrade preservation, period-boundary interval changes and independently reviewed full-refund contracts are wired into the existing app. Pricing remains login-gated; all new offers remain Proposed / Preview. Admin create/adjust/review and independent owner-hash/test-price activation are audited; payment never grants capabilities, verification or organic rank.
+
+User membership/usage and billing plus Creator/Vendor dashboard summaries use shared services. Five new RLS tables/15 FKs form a separate uninstalled proposal; all previous packages and installed baseline history remain intact. **109 automated tests, 38 native PostgreSQL scenarios and 12 new HTTP checks** pass; lint/typecheck/build and zero-vulnerability runtime audit. Browser sampled desktop/mobile pricing, no early checkout, User usage, Admin create/edit/review and Creator/Vendor summary integration. Actual provider activation/checkout/invoices/schedules/refunds and hosted installation remain unverified; no private environment or provider/hosted/DNS/Auth/recovery operation occurred.
+
+[Complete model, approved values versus recommendations, quotas and policies](AIBEAN_SUBSCRIPTION_PRICING_AND_ENTITLEMENTS.md), [exact schema/recovery dependencies](PRICING_V1_DATABASE_PROPOSAL.md), [versioned PRD/technical amendment](PRD_SUBSCRIPTION_ENTITLEMENTS_AMENDMENT_v1.md), [evidence](evidence/pricing-v1-validation.json). Remaining product work: affiliate management, extended campaign/profile media and reviewed fit/taxonomy inputs; production identity/provider/recovery/launch gates remain separate. Partial refunds, automatic proration, chargeback/tax and discretionary completed-service exceptions are not promised by this proposed full-refund/no-proration model.
+
+The discovery and earlier implementation sections below retain their dated stage evidence; their missing commercial-value/entitlement statements are superseded by this increment.
+
 **Current publication verified:** [Code 44aeb58](https://github.com/nzagha/aibean/commit/44aeb58e4b25ff5a1ea8c86f1b1590a8ecbc6d45) and [evidence c34e280](https://github.com/nzagha/aibean/commit/c34e2802db9179cdc3ae763f52484bf33bc14699) are pushed. [GitHub Validate 38285106755](https://github.com/nzagha/aibean/actions/runs/38285106755) passed all configured checks on exact final implementation/evidence source. Hosted installation/provider gates remain separate.
 
 ## Current milestone: durable comparisons, complete follows and behavioral reporting

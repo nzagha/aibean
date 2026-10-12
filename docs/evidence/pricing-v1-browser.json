@@ -1,0 +1,18 @@
+{
+ "date":"2026-10-12",
+ "environment":"New isolated PostgreSQL/Next.js fixture; synthetic accounts only",
+ "hostedAccess":false,
+ "providerCalls":false,
+ "observations":[
+  {"check":"Guest pricing redirects to Login; ordinary User sees all five correctly priced Proposed/Preview tiers","status":"PASS"},
+  {"check":"No membership checkout buttons before independent activation","status":"PASS"},
+  {"check":"User membership view shows actual usage, Free limits, zero paid benefits and fee discounts","status":"PASS"},
+  {"check":"Admin creates pricing proposal, edits fee in place before review, revision increments 1 to 2, then reviews without activation at revision 3","status":"PASS"},
+  {"check":"Creator and Tool Vendor dashboards show the shared Free membership/discount summaries","status":"PASS"},
+  {"check":"Desktop default 1265 CSS pixels and mobile 390; mobile document width 375 equals viewport 375, no page overflow","status":"PASS"},
+  {"check":"Pricing has one H1, no nested forms, accessible labels and retained existing brand/header/grid/classes","status":"PASS"}
+ ],
+ "screenshots":["pricing-v1-desktop.jpg","pricing-v1-mobile.jpg","pricing-v1-admin-review.jpg"],
+ "limits":["Real provider activation, checkout, invoice delivery, schedule changes and refunds not browser-executed; synthetic contracts are natively tested.","Sampled responsiveness is not full accessibility/device conformance.","Initial navigation calls timed out during compilation; rebinding the loaded tabs succeeded. New pricing tabs were closed and viewport reset; older unavailable error tabs were not navigated."],
+ "productionActivated":false
+}

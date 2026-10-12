@@ -1,5 +1,13 @@
 # Active MVP remediation plan
 
+## Latest increment: proposed commercial entitlements — 12 October 2026
+
+The owner's revised directive authorizes missing-price recommendations and local implementation. Five versioned tiers, monthly/annual prices, explicit quotas/discounts, paid-invoice-backed benefits, expiry/downgrade preservation, billing interval changes and independently reviewed full refunds are implemented locally. Admin create/adjust/review and separate owner hash/verified test-price activation are audited; all offers remain Proposed / Preview. [Complete model](AIBEAN_SUBSCRIPTION_PRICING_AND_ENTITLEMENTS.md), [exact separate schema](PRICING_V1_DATABASE_PROPOSAL.md), [PRD/technical amendment](PRD_SUBSCRIPTION_ENTITLEMENTS_AMENDMENT_v1.md). 109 automated tests, 38 native PostgreSQL scenarios, 12 new HTTP checks, browser sampling, lint/typecheck/build and runtime audit pass. No hosted/provider/private configuration/Auth/recovery/DNS/live-billing operation occurred.
+
+Next product implementation: affiliate configuration/disclosures/click ledger/reconciliation, extended campaign/profile media relationships, reviewed full fit data and approved v1.1 reconciliation. Next operational gates: current full-scope recovery/inventory and exact dependency/pricing schema approvals; independent config digest/test-price/webhook/schedule/refund verification; real identity/Storage/scanner capacity and coordinated launch/retention/accessibility/load/deployment approval. Do not leave subscription model values unspecified or repeat its working workflows. Discretionary completed-service refunds, partial refunds/proration, tax/chargeback settlement and broader sponsored/affiliate inventory require distinct contracts; none is promised by this proposed full-refund/no-proration model.
+
+Earlier discovery/implementation entries below are dated evidence; their missing pricing/entitlement statements are superseded by this increment.
+
 ## Current increment — 12 October 2026
 
 Durable private account comparisons, multi-target follows/transactional publication notifications and distinct behavioral analytics with four-panel integration are implemented and locally verified. **107 automated tests, 34 native PostgreSQL scenarios, 27 new HTTP checks**, lint/typecheck/build and runtime audit pass. [Complete result](MVP_DISCOVERY_COMPARISONS_FOLLOWS_ANALYTICS_RESULT.md) records browser coverage and the deletion-dialog limitation. [Separate discovery proposal](DISCOVERY_V1_DATABASE_PROPOSAL.md) depends on all four unchanged earlier packages and requires new exact hosted approval/recovery review; no hosted/provider execution, private configuration or Auth activation occurred.

@@ -1,5 +1,11 @@
 # Route-by-route functional coverage — 12 October 2026
 
+## Latest pricing/membership increment
+
+**12 new HTTP checks PASS** in a new isolated fixture; [exact evidence](evidence/pricing-v1-http.json). `/pricing` stays login-gated and renders five consistent Proposed/Preview tiers without unapproved checkout. `/account/membership` shows actual owner-scoped limits/usage/discounts, scheduled changes and refund state; guest denied. Billing, Creator and Tool Vendor dashboards use shared membership summaries. `/admin/commerce/pricing` exposes versioned create/edit/review/independently authorized test activation and refund review; ordinary User denied Admin/Creator workflows. Ordinary User `/vendor` retains its existing onboarding/empty inventory view, with no ownership or paid entitlement grant. Server-owned Tool capability/checkout checks remain strict.
+
+Native tests cover actual draft/Stack/pre-upload quota denial, downgrade edits, integer discounts, pinned checkout, paid invoice renewal/expiry, period changes, refunds and concurrent allocations. Browser verifies five-tier pricing, mobile/desktop containment, User usage, Admin create/adjust/review and Creator/Vendor summaries. Actual provider checkout/schedules/refunds remain unverified; no provider/hosted access. [Full proposed model and limits](AIBEAN_SUBSCRIPTION_PRICING_AND_ENTITLEMENTS.md). Earlier route evidence below is preserved as its dated increment.
+
 ## New discovery milestone coverage
 
 **27/27 new HTTP checks PASS**, distinct from the dated 119-check audit below. [Exact evidence](evidence/mvp-discovery-http.json), [native workflows](evidence/mvp-discovery-native-postgres.json), [actual browser coverage and limits](evidence/mvp-discovery-browser.json). Synthetic loopback PostgreSQL only; no hosted migration/provider activation.

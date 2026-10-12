@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-12T19:40:45.308Z",
+  "environment": "New loopback fixture; synthetic identities only",
+  "hostedAccess": false,
+  "providerCalls": false,
+  "total": 12,
+  "results": [
+    {
+      "check": "Guest denied /pricing",
+      "pass": true
+    },
+    {
+      "check": "Guest denied /account/membership",
+      "pass": true
+    },
+    {
+      "check": "User full five-tier preview with no checkout",
+      "pass": true
+    },
+    {
+      "check": "User actual membership and usage",
+      "pass": true
+    },
+    {
+      "check": "User billing shared membership",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User denied /admin/commerce/pricing",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User denied /creator",
+      "pass": true
+    },
+    {
+      "check": "Ordinary User Vendor onboarding grants no ownership or Pro access",
+      "pass": true
+    },
+    {
+      "check": "Admin auditable versioned plan controls",
+      "pass": true
+    },
+    {
+      "check": "Creator shared subscription benefits",
+      "pass": true
+    },
+    {
+      "check": "Vendor shared subscription benefits",
+      "pass": true
+    },
+    {
+      "check": "Admin membership remains account-scoped",
+      "pass": true
+    }
+  ]
+}
