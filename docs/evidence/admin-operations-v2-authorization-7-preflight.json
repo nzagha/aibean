@@ -1,0 +1,103 @@
+{
+  "authorization": 7,
+  "status": "PASS_PREFLIGHT_ONLY",
+  "sourceCommit": "558f863cb0001019a69287a7610fc5a7994de62b",
+  "startedAt": "2026-10-13T18:36:29.211Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+  "dependencies": 100,
+  "v4aManifestSha256": "cafbf6932c2395cf1d9c5b889cac86ab67cef6b333e3fd8d12cb8c351bdaaa91",
+  "installerInvocations": 0,
+  "verifierInvocations": 0,
+  "checks": [
+    {
+      "name": "Exact branch commit SQL mechanism and all 100 dependencies before private access",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing unique protected operator recovery profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Both historical failures and successful v4a target stopped and protected",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent v4a ciphertext receipt metadata decryptability archive and retained-target check",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh read-only 24-table inventory versus independent v4a private metadata and original v3",
+      "status": "PASS"
+    },
+    {
+      "name": "All original v3 v4a archives profiles targets and private environment preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen hashes immediately before installation",
+      "status": "PASS"
+    }
+  ],
+  "automaticRetry": false,
+  "retainedTargetInspection": {
+    "status": "PASS",
+    "targetRestarted": false,
+    "protectedOwnershipAclAndAncestors": "PASS",
+    "certificateBindingUnchanged": true,
+    "historicalFailedTargets": 2,
+    "retainedSuccessfulV4aTargets": 1,
+    "targetDataModified": false,
+    "allStopped": true,
+    "targetDeleted": false
+  },
+  "independentEncryptedArchiveVerification": {
+    "status": "PASS",
+    "archiveCiphertextIntegrity": true,
+    "metadataCiphertextIntegrity": true,
+    "archivePlaintextIntegrity": true,
+    "metadataBindingsAndCounts": true,
+    "nativeArchiveListCount": 195,
+    "decryptable": true
+  },
+  "retainedNewTarget": {
+    "status": "STOPPED_AND_RETAINED",
+    "count": 1,
+    "plaintextScopedDataOnPrivateDisk": true,
+    "deleted": false
+  },
+  "preflight": {
+    "status": "PASS",
+    "phase": "postflight",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "operator": "postgres",
+    "strictTlsHostnameVerified": true,
+    "serverVersion": "17.6",
+    "selectedTables": 24,
+    "selectedSequences": 2,
+    "foreignKeys": 34,
+    "constraints": 89,
+    "indexes": 36,
+    "policies": 24,
+    "applicationRlsTables": 19,
+    "drizzleEntries": 2,
+    "securityEntries": 1,
+    "reviewLedgerEntries": 1,
+    "testUsersRecords": 2,
+    "authUsers": 0,
+    "authIdentities": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "publicReviewRecords": 0,
+    "privateIntegrity": "PASS",
+    "foundationAndReviewHistory": "PASS",
+    "effectiveGrantsAndRoles": "PASS",
+    "recordBodiesExported": false,
+    "sourceWrites": false
+  },
+  "hostedSqlAttempted": false,
+  "finishedAt": "2026-10-13T18:37:11.155Z"
+}

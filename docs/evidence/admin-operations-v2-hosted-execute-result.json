@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "package": "admin-operations-v2",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "attempted": true,
+  "commitAcknowledged": true,
+  "rollback": "NOT_NEEDED",
+  "verified": {
+    "tables": 5,
+    "publicTables": 4,
+    "rls": 5,
+    "foreignKeys": 8,
+    "indexes": 11,
+    "constraints": 33,
+    "policies": 5,
+    "independentSessions": 3,
+    "baselinePreserved": true,
+    "effectiveRoleColumnGrants": true
+  },
+  "hostedAuthActivated": false,
+  "automaticRetry": false,
+  "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "verifiedAt": "2026-10-13T18:41:26.331Z",
+  "privateEnvironmentUnchanged": true
+}

@@ -1,0 +1,219 @@
+{
+  "authorization": 7,
+  "status": "PASS",
+  "sourceCommit": "558f863cb0001019a69287a7610fc5a7994de62b",
+  "startedAt": "2026-10-13T18:38:00.297Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+  "dependencies": 100,
+  "v4aManifestSha256": "cafbf6932c2395cf1d9c5b889cac86ab67cef6b333e3fd8d12cb8c351bdaaa91",
+  "installerInvocations": 1,
+  "verifierInvocations": 1,
+  "checks": [
+    {
+      "name": "Exact branch commit SQL mechanism and all 100 dependencies before private access",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing unique protected operator recovery profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Both historical failures and successful v4a target stopped and protected",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent v4a ciphertext receipt metadata decryptability archive and retained-target check",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh read-only 24-table inventory versus independent v4a private metadata and original v3",
+      "status": "PASS"
+    },
+    {
+      "name": "All original v3 v4a archives profiles targets and private environment preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen hashes immediately before installation",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen hashes and private recovery preservation after installer",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh read-only 29-table structure and private 24-table v4a predecessor continuity",
+      "status": "PASS"
+    },
+    {
+      "name": "Original v3 v4a artifacts and all three stopped targets untouched after COMMIT",
+      "status": "PASS"
+    }
+  ],
+  "automaticRetry": false,
+  "retainedTargetInspection": {
+    "retainedSuccessfulV4aTargets": 1,
+    "allStopped": true,
+    "targetDeleted": false,
+    "targetDataModified": false,
+    "historicalFailedTargets": 2,
+    "status": "PASS",
+    "targetRestarted": false,
+    "certificateBindingUnchanged": true,
+    "protectedOwnershipAclAndAncestors": "PASS"
+  },
+  "independentEncryptedArchiveVerification": {
+    "status": "PASS",
+    "archiveCiphertextIntegrity": true,
+    "metadataCiphertextIntegrity": true,
+    "archivePlaintextIntegrity": true,
+    "metadataBindingsAndCounts": true,
+    "nativeArchiveListCount": 195,
+    "decryptable": true
+  },
+  "retainedNewTarget": {
+    "status": "STOPPED_AND_RETAINED",
+    "count": 1,
+    "plaintextScopedDataOnPrivateDisk": true,
+    "deleted": false
+  },
+  "preflight": {
+    "status": "PASS",
+    "phase": "postflight",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "operator": "postgres",
+    "strictTlsHostnameVerified": true,
+    "serverVersion": "17.6",
+    "selectedTables": 24,
+    "selectedSequences": 2,
+    "foreignKeys": 34,
+    "constraints": 89,
+    "indexes": 36,
+    "policies": 24,
+    "applicationRlsTables": 19,
+    "drizzleEntries": 2,
+    "securityEntries": 1,
+    "reviewLedgerEntries": 1,
+    "testUsersRecords": 2,
+    "authUsers": 0,
+    "authIdentities": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "publicReviewRecords": 0,
+    "privateIntegrity": "PASS",
+    "foundationAndReviewHistory": "PASS",
+    "effectiveGrantsAndRoles": "PASS",
+    "recordBodiesExported": false,
+    "sourceWrites": false
+  },
+  "installerStartedAt": "2026-10-13T18:38:43.807Z",
+  "installerFinishedAt": "2026-10-13T18:41:26.448Z",
+  "installation": {
+    "exitCode": 0,
+    "processError": null,
+    "result": {
+      "status": "PASS",
+      "package": "admin-operations-v2",
+      "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "attempted": true,
+      "commitAcknowledged": true,
+      "rollback": "NOT_NEEDED",
+      "verified": {
+        "tables": 5,
+        "publicTables": 4,
+        "rls": 5,
+        "foreignKeys": 8,
+        "indexes": 11,
+        "constraints": 33,
+        "policies": 5,
+        "independentSessions": 3,
+        "baselinePreserved": true,
+        "effectiveRoleColumnGrants": true
+      },
+      "hostedAuthActivated": false,
+      "automaticRetry": false,
+      "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+      "project": "yfknxidgphhepdtwazhn",
+      "database": "postgres",
+      "verifiedAt": "2026-10-13T18:41:26.331Z",
+      "privateEnvironmentUnchanged": true
+    }
+  },
+  "verifierStartedAt": "2026-10-13T18:41:27.344Z",
+  "verifierFinishedAt": "2026-10-13T18:43:40.265Z",
+  "verification": {
+    "exitCode": 0,
+    "processError": null,
+    "result": {
+      "status": "PASS",
+      "package": "admin-operations-v2",
+      "readOnly": true,
+      "verified": {
+        "tables": 5,
+        "publicTables": 4,
+        "rls": 5,
+        "foreignKeys": 8,
+        "indexes": 11,
+        "constraints": 33,
+        "policies": 5,
+        "independentSessions": 3,
+        "baselinePreserved": true,
+        "effectiveRoleColumnGrants": true
+      },
+      "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+      "project": "yfknxidgphhepdtwazhn",
+      "database": "postgres",
+      "verifiedAt": "2026-10-13T18:43:40.145Z",
+      "privateEnvironmentUnchanged": true
+    }
+  },
+  "independentV4aContinuityPostflight": {
+    "status": "PASS",
+    "phase": "postflight",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "operator": "postgres",
+    "strictTlsHostnameVerified": true,
+    "serverVersion": "17.6",
+    "selectedTables": 29,
+    "protectedPredecessorTables": 24,
+    "selectedSequences": 2,
+    "operationsVerified": {
+      "tables": 5,
+      "publicTables": 4,
+      "rls": 5,
+      "foreignKeys": 8,
+      "indexes": 11,
+      "constraints": 33,
+      "policies": 5
+    },
+    "foreignKeys": 34,
+    "constraints": 89,
+    "indexes": 36,
+    "policies": 24,
+    "applicationRlsTables": 19,
+    "drizzleEntries": 2,
+    "securityEntries": 1,
+    "reviewLedgerEntries": 1,
+    "testUsersRecords": 2,
+    "authUsers": 0,
+    "authIdentities": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "publicReviewRecords": 0,
+    "privateIntegrity": "PASS",
+    "foundationAndReviewHistory": "PASS",
+    "effectiveGrantsAndRoles": "PASS",
+    "recordBodiesExported": false,
+    "sourceWrites": false
+  },
+  "commitAcknowledged": true,
+  "hostedSqlAttempted": true,
+  "scopedTablesAfter": 29,
+  "scopedSequencesAfter": 2,
+  "finishedAt": "2026-10-13T18:45:03.725Z"
+}
