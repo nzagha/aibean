@@ -36,5 +36,20 @@
   "operationsHostedInstallation": "NOT_EXECUTED",
   "providersActivated": false,
   "sourceWrites": false,
-  "ci": "Pending publication"
+  "ci": {
+    "status": "PASS",
+    "runId": 38442928290,
+    "url": "https://github.com/nzagha/aibean/actions/runs/38442928290",
+    "commit": "fc0891a48285d02f086dd22755ca3d3e938a237c",
+    "checks": [
+      "npm ci",
+      "lint",
+      "typecheck",
+      "automated tests",
+      "production build",
+      "runtime dependency audit"
+    ],
+    "nativeWindowsCmsRunInCI": false
+  },
+  "implementationCommit": "fc0891a48285d02f086dd22755ca3d3e938a237c"
 }
