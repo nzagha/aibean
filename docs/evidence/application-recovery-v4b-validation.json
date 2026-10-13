@@ -73,9 +73,20 @@
       "hostedConnections": 0
     }
   },
-  "implementationCommit": "PENDING_PUBLICATION",
+  "implementationCommit": "2bc1718f0e5824b5550b03b5e8abf3f5f0f1f759",
   "ci": {
-    "status": "PENDING_PUBLICATION",
-    "nativeWindowsCms": "Local evidence only; Linux CI does not perform real recovery"
+    "status": "PASS",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38463230269",
+    "run": 38463230269,
+    "implementationCommit": "2bc1718f0e5824b5550b03b5e8abf3f5f0f1f759",
+    "checks": [
+      "lint",
+      "typecheck",
+      "automated tests",
+      "default production build",
+      "runtime dependency audit"
+    ],
+    "hostedConnections": false,
+    "nativeWindowsCms": "Separately recorded local synthetic suite"
   }
 }
