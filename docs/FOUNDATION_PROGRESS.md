@@ -1,5 +1,7 @@
 # Supabase foundation: stage evidence and next milestone
 
+**Authorization 3 publication validation PASS:** Recovery-result commit `8473c0c1908ffafaff3456376dd1e3520550438e` is pushed; [GitHub Validate 38403424263](https://github.com/nzagha/aibean/actions/runs/38403424263) passed lint/typecheck/tests/build/audit. The hosted recovery gate passed separately; no installation was run.
+
 **Authorization 3 hosted recovery v3 PASS — 13 October 2026:** Exact manifest `00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469`, all seventeen dependency hashes and the single frozen-executor invocation passed. Actual encrypted eighteen-table/two-sequence export and fresh isolated PostgreSQL restore passed all fifteen export steps, schema/security/history/private integrity and independent hosted continuity. Both TestUsers records, original backup and both stopped historical targets remain unchanged; only the new passing target was disposed. Authorization 3 is consumed; no migration/provider action followed. [Actual v3 result and next separately reviewed installation](SUPABASE_EXPANDED_RECOVERY_V3_EXECUTION_RESULT.md). Earlier failure/readiness/approval wording below is historical and superseded for the foundation recovery gate.
 
 

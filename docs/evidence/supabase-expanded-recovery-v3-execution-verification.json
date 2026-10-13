@@ -205,5 +205,16 @@
     "header": true,
     "approvedCmsDecryptable": true
   },
-  "finishedAt": "2026-10-13T13:10:44.831Z"
+  "finishedAt": "2026-10-13T13:10:44.831Z",
+  "publicationValidation": {
+    "commit": "8473c0c1908ffafaff3456376dd1e3520550438e",
+    "status": "PASS",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38403424263",
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "automatedTests": "PASS",
+    "productionBuild": "PASS",
+    "runtimeDependencyAudit": "PASS",
+    "hostedOperationInCi": false
+  }
 }
