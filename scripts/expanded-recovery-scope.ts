@@ -435,7 +435,7 @@ export function validateExpandedToc(
       "Archive contains an unexpected object kind",
     );
     const words = match[3].split(" ");
-    return { kind: match[1], schema: match[2], words };
+    return { kind: match[1], schema: match[2], words, description: match[3] };
   };
   const parsed = entries.map(parse);
   for (const row of parsed) {
@@ -485,7 +485,11 @@ export function validateExpandedToc(
             (policy) =>
               policy.schema === row.schema &&
               policy.relation === name &&
-              policy.name === row.words[1],
+              // pg_restore --list emits the complete policy tag, including
+              // spaces, without SQL identifier quoting. Match catalog metadata
+              // and the table owner exactly; never truncate or accept a prefix.
+              row.description ===
+                `${name} ${policy.name} ${catalog.relations.find((relation) => relation.schema === row.schema && relation.name === name)?.owner}`,
           ),
           "Unexpected policy archive entry",
         );
@@ -502,6 +506,19 @@ export function validateExpandedToc(
         );
     }
   }
+  assert.deepEqual(
+    parsed
+      .filter((row) => row.kind === "POLICY")
+      .map((row) => `${row.schema} ${row.description}`)
+      .sort(),
+    catalog.policies
+      .map(
+        (policy) =>
+          `${policy.schema} ${policy.relation} ${policy.name} ${catalog.relations.find((relation) => relation.schema === policy.schema && relation.name === policy.relation)?.owner}`,
+      )
+      .sort(),
+    "Archive policy inventory mismatch",
+  );
   assert.deepEqual(
     parsed
       .filter((row) => row.kind === "TABLE")

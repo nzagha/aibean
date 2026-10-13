@@ -1,5 +1,7 @@
 # aiBean corrected expanded recovery v2 execution result
 
+**Recovery v2 diagnosis / v3 local correction PASS — 13 October 2026:** Frozen v2 reproduces a full-policy-name allowlist defect after successful native dump/list/schema inspection. V3 matches complete catalog policy metadata and adds fifteen safe export diagnostic boundaries. All 121 tests, native synthetic TLS/CMS export/restore and all fifteen failure/retention checks pass; isolated production build, lint/typecheck and audit pass. Manifest SHA-256: `00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469` (seventeen dependencies). V2 manifest and historical failure evidence are preserved; no hosted connection/retry or historical backup/target operation occurred. [Diagnosis, evidence and exact new authorization](SUPABASE_EXPANDED_RECOVERY_V2_FAILURE_DIAGNOSIS.md). Actual expanded hosted recovery remains FAIL; v3 requires new independent consent. Earlier v2 retry wording is historical and cannot authorize v3.
+
 **Recovery gate: FAIL.** Authorization 2 was consumed by one exact executor invocation on 12 October 2026 local / 13 October UTC. It stopped at `approved-scoped-export` before encryption or restoration. No second attempt, repair, installation or provider activation followed.
 
 Target: project `yfknxidgphhepdtwazhn`, database `postgres`, branch `codex/supabase-foundation`. Authorized inventory commit: `bea2ca7ebd38d3c331f6e3e098138487ef7c0030`.

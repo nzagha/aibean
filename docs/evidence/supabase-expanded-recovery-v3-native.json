@@ -1,0 +1,199 @@
+{
+  "capturedAt": "2026-10-13T04:05:17.738Z",
+  "result": "PASS_SYNTHETIC_EXACT_EXECUTOR",
+  "packageSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+  "serverVersion": "17.11",
+  "selectedTables": 18,
+  "selectedSequences": 2,
+  "originalInetText": "127.0.0.1/32",
+  "normalizedHost": "127.0.0.1",
+  "exactExecutorIdentityQueryPassed": true,
+  "nonLoopbackRejected": true,
+  "realWrongDatabaseRejected": true,
+  "realWrongOperatorRejected": true,
+  "historyScopeInstallationAndLocalFailureBeforeBodyCapture": true,
+  "nativeDumpEncryptedCmsDecryptionAndRestorePassed": true,
+  "originalSyntheticBackupPreserved": true,
+  "failedSyntheticTargetStoppedAndPreserved": true,
+  "allCatalogOwnersAclRlsPoliciesDataSequencesAndLedgersMatched": true,
+  "sourceReadOnlyContinuityPassed": true,
+  "successfulSyntheticTargetDisposed": true,
+  "nativeProcessAndEnvironment": "EXACT_PRODUCTION_IMPLEMENTATION",
+  "snapshotVisibilityAndLifetime": "PASS",
+  "insufficientNativeDumpPermissionsRejected": true,
+  "multiwordPolicyNamesRestoredExactly": true,
+  "exportBoundaryFailureInjections": [
+    {
+      "operation": "snapshot-export",
+      "diagnostic": {
+        "operation": "snapshot-export",
+        "assertionId": "snapshot-export.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "native-dump",
+      "diagnostic": {
+        "operation": "native-dump",
+        "assertionId": "native-dump.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-bounds",
+      "diagnostic": {
+        "operation": "archive-bounds",
+        "assertionId": "archive-bounds.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-header",
+      "diagnostic": {
+        "operation": "archive-header",
+        "assertionId": "archive-header.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-toc",
+      "diagnostic": {
+        "operation": "archive-toc",
+        "assertionId": "archive-toc.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-schema",
+      "diagnostic": {
+        "operation": "archive-schema",
+        "assertionId": "archive-schema.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-allowlist",
+      "diagnostic": {
+        "operation": "archive-allowlist",
+        "assertionId": "archive-allowlist.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "snapshot-integrity",
+      "diagnostic": {
+        "operation": "snapshot-integrity",
+        "assertionId": "snapshot-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-encrypt",
+      "diagnostic": {
+        "operation": "archive-encrypt",
+        "assertionId": "archive-encrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-bounds",
+      "diagnostic": {
+        "operation": "metadata-bounds",
+        "assertionId": "metadata-bounds.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-encrypt",
+      "diagnostic": {
+        "operation": "metadata-encrypt",
+        "assertionId": "metadata-encrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "ciphertext-hashes",
+      "diagnostic": {
+        "operation": "ciphertext-hashes",
+        "assertionId": "ciphertext-hashes.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-decrypt",
+      "diagnostic": {
+        "operation": "metadata-decrypt",
+        "assertionId": "metadata-decrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-decrypt",
+      "diagnostic": {
+        "operation": "archive-decrypt",
+        "assertionId": "archive-decrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-integrity",
+      "diagnostic": {
+        "operation": "archive-integrity",
+        "assertionId": "archive-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    }
+  ],
+  "exportOperationsPassed": [
+    "snapshot-export",
+    "native-dump",
+    "archive-bounds",
+    "archive-header",
+    "archive-toc",
+    "archive-schema",
+    "archive-allowlist",
+    "snapshot-integrity",
+    "archive-encrypt",
+    "metadata-bounds",
+    "metadata-encrypt",
+    "ciphertext-hashes",
+    "metadata-decrypt",
+    "archive-decrypt",
+    "archive-integrity"
+  ],
+  "syntheticFailedTargetsRetained": 16,
+  "syntheticRootRetainedForFailureEvidence": true,
+  "hostedConnections": 0,
+  "hostedExport": "NOT EXECUTED",
+  "realRetainedTargetTouched": false
+}

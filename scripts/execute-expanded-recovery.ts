@@ -14,6 +14,12 @@ import { resolve, join, relative, isAbsolute } from "node:path";
 import { checkServerIdentity, type PeerCertificate } from "node:tls";
 import { config } from "dotenv";
 import postgres from "postgres";
+import {
+  assertNativeResult,
+  recoveryOperation,
+  safeRecoveryDiagnostic,
+  type ExportOperation,
+} from "./recovery-diagnostics";
 import { verifiedDatabaseConfig } from "../src/lib/db/tls-config";
 import { assertRuntimeConnection } from "../src/lib/db/runtime-config";
 import {
@@ -36,7 +42,7 @@ import {
 } from "./expanded-recovery-scope";
 
 export const recoveryManifestPath =
-  "db/recovery/expanded-recovery-package-v2.json";
+  "db/recovery/expanded-recovery-package-v3.json";
 export const requiredRecoveryFiles = [
   ".gitattributes",
   "scripts/execute-expanded-recovery.ts",
@@ -52,6 +58,9 @@ export const requiredRecoveryFiles = [
   "scripts/test-expanded-recovery-executor.ts",
   "scripts/prepare-synthetic-recovery-test.ps1",
   "tests/expanded-recovery.test.ts",
+  "scripts/recovery-diagnostics.ts",
+  "tests/recovery-diagnostics.test.ts",
+  "db/recovery/expanded-recovery-package-v2.json",
 ].sort();
 type Manifest = {
   packageId: string;
@@ -88,7 +97,7 @@ export function inspectRecoveryPackage(approvedSha?: string) {
       approvedSha,
       "Reviewed recovery package hash differs",
     );
-  assert.equal(manifest.packageId, "aibean-expanded-recovery-v2");
+  assert.equal(manifest.packageId, "aibean-expanded-recovery-v3");
   assert.equal(manifest.targetProject, recoveryProject);
   assert.equal(manifest.database, "postgres");
   assert.deepEqual(manifest.scope, recoveryRelations);
@@ -104,7 +113,7 @@ export function inspectRecoveryPackage(approvedSha?: string) {
     );
   return { manifest, packageSha256 };
 }
-const childEnvironment = () => {
+export const childEnvironment = () => {
   const env: NodeJS.ProcessEnv = { NODE_ENV: "production" };
   for (const key of [
     "PATH",
@@ -184,7 +193,7 @@ const crypto = (request: object) =>
   bridge("scripts/private-backup-crypto.ps1", request);
 const lifecycle = (request: object) =>
   bridge("scripts/private-expanded-recovery.ps1", request);
-const native = (
+export const native = (
   profile: PrivateProfile,
   name: string,
   args: string[],
@@ -198,24 +207,14 @@ const native = (
     timeout: 60000,
     maxBuffer: 16 * 1024 * 1024,
   });
-  assert.equal(
-    result.status,
-    0,
-    "Native recovery operation failed; diagnostics redacted",
-  );
-  assert(!result.error);
-  assert.equal(
-    result.stderr?.length || 0,
-    0,
-    "Native warning needs private review",
-  );
+  assertNativeResult(result);
   return result.stdout;
 };
 const q =
   (tx: { unsafe: (text: string) => PromiseLike<unknown> }): RecoveryQuery =>
   async (text: string) =>
     JSON.parse(JSON.stringify(await tx.unsafe(text)));
-const pgEnvironment = (
+export const pgEnvironment = (
   host: string,
   port: number,
   role: string,
@@ -478,6 +477,10 @@ export type PreparedRecoveryContext = {
   crypto: typeof crypto;
   native: typeof native;
   onSourceQuery?: (text: string) => void;
+  onExportOperation?: (
+    operation: ExportOperation,
+    state: "start" | "pass",
+  ) => void;
 };
 export const localRecoveryIdentitySql =
   "SELECT current_user AS role,current_database() AS database,host(inet_server_addr()) AS host,current_setting('server_version') AS version,(SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()) AS tls";
@@ -532,6 +535,18 @@ export async function executePreparedRecovery(
       return q(tx)(text);
     };
   resetPreparedState();
+  const privateBuffers: Buffer[] = [];
+  const completedExportOperations: ExportOperation[] = [];
+  const exportStep = <T>(
+    operation: ExportOperation,
+    work: () => T | Promise<T>,
+  ) => {
+    stage = `approved-scoped-export:${operation}`;
+    return recoveryOperation(operation, work, (id, state) => {
+      context.onExportOperation?.(id, state);
+      if (state === "pass") completedExportOperations.push(id);
+    });
+  };
   try {
     stage = "source-readonly-preflight";
     let capture:
@@ -633,20 +648,26 @@ export async function executePreparedRecovery(
           mode: "target-password",
           target: target.name,
         });
-        const [snapshot] = await q(tx)(
-          "SELECT pg_export_snapshot() AS snapshot",
+        const [snapshot] = await exportStep("snapshot-export", () =>
+          q(tx)("SELECT pg_export_snapshot() AS snapshot"),
         );
-        stage = "approved-scoped-export";
-        attemptedExport = true;
-        let archive = native(
-          profile,
-          "pg_dump",
-          expandedDumpArguments(String(snapshot.snapshot)),
-          sourceEnv,
+        let archive = await exportStep("native-dump", () => {
+          attemptedExport = true;
+          return native(
+            profile,
+            "pg_dump",
+            expandedDumpArguments(String(snapshot.snapshot)),
+            sourceEnv,
+          );
+        });
+        privateBuffers.push(archive);
+        await exportStep("archive-bounds", () =>
+          assert(archive.length > 0 && archive.length <= maxArchiveBytes),
         );
-        assert(archive.length > 0 && archive.length <= maxArchiveBytes);
-        assert.equal(archive.subarray(0, 5).toString("ascii"), "PGDMP");
-        archiveEntries = validateExpandedToc(
+        await exportStep("archive-header", () =>
+          assert.equal(archive.subarray(0, 5).toString("ascii"), "PGDMP"),
+        );
+        const toc = await exportStep("archive-toc", () =>
           native(
             profile,
             "pg_restore",
@@ -654,6 +675,8 @@ export async function executePreparedRecovery(
             childEnvironment(),
             archive,
           ).toString("utf8"),
+        );
+        const ddl = await exportStep("archive-schema", () =>
           native(
             profile,
             "pg_restore",
@@ -661,20 +684,26 @@ export async function executePreparedRecovery(
             childEnvironment(),
             archive,
           ).toString("utf8"),
-          capture.catalog,
         );
-        compareExpandedSnapshots(
-          capture,
-          await expandedPrivateSnapshot(sourceQuery(tx)),
+        archiveEntries = await exportStep("archive-allowlist", () =>
+          validateExpandedToc(toc, ddl, capture!.catalog),
+        );
+        await exportStep("snapshot-integrity", async () =>
+          compareExpandedSnapshots(
+            capture!,
+            await expandedPrivateSnapshot(sourceQuery(tx)),
+          ),
         );
         archiveHash = recoverySha(archive);
-        assert.equal(
-          crypto({
-            mode: "encrypt",
-            name: archiveName,
-            base64: archive.toString("base64"),
-          }),
-          "OK",
+        await exportStep("archive-encrypt", () =>
+          assert.equal(
+            crypto({
+              mode: "encrypt",
+              name: archiveName,
+              base64: archive.toString("base64"),
+            }),
+            "OK",
+          ),
         );
         retainedArchive = true;
         const metadata = Buffer.from(
@@ -689,34 +718,46 @@ export async function executePreparedRecovery(
             createdAt: new Date().toISOString(),
           }),
         );
-        assert(metadata.length <= maxArchiveBytes);
-        assert.equal(
-          crypto({
-            mode: "encrypt",
-            name: metadataName,
-            base64: metadata.toString("base64"),
-          }),
-          "OK",
+        privateBuffers.push(metadata);
+        await exportStep("metadata-bounds", () =>
+          assert(metadata.length <= maxArchiveBytes),
         );
-        cipherHash = recoverySha(
-          readFileSync(join(profile.backups, archiveName)),
+        await exportStep("metadata-encrypt", () =>
+          assert.equal(
+            crypto({
+              mode: "encrypt",
+              name: metadataName,
+              base64: metadata.toString("base64"),
+            }),
+            "OK",
+          ),
         );
-        metadataCipherHash = recoverySha(
-          readFileSync(join(profile.backups, metadataName)),
-        );
-        const decryptedMetadata = Buffer.from(
-          crypto({ mode: "decrypt", name: metadataName }),
-          "base64",
-        );
-        assert.equal(recoverySha(decryptedMetadata), recoverySha(metadata));
-        decryptedMetadata.fill(0);
+        await exportStep("ciphertext-hashes", () => {
+          cipherHash = recoverySha(
+            readFileSync(join(profile.backups, archiveName)),
+          );
+          metadataCipherHash = recoverySha(
+            readFileSync(join(profile.backups, metadataName)),
+          );
+        });
+        await exportStep("metadata-decrypt", () => {
+          const decryptedMetadata = Buffer.from(
+            crypto({ mode: "decrypt", name: metadataName }),
+            "base64",
+          );
+          privateBuffers.push(decryptedMetadata);
+          assert.equal(recoverySha(decryptedMetadata), recoverySha(metadata));
+          decryptedMetadata.fill(0);
+        });
         metadata.fill(0);
         archive.fill(0);
-        archive = Buffer.from(
-          crypto({ mode: "decrypt", name: archiveName }),
-          "base64",
+        archive = await exportStep("archive-decrypt", () =>
+          Buffer.from(crypto({ mode: "decrypt", name: archiveName }), "base64"),
         );
-        assert.equal(recoverySha(archive), archiveHash);
+        privateBuffers.push(archive);
+        await exportStep("archive-integrity", () =>
+          assert.equal(recoverySha(archive), archiveHash),
+        );
         stage = "isolated-restore";
         await local
           .unsafe(
@@ -915,6 +956,7 @@ export async function executePreparedRecovery(
       packageSha256: approvedSha,
       selectedTables: 18,
       selectedSequences: 2,
+      completedExportOperations,
       archiveEntries,
       archiveSha256: archiveHash,
       encryptedArchiveSha256: cipherHash,
@@ -947,6 +989,7 @@ export async function executePreparedRecovery(
     };
     return publicResult;
   } finally {
+    for (const buffer of privateBuffers) buffer.fill(0);
     await Promise.allSettled([local?.end({ timeout: 5 })]);
     local = undefined;
     if (target && existsSync(target.directory))
@@ -990,7 +1033,7 @@ async function main() {
 }
 if (process.argv[1]?.endsWith("execute-expanded-recovery.ts"))
   main()
-    .catch(() => {
+    .catch((error: unknown) => {
       console.error(
         JSON.stringify({
           recoveryGate: "FAIL",
@@ -1000,6 +1043,7 @@ if (process.argv[1]?.endsWith("execute-expanded-recovery.ts"))
           sourceWrites: false,
           automaticResetOrRepeat: false,
           transientTargetRetainedOnFailure: Boolean(target),
+          diagnostic: safeRecoveryDiagnostic(error),
           details:
             "Private diagnostics redacted; reviewed recovery decision required",
         }),

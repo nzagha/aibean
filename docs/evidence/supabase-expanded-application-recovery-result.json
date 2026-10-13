@@ -77,7 +77,16 @@
     "publicationFilesScanned": 14,
     "publicationProtectedValueScan": "PASS",
     "publication": "SANITIZED_DOCUMENTATION_ONLY",
-    "ci": "NOT_YET_CHECKED_FOR_RESULT_COMMIT"
+    "ci": "PASS",
+    "ciCommit": "ee31dc569179d104081b4ff56649c08dad6def1b",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38343497860"
   },
-  "historicalFailureEvidence": "docs/evidence/supabase-expanded-application-recovery-v1-historical.json"
+  "historicalFailureEvidence": "docs/evidence/supabase-expanded-application-recovery-v1-historical.json",
+  "correctionPreparation": {
+    "packageId": "aibean-expanded-recovery-v3",
+    "packageSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+    "status": "PASS_SYNTHETIC_LOCAL_ONLY",
+    "report": "docs/SUPABASE_EXPANDED_RECOVERY_V2_FAILURE_DIAGNOSIS.md",
+    "hostedRetryExecuted": false
+  }
 }

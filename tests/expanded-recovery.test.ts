@@ -113,6 +113,36 @@ test("isolated recovery prerequisites are loopback-only NOLOGIN fixtures and pre
   assert.match(sql, /CREATE TABLE auth\.users \(id uuid PRIMARY KEY\)/);
   assert(!/INSERT INTO|DELETE FROM|DROP |PASSWORD|CREATE EXTENSION/i.test(sql));
 });
+test("archive policies match full catalog names, owners and inventory without token truncation", () => {
+  for (const name of [
+    "Enable read access for all users",
+    'A "quoted" policy',
+    "two  spaces",
+    "policy postgres",
+  ]) {
+    const policies = {
+      ...catalog,
+      policies: [{ schema: "public", relation: "TestUsers", name }],
+    };
+    const line = `999; 1 1 POLICY public TestUsers ${name} postgres`;
+    assert.equal(validateExpandedToc(`${toc}\n${line}`, "", policies), 39);
+    assert.throws(
+      () => validateExpandedToc(toc, "", policies),
+      /policy inventory/,
+    );
+    assert.throws(
+      () => validateExpandedToc(`${toc}\n${line}\n${line}`, "", policies),
+      /policy inventory/,
+    );
+    for (const bad of [
+      `${line} extra`,
+      line.replace(/postgres$/, "unapproved"),
+      line.replace(name, `${name} changed`),
+      line.replace("TestUsers", "users"),
+    ])
+      assert.throws(() => validateExpandedToc(`${toc}\n${bad}`, "", policies));
+  }
+});
 test("encrypted metadata ACL replay rejects injection and permits only reviewed schema defaults", () => {
   const safe = {
     ...catalog,
@@ -278,5 +308,10 @@ test("metadata preflight cannot capture records and approved manifest remains ex
       "a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30",
     ),
   );
-  assert.equal(review.manifest.packageId, "aibean-expanded-recovery-v2");
+  assert.equal(review.manifest.packageId, "aibean-expanded-recovery-v3");
+  assert.throws(() =>
+    inspectRecoveryPackage(
+      "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    ),
+  );
 });

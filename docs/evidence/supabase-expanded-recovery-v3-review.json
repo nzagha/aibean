@@ -1,0 +1,44 @@
+{
+  "capturedAt": "2026-10-13T12:46:51.476Z",
+  "localCorrection": "PASS",
+  "hostedRecoveryGate": "FAIL_NOT_RETRIED",
+  "hostedConnections": 0,
+  "startingCommit": "ee31dc569179d104081b4ff56649c08dad6def1b",
+  "newManifest": {
+    "path": "db/recovery/expanded-recovery-package-v3.json",
+    "sha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+    "dependencies": 17,
+    "changedDependencies": 7
+  },
+  "historicalManifest": {
+    "path": "db/recovery/expanded-recovery-package-v2.json",
+    "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "unchanged": true
+  },
+  "confirmedDefect": "TOC_POLICY_NAME_TRUNCATED_AT_FIRST_SPACE",
+  "firstReproducedFailure": "archive-allowlist",
+  "historicalHostedExactException": "UNRECOVERABLE_REDACTED",
+  "nativeSyntheticRecovery": "PASS",
+  "exportBoundaryFailures": 15,
+  "allFailureSourcesUnchanged": true,
+  "allFailureTargetsRetained": true,
+  "protectedApplicationSqlAndPrivateHelpersUnchanged": 351,
+  "historicalBackupsAndTargetsTouched": false,
+  "sourceScope": {
+    "tables": 18,
+    "sequences": 2
+  },
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "testsPassed": 121,
+    "testsFailed": 0,
+    "localProductionBuild": "PASS_ISOLATED_WEBPACK",
+    "defaultLocalBuild": "BLOCKED_WINDOWS_CACHE_REPARSE_EPERM",
+    "runtimeVulnerabilities": 0,
+    "previousCommitCi": "PASS",
+    "correctionCi": "PENDING_PUBLICATION"
+  },
+  "readyForIndependentExecutionReview": true,
+  "hostedAuthorizationUsed": false
+}

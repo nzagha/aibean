@@ -1,0 +1,25 @@
+{
+  "status": "REPRODUCED_FAILURE_SYNTHETIC_ONLY",
+  "stage": "exact-executor-synthetic-full-workflow",
+  "nativeEvidence": [
+    {
+      "operation": "pg_dump",
+      "completed": true
+    },
+    {
+      "operation": "pg_dump",
+      "completed": true
+    },
+    {
+      "operation": "pg_restore_list",
+      "completed": true
+    },
+    {
+      "operation": "pg_restore_schema",
+      "completed": true
+    }
+  ],
+  "assertion": "TOC_POLICY_NAME_MISMATCH",
+  "hostedConnections": 0,
+  "frozenV2Unchanged": true
+}

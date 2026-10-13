@@ -1,0 +1,174 @@
+{
+  "packageId": "aibean-expanded-recovery-v3",
+  "targetProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "scope": [
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers",
+    "public.TestUsers_id_seq",
+    "public.audit_logs",
+    "public.billing_webhook_receipts",
+    "public.claim_requests",
+    "public.featured_placements",
+    "public.orders",
+    "public.rate_limits",
+    "public.saved_tools",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tools",
+    "public.users",
+    "public.vendor_access"
+  ],
+  "limits": {
+    "tables": 18,
+    "sequences": 2,
+    "archiveBytes": 4194304,
+    "totalSelectedRecords": 10000,
+    "identityMappings": 0,
+    "authUsers": 0,
+    "testUsers": 2,
+    "queryTimeoutMilliseconds": 60000,
+    "lockTimeoutMilliseconds": 5000
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "f7ee637d5254eb15109d79a07c7e07fababab5867bfde887d181987357339822"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "sha256": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v2.json",
+      "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec"
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "sha256": "e595728d8e49020099095bdf395c4ff9b9ff8ae6cf49a1fadff23bc280157eae"
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "sha256": "7e78974824527378e7ebe910343fa9cfddc8707d6e53e396d7701bc28c534ac5"
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "sha256": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd"
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "sha256": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d"
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "sha256": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85"
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "sha256": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99"
+    },
+    {
+      "path": "scripts/recovery-diagnostics.ts",
+      "sha256": "22c753a89592c39d706416ee1c5972fe94beb275c5ac3f5b49c1de4564b9fad8"
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "sha256": "8c7a43cc20062277962f4973b53a2f243d5f846c9003b5beb14066056b13a494"
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "sha256": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b"
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "sha256": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e"
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "sha256": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f"
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "sha256": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b"
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "sha256": "4ed9cdb3bfebed1d9541f2448663d017307556527b665bc30a3fbbd45e4f3785"
+    },
+    {
+      "path": "tests/recovery-diagnostics.test.ts",
+      "sha256": "27afa971e86f21f26b741ce6a402ce429b68b5a30d2db1929f10caf4cc25d65f"
+    }
+  ],
+  "previousSourceCommit": "ee31dc569179d104081b4ff56649c08dad6def1b",
+  "previousManifest": {
+    "path": "db/recovery/expanded-recovery-package-v2.json",
+    "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "outcome": "FAILED 2026-10-13 at approved-scoped-export; Authorization 2 exhausted; immutable historical manifest"
+  },
+  "changes": [
+    {
+      "path": ".gitattributes",
+      "previousSha256": "e1a48bc736f386c1342f1f9579d96823be20d94f93a1307dbae16e4aa0a7bc92",
+      "newSha256": "f7ee637d5254eb15109d79a07c7e07fababab5867bfde887d181987357339822",
+      "description": "Pin LF bytes for new diagnostic implementation and tests."
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "previousSha256": "79a4e33744714fe2f094405a1cee99de4b3e16e314ef668046f77ccafe7a5ed5",
+      "newSha256": "e595728d8e49020099095bdf395c4ff9b9ff8ae6cf49a1fadff23bc280157eae",
+      "description": "Bind a new v3 manifest, use fifteen bounded export diagnostics, share exact native runner/environment with synthetic tests, and wipe transient archive buffers in finally."
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "previousSha256": "462109414ebdd295c162a491c9dd6e497702daddf798404088d782f0c07149d4",
+      "newSha256": "7e78974824527378e7ebe910343fa9cfddc8707d6e53e396d7701bc28c534ac5",
+      "description": "Match complete policy TOC descriptions to catalog names/table owners and require exact policy inventory."
+    },
+    {
+      "path": "scripts/recovery-diagnostics.ts",
+      "previousSha256": null,
+      "newSha256": "22c753a89592c39d706416ee1c5972fe94beb275c5ac3f5b49c1de4564b9fad8",
+      "description": "Closed diagnostic identifiers and whitelisted SQLSTATE/process categories; never emit protected exception contents."
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "previousSha256": "0118e320f3c2a4c2af94cc834d0849dfc4b841f2e0c3b68ec2a0921b18e1ec8f",
+      "newSha256": "8c7a43cc20062277962f4973b53a2f243d5f846c9003b5beb14066056b13a494",
+      "description": "Use recorded multiword policy metadata with synthetic rows; test actual production native runner/environment, snapshot lifetime, permission denial, every export failure boundary and retention."
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "previousSha256": "d55aa0e55cfb319c6caa6558580a0762499d4ba4fa6c1a77ed871c0cc3b68c9e",
+      "newSha256": "4ed9cdb3bfebed1d9541f2448663d017307556527b665bc30a3fbbd45e4f3785",
+      "description": "Reject altered/missing/duplicate policy descriptions and obsolete manifest authorization hashes."
+    },
+    {
+      "path": "tests/recovery-diagnostics.test.ts",
+      "previousSha256": null,
+      "newSha256": "27afa971e86f21f26b741ce6a402ce429b68b5a30d2db1929f10caf4cc25d65f",
+      "description": "Verify redaction, all export boundaries, fail-closed process outcomes and strict native child environment."
+    }
+  ],
+  "validation": {
+    "unit": "npm test",
+    "native": "npx --no-install tsx scripts/test-expanded-recovery-executor.ts",
+    "reproductionEvidence": "docs/evidence/supabase-expanded-recovery-v2-local-reproduction.json",
+    "evidence": "docs/evidence/supabase-expanded-recovery-v3-native.json",
+    "interpretation": "Synthetic local-only validation. Historical hosted exception remains redacted; fresh exact-hash owner authorization is required for any hosted execution."
+  },
+  "limitations": [
+    "Managed Auth/Vault/Storage/Realtime data and settings excluded.",
+    "Original retained failed target must not be reused or deleted.",
+    "Independent-device key recovery and off-device backup retention unverified.",
+    "Native loopback fixtures do not establish hosted source TLS, identity, current inventory or actual recovery success.",
+    "Both historical failed targets must remain stopped and unchanged.",
+    "Hosted PostgreSQL 17.6 versus local PostgreSQL 17.11 and collation differences remain.",
+    "Synthetic fault-injection targets and their temporary CMS material remain retained for local inspection."
+  ]
+}
