@@ -57,5 +57,17 @@
     "jsonAndWhitespace": "PASS",
     "relevantOfflineRegressionTests": 6
   },
-  "ci": "Pending publication"
+  "ci": {
+    "status": "PASS_ON_SAME_COMMIT_ATTEMPT_2",
+    "runId": 38445668846,
+    "url": "https://github.com/nzagha/aibean/actions/runs/38445668846",
+    "commit": "5c9b48b04a165ae3263595af22ef9138f93bdb16",
+    "tests": 137,
+    "pass": 137,
+    "fail": 0,
+    "firstAttempt": "Native V8 jit_page.has_value() process abort; original evidence retained",
+    "frozenFilesModified": false,
+    "recoveryRepeated": false
+  },
+  "resultCommit": "5c9b48b04a165ae3263595af22ef9138f93bdb16"
 }

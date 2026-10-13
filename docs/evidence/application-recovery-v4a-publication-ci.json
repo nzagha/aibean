@@ -1,0 +1,103 @@
+{
+  "commit": "5c9b48b04a165ae3263595af22ef9138f93bdb16",
+  "runId": 38445668846,
+  "url": "https://github.com/nzagha/aibean/actions/runs/38445668846",
+  "attempt1": {
+    "status": "FAIL",
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "tests": "NATIVE_PROCESS_ABORT",
+    "assertion": "V8 Check failed: jit_page.has_value()",
+    "affectedTestFile": "tests/supabase-identity.test.ts",
+    "reportedTests": 135,
+    "reportedPass": 134,
+    "reportedFail": 1,
+    "build": "SKIPPED",
+    "runtimeAudit": "SKIPPED",
+    "underlyingRuntimeCause": "UNVERIFIED"
+  },
+  "attempt2": {
+    "status": "PASS",
+    "attempt": 2,
+    "commit": "5c9b48b04a165ae3263595af22ef9138f93bdb16",
+    "verifiedAt": "2026-10-13T18:26:13.549Z",
+    "tests": 137,
+    "pass": 137,
+    "fail": 0,
+    "checks": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run lint",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run typecheck",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm test",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run build",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm audit --omit=dev --audit-level=high",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "hostedRecoveryInvocations": 1,
+  "newRecoveryInvokedByCI": false,
+  "hostedSupabaseAccessByCI": false,
+  "frozenFilesModified": false,
+  "independentLocalIdentityCheck": {
+    "status": "PASS",
+    "tests": 6,
+    "failures": 0,
+    "syntheticInMemoryOnly": true,
+    "hostedConnections": 0,
+    "sourceModified": false
+  },
+  "recoveryRemainedSingleExecution": true
+}
