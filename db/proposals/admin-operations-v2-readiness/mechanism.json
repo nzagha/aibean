@@ -1,0 +1,416 @@
+{
+  "packageId": "admin-operations-v2-hosted-readiness",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "sqlPath": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+  "scope": {
+    "publicTables": 4,
+    "privateLedgers": 1
+  },
+  "recoveryManifestSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+  "status": "LOCAL_READINESS_ONLY_REQUIRES_NEW_OWNER_AUTHORIZATION",
+  "files": [
+    {
+      "path": "db/install/identity-and-security.sql",
+      "sha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a"
+    },
+    {
+      "path": "db/install/manifest.json",
+      "sha256": "fa67cad272008510be34ada709740393107965d49836ca6e6de35e57a711d5f5"
+    },
+    {
+      "path": "db/install/reviewed-installation.sql",
+      "sha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c"
+    },
+    {
+      "path": "db/install/runtime-login-proposal.sql",
+      "sha256": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940"
+    },
+    {
+      "path": "db/install/testusers-security-proposal.sql",
+      "sha256": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2-readiness/.gitattributes",
+      "sha256": "263ddcbd5aa582fa629913d4da11bcf59bb4e4a77c8d7b7dd58223738e1ffecb"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2-readiness/catalog.json",
+      "sha256": "cbdc7fa218307a12ca2c13f4eb64a378abff12bfaf79b76269ecf1875813bc85"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/manifest.json",
+      "sha256": "e62d14a8f480e57315a26ea410e102d9c046435def79f560d3bfc98067e71017"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/.gitattributes",
+      "sha256": "0fce5f7f295a8b04b2df5cafff233c572d84fd001954b0443ce589ac0168be51"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/catalog.json",
+      "sha256": "2d30633345c18f1bccc016cd856e3ec02aea70715c6d2f6fe901d393b7915efc"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/mechanism.json",
+      "sha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b"
+    },
+    {
+      "path": "db/proposals/admin-review-v1.manifest.json",
+      "sha256": "33c50b4a2484d3f264f4cadd5e200fb977219f55e68a50303ce05a6c84971e30"
+    },
+    {
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca"
+    },
+    {
+      "path": "db/proposals/creator-content-v1/manifest.json",
+      "sha256": "0724c8fa4f3bd08c386abd0d201d248cfd849dbf6aa8d58a9b40ed87e9bdfb8c"
+    },
+    {
+      "path": "db/proposals/discovery-v1/manifest.json",
+      "sha256": "db51c8dd639e853da6b1577e0a7936f017e03c9d3f627d33e8c0d78ab243428b"
+    },
+    {
+      "path": "db/proposals/pricing-v1/manifest.json",
+      "sha256": "d44ccd975d12d629b656d12110bfe0dd38d354b6e030d616a4f35cef220e1b21"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v3.json",
+      "sha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469"
+    },
+    {
+      "path": "docs/evidence/.gitattributes",
+      "sha256": "a68491a71d01399be9902a1049f79e483585f29c6bfa4fc4b32b5563553e915f"
+    },
+    {
+      "path": "docs/evidence/admin-review-v1-hosted-execute-result.json",
+      "sha256": "b286aaa696e0d76270462102aaf348525901f76174403b1ee8b9eb944e40aaf8"
+    },
+    {
+      "path": "docs/evidence/admin-review-v1-hosted-verify-result.json",
+      "sha256": "08b7ed9eaa848412252877db19ff02a7a9568feb9ba61c558549dfd1cac6207b"
+    },
+    {
+      "path": "docs/evidence/supabase-expanded-application-recovery-result.json",
+      "sha256": "8ff51d8420fb5af968367b8700e57e1b337a39e45aa8b1a45137ad1128501f3c"
+    },
+    {
+      "path": "docs/evidence/supabase-hosted-scoped-recovery-2026-10-09.json",
+      "sha256": "a3bb66e3d421396d7e79f97194e6734fecfbfb9c27fa4933355219d48587d82d"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "50e35d688d3318ae2ea899d4e5959cdc7655d34902d4c9c2d2a2a61e2f3e20f5"
+    },
+    {
+      "path": "package.json",
+      "sha256": "5d4688b6f117b194885372b92cdaf4999735277d6dec755541800d5b3bebf023"
+    },
+    {
+      "path": "scripts/.gitattributes",
+      "sha256": "f9921dcc69b97025e25d11f5292b194089876b26909d78b4efc52b77de875f1d"
+    },
+    {
+      "path": "scripts/admin-operations-v2/.gitattributes",
+      "sha256": "263ddcbd5aa582fa629913d4da11bcf59bb4e4a77c8d7b7dd58223738e1ffecb"
+    },
+    {
+      "path": "scripts/admin-operations-v2/core.ts",
+      "sha256": "2013e4bcf2db22fd96c47bcd32ff49976cdaae34d731a478064905fb7bcd71e5"
+    },
+    {
+      "path": "scripts/admin-operations-v2/dependency-inventory.ts",
+      "sha256": "cc603143db1dd56df4826d5404ba5e87b8bd009a0061b5eeb623a9eb5eaf36d0"
+    },
+    {
+      "path": "scripts/admin-operations-v2/execute.ts",
+      "sha256": "8bd4e4e0232dce98b39a0ea6861e43bf62ec449cc85b4da740354066c76e4b77"
+    },
+    {
+      "path": "scripts/admin-operations-v2/native-test.ts",
+      "sha256": "7ceb1236ec5daf5a74c28e20f96de60dba2500bb1cbae448a1d84ef0bfbcbeeb"
+    },
+    {
+      "path": "scripts/admin-operations-v2/operator.ts",
+      "sha256": "d44b2e44ed1e3e8e3ac517289f6577f0e7eb0e4a55d2b651fa9fc5e18c280797"
+    },
+    {
+      "path": "scripts/admin-operations-v2/prepare.ts",
+      "sha256": "6345145b19c35f612d3fdb079bcce2cd0d5dffab22c3fe2e470a5eac1b6c9a5e"
+    },
+    {
+      "path": "scripts/admin-operations-v2/verify.ts",
+      "sha256": "ad04d96542ead6cade95ac7308901a1af7a00291f326a9dde296a3f6b73e6bbb"
+    },
+    {
+      "path": "scripts/admin-review-v1/.gitattributes",
+      "sha256": "57eb830e05116c663f7e484b1b1f7545dab51c08eeb6aa10b6234b0b6c4a4270"
+    },
+    {
+      "path": "scripts/admin-review-v1/core.ts",
+      "sha256": "aba58f25964cf76312a7480199b7295167f44b73bc3e83716e4455fb88ffacfd"
+    },
+    {
+      "path": "scripts/admin-review-v1/execute.ts",
+      "sha256": "da9f4abf8a64487faa97b57feb87433bf1b999b5c2e6827727885bd247fb64e7"
+    },
+    {
+      "path": "scripts/admin-review-v1/native-test.ts",
+      "sha256": "6fa370bdfdea538ece0fc7ea0b4cb65e01d1628df3ce6addef8192b9e61b294c"
+    },
+    {
+      "path": "scripts/admin-review-v1/operator.ts",
+      "sha256": "e183cc5c50dc8dd62aada175cf043c3a406faec90cca05a467c2a585528c797c"
+    },
+    {
+      "path": "scripts/admin-review-v1/prepare.ts",
+      "sha256": "e64b03f1f4b445ae99cadac269f8941d2c5a2d51b1ee459889226b7ae4753230"
+    },
+    {
+      "path": "scripts/admin-review-v1/verify.ts",
+      "sha256": "8b124766f8dabab48ca3048b7350de646d25000de28d82baa4a897f4e2e32508"
+    },
+    {
+      "path": "scripts/execute-approved-installation.ts",
+      "sha256": "88cc9a91c72af0d3684762e63326137e91f55d8f506a1b329ccd5a7563de9a98"
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "sha256": "e595728d8e49020099095bdf395c4ff9b9ff8ae6cf49a1fadff23bc280157eae"
+    },
+    {
+      "path": "scripts/execute-scoped-backup.ts",
+      "sha256": "16076a68bf4b2fd37a5c48284726ebe2e0c4b456a5b65d3018ab27e7a1ff0a7a"
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "sha256": "7e78974824527378e7ebe910343fa9cfddc8707d6e53e396d7701bc28c534ac5"
+    },
+    {
+      "path": "scripts/inspect-public-backup-scope.ts",
+      "sha256": "23127da22b68327af8bf90d89cc71f627b1bb3d96db26d713875c0dbc9ac3ce6"
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "sha256": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d"
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "sha256": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85"
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "sha256": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99"
+    },
+    {
+      "path": "scripts/recovery-diagnostics.ts",
+      "sha256": "22c753a89592c39d706416ee1c5972fe94beb275c5ac3f5b49c1de4564b9fad8"
+    },
+    {
+      "path": "src/lib/admin/catalog-controls.ts",
+      "sha256": "8fa9ad6f7c2110e883842d52dde36a251698696f09d0ce07118726bf2eefbcd0"
+    },
+    {
+      "path": "src/lib/admin/commerce-contracts.ts",
+      "sha256": "8c5b84c799978e8eb073ea5338f7d95a79841c3b5c1da9dd44c502f469e125c6"
+    },
+    {
+      "path": "src/lib/admin/commerce-queries.ts",
+      "sha256": "dd19dca4a61b3e185f5d101d8dec4b0bc37792559b960380a66ed70887660434"
+    },
+    {
+      "path": "src/lib/admin/commerce-storage.ts",
+      "sha256": "05b586288d69cca01dc4e7e6db48b6bbe204000919c2279083dab81931a81df2"
+    },
+    {
+      "path": "src/lib/admin/commerce-workflows.ts",
+      "sha256": "faa96bd633abe5e1ae4acf4684c869fea046b0dd701c99d4e8fd269eb262d633"
+    },
+    {
+      "path": "src/lib/admin/contracts.ts",
+      "sha256": "1724975fca2e9e1ffabaad938d961f7db548ba0ed0c5fd93e460cf61764ec8b1"
+    },
+    {
+      "path": "src/lib/admin/queries.ts",
+      "sha256": "4e1914adb8ab0c7d5c54e3f0245108e6032d0c9cc18941db7df44d30852a5e9e"
+    },
+    {
+      "path": "src/lib/admin/request-queries.ts",
+      "sha256": "0febddb8472ef5b74a9d0c9912abd358447d8d4f146cbee5bd6572329883f228"
+    },
+    {
+      "path": "src/lib/admin/review-contracts.ts",
+      "sha256": "c9a0fe59c59062460e54f15b7b31e8addcc93253f60a82dff1ce82a91809b99f"
+    },
+    {
+      "path": "src/lib/admin/review-storage.ts",
+      "sha256": "a9ea58ee9d7a5ddea28ea12466826bfd3db86e9e6ace67834f1921d9236934f8"
+    },
+    {
+      "path": "src/lib/admin/review-workflows.ts",
+      "sha256": "a2a5493c53f195e39e674e3eb05d444b9a0d6111868c74ea2b619c091b73a20b"
+    },
+    {
+      "path": "src/lib/admin/subscription-management.ts",
+      "sha256": "a0a37c87394bcb613ff86b2e8667e033024a958284d6359ca4c860e25db58f5b"
+    },
+    {
+      "path": "src/lib/admin/tool-workflows.ts",
+      "sha256": "41f1a723adc994ea1986c47afa282fe2707708355ef40c9d9b662cc567ce845b"
+    },
+    {
+      "path": "src/lib/catalog/comparison.ts",
+      "sha256": "d4150a55bc46faf2f8c4430cf47fa06a78b46fbf0595f5a88d570b24879fd5c8"
+    },
+    {
+      "path": "src/lib/catalog/filter.ts",
+      "sha256": "5ef43fcc5989399637be6a702493c4f4bda93bb221f9b9a1be856751c4d34994"
+    },
+    {
+      "path": "src/lib/catalog/logos.ts",
+      "sha256": "a0fd4b0cece3b10652fc0d99756c69e4385b77286eb287c4009077e4e51b34d9"
+    },
+    {
+      "path": "src/lib/catalog/taxonomy-display.ts",
+      "sha256": "0261b0d9ea9063feb76562b634b1b30df47d69a5690e61f48ca87afb7f85c2d7"
+    },
+    {
+      "path": "src/lib/catalog/taxonomy.ts",
+      "sha256": "81893c58a884fab50e4dc0e203d500b896eb9911edfe3ab70cece6e510a4c49a"
+    },
+    {
+      "path": "src/lib/catalog/types.ts",
+      "sha256": "06109ce8b38aec84778c5901b6ea231704137a5551951504bc64a0de29fbb709"
+    },
+    {
+      "path": "src/lib/content/contracts.ts",
+      "sha256": "fd30e2a6e9c0ad8fb777fd78cda7c282d74fa4941f55054b41525709383d1b0b"
+    },
+    {
+      "path": "src/lib/content/decision-notifications.ts",
+      "sha256": "4459f7cb49d2dd0f85fdf0f36978cea833883a8a612b1d7dc27f41b6b97260cd"
+    },
+    {
+      "path": "src/lib/content/queries.ts",
+      "sha256": "2ac73f8e20b9d9ad5e4073a7fac23c973855f64b28e8011ad405b3458d54836f"
+    },
+    {
+      "path": "src/lib/content/storage.ts",
+      "sha256": "22b82d5bde954ea62b079e1f93dc39a3f47c0c8ea6a9996f988bc523d2023db6"
+    },
+    {
+      "path": "src/lib/content/workflows.ts",
+      "sha256": "6b29a8506f074074bbbebf2d91399f4b29f096054c0ae8627cf055576227c5d5"
+    },
+    {
+      "path": "src/lib/db/admin-commerce-schema.ts",
+      "sha256": "fd10ccf6083fd24361320177d54fd35771e73344185ff67166ea79e9c426a953"
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "sha256": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b"
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "sha256": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e"
+    },
+    {
+      "path": "src/lib/db/schema.ts",
+      "sha256": "ae149cf1a9cfe3893fc27350a524376f540edaa24b710e897879fd1f224bfae3"
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "sha256": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f"
+    },
+    {
+      "path": "src/lib/discovery/analytics-contracts.ts",
+      "sha256": "211093a3a5a18b2a03df0cabdc577ceb2d8cadec577d53c1681779c30d488188"
+    },
+    {
+      "path": "src/lib/discovery/analytics.ts",
+      "sha256": "7e117651c51410a55ca8413976522d92c0b7c14f980bb6b7cbfe121b73443f03"
+    },
+    {
+      "path": "src/lib/discovery/comparisons.ts",
+      "sha256": "566af28b8b0ca077437b02c75f5c84957bee973afed201caa84796c6d20b5f1b"
+    },
+    {
+      "path": "src/lib/discovery/follows.ts",
+      "sha256": "337d97a3cdd7223585c5acd8956d6024db7198119f580b587654f98076d97a57"
+    },
+    {
+      "path": "src/lib/discovery/storage.ts",
+      "sha256": "80be24d26af86878339cd8a88234a7e14a47e7eb38eb657ed386a3f5a0265777"
+    },
+    {
+      "path": "src/lib/discovery/targets.ts",
+      "sha256": "519c094bba80f830aa9d899020e8144c60321d3f6099a9581b51da09bf91a731"
+    },
+    {
+      "path": "src/lib/pricing/config.ts",
+      "sha256": "2acb6b7a8b68e9a88f31100ffd4808c92c4f91ef989dd9643fde636bb110c755"
+    },
+    {
+      "path": "src/lib/pricing/entitlements.ts",
+      "sha256": "82e9f6080635911bbcac1c920d477f871c93a5d7a52ff265a25b9e6114ef4f13"
+    },
+    {
+      "path": "src/lib/pricing/payments.ts",
+      "sha256": "f03ff57ac04993653077f6470453d9d373a11ff0c389d501e67e8ce5c39dbab1"
+    },
+    {
+      "path": "src/lib/pricing/releases.ts",
+      "sha256": "76438026051b5bde81e01faf6683e5ca12cddc825efc58ddd86f64342ec2a5c9"
+    },
+    {
+      "path": "src/lib/pricing/storage.ts",
+      "sha256": "77d5ae2e3e05843c302d760f610c52ac5743e2cbd1c2e8b09e3968ebad3439dc"
+    },
+    {
+      "path": "src/lib/ranking.ts",
+      "sha256": "b7586c4ea0653271e722ae05b5d0ee519dea38fe0055064643e5a9f6ee80f6fb"
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "sha256": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b"
+    },
+    {
+      "path": "src/lib/supabase/identity.ts",
+      "sha256": "8ad5444522219fef669572484b3d8e8e9bd5e179c5737151b0fc74ec9ceda647"
+    },
+    {
+      "path": "src/lib/validation.ts",
+      "sha256": "4735cd8687fd27e8d6b51db4e1fc090a9e3d5149aefbf58b07d228bee214c4e7"
+    },
+    {
+      "path": "src/lib/workspace-filters.ts",
+      "sha256": "65c59fca7b81be69e342d972a3d8573fb14a920d18faca8b7addee879b2f7da3"
+    },
+    {
+      "path": "tests/.gitattributes",
+      "sha256": "105683f87921e3f0ea8b3b80388544582125c1a8b40a29f792764a6db45bab42"
+    },
+    {
+      "path": "tests/admin-operations-installation.test.ts",
+      "sha256": "84d34258efcad012802597571fe9409c5f6c76f3c7a8a9a65c8d649f55c84784"
+    },
+    {
+      "path": "tests/admin-review-installation.test.ts",
+      "sha256": "a963579dab382051a361949b2c3dcb2730a8eba9036714daed698da7af6907eb"
+    },
+    {
+      "path": "tests/fixtures/admin-operations-contract.ts",
+      "sha256": "23096515d941fbc15e85e53c7be4ad731bade5f804e2b670a32841c64f4ecfa0"
+    },
+    {
+      "path": "tests/fixtures/admin-workflow-contract.ts",
+      "sha256": "ba59eb94217d937e14869ae7312fb690dfb0e9146d76d00ff8c50b63bc6c8a66"
+    }
+  ],
+  "nativeEvidence": "docs/evidence/admin-operations-v2-native-readiness.json"
+}

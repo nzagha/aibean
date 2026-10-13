@@ -1,0 +1,128 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-13T15:41:17.201Z",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "nativePostgreSQL": "17.11",
+  "freshInstances": 5,
+  "hostedConnections": 0,
+  "syntheticOnly": true,
+  "scenarioCount": 18,
+  "scenarios": [
+    {
+      "name": "Native trusted TLS and rejected untrusted CA/hostname",
+      "status": "PASS"
+    },
+    {
+      "name": "Reference catalogs match Drizzle columns FK targets and exact five RLS relations",
+      "status": "PASS"
+    },
+    {
+      "name": "Bad authorization fails before SQL",
+      "status": "PASS"
+    },
+    {
+      "name": "Incorrect session operator and database identity fail before SQL",
+      "status": "PASS"
+    },
+    {
+      "name": "Recovery history and TestUsers drift stop before installation",
+      "status": "PASS"
+    },
+    {
+      "name": "Unexpected target object fails before SQL without repair",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing predecessor ledger table, wrong hash and predecessor grant drift fail before SQL",
+      "status": "PASS"
+    },
+    {
+      "name": "Late native DDL failure rolls back exact SQL and all prior data/history",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent exact executors serialize: one commit and one verified rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent postflight five catalogs FKs indexes constraints RLS effective grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser and BYPASSRLS service connections denied actual table reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime cannot change capabilities requests ledger or schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Paid transactions and subscriptions never mutate capabilities ownership trust or ranking",
+      "status": "PASS"
+    },
+    {
+      "name": "Re-execution refuses existing objects before transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Post-commit verifier failure preserves installation and requires forward review",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent verifier rejects extra grants missing index disabled RLS and wrong ledger",
+      "status": "PASS"
+    },
+    {
+      "name": "Lost COMMIT response is UNKNOWN, never retried or automatically rolled back",
+      "status": "PASS"
+    },
+    {
+      "name": "Full native server commerce contract: account isolation payment/editorial separation and audit rollback",
+      "status": "PASS"
+    }
+  ],
+  "catalogCounts": {
+    "relations": 5,
+    "columns": 41,
+    "constraints": 33,
+    "foreignKeys": 8,
+    "indexes": 11,
+    "policies": 5
+  },
+  "historicalRecoveryArtifactsTouched": false,
+  "frozenSqlUnchanged": true,
+  "codeHashes": [
+    {
+      "path": "scripts/admin-operations-v2/dependency-inventory.ts",
+      "sha256": "cc603143db1dd56df4826d5404ba5e87b8bd009a0061b5eeb623a9eb5eaf36d0"
+    },
+    {
+      "path": "scripts/admin-operations-v2/core.ts",
+      "sha256": "2013e4bcf2db22fd96c47bcd32ff49976cdaae34d731a478064905fb7bcd71e5"
+    },
+    {
+      "path": "scripts/admin-operations-v2/operator.ts",
+      "sha256": "d44b2e44ed1e3e8e3ac517289f6577f0e7eb0e4a55d2b651fa9fc5e18c280797"
+    },
+    {
+      "path": "scripts/admin-operations-v2/native-test.ts",
+      "sha256": "7ceb1236ec5daf5a74c28e20f96de60dba2500bb1cbae448a1d84ef0bfbcbeeb"
+    },
+    {
+      "path": "scripts/admin-operations-v2/execute.ts",
+      "sha256": "8bd4e4e0232dce98b39a0ea6861e43bf62ec449cc85b4da740354066c76e4b77"
+    },
+    {
+      "path": "scripts/admin-operations-v2/verify.ts",
+      "sha256": "ad04d96542ead6cade95ac7308901a1af7a00291f326a9dde296a3f6b73e6bbb"
+    },
+    {
+      "path": "scripts/admin-operations-v2/prepare.ts",
+      "sha256": "6345145b19c35f612d3fdb079bcce2cd0d5dffab22c3fe2e470a5eac1b6c9a5e"
+    },
+    {
+      "path": "tests/admin-operations-installation.test.ts",
+      "sha256": "84d34258efcad012802597571fe9409c5f6c76f3c7a8a9a65c8d649f55c84784"
+    }
+  ]
+}

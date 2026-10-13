@@ -1,0 +1,128 @@
+{
+  "designId": "application-recovery-coverage-v4.0",
+  "status": "DESIGN_ONLY_NOT_EXECUTABLE_NOT_AUTHORIZED",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "immutablePredecessor": {
+    "manifest": "db/recovery/expanded-recovery-package-v3.json",
+    "sha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+    "tables": 18,
+    "sequences": 2
+  },
+  "checkpoints": [
+    {
+      "id": "v4a-review-installed",
+      "recommendation": "Before Admin Operations hosted installation; separately implement/native-test/review/exact-hash authorize a new executor and manifest first",
+      "scope": [
+        "aibean_private.admin_review_installations",
+        "aibean_private.installations",
+        "aibean_private.user_identities",
+        "drizzle.__drizzle_migrations",
+        "drizzle.__drizzle_migrations_id_seq",
+        "public.TestUsers",
+        "public.TestUsers_id_seq",
+        "public.audit_logs",
+        "public.billing_webhook_receipts",
+        "public.claim_disputes",
+        "public.claim_requests",
+        "public.creator_applications",
+        "public.creator_capability_requests",
+        "public.featured_placements",
+        "public.orders",
+        "public.rate_limits",
+        "public.saved_tools",
+        "public.stack_tools",
+        "public.stacks",
+        "public.taxonomy",
+        "public.tool_reviews",
+        "public.tools",
+        "public.users",
+        "public.vendor_access",
+        "public.vendor_edit_requests",
+        "public.verification_requests"
+      ],
+      "tables": 24,
+      "sequences": 2
+    },
+    {
+      "id": "v4b-operations-installed",
+      "recommendation": "Immediately after a future approved Admin Operations COMMIT/postflight, before feature writes/accounts/provider tests",
+      "scope": [
+        "aibean_private.admin_operations_installations",
+        "aibean_private.admin_review_installations",
+        "aibean_private.installations",
+        "aibean_private.user_identities",
+        "drizzle.__drizzle_migrations",
+        "drizzle.__drizzle_migrations_id_seq",
+        "public.TestUsers",
+        "public.TestUsers_id_seq",
+        "public.audit_logs",
+        "public.billing_products",
+        "public.billing_transactions",
+        "public.billing_webhook_receipts",
+        "public.claim_disputes",
+        "public.claim_requests",
+        "public.commerce_subscriptions",
+        "public.creator_applications",
+        "public.creator_capability_requests",
+        "public.featured_placements",
+        "public.orders",
+        "public.rate_limits",
+        "public.saved_tools",
+        "public.stack_tools",
+        "public.stacks",
+        "public.taxonomy",
+        "public.tool_reviews",
+        "public.tool_submissions",
+        "public.tools",
+        "public.users",
+        "public.vendor_access",
+        "public.vendor_edit_requests",
+        "public.verification_requests"
+      ],
+      "tables": 29,
+      "sequences": 2
+    }
+  ],
+  "include": [
+    "scoped definitions columns constraints indexes RLS policies and triggers",
+    "owners effective table/column/schema grants",
+    "restricted role flags and reviewed memberships without passwords",
+    "original migration/security history plus exact review/operations installation ledgers",
+    "scoped records encrypted and private integrity metadata",
+    "both original TestUsers records and sequence state"
+  ],
+  "exclude": [
+    "managed Auth Vault Storage Realtime rows",
+    "credentials passwords private keys",
+    "unrelated schema objects or provider configurations"
+  ],
+  "failClosed": [
+    "unexpected scope/data/history/grant drift",
+    "nonzero Auth identities or application identity mappings without a new reviewed scope",
+    "unverified certificate TLS local target or storage ACLs",
+    "unexpected routines archive entries or external dependencies",
+    "archive/metadata exceeding separately reviewed bounds"
+  ],
+  "preserve": [
+    "original successful archive",
+    "successful v3 archive",
+    "both historical stopped failed targets",
+    "all new failed targets"
+  ],
+  "implementationRequired": [
+    "new versioned scope allowlist and independent catalog validation",
+    "new signed-by-checksum dependency manifest and exact-hash executor",
+    "local prerequisites for review/operations ledger permissions",
+    "native synthetic CMS export/restore and every-stage failure tests",
+    "owner approval of scope size bounds managed empty-FK fixtures and recovery impact"
+  ],
+  "readiness": "Recovery design only. No new export restore profile or artifacts created; no frozen recovery code modified",
+  "artifactNamespace": {
+    "version": "v4 only",
+    "newProfileRequired": true,
+    "originalV3ProfileUnchanged": true,
+    "originalExpandedReceiptCount": 1,
+    "rule": "Never add new v3-pattern receipts to the frozen v3 backup directory; review new artifact discovery and existing-certificate integration independently"
+  }
+}

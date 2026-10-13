@@ -1,5 +1,7 @@
 # MVP acceptance matrix — 12 October 2026
 
+**Package 2 readiness is locally verified; it grants no hosted installation or feature/provider activation.** Admin Review remains the sole newly hosted feature package.
+
 Available local workflows pass bounded acceptance; **full hosted MVP acceptance is incomplete**. Local execution does not imply hosted installation/provider readiness. This supersedes the earlier 94-test snapshot; historical audit/version documents remain unchanged.
 
 The required classifications below are literal. An incomplete portion is listed separately from working installed/provider-dependent behavior.
@@ -19,7 +21,7 @@ The required classifications below are literal. An incomplete portion is listed 
 | Review/claim moderation, ownership and self-review exclusion | Implemented and locally verified | Native independent sessions, Tool-first locking, canonical ownership and browser ordinary review → Admin → public. Real payment gated. |
 | Creator application, Vendor requests, disputes and capability requests | Implemented; hosted Admin Review schema independently verified; end-to-end provider testing pending | Authorization 5 executed exact SQL once, COMMIT acknowledged. Separate read-only verifier PASS: five public tables/private ledger, 16 FKs, 42 constraints, 11 indexes, six RLS policies/effective grants; foundation/TestUsers/recovery preserved. No capabilities or real accounts activated. See ADMIN_REVIEW_V1_HOSTED_INSTALLATION_RESULT.md. |
 | Protected Admin/Creator capability activation | Incomplete implementation | Operator-specific User/request/revision/evidence approval and validated procedure required; runtime cannot set flags. |
-| Commercial submissions/payments/subscriptions/pricing administration | Implemented but awaiting hosted installation | Four-table commercial proposal/eight FKs; restricted grants, idempotency and rollback pass. |
+| Commercial submissions/payments/subscriptions/pricing administration | Implemented and locally verified; Package 2 hosted installation pending | Exact frozen Operations SQL; dedicated 100-dependency installer/verifier LOCAL PASS; 131 automated/18 native scenarios (5 clusters), 8 FKs/33 constraints/11 indexes/5 RLS policies. No hosted execution/provider activation. See ADMIN_OPERATIONS_V2_HOSTED_INSTALLATION_READINESS.md. |
 | Real Stripe sandbox checkout/webhook/subscription reconciliation | Implemented but awaiting provider testing | Exact test product/price/webhook/fixture approval; no real provider execution. |
 | $99/five-day sponsored review/scheduling and organic-rank separation | Implemented and locally verified | Synthetic scheduling and independent editorial/payment/rank tests; real provider activation remains gated. |
 | Proposed subscriptions, monthly/annual prices, quotas and fee discounts | Implemented but awaiting hosted installation | Separate pricing-v1; five tiers, validated version/review/independent activation, pinned quote/benefit history and server allocation limits. All new commercial values remain Proposed / Preview. |

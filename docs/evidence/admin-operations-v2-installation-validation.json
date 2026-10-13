@@ -1,0 +1,48 @@
+{
+  "status": "LOCAL_READINESS_PASS_HOSTED_NOT_EXECUTED",
+  "preparedAt": "2026-10-13T15:41:48.612Z",
+  "sourceCommit": "07f7b7810d80f71a99c300370d09e71bc6eb0a2f",
+  "package": "admin-operations-v2",
+  "sqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+  "mechanismSha256": "31ee1f91bc5be3dd6ef9c11abcbbe5809502beee1dbbee45609193e0659507e2",
+  "dependencies": 100,
+  "automated": {
+    "tests": 131,
+    "pass": 131,
+    "fail": 0
+  },
+  "native": {
+    "scenarios": 18,
+    "freshPostgreSQL17Clusters": 5,
+    "hostedConnections": 0,
+    "tls": true,
+    "syntheticOnly": true,
+    "catalog": {
+      "relations": 5,
+      "columns": 41,
+      "constraints": 33,
+      "foreignKeys": 8,
+      "indexes": 11,
+      "policies": 5
+    }
+  },
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "runtimeAudit": {
+    "status": "PASS",
+    "vulnerabilities": 0
+  },
+  "offlineNewAndFrozenPredecessorSeals": "PASS",
+  "frozenSqlAndRecoveryUnchanged": true,
+  "privateEnvironmentModified": false,
+  "historicalArtifactsTouched": false,
+  "providersActivated": false,
+  "hostedAvailability": "Not checked in this local-only task; last actual Admin Review hosted PASS remains Authorization 5",
+  "sandboxLimitations": [
+    "Initial Next route type generation blocked by Windows sandbox canonicalization; normal Windows typecheck passed",
+    "Initial sandbox suite failed three existing loopback/symlink tests; complete normal Windows suite passed unchanged",
+    "Initial native tool setup rejected an unavailable OpenSSL path before database startup; verified installed binary used"
+  ],
+  "ci": "Pending publication"
+}

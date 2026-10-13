@@ -1,0 +1,1157 @@
+{
+  "relations": [
+    {
+      "schema": "aibean_private",
+      "name": "admin_operations_installations",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "billing_products",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "billing_transactions",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "commerce_subscriptions",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "tool_submissions",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    }
+  ],
+  "columns": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "package_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "sql_sha256",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "installed_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "name",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "amount",
+      "type": "integer",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "currency",
+      "type": "text",
+      "not_null": true,
+      "expression": "'usd'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "active",
+      "type": "boolean",
+      "not_null": true,
+      "expression": "false"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "updated_by",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "product_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "kind",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "subject_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "amount",
+      "type": "integer",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "currency",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'created'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "stripe_session_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "product_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "stripe_subscription_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "ends_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "cancel_at_period_end",
+      "type": "boolean",
+      "not_null": true,
+      "expression": "false"
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "provider_event_at",
+      "type": "bigint",
+      "not_null": true,
+      "expression": "0"
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "proposed",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'pending'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    }
+  ],
+  "constraints": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "admin_operations_installations_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (package_id)",
+      "validated": true
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "admin_operations_installations_sql_sha256_check",
+      "type": "c",
+      "definition": "CHECK ((sql_sha256 ~ '^[0-9a-f]{64}$'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_amount_check",
+      "type": "c",
+      "definition": "CHECK (((amount >= 0) AND (amount <= 1000000)))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_check",
+      "type": "c",
+      "definition": "CHECK (((amount > 0) OR (id = 'verification'::text)))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_currency_check",
+      "type": "c",
+      "definition": "CHECK ((currency = 'usd'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_id_check",
+      "type": "c",
+      "definition": "CHECK ((id = ANY (ARRAY['submission'::text, 'edit'::text, 'verification'::text, 'vendor_subscription'::text, 'creator_subscription'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_updated_by_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (updated_by) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_amount_check",
+      "type": "c",
+      "definition": "CHECK (((amount >= 0) AND (amount <= 1000000)))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_check",
+      "type": "c",
+      "definition": "CHECK ((kind = product_id))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_check1",
+      "type": "c",
+      "definition": "CHECK (((amount > 0) OR (kind = 'verification'::text)))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_currency_check",
+      "type": "c",
+      "definition": "CHECK ((currency = 'usd'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_kind_check",
+      "type": "c",
+      "definition": "CHECK ((kind = ANY (ARRAY['submission'::text, 'edit'::text, 'verification'::text, 'vendor_subscription'::text, 'creator_subscription'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_kind_subject_id_key",
+      "type": "u",
+      "definition": "UNIQUE (kind, subject_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_product_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (product_id) REFERENCES billing_products(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['created'::text, 'paid'::text, 'expired'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_stripe_session_id_key",
+      "type": "u",
+      "definition": "UNIQUE (stripe_session_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_product_id_check",
+      "type": "c",
+      "definition": "CHECK ((product_id = ANY (ARRAY['vendor_subscription'::text, 'creator_subscription'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_product_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (product_id) REFERENCES billing_products(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['active'::text, 'trialing'::text, 'past_due'::text, 'canceled'::text, 'unpaid'::text, 'incomplete'::text, 'incomplete_expired'::text, 'paused'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_stripe_subscription_id_key",
+      "type": "u",
+      "definition": "UNIQUE (stripe_subscription_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_check",
+      "type": "c",
+      "definition": "CHECK (((status = 'pending'::text) OR ((reviewer_id IS NOT NULL) AND (review_reason IS NOT NULL) AND (reviewed_at IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_check1",
+      "type": "c",
+      "definition": "CHECK (((status <> 'approved'::text) OR (tool_id IS NOT NULL)))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_proposed_check",
+      "type": "c",
+      "definition": "CHECK ((jsonb_typeof(proposed) = 'object'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_reviewer_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_tool_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    }
+  ],
+  "indexes": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "admin_operations_installations_pkey",
+      "definition": "CREATE UNIQUE INDEX admin_operations_installations_pkey ON aibean_private.admin_operations_installations USING btree (package_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "billing_products_pkey",
+      "definition": "CREATE UNIQUE INDEX billing_products_pkey ON public.billing_products USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_kind_subject_id_key",
+      "definition": "CREATE UNIQUE INDEX billing_transactions_kind_subject_id_key ON public.billing_transactions USING btree (kind, subject_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_pkey",
+      "definition": "CREATE UNIQUE INDEX billing_transactions_pkey ON public.billing_transactions USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "billing_transactions_stripe_session_id_key",
+      "definition": "CREATE UNIQUE INDEX billing_transactions_stripe_session_id_key ON public.billing_transactions USING btree (stripe_session_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "commercial_queue",
+      "definition": "CREATE INDEX commercial_queue ON public.billing_transactions USING btree (status, created_at, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_pkey",
+      "definition": "CREATE UNIQUE INDEX commerce_subscriptions_pkey ON public.commerce_subscriptions USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "commerce_subscriptions_stripe_subscription_id_key",
+      "definition": "CREATE UNIQUE INDEX commerce_subscriptions_stripe_subscription_id_key ON public.commerce_subscriptions USING btree (stripe_subscription_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "subscriptions_owner",
+      "definition": "CREATE INDEX subscriptions_owner ON public.commerce_subscriptions USING btree (user_id, created_at, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "submission_queue",
+      "definition": "CREATE INDEX submission_queue ON public.tool_submissions USING btree (status, created_at, id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "tool_submissions_pkey",
+      "definition": "CREATE UNIQUE INDEX tool_submissions_pkey ON public.tool_submissions USING btree (id)",
+      "valid": true,
+      "ready": true
+    }
+  ],
+  "policies": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "name": "runtime_read_operations_ledger",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    }
+  ],
+  "acl": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_operations_installations",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_products",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "billing_transactions",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "commerce_subscriptions",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "tool_submissions",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    }
+  ],
+  "columnAcl": [],
+  "triggers": []
+}
