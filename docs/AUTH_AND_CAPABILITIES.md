@@ -1,5 +1,7 @@
 # Authentication, capabilities and RLS contract
 
+**12 October local release engineering update:** shared PostgreSQL throttles/replays, epoch-bound proofs, app/provider session revocation, same-account five-minute sensitive-action reauthentication and guarded exclusive production mode are implemented and locally verified. A separately reviewed private Auth session predicate/ledger proposal is required before candidate/provider use; no hosted installation, activation or private environment change occurred. Production readiness remains unverified. [Current result and limits](HOSTED_INTEGRATION_LOCAL_RESULT.md), [execution approvals](HOSTED_INTEGRATION_EXECUTION_CHECKLIST.md). Earlier account-security implementation observations below are historical where superseded by this update.
+
 Updated 9 October 2026. Target: Supabase Auth alone. The current website still uses its transitional password provider. Candidate verified identity/mapping/capability helpers and actual owner predicates are now implemented, with mocked and native PostgreSQL tests; they are inactive for website users. See [implemented scope/evidence](SUPABASE_AUTH_PHASE_1_IMPLEMENTATION_RESULT.md). The wider account-security, entitlements and future content matrix below remains a release specification wherever no endpoint exists, not an assertion that every planned module has been implemented. Hosted Auth, privileged step-up and cutover are not verified.
 
 ## Identity and capability resolution

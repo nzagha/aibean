@@ -1,6 +1,6 @@
 "use server";
 import { analyticsSession } from "@/lib/discovery/analytics-session";
-import { requireUser, requireAdmin } from "@/lib/auth";
+import { requireSensitiveUser as requireUser, requireAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/security";
 import { revalidatePath } from "next/cache";

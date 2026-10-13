@@ -529,7 +529,7 @@ test("expired or forged recovery proof cannot be consumed and retry store is bou
   );
 });
 
-test("successful password update clears recovery and session cookies even if provider signout throws", async () => {
+test("password update clears browser state and reports incomplete revocation if global signout fails", async () => {
   const f = fixture({
     signOut: async () => {
       throw Error("private-provider-failure");
@@ -548,8 +548,8 @@ test("successful password update clears recovery and session cookies even if pro
     ),
   );
   assert.equal(
-    new URL(result.headers.get("location")!).searchParams.get("status"),
-    "password-updated",
+    new URL(result.headers.get("location")!).searchParams.get("error"),
+    "unavailable",
   );
   assert.equal(result.cookies.get(RECOVERY_COOKIE)?.maxAge, 0);
   assert.equal(result.cookies.get(ACCESS_COOKIE)?.maxAge, 0);

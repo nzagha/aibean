@@ -1,11 +1,15 @@
 export type AuthMode = "password" | "clerk" | "supabase" | "disabled";
 
-// Candidate tests require a separate loopback deployment. No environment file
-// is changed by implementation, and there is no production cutover value yet.
+// Candidate and production gates are exclusive. No private configuration is
+// changed by implementation. Evidence/owner flags are operator release inputs.
 export function authMode(
   env: Record<string, string | undefined> = process.env,
 ): AuthMode {
   const mode = env.AIBEAN_AUTH_MODE;
+  if (env.AIBEAN_SUPABASE_RELEASE === "production" && mode !== "supabase")
+    throw new Error(
+      "Production release cannot fall back to legacy authentication.",
+    );
   if (mode === "password") return mode;
   if (mode === "clerk") {
     if (!env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || !env.CLERK_SECRET_KEY)
@@ -18,6 +22,34 @@ export function authMode(
       origin = new URL(env.NEXT_PUBLIC_APP_URL || "");
     } catch {
       throw new Error("Authentication candidate configuration is invalid.");
+    }
+    if (env.AIBEAN_SUPABASE_RELEASE === "production") {
+      if (
+        env.NODE_ENV !== "production" ||
+        origin.protocol !== "https:" ||
+        !["aibean.io", "www.aibean.io"].includes(origin.hostname) ||
+        origin.port ||
+        origin.username ||
+        origin.password ||
+        origin.pathname !== "/" ||
+        origin.search ||
+        origin.hash ||
+        env.AIBEAN_SUPABASE_PRODUCTION_APPROVED !== "true" ||
+        env.AIBEAN_SUPABASE_HOSTED_E2E_VERIFIED !== "true" ||
+        env.AIBEAN_AUTH_LEGACY_RETIREMENT_VERIFIED !== "true" ||
+        env.AIBEAN_AUTH_SHARED_STATE !== "postgres" ||
+        !/^[A-Za-z0-9_-]{16,80}$/.test(env.AIBEAN_AUTH_RELEASE_EPOCH || "") ||
+        (env.AIBEAN_RECOVERY_SECRET?.length || 0) < 64 ||
+        !env.DATABASE_URL ||
+        env.CLERK_SECRET_KEY ||
+        env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+        env.LOCAL_LOGIN_PASSWORD_HASH ||
+        env.LOCAL_SESSION_SECRET
+      )
+        throw new Error(
+          "Production authentication release prerequisites are incomplete.",
+        );
+      return mode;
     }
     if (
       env.AIBEAN_SUPABASE_RELEASE !== "candidate" ||
@@ -49,6 +81,15 @@ export function providerTestApproved(
 ) {
   return (
     authMode(env) === "supabase" &&
-    env.AIBEAN_SUPABASE_PROVIDER_TEST_APPROVED === "true"
+    (env.AIBEAN_SUPABASE_RELEASE === "production" ||
+      env.AIBEAN_SUPABASE_PROVIDER_TEST_APPROVED === "true")
+  );
+}
+
+export function productionAuth(
+  env: Record<string, string | undefined> = process.env,
+) {
+  return (
+    authMode(env) === "supabase" && env.AIBEAN_SUPABASE_RELEASE === "production"
   );
 }

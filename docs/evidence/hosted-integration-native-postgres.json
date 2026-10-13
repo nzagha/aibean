@@ -1,0 +1,622 @@
+{
+  "date": "2026-10-13T02:28:11.938Z",
+  "environment": "Native disposable PostgreSQL; synthetic data only",
+  "version": "postgres (PostgreSQL) 17.11",
+  "tls": "Verified generated test CA, loopback hostname/IP, SCRAM authentication; hostnossl rejected",
+  "installationSqlSha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c",
+  "securitySqlSha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a",
+  "baselineMigrations": [
+    {
+      "path": "db/migrations/0000_numerous_skullbuster.sql",
+      "createdAt": 1791247215670,
+      "sha256": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468"
+    },
+    {
+      "path": "db/migrations/0001_hesitant_hardball.sql",
+      "createdAt": 1791249181547,
+      "sha256": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
+    }
+  ],
+  "backupSha256": "14e24ae2040d4bc26536b15b8b8be24bd49b887113d0f65d0c49bbd7a51d55d0",
+  "roleBackupSha256": "fd3dc769cffc5d8f561c299de9d7b5b85c42f2d52e0ddca79ada6f9c09b6f09d",
+  "applicationTables": 14,
+  "foreignKeys": 18,
+  "preservedTestUsers": 2,
+  "outcomes": [
+    {
+      "name": "Verified TLS and nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Untrusted certificates and incorrect peer hostname fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Late installation failure rolls back every new object and preserves TestUsers",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent clean installations serialize; observer sees no partial schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact package repeats without metadata, record or ledger changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Altered, missing and noncontiguous migration history is rejected atomically",
+      "status": "PASS"
+    },
+    {
+      "name": "Advisory lock timeout aborts a competing installation without changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact Approval B preparation works as nonsuperuser migration operator",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent browser, service and restricted runtime login sessions enforce grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime provisioning defaults and identity constraints preserve ordinary users",
+      "status": "PASS"
+    },
+    {
+      "name": "RLS independently denies browser rows; shared runtime requires server ownership checks",
+      "status": "PASS"
+    },
+    {
+      "name": "Competing authenticated runtime transactions cannot assign two Tool owners",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate TestUsers permission fix preserves two rows and denies browser reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate canonical identity provisions once across independent runtime sessions and rolls back conflicts",
+      "status": "PASS"
+    },
+    {
+      "name": "Candidate application owner queries and transactional Stack writes isolate two actual runtime identities",
+      "status": "PASS"
+    },
+    {
+      "name": "Real PostgreSQL historical upgrade preserves internal IDs and existing ownership",
+      "status": "PASS"
+    },
+    {
+      "name": "Native pg_dump/pg_dumpall preserve synthetic schema, ledgers, records and roles",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate instance restores equivalent metadata, counts, FKs, ledgers and permissions",
+      "status": "PASS"
+    },
+    {
+      "name": "Account mutations and Vendor reads enforce two-user ownership under the native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent User review edits accept one revision and audit failures roll back account creation",
+      "status": "PASS"
+    },
+    {
+      "name": "Admin lifecycle, rollback, moderation, paid ownership and pagination under native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent Admin edits accept exactly one current revision",
+      "status": "PASS"
+    },
+    {
+      "name": "Forward review proposal installs atomically; new RLS/grants and protected capability flags remain restricted",
+      "status": "PASS"
+    },
+    {
+      "name": "Safe taxonomy metadata, explainable organic ranking and Last Verified continuity under native restricted runtime",
+      "status": "PASS"
+    },
+    {
+      "name": "Forward commercial migration; paid submission/edit/verification and subscription lifecycle, isolation, rollback and RLS",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent sandbox checkout preparation deduplicates orders; concurrent pricing edits accept one unchanged revision",
+      "status": "PASS"
+    },
+    {
+      "name": "Creator content forward proposal: 15 RLS tables, 39 foreign keys, restricted grants, protected history and full multi-account workflow",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent content edits and moderation accept one revision; parallel outbound increments preserve every request",
+      "status": "PASS"
+    },
+    {
+      "name": "Resource file forward proposal and restricted native workflows preserve owners, scan/review/download gates, failure compensation and RLS",
+      "status": "PASS"
+    },
+    {
+      "name": "Discovery proposal rolls back late failure; exact history and RLS/grants stay guarded",
+      "status": "PASS"
+    },
+    {
+      "name": "Durable comparisons: independent accounts, ordered membership, archived Tools, revision and audit rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "Six follow targets, suspended-content privacy, duplicate prevention and transactional notification delivery",
+      "status": "PASS"
+    },
+    {
+      "name": "Behavioral analytics: verified attribution, deduplication, throttle, retention and Creator/Vendor isolation",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent sessions serialize comparison revisions and duplicate follows without losing data",
+      "status": "PASS"
+    },
+    {
+      "name": "Pricing proposal: late failure rolls back all five new tables without changing baseline/history",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent roles enforce pricing RLS/grants and private read-only installation history",
+      "status": "PASS"
+    },
+    {
+      "name": "Native versioned pricing, monthly/annual quotes, discounts, quota denial, invoice renewals/expiry, refunds and payment/capability separation",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent native sessions serialize usage quotas and deduplicate priced checkout",
+      "status": "PASS"
+    },
+    {
+      "name": "Affiliate/Creator proposal late failure is atomic; eight RLS tables and canonical FKs install in isolation",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent browser/service roles deny Affiliate/Creator tables and runtime cannot alter private installation ledger",
+      "status": "PASS"
+    },
+    {
+      "name": "Native affiliate URLs, reviewed activation, deduplicated clicks, signed-contract reconciliation, profile/campaign moderation and privacy",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent campaign edits enforce a single revision winner",
+      "status": "PASS"
+    },
+    {
+      "name": "Audit failure rolls back block replacement, draft revision and history; baseline TestUsers/migrations unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Final combined baseline/seven-package Drizzle schema, constraints, indexes, effective grants and exact ledgers",
+      "status": "PASS"
+    },
+    {
+      "name": "Separate Auth release proposal late failure rolls back; exact package installs without managed writes",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent shared Auth atomic throttles/replays, epochs, reauthentication, application/provider revocation and minimized state",
+      "status": "PASS"
+    }
+  ],
+  "hostedModified": false,
+  "hostedBackupVerified": false,
+  "pricingSqlSha256": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+  "affiliateCreatorSqlSha256": "0a06cae4801d6c8f4493694c9fe537c412d61b4d33c89d3a7926df45c701704a",
+  "integratedInventory": {
+    "tables": [
+      "account_follows",
+      "account_notifications",
+      "account_profiles",
+      "affiliate_clicks",
+      "affiliate_destinations",
+      "affiliate_programs",
+      "affiliate_reconciliations",
+      "affiliate_relationships",
+      "ai_playbooks",
+      "ai_skills",
+      "analytics_events",
+      "audit_logs",
+      "billing_products",
+      "billing_transactions",
+      "billing_webhook_receipts",
+      "campaign_blocks",
+      "claim_disputes",
+      "claim_requests",
+      "commerce_subscriptions",
+      "comparison_tools",
+      "content_reports",
+      "creator_applications",
+      "creator_capability_requests",
+      "creator_follows",
+      "creator_presentations",
+      "creator_resources",
+      "creator_revision_history",
+      "engagement_counters",
+      "event_tools",
+      "featured_placements",
+      "membership_bindings",
+      "membership_changes",
+      "orders",
+      "playbook_skills",
+      "playbook_tools",
+      "pricing_quotes",
+      "pricing_refunds",
+      "pricing_releases",
+      "public_events",
+      "rate_limits",
+      "resource_files",
+      "saved_comparisons",
+      "saved_entities",
+      "saved_tools",
+      "skill_tools",
+      "stack_settings",
+      "stack_tools",
+      "stacks",
+      "taxonomy",
+      "tool_reviews",
+      "tool_submissions",
+      "tools",
+      "users",
+      "vendor_access",
+      "vendor_edit_requests",
+      "verification_requests"
+    ],
+    "tableCount": 56,
+    "constraints": [
+      {
+        "type": "c",
+        "count": 118
+      },
+      {
+        "type": "f",
+        "count": 135
+      },
+      {
+        "type": "p",
+        "count": 57
+      },
+      {
+        "type": "t",
+        "count": 2
+      },
+      {
+        "type": "u",
+        "count": 26
+      }
+    ],
+    "indexes": 119,
+    "checkedSchemaModules": 8,
+    "equivalentConstraintNames": [
+      {
+        "table": "claim_disputes",
+        "drizzleName": "claim_dispute_status",
+        "sqlName": "claim_disputes_status_check"
+      },
+      {
+        "table": "creator_applications",
+        "drizzleName": "creator_application_status",
+        "sqlName": "creator_applications_status_check"
+      },
+      {
+        "table": "creator_capability_requests",
+        "drizzleName": "creator_capability_state",
+        "sqlName": "creator_capability_requests_desired_state_check"
+      },
+      {
+        "table": "creator_capability_requests",
+        "drizzleName": "creator_capability_status",
+        "sqlName": "creator_capability_requests_status_check"
+      },
+      {
+        "table": "vendor_edit_requests",
+        "drizzleName": "vendor_edit_status",
+        "sqlName": "vendor_edit_requests_status_check"
+      },
+      {
+        "table": "verification_requests",
+        "drizzleName": "verification_request_status",
+        "sqlName": "verification_requests_status_check"
+      },
+      {
+        "table": "billing_products",
+        "drizzleName": "product_kind",
+        "sqlName": "billing_products_id_check"
+      },
+      {
+        "table": "billing_products",
+        "drizzleName": "product_amount",
+        "sqlName": "billing_products_amount_check"
+      },
+      {
+        "table": "billing_products",
+        "drizzleName": "product_amount",
+        "sqlName": "billing_products_check"
+      },
+      {
+        "table": "billing_products",
+        "drizzleName": "product_currency",
+        "sqlName": "billing_products_currency_check"
+      },
+      {
+        "table": "billing_transactions",
+        "drizzleName": "transaction_product",
+        "sqlName": "billing_transactions_check"
+      },
+      {
+        "table": "billing_transactions",
+        "drizzleName": "transaction_amount",
+        "sqlName": "billing_transactions_amount_check"
+      },
+      {
+        "table": "billing_transactions",
+        "drizzleName": "transaction_amount",
+        "sqlName": "billing_transactions_check1"
+      },
+      {
+        "table": "account_follows",
+        "drizzleName": "follow_one_target",
+        "sqlName": "account_follows_check"
+      },
+      {
+        "table": "account_follows",
+        "drizzleName": "follow_self",
+        "sqlName": "account_follows_check1"
+      },
+      {
+        "table": "account_follows",
+        "drizzleName": "follow_target_kind",
+        "sqlName": "account_follows_check2"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_event",
+        "sqlName": "analytics_events_event_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_kind",
+        "sqlName": "analytics_events_kind_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_target_id",
+        "sqlName": "analytics_events_target_id_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_session",
+        "sqlName": "analytics_events_session_hash_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_dedup",
+        "sqlName": "analytics_events_dedup_key_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_source",
+        "sqlName": "analytics_events_source_check"
+      },
+      {
+        "table": "analytics_events",
+        "drizzleName": "analytics_metadata",
+        "sqlName": "analytics_events_metadata_check"
+      },
+      {
+        "table": "comparison_tools",
+        "drizzleName": "comparison_position",
+        "sqlName": "comparison_tools_position_check"
+      },
+      {
+        "table": "saved_comparisons",
+        "drizzleName": "comparison_name",
+        "sqlName": "saved_comparisons_name_check"
+      },
+      {
+        "table": "saved_comparisons",
+        "drizzleName": "comparison_context",
+        "sqlName": "saved_comparisons_context_check"
+      },
+      {
+        "table": "saved_comparisons",
+        "drizzleName": "comparison_revision",
+        "sqlName": "saved_comparisons_revision_check"
+      },
+      {
+        "table": "membership_bindings",
+        "drizzleName": "paid_period",
+        "sqlName": "membership_bindings_check"
+      },
+      {
+        "table": "membership_bindings",
+        "drizzleName": "paid_period",
+        "sqlName": "membership_bindings_check1"
+      },
+      {
+        "table": "pricing_quotes",
+        "drizzleName": "quote_amount",
+        "sqlName": "pricing_quotes_check1"
+      },
+      {
+        "table": "pricing_quotes",
+        "drizzleName": "quote_amount",
+        "sqlName": "pricing_quotes_base_check"
+      },
+      {
+        "table": "pricing_quotes",
+        "drizzleName": "quote_amount",
+        "sqlName": "pricing_quotes_check"
+      },
+      {
+        "table": "pricing_quotes",
+        "drizzleName": "quote_amount",
+        "sqlName": "pricing_quotes_check"
+      },
+      {
+        "table": "pricing_refunds",
+        "drizzleName": "refund_amount",
+        "sqlName": "pricing_refunds_amount_check"
+      },
+      {
+        "table": "pricing_refunds",
+        "drizzleName": "refund_review",
+        "sqlName": "pricing_refunds_check"
+      },
+      {
+        "table": "pricing_refunds",
+        "drizzleName": "refund_confirmed",
+        "sqlName": "pricing_refunds_check1"
+      },
+      {
+        "table": "pricing_releases",
+        "drizzleName": "release_hash",
+        "sqlName": "pricing_releases_config_sha256_check"
+      },
+      {
+        "table": "pricing_releases",
+        "drizzleName": "release_revision",
+        "sqlName": "pricing_releases_revision_check"
+      },
+      {
+        "table": "pricing_releases",
+        "drizzleName": "release_config",
+        "sqlName": "pricing_releases_config_check"
+      },
+      {
+        "table": "pricing_releases",
+        "drizzleName": "release_review",
+        "sqlName": "pricing_releases_check"
+      },
+      {
+        "table": "affiliate_programs",
+        "drizzleName": "affiliate_rate",
+        "sqlName": "affiliate_programs_proposed_rate_bps_check"
+      },
+      {
+        "table": "affiliate_programs",
+        "drizzleName": "affiliate_dates",
+        "sqlName": "affiliate_programs_check"
+      },
+      {
+        "table": "affiliate_programs",
+        "drizzleName": "affiliate_status",
+        "sqlName": "affiliate_programs_status_check"
+      },
+      {
+        "table": "affiliate_relationships",
+        "drizzleName": "affiliate_creator_share",
+        "sqlName": "affiliate_relationships_creator_share_bps_check"
+      },
+      {
+        "table": "campaign_blocks",
+        "drizzleName": "campaign_block_position_bound",
+        "sqlName": "campaign_blocks_position_check"
+      },
+      {
+        "table": "campaign_blocks",
+        "drizzleName": "campaign_block_parent",
+        "sqlName": "campaign_blocks_check2"
+      }
+    ],
+    "equivalentIndexNames": [
+      {
+        "table": "billing_transactions",
+        "drizzleName": "billing_subject",
+        "sqlName": "billing_transactions_kind_subject_id_key"
+      },
+      {
+        "table": "comparison_tools",
+        "drizzleName": "comparison_order",
+        "sqlName": "comparison_tools_comparison_id_position_key"
+      },
+      {
+        "table": "affiliate_reconciliations",
+        "drizzleName": "affiliate_program_event",
+        "sqlName": "affiliate_reconciliations_program_id_provider_event_id_key"
+      },
+      {
+        "table": "campaign_blocks",
+        "drizzleName": "campaign_block_position",
+        "sqlName": "campaign_blocks_campaign_id_position_key"
+      },
+      {
+        "table": "creator_revision_history",
+        "drizzleName": "creator_revision_unique",
+        "sqlName": "creator_revision_history_kind_entity_id_revision_key"
+      }
+    ],
+    "extendedNonUniqueIndexes": [
+      {
+        "table": "saved_comparisons",
+        "name": "comparison_owner",
+        "drizzleColumns": [
+          "user_id",
+          "created_at"
+        ],
+        "sqlColumns": [
+          "user_id",
+          "created_at",
+          "id"
+        ]
+      }
+    ],
+    "effectiveBrowserAndServiceGrants": "DENIED",
+    "sevenLedgers": "MATCH",
+    "frozenIndexesVerified": 36,
+    "sqlPackages": [
+      {
+        "id": "admin-review-v1",
+        "path": "db/proposals/admin-review-v1.sql",
+        "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+        "ledger": "admin_review_installations"
+      },
+      {
+        "id": "admin-operations-v2",
+        "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+        "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+        "ledger": "admin_operations_installations"
+      },
+      {
+        "id": "creator-content-v1",
+        "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+        "sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+        "ledger": "content_installations"
+      },
+      {
+        "id": "creator-files-v1",
+        "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+        "sha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+        "ledger": "files_installations"
+      },
+      {
+        "id": "discovery-v1",
+        "path": "db/proposals/discovery-v1/reviewed-installation.sql",
+        "sha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+        "ledger": "discovery_installations"
+      },
+      {
+        "id": "pricing-v1",
+        "path": "db/proposals/pricing-v1/reviewed-installation.sql",
+        "sha256": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+        "ledger": "pricing_installations"
+      },
+      {
+        "id": "affiliate-creator-v1",
+        "path": "db/proposals/affiliate-creator-v1/reviewed-installation.sql",
+        "sha256": "0a06cae4801d6c8f4493694c9fe537c412d61b4d33c89d3a7926df45c701704a",
+        "ledger": "affiliate_creator_installations"
+      }
+    ]
+  },
+  "authReleaseSqlSha256": "d1afd314dd083009abe0912dfc7f1a91861a90450e9979a068f9c856741b7bb3"
+}

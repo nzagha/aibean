@@ -1,0 +1,60 @@
+# Hosted integration and production identity readiness — local result
+
+12 October 2026; repository `nzagha/aibean`, branch `codex/supabase-foundation`, starting commit `5fd2e96bea8568051085264fb2332e8951af16ea`.
+
+**Local release engineering and integrated installation rehearsal: PASS. Hosted production identity/recovery readiness: not established.** No hosted connections, writes, backup/export/restore, accounts, email, provider activation, environment changes, DNS or deployment occurred. Existing website branding/layout and transitional login mode remain unchanged. Work did not repeat product audits, recreate modules or repeat A/B/C.
+
+## Auth protections implemented
+
+- `shared-security.ts` uses the existing server-only RLS `rate_limits` table through Drizzle. Atomic database-owned fifteen-minute windows share a global 1,000-attempt budget and per-purpose/HMAC-normalized-email budgets (ten login/reauth attempts, three other attempts). No forwarded-IP trust or process-local production fallback. Fixed-window boundaries are intentional; provider throttles apply independently. Bounded maintenance removes only expired Auth namespaces; an operator schedule remains to be reviewed.
+- Signed PKCE/recovery proofs are consumed by unique atomic insert with PostgreSQL expiry checks. One independent transaction wins a replay race. Trusted origin/form type/stream size and signed intent/verifier/kind/return-path validation remain; duplicate callback parameters and mixed code/token modes fail before provider exchange. Body and token values are not logged.
+- Epoch-bound access/recovery/intent signatures and shared session keys support release invalidation. Old epoch proofs stay invalid even if a provider session is reused. App session registration lasts at most eight hours; fresh password reauthentication lasts five minutes. Callback confirmation grants ordinary access without automatically granting sensitive-action freshness.
+- App revocation tombstones prevent an in-flight registration from reopening a revoked session. Logout tombstones precede rate/provider calls; provider failure still clears local proofs/chunks. Every business identity checks fresh verified provider account/claims, signed access proof, shared app state and current provider session existence/expiry. Provider deletion of a synthetic session denies an otherwise unexpired proof. Password reset requests global provider signout; failure reports incomplete revocation, not a false successful release.
+- Same-account password reauthentication checks the current signed active account before login and the verified returned UUID afterwards; different-account credentials cannot switch accounts/provision/merge or obtain step-up. On successful new-session step-up, the old app session is revoked. `/reauthenticate` and its checked POST reuse the existing brand/styles. Admin and Tool-owner guards and sensitive account/claim/commercial/Creator/pricing Server Actions require freshness; ordinary browsing/saves/comparisons/follows keep existing behavior. Five-minute step-up may require confirmation again during a long editing session.
+- Production mode requires explicit owner/evidence/legacy-retirement attestations, canonical HTTPS aiBean origin, shared PostgreSQL state, private epoch/secret and database configuration. Legacy Clerk/password credentials or a non-Supabase fallback mode reject the release. The real route adapter checks the independently hashed private Auth installation ledger before every shared operation and sanitizes backend exceptions. Missing shared state/ledger/TLS/configuration fails closed. Legacy cookies are cleared in Supabase mode; no email-only historical migration or implicit provider fallback exists.
+- Supabase route/SSR session cookies are HttpOnly, same-site Lax, host-only/path-root and Secure on HTTPS; sensitive responses remain private/no-store. This app's Auth flow is server-owned; the prepared browser SDK client is not used to read these tokens. Current password configuration was not edited.
+
+Canonical identity provisioning remains ID-only ordinary defaults in one locked transaction. It accepts only verified Auth UUIDs, resolves the existing private mapping, preserves historical internal IDs and rejects collisions/absent-FK identities. Signup metadata, payment and email addresses cannot grant Admin/Creator or Tool ownership. Existing independent native ownership/capability/rollback contracts were rerun rather than replaced.
+
+## Separate Auth database proposal
+
+`db/proposals/auth-release-v1/reviewed-installation.sql` SHA-256 **`d1afd314dd083009abe0912dfc7f1a91861a90450e9979a068f9c856741b7bb3`**; offline preparer `scripts/prepare-auth-release-proposal.ts`.
+
+It is **additional to the seven frozen feature packages**. A fixed private SECURITY DEFINER function returns only a boolean for a verified account/session UUID pair, reading `auth.sessions.id/user_id/not_after`. Definer privilege is narrowly necessary because the runtime must not receive raw managed-session SELECT. Search path is fixed to `pg_catalog`; relation names are fully qualified; PUBLIC/anon/authenticated/service-role execute is revoked; runtime execute alone is granted. The trusted server validates signed identity before using the function; visitor JWT/database `auth.uid()` context is not assumed on Drizzle sessions. It writes no managed object. Private RLS installation ledger is runtime-read-only. Preflight checks all seven exact dependency ledgers, target/operator, safe NOLOGIN group, managed session shape/read rights, absent proposal objects and independently bound hash.
+
+This proposal passed late-failure rollback, raw-session denial, independent browser/service function denial and shared-control concurrency locally. It has **no hosted approval/installation**. Fresh hosted managed schema/permissions must be verified before review. If managed access differs, prepare a reviewed alternative; never grant raw session reads to the application. This is a proposed release prerequisite, not a correction to frozen feature SQL.
+
+## Integrated native rehearsal
+
+The existing bounded native harness now also runs `scripts/integrated-database-contract.ts` after applying the baseline and all seven exact packages in dependency order. It starts two **new**, disposable PostgreSQL 17.11 clusters with generated CA/SCRAM and independent clients; no `.env` or supplied hosted endpoint is loaded. Existing recovery targets/backups remain untouched. Both new clusters stopped successfully; ignored synthetic artifacts were retained.
+
+Final combined public inventory: **56 aiBean tables plus synthetic TestUsers**, all RLS; **135 public FKs**, 118 CHECK constraints, 57 PKs, 26 unique constraints, two constraint triggers and **119 indexes**. Private identity mapping has its two additional FKs. The complete original Drizzle history and seven private ledger checksums match; all protected User capability attempts still deny after every feature grant. Two original synthetic TestUsers rows are unchanged. Eight Drizzle schema modules supply expected tables/columns/FKs/checks/index shapes; effective browser/service table and column grants and private ledgers are denied.
+
+Hand-reviewed SQL sometimes combines/splits CHECK conjunctions or uses generated names; PostgreSQL-normalized predicate comparisons verify the same protections. Forty-six name/decomposition equivalences and five index-name equivalences are recorded. `comparison_owner` contains the expected lookup prefix plus frozen descending timestamp/id tie-break order; that stronger nonunique index is recorded separately rather than misreported as a missing index. All **36 named CREATE INDEX declarations** in the exact frozen SQL are independently rebuilt in transient probes and compared including order, uniqueness, predicates and expressions. No frozen SQL was edited to make these checks pass; no schema integration defect requiring a forward feature correction was observed.
+
+Existing native workflows prove protected capabilities, two-account isolation, one Tool owner, approved Creator publication, payment versus editorial/rank separation, scoped analytics/affiliate access, transaction failure and competing revision behavior. Every package's applicable failure guard remains intact; new Auth proposal late failure leaves no function/ledger. Shared Auth tests use independent runtime connections and a synthetic managed-session shape; they verify one budget/replay winner, expiry, cross-account/epoch denial, step-up, app/provider revocation, minimized state and unrelated-row retention.
+
+## Verification evidence and limits
+
+| Check | Result |
+| --- | --- |
+| Full automated suite | **116/116 PASS**, zero skips |
+| Native PostgreSQL scenarios | **46/46 PASS**, new local clusters only |
+| New Auth release tests | Four named tests with synthetic scenarios PASS, including pinned real SDK/loopback transport |
+| ESLint / TypeScript / production build | PASS |
+| Runtime dependency audit | PASS, zero vulnerabilities; dependencies/lockfile unchanged |
+| Protected source/SQL/recovery/import comparisons | **56 PASS** against starting commit |
+| Corrected recovery v2 manifest/dependency checks | Exact v2 SHA-256 and **14/14** dependencies PASS; no actual hosted retry |
+| Hosted/provider/browser acceptance | **Not executed** in this task; previous UI evidence remains historical |
+
+[Native sanitized evidence](evidence/hosted-integration-native-postgres.json), [offline preservation/recovery evidence](evidence/hosted-integration-offline-readiness.json), [validation record](evidence/hosted-integration-local-validation.json).
+
+Initial verification iterations corrected the new probe's name/conjunction/expression comparison and a native raw-SQL timestamp binding (explicit ISO/timestamptz). They were local harness/new-code changes, not frozen SQL changes. A production-build invocation was temporarily blocked when automatic approval review hit its usage limit; after the owner's continuation, permitted execution resumed and final local checks passed. No permissions were bypassed.
+
+The synthetic loopback HTTP service exercises the pinned Supabase SDK's requests/session handling; it is **not a full GoTrue server or hosted email/JWT-key deployment**. Native `auth.sessions` is synthetic; current hosted column/operator grants are unverified. No new actual browser walkthrough was claimed. Production approval flags are evidence attestations, not cryptographic proof of provider acceptance. In-flight authorized transactions are not canceled retroactively by revocation. Real SMTP, signed-cookie/proxy behavior on the deployment, capacity/throttle tuning, retention scheduling, protected capability bootstrap and historical ownership linking still require their specific operator/provider tests and approvals.
+
+## Execution handoff
+
+The first required authorization is **fresh hosted read-only inventory**, with exact wording in [execution checklist](HOSTED_INTEGRATION_EXECUTION_CHECKLIST.md). Next is independently authorized corrected recovery v2; then individual reviewed packages, complete new recovery coverage, separate Auth proposal and isolated provider/account tests. Original expanded hosted recovery remains unpassed; current local v2 bytes are ready for review, but current private backup/certificate and hosted prerequisites were not rechecked in this local-only task.
+
+[Seven hashes/approval/recovery/rollback checklist](HOSTED_INTEGRATION_EXECUTION_CHECKLIST.md) and [initial real end-to-end sequence/provider inputs](HOSTED_END_TO_END_TEST_SEQUENCE.md) identify responsible parties and exact private inputs. No automatic follow-on operation is authorized by this report.

@@ -1,5 +1,5 @@
 "use server";
-import { requireUser } from "@/lib/auth";
+import { requireSensitiveUser as requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { stripeClient, stripeConfigured } from "@/lib/billing";
 import { commerceAvailable } from "@/lib/admin/commerce-storage";

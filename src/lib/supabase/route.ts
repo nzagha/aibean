@@ -11,6 +11,7 @@ export function createSupabaseRouteClient(request: NextRequest) {
   const supabase = createServerClient(url, publishableKey, {
     cookies: bridge.cookies,
     cookieOptions: {
+      httpOnly: true,
       sameSite: "lax",
       secure: request.nextUrl.protocol === "https:",
       path: "/",

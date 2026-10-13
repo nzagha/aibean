@@ -1,5 +1,5 @@
 "use server";
-import { requireAdmin, requireUser } from "@/lib/auth";
+import { requireAdmin, requireSensitiveUser as requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/security";
 import { adminMessage, refreshAfterCommit } from "@/lib/admin/contracts";

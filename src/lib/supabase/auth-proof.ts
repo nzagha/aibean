@@ -12,9 +12,10 @@ type Proof = {
   returnTo?: string;
   sub?: string;
   session?: string;
+  epoch?: string;
 };
 
-export function createAuthProofs(secret: string) {
+export function createAuthProofs(secret: string, epoch?: string) {
   if (secret.length < 64)
     throw new Error("Configure private recovery protection.");
   const mac = (body: string) =>
@@ -27,6 +28,7 @@ export function createAuthProofs(secret: string) {
     const body = Buffer.from(
       JSON.stringify({
         ...fields,
+        ...(epoch ? { epoch } : {}),
         nonce: randomUUID(),
         expires: now + seconds * 1000,
       }),
@@ -48,6 +50,7 @@ export function createAuthProofs(secret: string) {
     try {
       const p: Proof = JSON.parse(Buffer.from(body, "base64url").toString());
       return p.purpose === purpose &&
+        (!epoch || p.epoch === epoch) &&
         typeof p.nonce === "string" &&
         typeof p.expires === "number" &&
         p.expires > now

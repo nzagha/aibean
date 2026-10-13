@@ -9,6 +9,7 @@ export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
   const { url, publishableKey } = publicSupabaseConfig();
   return createServerClient(url, publishableKey, {
+    cookieOptions: { httpOnly: true, secure: process.env.NEXT_PUBLIC_APP_URL?.startsWith("https:"), sameSite: "lax", path: "/" },
     cookies: { getAll: () => cookieStore.getAll() },
   });
 }

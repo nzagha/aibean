@@ -6,7 +6,7 @@ import { and, eq, or, gt, inArray } from "drizzle-orm";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireUser, requireAdmin } from "@/lib/auth";
+import { requireSensitiveUser as requireUser, requireAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { featuredPlacements, tools, auditLogs } from "@/lib/db/schema";
 import { rateLimit } from "@/lib/security";

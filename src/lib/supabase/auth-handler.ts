@@ -5,28 +5,25 @@ import { db } from "../db";
 import { resolveSupabaseUser } from "./identity";
 import { createSupabaseRouteClient } from "./route";
 import { createAuthHandlers, type AuthAction } from "./auth-flow";
-import { createAuthLimiter } from "./auth-limits";
-import { createProofReplayStore } from "./auth-proof";
-
-const candidateState = globalThis as unknown as {
-  aibeanCandidateLimiter?: ReturnType<typeof createAuthLimiter>;
-  aibeanCandidateReplay?: ReturnType<typeof createProofReplayStore>;
-};
+import { sharedAuthSecurity } from "./release-server";
+import { ACCESS_COOKIE, INTENT_COOKIE, RECOVERY_COOKIE } from "./auth-proof";
+import { clearSupabaseSessionCookies } from "./session-refresh";
 function handlers() {
   if (!providerTestApproved())
     throw new Error("Candidate provider testing is not enabled.");
-  candidateState.aibeanCandidateLimiter ??= createAuthLimiter();
-  candidateState.aibeanCandidateReplay ??= createProofReplayStore();
+  const security = sharedAuthSecurity();
   return createAuthHandlers({
     origin: process.env.NEXT_PUBLIC_APP_URL || "",
     secret: process.env.AIBEAN_RECOVERY_SECRET || "",
+    epoch: process.env.AIBEAN_AUTH_RELEASE_EPOCH,
     client(request) {
       const { supabase, finish } = createSupabaseRouteClient(request);
       return { auth: supabase.auth, finish };
     },
     provision: (uuid) => resolveSupabaseUser(db(), uuid),
-    allow: candidateState.aibeanCandidateLimiter,
-    replay: candidateState.aibeanCandidateReplay,
+    allow: security.allow,
+    replay: security,
+    security,
   });
 }
 function unavailable(request: NextRequest, action?: AuthAction) {
@@ -60,6 +57,17 @@ function unavailable(request: NextRequest, action?: AuthAction) {
   const response = NextResponse.redirect(url, 303);
   response.headers.set("Cache-Control", "private, no-store");
   response.headers.set("Referrer-Policy", "no-referrer");
+  if (action === "logout") {
+    for (const name of [ACCESS_COOKIE, INTENT_COOKIE, RECOVERY_COOKIE])
+      response.cookies.set(name, "", {
+        httpOnly: true,
+        secure: request.nextUrl.protocol === "https:",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 0,
+      });
+    clearSupabaseSessionCookies(request, response, true);
+  }
   return response;
 }
 export async function candidateAuthPost(

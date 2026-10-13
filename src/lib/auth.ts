@@ -16,6 +16,9 @@ import { ownerPredicates } from "./db/owned-resources";
 import { ACCESS_COOKIE, RECOVERY_COOKIE } from "./supabase/auth-proof";
 import { verifiedBusinessAccount } from "./supabase/business-session";
 import { creatorPublishingAllowed } from "./admin/review-storage";
+import { productionAuth } from "./auth-mode";
+import { sharedAuthSecurity } from "./supabase/release-server";
+import { createAuthProofs } from "./supabase/auth-proof";
 export const authConfigured = () => authMode() === "clerk";
 export async function getIdentity(provision = true) {
   const mode = authMode();
@@ -31,6 +34,9 @@ export async function getIdentity(provision = true) {
     client.auth,
     cookieStore.get(ACCESS_COOKIE)?.value,
     process.env.AIBEAN_RECOVERY_SECRET || "",
+    sharedAuthSecurity().active,
+    false,
+    process.env.AIBEAN_AUTH_RELEASE_EPOCH,
   );
   if (!authUserId) return null;
   if (!provision) {
@@ -62,6 +68,7 @@ export async function requireUser(
 export async function requireAdmin() {
   const user = await requireUser("/admin");
   if (!hasCapability(user, "admin")) redirect("/account?notice=admin-required");
+  await requireRecentAuthentication("/admin");
   return user;
 }
 export async function requireCreator() {
@@ -81,11 +88,39 @@ export async function requireVendorCapability(toolId: string) {
     .where(ownerPredicates(user.id).vendorTool(toolId));
   if (!ownsResource(user, access?.userId))
     redirect("/account?notice=vendor-required");
+  await requireRecentAuthentication("/vendor");
   return user;
 }
 
 export const requireApprovedCreator = requireCreator;
 export const requireToolOwner = requireVendorCapability;
+export async function requireRecentAuthentication(returnTo = "/account") {
+  if (!productionAuth()) return;
+  const cookieStore = await cookies();
+  const proof = createAuthProofs(
+    process.env.AIBEAN_RECOVERY_SECRET || "",
+    process.env.AIBEAN_AUTH_RELEASE_EPOCH,
+  ).read(cookieStore.get(ACCESS_COOKIE)?.value, "access");
+  if (
+    !proof?.sub ||
+    !proof.session ||
+    !(await sharedAuthSecurity().active(
+      { sub: proof.sub, session: proof.session },
+      true,
+    ))
+  )
+    redirect(
+      `/reauthenticate?returnTo=${encodeURIComponent(safeReturnPath(returnTo))}`,
+    );
+}
+export async function requireSensitiveUser(
+  returnTo = "/account",
+  databaseRequired = true,
+) {
+  const user = await requireUser(returnTo, databaseRequired);
+  await requireRecentAuthentication(returnTo);
+  return user;
+}
 export async function requireVendor() {
   const user = await requireUser("/vendor");
   const access = await db()

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-13T02:37:52.209Z",
+  "scope": "Local-only release engineering and integrated rehearsal",
+  "baselineCommit": "5fd2e96bea8568051085264fb2332e8951af16ea",
+  "automatedTests": {
+    "passed": 116,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativePostgres": {
+    "version": "postgres (PostgreSQL) 17.11",
+    "passed": 46,
+    "failed": 0,
+    "allOutcomesPass": true,
+    "tableCount": 56,
+    "publicForeignKeys": 135,
+    "indexes": 119,
+    "frozenIndexesVerified": 36,
+    "newInstancesStopped": true
+  },
+  "lint": "PASS",
+  "typescript": "PASS",
+  "productionBuild": "PASS",
+  "runtimeDependencyAudit": {
+    "status": "PASS",
+    "vulnerabilities": 0,
+    "dependenciesChanged": false
+  },
+  "frozenFilesPreserved": 56,
+  "recovery": {
+    "manifestPath": "db/recovery/expanded-recovery-package-v2.json",
+    "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "dependencies": 14,
+    "allDependencyHashesMatch": true,
+    "tables": 18,
+    "sequences": 2,
+    "managedAuthBodiesExcluded": true,
+    "hostedRetry": false,
+    "readiness": "Locally corrected; fresh hosted inventory, private prerequisites and explicit retry approval pending"
+  },
+  "authReleaseSqlSha256": "d1afd314dd083009abe0912dfc7f1a91861a90450e9979a068f9c856741b7bb3",
+  "hostedConnections": 0,
+  "hostedWrites": 0,
+  "hostedExports": 0,
+  "realAccountsCreated": 0,
+  "providerActivations": 0,
+  "privateEnvironmentChanged": false,
+  "publication": {
+    "status": "pending tested commit/push and CI"
+  },
+  "limitations": [
+    "Synthetic loopback Auth service uses real pinned SDK, not full GoTrue or hosted mail/JWT deployment.",
+    "Native managed sessions shape is synthetic; current hosted metadata/access remains unverified.",
+    "No actual browser walkthrough or hosted provider activation in this task.",
+    "Original expanded hosted recovery remains unpassed; new full-scope recovery required after feature installs."
+  ]
+}

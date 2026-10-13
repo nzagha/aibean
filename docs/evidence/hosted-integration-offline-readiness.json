@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-13T02:37:55.559Z",
+  "baselineCommit": "5fd2e96bea8568051085264fb2332e8951af16ea",
+  "mode": "offline-only",
+  "protectedFiles": 56,
+  "protectedFilesPreserved": true,
+  "recovery": {
+    "manifestPath": "db/recovery/expanded-recovery-package-v2.json",
+    "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "dependencies": 14,
+    "allDependencyHashesMatch": true,
+    "tables": 18,
+    "sequences": 2,
+    "managedAuthBodiesExcluded": true,
+    "hostedRetry": false,
+    "readiness": "Locally corrected; fresh hosted inventory, private prerequisites and explicit retry approval pending"
+  },
+  "sevenPackages": [
+    {
+      "id": "admin-review-v1",
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "ledger": "admin_review_installations"
+    },
+    {
+      "id": "admin-operations-v2",
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "ledger": "admin_operations_installations"
+    },
+    {
+      "id": "creator-content-v1",
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "ledger": "content_installations"
+    },
+    {
+      "id": "creator-files-v1",
+      "path": "db/proposals/creator-files-v1/reviewed-installation.sql",
+      "sha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "ledger": "files_installations"
+    },
+    {
+      "id": "discovery-v1",
+      "path": "db/proposals/discovery-v1/reviewed-installation.sql",
+      "sha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+      "ledger": "discovery_installations"
+    },
+    {
+      "id": "pricing-v1",
+      "path": "db/proposals/pricing-v1/reviewed-installation.sql",
+      "sha256": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+      "ledger": "pricing_installations"
+    },
+    {
+      "id": "affiliate-creator-v1",
+      "path": "db/proposals/affiliate-creator-v1/reviewed-installation.sql",
+      "sha256": "0a06cae4801d6c8f4493694c9fe537c412d61b4d33c89d3a7926df45c701704a",
+      "ledger": "affiliate_creator_installations"
+    }
+  ],
+  "additionalAuthProposal": {
+    "path": "db/proposals/auth-release-v1/reviewed-installation.sql",
+    "sha256": "d1afd314dd083009abe0912dfc7f1a91861a90450e9979a068f9c856741b7bb3",
+    "hostedApproved": false
+  },
+  "hostedOperations": 0,
+  "providerActivations": 0
+}

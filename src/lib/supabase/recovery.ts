@@ -10,6 +10,7 @@ export async function recoverySessionReady() {
     if (!providerTestApproved()) return false;
     const proof = createAuthProofs(
       process.env.AIBEAN_RECOVERY_SECRET || "",
+      process.env.AIBEAN_AUTH_RELEASE_EPOCH,
     ).read((await cookies()).get(RECOVERY_COOKIE)?.value, "recovery");
     if (!proof) return false;
     const client = await createSupabaseServerClient();

@@ -13,9 +13,16 @@ import {
   ACCESS_COOKIE,
 } from "./auth-proof";
 import { clearSupabaseSessionCookies } from "./session-refresh";
+import type { createSharedAuthSecurity } from "./shared-security";
 
 export type AuthAction =
-  "login" | "register" | "resend" | "recover" | "reset" | "logout";
+  | "login"
+  | "register"
+  | "resend"
+  | "recover"
+  | "reset"
+  | "logout"
+  | "reauthenticate";
 type AuthClient = Pick<
   SupabaseClient["auth"],
   | "signUp"
@@ -32,13 +39,19 @@ type AuthClient = Pick<
 export type AuthDependencies = {
   origin: string;
   secret: string;
+  epoch?: string;
   client: (request: NextRequest) => {
     auth: AuthClient;
     finish: (response: NextResponse) => NextResponse;
   };
   provision: (uuid: string) => Promise<unknown>;
-  allow: (purpose: string, email: string) => boolean;
-  replay: ReturnType<typeof createProofReplayStore>;
+  allow: (purpose: string, email: string) => boolean | Promise<boolean>;
+  replay: {
+    consume:
+      | ReturnType<typeof createProofReplayStore>["consume"]
+      | ReturnType<typeof createSharedAuthSecurity>["consume"];
+  };
+  security?: ReturnType<typeof createSharedAuthSecurity>;
 };
 
 // This controller is shared by real routes and injected mock tests. The real
@@ -58,7 +71,7 @@ export function createAuthHandlers(deps: AuthDependencies) {
       actual.port === configured.port
     );
   }
-  const proofs = createAuthProofs(deps.secret);
+  const proofs = createAuthProofs(deps.secret, deps.epoch);
   const secure = origin.startsWith("https:");
   const cookieOptions = {
     httpOnly: true,
@@ -107,15 +120,17 @@ export function createAuthHandlers(deps: AuthDependencies) {
   }
   async function post(action: AuthAction, request: NextRequest) {
     const failurePage =
-      action === "register"
-        ? "/register"
-        : action === "recover"
-          ? "/forgot-password"
-          : action === "reset"
-            ? "/reset-password"
-            : action === "resend"
-              ? "/confirm-email"
-              : "/login";
+      action === "reauthenticate"
+        ? "/reauthenticate"
+        : action === "register"
+          ? "/register"
+          : action === "recover"
+            ? "/forgot-password"
+            : action === "reset"
+              ? "/reset-password"
+              : action === "resend"
+                ? "/confirm-email"
+                : "/login";
     if (
       !requestMatchesOrigin(request) ||
       request.headers.get("origin") !== origin ||
@@ -166,7 +181,7 @@ export function createAuthHandlers(deps: AuthDependencies) {
     )
       return fail("validation", "email");
     if (
-      ["login", "register", "reset"].includes(action) &&
+      ["login", "register", "reset", "reauthenticate"].includes(action) &&
       !validPassword(password)
     )
       return fail("validation", "password");
@@ -175,7 +190,13 @@ export function createAuthHandlers(deps: AuthDependencies) {
       form.get("passwordConfirmation") !== password
     )
       return fail("validation", "passwordConfirmation");
-    if (!deps.allow(action, email)) {
+    // Revoke before provider calls/rate denial. Logout invalidates the copied
+    // application proof even if the remote provider is temporarily unavailable.
+    if (action === "logout")
+      await deps.security?.revokeProof(
+        request.cookies.get(ACCESS_COOKIE)?.value,
+      );
+    if (!(await deps.allow(action, email))) {
       const response = fail("rate");
       if (action === "logout") {
         clear(response, ACCESS_COOKIE);
@@ -215,7 +236,21 @@ export function createAuthHandlers(deps: AuthDependencies) {
         clearSupabaseSessionCookies(request, result, true);
         return result;
       }
-      if (action === "login") {
+      if (action === "login" || action === "reauthenticate") {
+        const previous = proofs.read(
+          request.cookies.get(ACCESS_COOKIE)?.value,
+          "access",
+        );
+        if (
+          action === "reauthenticate" &&
+          (!previous?.sub ||
+            !previous.session ||
+            !(await deps.security?.active({
+              sub: previous.sub,
+              session: previous.session,
+            })))
+        )
+          return complete(fail("credentials"));
         const { error } = await auth.signInWithPassword({ email, password });
         if (error)
           return complete(
@@ -228,7 +263,19 @@ export function createAuthHandlers(deps: AuthDependencies) {
         established = true;
         const session = await verifiedSession(auth);
         if (!session) return abandon(fail("credentials"));
-        await deps.provision(session.sub);
+        if (action === "reauthenticate" && session.sub !== previous?.sub)
+          return abandon(fail("credentials"));
+        await deps.security?.establish(session, true);
+        if (
+          previous?.sub &&
+          previous.session &&
+          previous.session !== session.session
+        )
+          await deps.security?.revoke({
+            sub: previous.sub,
+            session: previous.session,
+          });
+        if (action === "login") await deps.provision(session.sub);
         const r = redirect(destination);
         clear(r, RECOVERY_COOKIE);
         clear(r, INTENT_COOKIE);
@@ -250,11 +297,15 @@ export function createAuthHandlers(deps: AuthDependencies) {
           !session ||
           proof.sub !== session.sub ||
           proof.session !== session.session ||
-          !deps.replay.consume(proof)
+          !(await deps.replay.consume(proof))
         )
           return complete(fail("invalidlink"));
         established = true;
         const { error } = await auth.updateUser({ password });
+        if (!error) {
+          const signedOut = await auth.signOut({ scope: "global" });
+          if (signedOut.error) return abandon(fail("unavailable"));
+        }
         const r = error
           ? fail("unavailable")
           : redirect("/login", { status: "password-updated" });
@@ -329,6 +380,9 @@ export function createAuthHandlers(deps: AuthDependencies) {
     const invalid = () => redirect("/login", { error: "invalidlink" });
     if (!requestMatchesOrigin(request)) return invalid();
     const params = request.nextUrl.searchParams;
+    for (const name of ["state", "code", "token_hash", "type", "error"])
+      if (params.getAll(name).length > 1) return invalid();
+    if (params.has("code") && params.has("token_hash")) return invalid();
     const { auth, finish } = deps.client(request);
     let established = false;
     async function abandon() {
@@ -367,7 +421,7 @@ export function createAuthHandlers(deps: AuthDependencies) {
           !/^[A-Za-z0-9_-]{16,256}$/.test(token) ||
           !["signup", "recovery"].includes(type || "") ||
           type !== intent.kind ||
-          !deps.replay.consume(intent)
+          !(await deps.replay.consume(intent))
         )
           return finish(invalid());
         const { error } = await auth.verifyOtp({
@@ -384,7 +438,7 @@ export function createAuthHandlers(deps: AuthDependencies) {
           params.has("error") ||
           !code ||
           !/^[A-Za-z0-9_-]{16,256}$/.test(code) ||
-          !deps.replay.consume(intent)
+          !(await deps.replay.consume(intent))
         )
           return finish(invalid());
         const { error } = await auth.exchangeCodeForSession(code);
@@ -406,6 +460,7 @@ export function createAuthHandlers(deps: AuthDependencies) {
           { ...cookieOptions, maxAge: 600 },
         );
       } else {
+        await deps.security?.establish(session);
         await deps.provision(session.sub);
         r.cookies.set(
           ACCESS_COOKIE,

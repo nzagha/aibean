@@ -7,11 +7,22 @@ import {
 import { authMode, providerTestApproved } from "./lib/auth-mode";
 import { refreshSupabaseSession } from "./lib/supabase/proxy";
 const clerk = clerkMiddleware();
-export default function proxy(request: NextRequest, event: NextFetchEvent) {
+export default async function proxy(
+  request: NextRequest,
+  event: NextFetchEvent,
+) {
   const mode = authMode();
   if (mode === "supabase") {
     if (!providerTestApproved()) return NextResponse.next();
-    return refreshSupabaseSession(request);
+    const response = await refreshSupabaseSession(request);
+    response.cookies.set("aibean_password_session", "", {
+      httpOnly: true,
+      secure: request.nextUrl.protocol === "https:",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 0,
+    });
+    return response;
   }
   if (mode === "clerk") return clerk(request, event);
   return NextResponse.next();

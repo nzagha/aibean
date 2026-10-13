@@ -23,6 +23,8 @@ import {
 } from "../tests/fixtures/affiliate-creator-contract";
 import { saveCampaignBlocks } from "../src/lib/creator-enhancements/presentation";
 import { enhancementsAvailable } from "../src/lib/creator-enhancements/storage";
+import { verifyIntegratedDatabase } from "./integrated-database-contract";
+import { authReleaseContract } from "../tests/fixtures/auth-release-contract";
 // Disposable native PostgreSQL only. Deliberately does not load dotenv, accept
 // DATABASE_URL, import the application DB, or connect to any supplied endpoint.
 import assert from "node:assert/strict";
@@ -2027,6 +2029,93 @@ async function main() {
       );
     },
   );
+  let integratedInventory:
+    Awaited<ReturnType<typeof verifyIntegratedDatabase>> | undefined;
+  await check(
+    "Final combined baseline/seven-package Drizzle schema, constraints, indexes, effective grants and exact ledgers",
+    async () => {
+      integratedInventory = await verifyIntegratedDatabase(operator);
+      // Repeat independent protected-capability tests after all seven grants.
+      await denied(runtime, "UPDATE public.users SET is_admin=true");
+      await denied(runtime, "UPDATE public.users SET is_creator=true");
+      await denied(
+        runtime,
+        "INSERT INTO public.users(id,is_admin,is_creator) VALUES('late-forged',true,true)",
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          "SELECT * FROM drizzle.__drizzle_migrations ORDER BY id",
+        ),
+        discoveryHistory,
+      );
+      assert.deepEqual(
+        await operator.unsafe(
+          'SELECT to_jsonb(t) AS row FROM public."TestUsers" t ORDER BY to_jsonb(t)::text',
+        ),
+        discoveryExisting,
+      );
+    },
+  );
+  // Synthetic managed session shape. This is created ONLY by the local harness.
+  await admin.unsafe(
+    "CREATE TABLE auth.sessions(id uuid PRIMARY KEY,user_id uuid NOT NULL REFERENCES auth.users(id),not_after timestamptz);ALTER TABLE auth.sessions OWNER TO managed_auth_owner;GRANT SELECT ON auth.sessions TO postgres",
+  );
+  const releaseManifest = JSON.parse(
+    read("db/proposals/auth-release-v1/manifest.json"),
+  );
+  const releaseSql = read(releaseManifest.sqlPath);
+  assert.equal(sha(releaseSql), releaseManifest.sqlSha256);
+  await operator`SELECT set_config('aibean.auth_release_install_sha256',${releaseManifest.sqlSha256},false)`;
+  await check(
+    "Separate Auth release proposal late failure rolls back; exact package installs without managed writes",
+    async () => {
+      await assert.rejects(
+        operator.unsafe(releaseSql.replace("COMMIT;", "SELECT 1/0;COMMIT;")),
+      );
+      await operator.unsafe("ROLLBACK");
+      assert.equal(
+        (
+          await operator.unsafe(
+            "SELECT to_regprocedure('aibean_private.auth_session_active(uuid,uuid)') AS f",
+          )
+        )[0].f,
+        null,
+      );
+      await operator.unsafe(releaseSql);
+      for (const role of ["anon", "authenticated", "service_role"]) {
+        const client = connect(source, role, "release-denial");
+        await denied(
+          client,
+          "SELECT aibean_private.auth_session_active('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb')",
+        );
+        await denied(
+          client,
+          "SELECT * FROM aibean_private.auth_release_installations",
+        );
+        await client.end();
+      }
+      await denied(runtime, "SELECT * FROM auth.sessions");
+      await denied(
+        runtime,
+        "UPDATE aibean_private.auth_release_installations SET sql_sha256=repeat('a',64)",
+      );
+    },
+  );
+  await check(
+    "Independent shared Auth atomic throttles/replays, epochs, reauthentication, application/provider revocation and minimized state",
+    async () => {
+      const peer = connect(source, "aibean_app_login", "release-peer");
+      try {
+        await authReleaseContract(
+          drizzle(runtime),
+          drizzle(peer),
+          drizzle(admin),
+        );
+      } finally {
+        await peer.end();
+      }
+    },
+  );
   const evidence = {
     date: new Date().toISOString(),
     environment: "Native disposable PostgreSQL; synthetic data only",
@@ -2045,6 +2134,8 @@ async function main() {
     hostedBackupVerified: false,
     pricingSqlSha256: pricingManifest.sqlSha256,
     affiliateCreatorSqlSha256: affiliateManifest.sqlSha256,
+    integratedInventory,
+    authReleaseSqlSha256: releaseManifest.sqlSha256,
   };
   writeFileSync(
     join(root, "evidence.json"),

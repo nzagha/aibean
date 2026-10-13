@@ -1,5 +1,13 @@
 # aiBean MVP product completion report — 12 October 2026
 
+## Current increment: local hosted-integration release engineering
+
+**Implemented and locally verified; hosted operations remain unapproved.** Shared PostgreSQL atomic Auth throttling/replay controls, epoch-bound proofs, app/provider session revocation, same-account sensitive-action reauthentication, server-owned secure cookies and a guarded exclusive Supabase production release mode are implemented. Existing canonical internal IDs, no email-only merges, protected capabilities and Tool ownership remain intact. Production/provider flags and private environment were not changed.
+
+**116 automated tests and 46 native PostgreSQL scenarios PASS**, plus lint, TypeScript, production build and zero-vulnerability runtime audit. Exact baseline plus all seven feature packages rehearse together: 56 public application tables, 135 public FKs, 119 indexes, verified effective grants/RLS, private histories and data continuity. All 56 protected source/SQL/manifest/import files and corrected recovery v2's fourteen dependencies remain unchanged. A separate proposed private Auth session predicate/ledger requires independent hosted approval; it does not alter the seven frozen packages. See [local result](HOSTED_INTEGRATION_LOCAL_RESULT.md), [exact execution/approval checklist](HOSTED_INTEGRATION_EXECUTION_CHECKLIST.md) and [real end-to-end sequence](HOSTED_END_TO_END_TEST_SEQUENCE.md).
+
+**Next gate: separately authorized fresh hosted read-only inventory**, then corrected v2 recovery retry after private/target prerequisites pass. No actual hosted export/restore/installation/Auth/account/email/provider/DNS/deployment operation occurred. Original encrypted backup and retained failed target remain untouched. Hosted production identity acceptance, new full-scope recovery and individual provider/installation/release decisions are pending; earlier missing local session-engineering statements are superseded by this increment, not by an operational release claim.
+
 ## Current increment: Affiliate management and Creator presentation/campaigns
 
 **Published and CI verified:** [Code 7dbc4a7](https://github.com/nzagha/aibean/commit/7dbc4a7ae37bb780a7b037d299a77114ad4bd2f4) and [reports/evidence 21f1037](https://github.com/nzagha/aibean/commit/21f1037988f32fec51bf5e31723275695bb48256) are on `codex/supabase-foundation`. [GitHub Validate 38311893528](https://github.com/nzagha/aibean/actions/runs/38311893528) passed every configured check on exact complete implementation source `21f1037988f32fec51bf5e31723275695bb48256`. Hosted/provider/media/identity launch gates remain separate.

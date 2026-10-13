@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireSensitiveUser as requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { updateOwnedAccount, accountCommand } from "@/lib/db/account-workflows";
 import { rateLimit } from "@/lib/security";

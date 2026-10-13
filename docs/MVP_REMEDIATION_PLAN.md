@@ -1,5 +1,11 @@
 # Active MVP remediation plan
 
+## Latest increment: local hosted integration and identity release readiness — 12 October 2026
+
+Implemented shared Auth atomic throttling/replay, strict session/epoch revocation, same-account reauthentication and guarded exclusive production mode. Existing canonical IDs/ownership/signup capability boundaries remain; baseline and seven feature proposals are unchanged. Combined native installation/permissions/history/data/workflow tests pass: 56 application tables, 135 public FKs, 119 indexes; 116 automated tests and 46 native scenarios. [Result](HOSTED_INTEGRATION_LOCAL_RESULT.md), [exact hashes/approval/rollback checklist](HOSTED_INTEGRATION_EXECUTION_CHECKLIST.md), [provider E2E progression](HOSTED_END_TO_END_TEST_SEQUENCE.md).
+
+Remaining operational order: owner-authorized fresh read-only hosted inventory/private prerequisite check; separately authorized corrected v2 recovery; individual package approvals/postflight; newly reviewed complete recovery scope/checkpoint; separate private Auth session predicate proposal; concrete sender/redirect/password-policy/two-account authorization; independent protected capability/provider tests; final coordinated release. No current configuration/hosted operation/provider account or activation changed. Preserve original archive and stopped failed target. Do not recreate product modules or repeat A/B/C/source import/navigation work.
+
 ## Latest increment: Affiliate and Creator enhancement completion — 12 October 2026
 
 Previously missing Affiliate administration/attribution/reconciliation and profile/media/campaign relationships are now working local implementations. Canonical Admin controls, secure disclosed outbound routing, actual scoped reports, signed receipts, structured moderated Creator presentation, ordered references/private previews/history and factual partial-fit inspection pass 112 automated tests, 43 native PostgreSQL scenarios, 17 HTTP checks and sampled browser acceptance. [Scope/evidence](AFFILIATE_AND_CREATOR_ENHANCEMENTS_RESULT.md), [exact proposal/recovery gate](AFFILIATE_CREATOR_V1_DATABASE_PROPOSAL.md), [versioned amendment](PRD_AFFILIATE_CREATOR_AMENDMENT_v1.md). Commercial defaults are recommendations, disabled until independent approval/provider verification. Pricing/quotas/discovery and all six prior proposals remain intact.

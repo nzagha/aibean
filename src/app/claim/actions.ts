@@ -2,7 +2,7 @@
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import { requireUser } from "@/lib/auth";
+import { requireSensitiveUser as requireUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { tools, claims, orders, vendorAccess } from "@/lib/db/schema";
 import { claimInput } from "@/lib/validation";
