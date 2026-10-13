@@ -51,7 +51,81 @@
       "failed": 0
     },
     "exactFrozenDependencyCheck": "PASS",
-    "publicationCi": "PENDING"
+    "publicationCi": {
+      "status": "PASS",
+      "runId": 38449441275,
+      "url": "https://github.com/nzagha/aibean/actions/runs/38449441275",
+      "commit": "b961d612d83bf91e89a95b93255f741733e98b45",
+      "attempt": 1,
+      "verifiedAt": "2026-10-13T18:48:57.354Z",
+      "tests": 137,
+      "pass": 137,
+      "fail": 0,
+      "checks": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm audit --omit=dev --audit-level=high",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "hostedOperationRepeated": false,
+      "frozenFilesModified": false
+    }
   },
   "approvalReview": {
     "initialLaunchRejectedBeforeProcessCreation": true,
@@ -62,5 +136,6 @@
     "admin-operations-v2-hosted-execute-result.json",
     "admin-operations-v2-hosted-verify-result.json",
     "admin-operations-v2-authorization-7-execution.json"
-  ]
+  ],
+  "resultCommit": "b961d612d83bf91e89a95b93255f741733e98b45"
 }
