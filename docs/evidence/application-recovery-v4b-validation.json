@@ -1,0 +1,81 @@
+{
+  "status": "PASS_LOCAL_ONLY",
+  "capturedAt": "2026-10-13T20:29:08.841Z",
+  "branch": "codex/supabase-foundation",
+  "startingCommit": "0c72d6a6ebc18f10a058c71c2a78843055ca1184",
+  "packageSha256": "523b351d870e36efd9283b06b9a19b68bb2de2b31e0cd87bd200008f27861deb",
+  "sealedDependencies": 138,
+  "lint": "PASS",
+  "typecheck": "PASS_NEXT_ROUTE_TYPES_AND_TSC",
+  "automatedTests": {
+    "total": 144,
+    "pass": 144,
+    "fail": 0
+  },
+  "nativePostgres": {
+    "version": "17.11",
+    "status": "PASS_SYNTHETIC_EXACT_EXECUTOR",
+    "selectedTables": 29,
+    "selectedSequences": 2,
+    "foreignKeys": 42,
+    "constraints": 122,
+    "indexes": 47,
+    "policies": 29,
+    "cmsRoundtrip": "PASS",
+    "populatedOperationsRoundtrip": "PASS",
+    "strictEmptyFeatureExactExecutorRoundtrip": "PASS",
+    "boundaryFailureInjections": 24,
+    "naturalFailureScenarios": 3,
+    "lateReceiptObserverFailureHasNoPassReceipt": true,
+    "predecessorSealedReferenceDriftRejected": true,
+    "failedTargetsStoppedRetained": 29,
+    "successfulTargetsStoppedRetained": 2,
+    "historicalSyntheticArtifactsPreserved": true,
+    "failedTargetStoppedBeforeFinalPreservationError": true
+  },
+  "productionBuild": {
+    "status": "PASS",
+    "bundler": "webpack",
+    "privateEnvironmentCopied": false,
+    "hostedConnectionsConfigured": false,
+    "sourceCopyUnchanged": true
+  },
+  "runtimeDependencyAudit": {
+    "status": "PASS",
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "frozenPredecessorPackagesUnchanged": true,
+  "hostedConnections": 0,
+  "hostedExport": "NOT_EXECUTED",
+  "realBackupCertificateOrStoppedTargetAccess": false,
+  "applicationBehaviorChanged": false,
+  "earlyRehearsal": {
+    "syntheticTlsSessionFixtureMismatch": "Corrected locally; failed synthetic root retained and stopped",
+    "sandboxTypeGenerationAccessDenied": "Rerun with native filesystem access; no hosted operations",
+    "intermediateUnpublishedCandidate": {
+      "packageSha256": "9a05f2149eab9e9cf1eea0c31ca238429c8452a1bbf54f2b4c5a3e49bc62e49b",
+      "result": "FAIL_CLOSED",
+      "stage": "exact-executor-synthetic-full-workflow",
+      "diagnosticCategory": "validation",
+      "passReceipts": 0,
+      "retainedNewTargets": 29,
+      "runningTargetMarkers": 0,
+      "exactAssertion": "Not independently established from redacted output",
+      "finalPackageFullNativeSuite": "PASS; intermediate failure not reproduced",
+      "syntheticRootPreserved": true,
+      "hostedConnections": 0
+    }
+  },
+  "implementationCommit": "PENDING_PUBLICATION",
+  "ci": {
+    "status": "PENDING_PUBLICATION",
+    "nativeWindowsCms": "Local evidence only; Linux CI does not perform real recovery"
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "capturedAt": "2026-10-13T20:27:44.773Z",
+  "result": "PASS_SYNTHETIC_EXACT_EXECUTOR",
+  "packageSha256": "523b351d870e36efd9283b06b9a19b68bb2de2b31e0cd87bd200008f27861deb",
+  "serverVersion": "17.11",
+  "selectedTables": 29,
+  "selectedSequences": 2,
+  "originalInetText": "127.0.0.1/32",
+  "normalizedHost": "127.0.0.1",
+  "exactExecutorIdentityQueryPassed": true,
+  "nonLoopbackRejected": true,
+  "realWrongDatabaseRejected": true,
+  "realWrongOperatorRejected": true,
+  "historyScopeInstallationAndLocalFailureBeforeBodyCapture": true,
+  "nativeDumpEncryptedCmsDecryptionAndRestorePassed": true,
+  "originalSyntheticBackupPreserved": true,
+  "failedSyntheticTargetStoppedAndPreserved": true,
+  "allCatalogOwnersAclRlsPoliciesDataSequencesAndLedgersMatched": true,
+  "sourceReadOnlyContinuityPassed": true,
+  "successfulSyntheticTargetStoppedRetained": true,
+  "nativeProcessAndEnvironment": "EXACT_PRODUCTION_IMPLEMENTATION",
+  "snapshotVisibilityAndLifetime": "PASS",
+  "insufficientNativeDumpPermissionsRejected": true,
+  "multiwordPolicyNamesRestoredExactly": true,
+  "allBoundaryFailureInjections": [
+    {
+      "operation": "snapshot-export",
+      "diagnostic": {
+        "operation": "snapshot-export",
+        "assertionId": "snapshot-export.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "native-dump",
+      "diagnostic": {
+        "operation": "native-dump",
+        "assertionId": "native-dump.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-bounds",
+      "diagnostic": {
+        "operation": "archive-bounds",
+        "assertionId": "archive-bounds.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-header",
+      "diagnostic": {
+        "operation": "archive-header",
+        "assertionId": "archive-header.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-toc",
+      "diagnostic": {
+        "operation": "archive-toc",
+        "assertionId": "archive-toc.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-schema",
+      "diagnostic": {
+        "operation": "archive-schema",
+        "assertionId": "archive-schema.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-allowlist",
+      "diagnostic": {
+        "operation": "archive-allowlist",
+        "assertionId": "archive-allowlist.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "snapshot-integrity",
+      "diagnostic": {
+        "operation": "snapshot-integrity",
+        "assertionId": "snapshot-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-encrypt",
+      "diagnostic": {
+        "operation": "archive-encrypt",
+        "assertionId": "archive-encrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-bounds",
+      "diagnostic": {
+        "operation": "metadata-bounds",
+        "assertionId": "metadata-bounds.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-encrypt",
+      "diagnostic": {
+        "operation": "metadata-encrypt",
+        "assertionId": "metadata-encrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "ciphertext-hashes",
+      "diagnostic": {
+        "operation": "ciphertext-hashes",
+        "assertionId": "ciphertext-hashes.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "metadata-decrypt",
+      "diagnostic": {
+        "operation": "metadata-decrypt",
+        "assertionId": "metadata-decrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-decrypt",
+      "diagnostic": {
+        "operation": "archive-decrypt",
+        "assertionId": "archive-decrypt.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "archive-integrity",
+      "diagnostic": {
+        "operation": "archive-integrity",
+        "assertionId": "archive-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "local-prerequisites",
+      "diagnostic": {
+        "operation": "local-prerequisites",
+        "assertionId": "local-prerequisites.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "native-restore",
+      "diagnostic": {
+        "operation": "native-restore",
+        "assertionId": "native-restore.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "permissions-replay",
+      "diagnostic": {
+        "operation": "permissions-replay",
+        "assertionId": "permissions-replay.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "restore-integrity",
+      "diagnostic": {
+        "operation": "restore-integrity",
+        "assertionId": "restore-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "restored-role-contract",
+      "diagnostic": {
+        "operation": "restored-role-contract",
+        "assertionId": "restored-role-contract.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "fresh-source-continuity",
+      "diagnostic": {
+        "operation": "fresh-source-continuity",
+        "assertionId": "fresh-source-continuity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "retention-integrity",
+      "diagnostic": {
+        "operation": "retention-integrity",
+        "assertionId": "retention-integrity.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "local-shutdown",
+      "diagnostic": {
+        "operation": "local-shutdown",
+        "assertionId": "local-shutdown.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "operation": "receipt-persist",
+      "diagnostic": {
+        "operation": "receipt-persist",
+        "assertionId": "receipt-persist.failed",
+        "category": "validation"
+      },
+      "sourceUnchanged": true,
+      "targetRetained": true
+    }
+  ],
+  "naturalFailures": [
+    {
+      "name": "archive-corruption",
+      "operation": "archive-header",
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "name": "metadata-corruption",
+      "operation": "metadata-decrypt",
+      "sourceUnchanged": true,
+      "targetRetained": true
+    },
+    {
+      "name": "snapshot-mismatch",
+      "operation": "snapshot-integrity",
+      "sourceUnchanged": true,
+      "targetRetained": true
+    }
+  ],
+  "reviewHashAndGrantDriftRejectedBeforeCapture": true,
+  "operationsHashAndGrantDriftRejectedBeforeCapture": true,
+  "unavailableSyntheticKeyRejectedBeforeCapture": true,
+  "populatedOperationsRoundtrip": {
+    "ordinaryUsers": 1,
+    "billingProducts": 2,
+    "billingTransactions": 1,
+    "toolSubmissions": 1,
+    "commerceSubscriptions": 1,
+    "hostedModeRejectsFeatureRecords": true,
+    "localTlsFixtureOnly": true
+  },
+  "priorV4aNativeCheckpointAndStoppedTargetPreserved": true,
+  "priorV4aSealedReferenceHashDriftRejected": true,
+  "strictEmptyFeatureExactExecutorRoundtripPassed": true,
+  "lateReceiptObserverFailureHasNoPassReceipt": true,
+  "failedTargetStoppedBeforeFinalPreservationError": true,
+  "realUntrustedTlsRejected": true,
+  "originalAndV3SyntheticArchivesAndHistoricalStoppedTargetsPreserved": true,
+  "codeHashes": [
+    {
+      "path": "scripts/recovery-v4b/execute.ts",
+      "sha256": "fd8f5a97daf5298bf85bd0854861eb15b8ba913c047dc7d6baf633a324389971"
+    },
+    {
+      "path": "scripts/recovery-v4b/scope.ts",
+      "sha256": "3b3825cae7fea1ed3e8aa2ffc6329e784cb69e5ff91666ad9a3a7cbc2ac64521"
+    },
+    {
+      "path": "scripts/recovery-v4b/diagnostics.ts",
+      "sha256": "0c5d6e8b3feee872632fa48231a29cb7b449455e41cd958b6dc18ad20b490390"
+    },
+    {
+      "path": "scripts/recovery-v4b/private-crypto.ps1",
+      "sha256": "fb71093124b001feaaf5f5bd753b7539855ffa589cc27d294442125e853618ba"
+    },
+    {
+      "path": "scripts/recovery-v4b/private-lifecycle.ps1",
+      "sha256": "a1cecb61e9367b05be41a42e98b986d44c15018884a7c59cb67bebbea5a8f817"
+    },
+    {
+      "path": "scripts/recovery-v4b/native-test.ts",
+      "sha256": "0010a7dab194fda05565ae00b181c6b9219cbbfa1e937da77342d43a829980d2"
+    },
+    {
+      "path": "scripts/recovery-v4b/prepare.ts",
+      "sha256": "f66fcda4824d2c951a88e3c98d10900623f968ac7fb25091a05b5d9d25cf40e4"
+    },
+    {
+      "path": "scripts/recovery-v4b/predecessor.ts",
+      "sha256": "37da543eb7d3db51af78429a6c7e896770a2116f651496260d9638b02862c990"
+    },
+    {
+      "path": "scripts/recovery-v4b/private-predecessor.ps1",
+      "sha256": "0ab2c80df9a3fefdd6fd86c3744fcffafeef1bb1b406aa57ebdc2f1482b72122"
+    },
+    {
+      "path": "db/recovery/application-v4b-local-prerequisites.sql",
+      "sha256": "10bef0dc33a6e8d4647ee1c7bfdfa44b56ccb7af0fedf08b700fe4dfcb9348a1"
+    },
+    {
+      "path": "scripts/recovery-v4b/unit.test.ts",
+      "sha256": "037e2580571c68b67c0fbb2027e159c81c07c1c1fe3c97d2d9547ef19c40d6ae"
+    }
+  ],
+  "exportOperationsPassed": [
+    "snapshot-export",
+    "native-dump",
+    "archive-bounds",
+    "archive-header",
+    "archive-toc",
+    "archive-schema",
+    "archive-allowlist",
+    "snapshot-integrity",
+    "archive-encrypt",
+    "metadata-bounds",
+    "metadata-encrypt",
+    "ciphertext-hashes",
+    "metadata-decrypt",
+    "archive-decrypt",
+    "archive-integrity",
+    "local-prerequisites",
+    "native-restore",
+    "permissions-replay",
+    "restore-integrity",
+    "restored-role-contract",
+    "fresh-source-continuity",
+    "retention-integrity",
+    "local-shutdown",
+    "receipt-persist"
+  ],
+  "scopedCatalog": {
+    "tables": 29,
+    "sequences": 2,
+    "foreignKeys": 42,
+    "constraints": 122,
+    "indexes": 47,
+    "policies": 29
+  },
+  "syntheticFailedTargetsRetained": 29,
+  "successfulRecoveryTargetsRetained": 2,
+  "syntheticRootRetainedForFailureEvidence": true,
+  "hostedConnections": 0,
+  "hostedExport": "NOT EXECUTED",
+  "realRetainedTargetTouched": false
+}
