@@ -51,5 +51,19 @@
   "automaticRetry": false,
   "nextStage": "Separate Admin Operations v2 preparation only; no authorization to install",
   "recoveryLimitation": "V3 remains an 18-table/two-sequence foundation backup; the six new relations are outside that archive",
-  "verifiedAt": "2026-10-13T15:08:24.590Z"
+  "verifiedAt": "2026-10-13T15:08:24.590Z",
+  "publication": {
+    "resultCommit": "8cfba8f8a231fc8991aef20f95b6e2cf195aeef1",
+    "branch": "codex/supabase-foundation",
+    "ci": "PASS",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38419677297",
+    "checks": [
+      "lint",
+      "typecheck",
+      "automated tests",
+      "production build",
+      "runtime dependency audit"
+    ],
+    "note": "CI result for actual-result commit; subsequent documentation-only update records observed evidence"
+  }
 }

@@ -1,5 +1,7 @@
 # Supabase foundation: stage evidence and next milestone
 
+**Authorization 5 publication CI PASS:** Actual hosted-result commit `8cfba8f8a231fc8991aef20f95b6e2cf195aeef1` is pushed; [Validate 38419677297](https://github.com/nzagha/aibean/actions/runs/38419677297) passed all configured checks. Hosted SQL COMMIT and the separate verifier PASS are independently recorded in the installation receipts.
+
 **Authorization 5 — Admin Review v1 HOSTED PASS, 13 October 2026.** The unchanged 34-dependency mechanism executed the approved SQL once; COMMIT acknowledged and the separately invoked read-only verifier PASS. Five public tables and the private ledger, 16 FKs, 42 constraints, 11 indexes and six RLS policies/grants are verified. Original foundation/history, both TestUsers records, zero accounts/mappings, private environment and original/v3 backups remain preserved. Only Admin Review v1 was installed; no provider or capability activation. [Actual execution and independent acceptance](ADMIN_REVIEW_V1_HOSTED_INSTALLATION_RESULT.md). Admin Operations v2 may proceed only to separate preparation/review/authorization. Recovery v3 excludes the new six relations; new coverage remains required before real feature writes.
 
 Earlier dated absence, preparation and recovery paragraphs below are historical, superseded by this actual installation result; their consent cannot be reused.
