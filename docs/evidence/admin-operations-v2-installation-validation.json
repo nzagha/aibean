@@ -44,5 +44,18 @@
     "Initial sandbox suite failed three existing loopback/symlink tests; complete normal Windows suite passed unchanged",
     "Initial native tool setup rejected an unavailable OpenSSL path before database startup; verified installed binary used"
   ],
-  "ci": "Pending publication"
+  "ci": {
+    "status": "PASS",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38424761342",
+    "checks": [
+      "lint",
+      "typecheck",
+      "automated tests",
+      "production build",
+      "runtime dependency audit"
+    ],
+    "hostedConnection": false,
+    "nativeDatabaseTests": "Separately recorded local synthetic suite, not CI-hosted installation"
+  },
+  "implementationCommit": "ef0ad3e0cd7a49aa85b3657638e63208fbec9db9"
 }
