@@ -1,0 +1,209 @@
+{
+  "startedAt": "2026-10-13T13:09:17.187Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "authorizedRevision": "ed8f1cd9d4f7e83654a9a5116770f1ba5ffdef6f",
+  "packageSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+  "attempts": 1,
+  "checks": [
+    {
+      "name": "Exact branch and authorized source commit",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact v3 manifest and seventeen dependency hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing protected recovery profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing native prerequisite paths",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected storage native tools and both stopped historical targets",
+      "status": "PASS"
+    },
+    {
+      "name": "Immediate independent read-only hosted preflight and private TestUsers continuity",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen package immediately before executor launch",
+      "status": "PASS"
+    },
+    {
+      "name": "Historical target witnesses still unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Original encrypted backup files and private environment unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Both historical failed targets untouched and stopped",
+      "status": "PASS"
+    },
+    {
+      "name": "V3 manifest and seventeen dependencies unchanged after operation",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent fresh hosted continuity after operation",
+      "status": "PASS"
+    },
+    {
+      "name": "Fifteen exact export-stage outcomes",
+      "status": "PASS"
+    },
+    {
+      "name": "New successful encrypted archive metadata receipt and decryptability",
+      "status": "PASS"
+    },
+    {
+      "name": "Only the new passing target disposed; both historical failures retained",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "sourceWrites": false,
+  "localInspectionHelperCorrection": "Syntax corrected before any executor invocation; separate zero-attempt evidence retained",
+  "privatePrerequisites": {
+    "newExpandedArtifactCount": 0,
+    "nonSynchronizedRoot": "PASS",
+    "privateStorageAcl": "PASS",
+    "existingCmsProfileOnly": true,
+    "retainedFailedTargetUntouched": true,
+    "recoveryTargetReadiness": "Existing prerequisites only; new target TLS/identity/pristine checks deferred to separately authorized executor",
+    "ntfsAndMinimumCapacity": "PASS",
+    "retainedFailedTargetsStopped": true,
+    "requiredBinaryAvailability": "PASS",
+    "openSslAvailability": "PASS",
+    "retainedFailedTargetCount": 2,
+    "nativePostgreSql": "17.11",
+    "newTargetCreated": false
+  },
+  "independentHostedPreflight": {
+    "status": "PASS",
+    "strictTargetOperatorTls": true,
+    "historiesRolesRlsAndGrants": true,
+    "freshInventoryUnchanged": true,
+    "emptyAuthUsersAndMappings": true,
+    "testUsersPrivateIntegrityAndMetadata": true,
+    "originalArchiveDecryptable": true,
+    "applicationRecordBodiesExported": false
+  },
+  "executorExitCode": 0,
+  "executorResult": {
+    "recoveryGate": "PASS",
+    "verifiedAt": "2026-10-13T13:10:25.275Z",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "packageSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+    "selectedTables": 18,
+    "selectedSequences": 2,
+    "completedExportOperations": [
+      "snapshot-export",
+      "native-dump",
+      "archive-bounds",
+      "archive-header",
+      "archive-toc",
+      "archive-schema",
+      "archive-allowlist",
+      "snapshot-integrity",
+      "archive-encrypt",
+      "metadata-bounds",
+      "metadata-encrypt",
+      "ciphertext-hashes",
+      "metadata-decrypt",
+      "archive-decrypt",
+      "archive-integrity"
+    ],
+    "archiveEntries": 138,
+    "archiveSha256": "00c32d86974c0d989f4cbc3e19f461c384af2a3c759692c29284caacda187782",
+    "encryptedArchiveSha256": "7387499ffadbcf5033b53d4f8e148bed286954c10d460752485c9837da8f90ef",
+    "encryptedMetadataSha256": "adee47e2750f56275272955f5221b1b8fb3b43475ed3b220e61e4df5e0df5049",
+    "recordCounts": {
+      "aibean_private.installations": 1,
+      "aibean_private.user_identities": 0,
+      "drizzle.__drizzle_migrations": 2,
+      "public.TestUsers": 2,
+      "public.audit_logs": 0,
+      "public.billing_webhook_receipts": 0,
+      "public.claim_requests": 0,
+      "public.featured_placements": 0,
+      "public.orders": 0,
+      "public.rate_limits": 0,
+      "public.saved_tools": 0,
+      "public.stack_tools": 0,
+      "public.stacks": 0,
+      "public.taxonomy": 0,
+      "public.tool_reviews": 0,
+      "public.tools": 0,
+      "public.users": 0,
+      "public.vendor_access": 0
+    },
+    "testUsersRecords": 2,
+    "identityMappings": 0,
+    "rlsApplicationTables": 14,
+    "foreignKeys": 18,
+    "drizzleEntries": 2,
+    "securityLedgerEntries": 1,
+    "sourceAndRestoredPrivateIntegrityMatch": true,
+    "ownersAclSchemasDefaultGrantsRlsPoliciesMatch": true,
+    "sourceUnchanged": true,
+    "originalArchivePreserved": true,
+    "envUnchanged": true,
+    "strictSourceAndLocalTlsHostnameVerified": true,
+    "localNoLoginRoleSurrogates": true,
+    "managedAuthExported": false,
+    "realHostedAuthRecovered": false,
+    "localAuthStructuralFixtureOnly": true,
+    "sourceDatabaseEnvironment": {
+      "owner": "postgres",
+      "encoding": "UTF8",
+      "collation_provider": "i",
+      "collation": "en_US.UTF-8",
+      "ctype": "en_US.UTF-8",
+      "locale": "en-US",
+      "collation_version": "153.121",
+      "server_version": "17.6"
+    },
+    "localDatabaseEnvironment": {
+      "owner": "postgres",
+      "encoding": "UTF8",
+      "collation_provider": "c",
+      "collation": "C",
+      "ctype": "C",
+      "locale": null,
+      "collation_version": null,
+      "server_version": "17.11"
+    },
+    "managedEnvironmentRecreated": false,
+    "transientLocalRecoveryDisposed": true,
+    "sourceWrites": false,
+    "authSettingsChanged": false,
+    "authAccountsCreated": false,
+    "mailSent": false
+  },
+  "independentHostedPostflight": {
+    "status": "PASS",
+    "strictTargetOperatorTls": true,
+    "historiesRolesRlsAndGrants": true,
+    "freshInventoryUnchanged": true,
+    "emptyAuthUsersAndMappings": true,
+    "testUsersPrivateIntegrityAndMetadata": true,
+    "originalArchiveDecryptable": true,
+    "applicationRecordBodiesExported": false
+  },
+  "independentArchiveVerification": {
+    "ciphertextHashes": true,
+    "archivePlaintextHash": true,
+    "metadataBindingsAndCounts": true,
+    "header": true,
+    "approvedCmsDecryptable": true
+  },
+  "finishedAt": "2026-10-13T13:10:44.831Z"
+}

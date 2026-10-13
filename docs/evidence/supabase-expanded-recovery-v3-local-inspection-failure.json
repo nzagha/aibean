@@ -1,0 +1,31 @@
+{
+  "startedAt": "2026-10-13T13:08:15.671Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "authorizedRevision": "ed8f1cd9d4f7e83654a9a5116770f1ba5ffdef6f",
+  "packageSha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469",
+  "attempts": 0,
+  "checks": [
+    {
+      "name": "Exact branch and authorized source commit",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact v3 manifest and seventeen dependency hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing protected recovery profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing native prerequisite paths",
+      "status": "PASS"
+    }
+  ],
+  "status": "FAIL",
+  "sourceWrites": false,
+  "stoppedAt": "Protected storage native tools and both stopped historical targets",
+  "details": "Execution stopped; protected diagnostics withheld. No automatic retry.",
+  "finishedAt": "2026-10-13T13:08:16.457Z"
+}
