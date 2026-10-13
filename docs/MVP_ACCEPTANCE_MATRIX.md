@@ -1,5 +1,7 @@
 # MVP acceptance matrix — 12 October 2026
 
+**Recovery v4a is implemented and validated locally; hosted recovery and Package 2 remain separately unexecuted.**
+
 **Package 2 readiness is locally verified; it grants no hosted installation or feature/provider activation.** Admin Review remains the sole newly hosted feature package.
 
 Available local workflows pass bounded acceptance; **full hosted MVP acceptance is incomplete**. Local execution does not imply hosted installation/provider readiness. This supersedes the earlier 94-test snapshot; historical audit/version documents remain unchanged.
@@ -15,6 +17,7 @@ The required classifications below are literal. An incomplete portion is listed 
 | Sensitive-action same-account reauthentication and exclusive production release gate | Implemented but awaiting provider testing | Five-minute freshness; old epoch/legacy credentials/fallback/foreign account denied. Current private mode remains unchanged; owner flags do not replace hosted E2E evidence. |
 | Combined baseline and all seven reviewed feature packages | Implemented and locally verified | 46 native scenarios; 56 application tables/135 public FKs/119 indexes; exact ledgers, RLS/effective grants, protected capabilities and TestUsers/history continuity. Only Admin Review v1 is hosted installed and independently verified under Authorization 5; the remaining six feature packages are pending separate approvals. |
 | Expanded recovery: historical v2 / authorized v3 | Actual hosted v3 recovery PASS; v2 historically FAIL | One exact v3 executor invocation, 17 dependency hashes, 18 tables/two sequences, all 15 export steps, native isolated restoration and independent archive/source/security/retention validation pass. Original backup and both historical failed targets preserved. No feature package or provider activation. See SUPABASE_EXPANDED_RECOVERY_V3_EXECUTION_RESULT.md. |
+| Recovery v4a current Review-installed coverage | Implemented and native verified; hosted recovery pending owner authorization | 24 tables/two sequences; exact manifest cafbf6932c2395cf1d9c5b889cac86ab67cef6b333e3fd8d12cb8c351bdaaa91; 137 tests, 24 boundary and three actual corruption/mismatch failures, CMS/native restore/catalog/security/history/continuity PASS. New isolated namespace; successful/failed targets stopped and retained. V4b remains future after Package 2. |
 | Admin counts/queues, Tool CRUD/preview/lifecycle/search/pagination/audits | Implemented and locally verified | Existing-schema PGlite/native, actual Admin browser moderation, stale/concurrent/rollback checks. |
 | Stable-ID taxonomy metadata and subcategory routing | Implemented and locally verified | Duplicate historical slug fails closed without parent; no taxonomy bytes/IDs changed. |
 | Approved v1.1 reconciliation and sub-vertical source | Incomplete implementation | Later approved binary unverified; do not substitute historical v1 or invent records. |

@@ -1,0 +1,40 @@
+{
+  "status": "LOCAL_V4A_RECOVERY_PASS_HOSTED_NOT_EXECUTED",
+  "preparedAt": "2026-10-13T17:56:39.666Z",
+  "sourceCommit": "00b457aa6bd04d55c7d8b829b4421c1e413231d6",
+  "manifestPath": "db/recovery/application-recovery-v4a.json",
+  "manifestSha256": "cafbf6932c2395cf1d9c5b889cac86ab67cef6b333e3fd8d12cb8c351bdaaa91",
+  "dependencies": 58,
+  "automatedTests": {
+    "pass": 137,
+    "fail": 0
+  },
+  "native": {
+    "status": "PASS_SYNTHETIC_EXACT_EXECUTOR",
+    "postgres": "17.11",
+    "tables": 24,
+    "sequences": 2,
+    "freshClusters": 31,
+    "boundaryFailures": 24,
+    "naturalFailures": 3,
+    "failedTargetsStoppedRetained": 28,
+    "successfulTargetStoppedRetained": true,
+    "windowsCmsEncryptionDecryptionAndRestore": "PASS",
+    "sourceContinuity": "PASS"
+  },
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "runtimeAudit": {
+    "status": "PASS",
+    "vulnerabilities": 0
+  },
+  "frozenInstallationsAndHistoricalManifestsUnchanged": true,
+  "realHostedConnections": 0,
+  "realPrivateProfileKeyBackupTargetTouched": false,
+  "hostedRecovery": "NOT_EXECUTED",
+  "operationsHostedInstallation": "NOT_EXECUTED",
+  "providersActivated": false,
+  "sourceWrites": false,
+  "ci": "Pending publication"
+}

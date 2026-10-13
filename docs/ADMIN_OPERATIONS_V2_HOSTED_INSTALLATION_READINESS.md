@@ -1,5 +1,8 @@
 # Admin Operations v2 hosted installation readiness
 
+**Recovery v4a LOCAL IMPLEMENTATION/NATIVE PASS — 13 October 2026.** Actual separately versioned encrypted 24-table/two-sequence recovery code, private v4 namespace/CMS/lifecycle and read-only export/isolated restore verification are implemented. Frozen manifest `cafbf6932c2395cf1d9c5b889cac86ab67cef6b333e3fd8d12cb8c351bdaaa91` (58 dependencies); 137 automated tests, 24 boundary failures, three natural corruption/mismatch cases, full native restoration/permissions/history/source and retention checks PASS. No hosted connection or real private artifact access occurred. Review remains last verified hosted PASS; Operations remains local readiness PASS/hosted uninstalled; v3 remains foundation-only PASS. V4a actual hosted recovery still needs one new exact-hash owner authorization; v4b remains future 29-table coverage after Package 2. [Exact readiness, limitations and proposed authorization](APPLICATION_RECOVERY_V4A_READINESS.md). Earlier snapshots are historical.
+
+
 **LOCAL READINESS PASS. HOSTED INSTALLATION NOT EXECUTED.** Prepared 13 October 2026 on `nzagha/aibean`, branch `codex/supabase-foundation`, based on `07f7b7810d80f71a99c300370d09e71bc6eb0a2f`. This task implemented and tested the dedicated operator installer and separate read-only verifier; every database rehearsal used a fresh disposable loopback-only PostgreSQL 17.11 instance and synthetic data. No hosted connection/read/write, provider call, private environment change or historical backup/target operation occurred.
 
 ## Exact package and immutable predecessor

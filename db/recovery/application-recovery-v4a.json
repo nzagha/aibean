@@ -1,0 +1,283 @@
+{
+  "packageId": "aibean-application-recovery-v4a",
+  "targetProject": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "scope": [
+    "aibean_private.admin_review_installations",
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers",
+    "public.TestUsers_id_seq",
+    "public.audit_logs",
+    "public.billing_webhook_receipts",
+    "public.claim_disputes",
+    "public.claim_requests",
+    "public.creator_applications",
+    "public.creator_capability_requests",
+    "public.featured_placements",
+    "public.orders",
+    "public.rate_limits",
+    "public.saved_tools",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tools",
+    "public.users",
+    "public.vendor_access",
+    "public.vendor_edit_requests",
+    "public.verification_requests"
+  ],
+  "limits": {
+    "tables": 24,
+    "sequences": 2,
+    "archiveBytes": 4194304,
+    "totalSelectedRecords": 10000,
+    "authUsers": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "reviewRecords": 0,
+    "testUsers": 2
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "f7ee637d5254eb15109d79a07c7e07fababab5867bfde887d181987357339822"
+    },
+    {
+      "path": "db/install/identity-and-security.sql",
+      "sha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a"
+    },
+    {
+      "path": "db/install/manifest.json",
+      "sha256": "fa67cad272008510be34ada709740393107965d49836ca6e6de35e57a711d5f5"
+    },
+    {
+      "path": "db/install/reviewed-installation.sql",
+      "sha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/.gitattributes",
+      "sha256": "0fce5f7f295a8b04b2df5cafff233c572d84fd001954b0443ce589ac0168be51"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/catalog.json",
+      "sha256": "2d30633345c18f1bccc016cd856e3ec02aea70715c6d2f6fe901d393b7915efc"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/mechanism.json",
+      "sha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b"
+    },
+    {
+      "path": "db/proposals/admin-review-v1.manifest.json",
+      "sha256": "33c50b4a2484d3f264f4cadd5e200fb977219f55e68a50303ce05a6c84971e30"
+    },
+    {
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca"
+    },
+    {
+      "path": "db/recovery/application-coverage-v4-design.json",
+      "sha256": "b457d9f32eb46f46aade62aa4a6bcbe9a65f0872ae7b6c7255a17ac3a9e0fe8d"
+    },
+    {
+      "path": "db/recovery/application-v4a-local-prerequisites.sql",
+      "sha256": "4aac218f5721a50d74023f072708554455985c8fbcfcbd7c79d783c2dc540891"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-local-prerequisites.sql",
+      "sha256": "7914f549bd40f19cebca2ee027287c6011e721dc24e08a23fba24892a056b4d8"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v2.json",
+      "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec"
+    },
+    {
+      "path": "db/recovery/expanded-recovery-package-v3.json",
+      "sha256": "00943149054982c8b52f2ce6d38bae32c557960c37365ab447284010de8e7469"
+    },
+    {
+      "path": "docs/evidence/.gitattributes",
+      "sha256": "a68491a71d01399be9902a1049f79e483585f29c6bfa4fc4b32b5563553e915f"
+    },
+    {
+      "path": "docs/evidence/admin-review-v1-hosted-execute-result.json",
+      "sha256": "b286aaa696e0d76270462102aaf348525901f76174403b1ee8b9eb944e40aaf8"
+    },
+    {
+      "path": "docs/evidence/admin-review-v1-hosted-verify-result.json",
+      "sha256": "08b7ed9eaa848412252877db19ff02a7a9568feb9ba61c558549dfd1cac6207b"
+    },
+    {
+      "path": "docs/evidence/supabase-approval-a-installation-2026-10-09.json",
+      "sha256": "8d3773e21cca5261ede3cc757a1e666663ae3410115ca182950ef987fdf49df2"
+    },
+    {
+      "path": "docs/evidence/supabase-approval-b-runtime-login-2026-10-09.json",
+      "sha256": "8198267013b639235876dac7c419a9284823defc5e61580dbc00fd8b90bf07b5"
+    },
+    {
+      "path": "docs/evidence/supabase-approval-c-testusers-security-2026-10-09.json",
+      "sha256": "333481456ddfc15202ba99db3157af55d0d8401c5b74eef49e89a563099a7509"
+    },
+    {
+      "path": "docs/evidence/supabase-expanded-application-recovery-result.json",
+      "sha256": "8ff51d8420fb5af968367b8700e57e1b337a39e45aa8b1a45137ad1128501f3c"
+    },
+    {
+      "path": "docs/evidence/supabase-hosted-scoped-recovery-2026-10-09.json",
+      "sha256": "a3bb66e3d421396d7e79f97194e6734fecfbfb9c27fa4933355219d48587d82d"
+    },
+    {
+      "path": "scripts/.gitattributes",
+      "sha256": "f9921dcc69b97025e25d11f5292b194089876b26909d78b4efc52b77de875f1d"
+    },
+    {
+      "path": "scripts/admin-review-v1/.gitattributes",
+      "sha256": "57eb830e05116c663f7e484b1b1f7545dab51c08eeb6aa10b6234b0b6c4a4270"
+    },
+    {
+      "path": "scripts/admin-review-v1/core.ts",
+      "sha256": "aba58f25964cf76312a7480199b7295167f44b73bc3e83716e4455fb88ffacfd"
+    },
+    {
+      "path": "scripts/admin-review-v1/execute.ts",
+      "sha256": "da9f4abf8a64487faa97b57feb87433bf1b999b5c2e6827727885bd247fb64e7"
+    },
+    {
+      "path": "scripts/admin-review-v1/native-test.ts",
+      "sha256": "6fa370bdfdea538ece0fc7ea0b4cb65e01d1628df3ce6addef8192b9e61b294c"
+    },
+    {
+      "path": "scripts/admin-review-v1/operator.ts",
+      "sha256": "e183cc5c50dc8dd62aada175cf043c3a406faec90cca05a467c2a585528c797c"
+    },
+    {
+      "path": "scripts/admin-review-v1/prepare.ts",
+      "sha256": "e64b03f1f4b445ae99cadac269f8941d2c5a2d51b1ee459889226b7ae4753230"
+    },
+    {
+      "path": "scripts/admin-review-v1/verify.ts",
+      "sha256": "8b124766f8dabab48ca3048b7350de646d25000de28d82baa4a897f4e2e32508"
+    },
+    {
+      "path": "scripts/execute-approved-installation.ts",
+      "sha256": "88cc9a91c72af0d3684762e63326137e91f55d8f506a1b329ccd5a7563de9a98"
+    },
+    {
+      "path": "scripts/execute-expanded-recovery.ts",
+      "sha256": "e595728d8e49020099095bdf395c4ff9b9ff8ae6cf49a1fadff23bc280157eae"
+    },
+    {
+      "path": "scripts/execute-scoped-backup.ts",
+      "sha256": "16076a68bf4b2fd37a5c48284726ebe2e0c4b456a5b65d3018ab27e7a1ff0a7a"
+    },
+    {
+      "path": "scripts/expanded-recovery-scope.ts",
+      "sha256": "7e78974824527378e7ebe910343fa9cfddc8707d6e53e396d7701bc28c534ac5"
+    },
+    {
+      "path": "scripts/inspect-public-backup-scope.ts",
+      "sha256": "23127da22b68327af8bf90d89cc71f627b1bb3d96db26d713875c0dbc9ac3ce6"
+    },
+    {
+      "path": "scripts/prepare-synthetic-recovery-test.ps1",
+      "sha256": "e7610478c5e90f9376391a6054ba45b11ccf8bb586812dc0c3c4eac589e934fd"
+    },
+    {
+      "path": "scripts/private-backup-crypto.ps1",
+      "sha256": "63bc4a5744c10f89d7f134aed7d4f70dc4e0557bebf335cc06ef9778d6e5745d"
+    },
+    {
+      "path": "scripts/private-expanded-recovery.ps1",
+      "sha256": "7fb2c1aff71cba8b06a929d4cb1cc3b700ce6df9a6bb796d9c00231261380b85"
+    },
+    {
+      "path": "scripts/private-runtime-credential.ps1",
+      "sha256": "fd76e2c0772402a3d1489e28c791b874b3da9adde8a1b695f582412ec76a0d99"
+    },
+    {
+      "path": "scripts/recovery-diagnostics.ts",
+      "sha256": "22c753a89592c39d706416ee1c5972fe94beb275c5ac3f5b49c1de4564b9fad8"
+    },
+    {
+      "path": "scripts/recovery-v4a/.gitattributes",
+      "sha256": "6f033382a363d2165168f315df842f4588a21792d72953b8f978137f2d2f82b8"
+    },
+    {
+      "path": "scripts/recovery-v4a/diagnostics.ts",
+      "sha256": "0c5d6e8b3feee872632fa48231a29cb7b449455e41cd958b6dc18ad20b490390"
+    },
+    {
+      "path": "scripts/recovery-v4a/execute.ts",
+      "sha256": "0287f00cbddcfbeca240a7e9b651d5e59deb5e62eb77a154f7ace333c239f45c"
+    },
+    {
+      "path": "scripts/recovery-v4a/native-test.ts",
+      "sha256": "3481beca1e6a425ee2ea49ce9f4e446ec22a6eb182b7b8fe27518ea1885398bd"
+    },
+    {
+      "path": "scripts/recovery-v4a/prepare.ts",
+      "sha256": "80459ffca1361489afc699a437789cf1134c035d11612aa86c845a9e8353b924"
+    },
+    {
+      "path": "scripts/recovery-v4a/private-crypto.ps1",
+      "sha256": "7bb85a40fcfa787b2b8d378a4d5e26e08c47fd0befa3ebeef7be3cc541fe0baf"
+    },
+    {
+      "path": "scripts/recovery-v4a/private-lifecycle.ps1",
+      "sha256": "4e554c3a0600bc8fe814db32ae2c49ce2afbd9095dfa83507719c840ca2a0993"
+    },
+    {
+      "path": "scripts/recovery-v4a/scope.ts",
+      "sha256": "4ad998f9384c825f17c2fef104fb10859014796bd79ff7bb70fd6732c7ad2a35"
+    },
+    {
+      "path": "scripts/test-expanded-recovery-executor.ts",
+      "sha256": "8c7a43cc20062277962f4973b53a2f243d5f846c9003b5beb14066056b13a494"
+    },
+    {
+      "path": "src/lib/db/connection-config.ts",
+      "sha256": "50558ff8ef221d893b4d63591dca749831c94ddfe60dc023fb2a1ada53d7946b"
+    },
+    {
+      "path": "src/lib/db/runtime-config.ts",
+      "sha256": "44acfd2b2e7c23dcec0c23a80362539244f9651465910e1d38b55026859c196e"
+    },
+    {
+      "path": "src/lib/db/tls-config.ts",
+      "sha256": "3c494248921f00c36f5b950cfda7208e4a3c6d077da6e8bede15d41d4c1c627f"
+    },
+    {
+      "path": "src/lib/supabase/config.ts",
+      "sha256": "efdf07a509152bafdebf4062eb5c1958164204b0bfdab349923b29a08bfb731b"
+    },
+    {
+      "path": "tests/.gitattributes",
+      "sha256": "105683f87921e3f0ea8b3b80388544582125c1a8b40a29f792764a6db45bab42"
+    },
+    {
+      "path": "tests/admin-review-installation.test.ts",
+      "sha256": "a963579dab382051a361949b2c3dcb2730a8eba9036714daed698da7af6907eb"
+    },
+    {
+      "path": "tests/application-recovery-v4a.test.ts",
+      "sha256": "3c6ccece3d9f3be37b19237b33db6e812e9bcb16f0a308e3025dbb0cee833cb7"
+    },
+    {
+      "path": "tests/expanded-recovery.test.ts",
+      "sha256": "4ed9cdb3bfebed1d9541f2448663d017307556527b665bc30a3fbbd45e4f3785"
+    },
+    {
+      "path": "tests/recovery-diagnostics.test.ts",
+      "sha256": "27afa971e86f21f26b741ce6a402ce429b68b5a30d2db1929f10caf4cc25d65f"
+    }
+  ],
+  "namespace": "ApplicationRecoveryV4a",
+  "receiptVersion": 4,
+  "localTargetDisposition": "STOP_AND_RETAIN_NO_DELETE",
+  "nativeEvidence": "docs/evidence/application-recovery-v4a-native.json",
+  "status": "LOCAL_PACKAGE_REQUIRES_SEPARATE_EXACT_HASH_HOSTED_AUTHORIZATION"
+}
