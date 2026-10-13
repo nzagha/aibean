@@ -1,5 +1,8 @@
 # Admin review database proposal — v1
 
+**Admin Review v1 installation mechanism LOCAL PASS — 13 October 2026:** Dedicated exact-hash installer and independent read-only verifier are implemented; 15 native scenarios (three fresh synthetic clusters) pass, including effective browser/service/runtime denial, protected capabilities, concurrent one-winner installation, late rollback and post-commit preservation. Approved SQL remains `5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca`; mechanism seal `96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b` binds 34 dependencies. Actual recovery v3 remains PASS; hosted installation is unexecuted and needs new independent owner approval. [Working commands, evidence and exact authorization](ADMIN_REVIEW_V1_HOSTED_INSTALLATION_READINESS.md). Earlier installer-preparation gaps below are historical.
+
+
 Status: prepared and verified only with synthetic data in disposable PostgreSQL. Not authorized or executed against hosted Supabase.
 
 Target for any later separately approved installation: development project `yfknxidgphhepdtwazhn`, database `postgres`, branch `codex/supabase-foundation`.

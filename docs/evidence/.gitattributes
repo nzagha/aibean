@@ -1,0 +1,4 @@
+# Recovery evidence dependencies; no historical content is rewritten.
+supabase-expanded-application-recovery-result.json text eol=lf
+supabase-hosted-scoped-recovery-2026-10-09.json text eol=lf
+.gitattributes text eol=lf

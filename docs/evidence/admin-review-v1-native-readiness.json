@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-13T13:53:40.703Z",
+  "sqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+  "nativePostgreSQL": "17.11",
+  "freshInstances": 3,
+  "hostedConnections": 0,
+  "syntheticOnly": true,
+  "scenarioCount": 15,
+  "scenarios": [
+    {
+      "name": "Native trusted TLS and rejected untrusted CA/hostname",
+      "status": "PASS"
+    },
+    {
+      "name": "Reference catalogs match Drizzle columns FK targets and exact six RLS relations",
+      "status": "PASS"
+    },
+    {
+      "name": "Bad authorization fails before SQL",
+      "status": "PASS"
+    },
+    {
+      "name": "Incorrect session operator and database identity fail before SQL",
+      "status": "PASS"
+    },
+    {
+      "name": "Recovery history and TestUsers drift stop before installation",
+      "status": "PASS"
+    },
+    {
+      "name": "Unexpected target object fails before SQL without repair",
+      "status": "PASS"
+    },
+    {
+      "name": "Late native DDL failure rolls back exact SQL and all prior data/history",
+      "status": "PASS"
+    },
+    {
+      "name": "Concurrent exact executors serialize: one commit and one verified rollback",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent postflight six catalogs FKs indexes constraints RLS effective grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser and BYPASSRLS service connections denied actual table reads",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime cannot change capabilities requests ledger or schema",
+      "status": "PASS"
+    },
+    {
+      "name": "Runtime ordinary provisioning and allowed review writes roll back with no capability change",
+      "status": "PASS"
+    },
+    {
+      "name": "Re-execution refuses existing objects before transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Post-commit verifier failure preserves installation and requires forward review",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent verifier rejects extra grants missing index disabled RLS and wrong ledger",
+      "status": "PASS"
+    }
+  ],
+  "catalogCounts": {
+    "relations": 6,
+    "columns": 63,
+    "constraints": 42,
+    "foreignKeys": 16,
+    "indexes": 11,
+    "policies": 6
+  },
+  "historicalRecoveryArtifactsTouched": false,
+  "frozenSqlUnchanged": true,
+  "codeHashes": [
+    {
+      "path": "scripts/admin-review-v1/core.ts",
+      "sha256": "aba58f25964cf76312a7480199b7295167f44b73bc3e83716e4455fb88ffacfd"
+    },
+    {
+      "path": "scripts/admin-review-v1/operator.ts",
+      "sha256": "e183cc5c50dc8dd62aada175cf043c3a406faec90cca05a467c2a585528c797c"
+    },
+    {
+      "path": "scripts/admin-review-v1/native-test.ts",
+      "sha256": "6fa370bdfdea538ece0fc7ea0b4cb65e01d1628df3ce6addef8192b9e61b294c"
+    },
+    {
+      "path": "scripts/admin-review-v1/execute.ts",
+      "sha256": "da9f4abf8a64487faa97b57feb87433bf1b999b5c2e6827727885bd247fb64e7"
+    },
+    {
+      "path": "scripts/admin-review-v1/verify.ts",
+      "sha256": "8b124766f8dabab48ca3048b7350de646d25000de28d82baa4a897f4e2e32508"
+    },
+    {
+      "path": "scripts/admin-review-v1/prepare.ts",
+      "sha256": "e64b03f1f4b445ae99cadac269f8941d2c5a2d51b1ee459889226b7ae4753230"
+    },
+    {
+      "path": "tests/admin-review-installation.test.ts",
+      "sha256": "a963579dab382051a361949b2c3dcb2730a8eba9036714daed698da7af6907eb"
+    }
+  ]
+}

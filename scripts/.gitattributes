@@ -1,0 +1,5 @@
+# Preserve bytes used by the separately reviewed installation mechanism.
+execute-approved-installation.ts text eol=lf
+execute-scoped-backup.ts text eol=lf
+inspect-public-backup-scope.ts text eol=lf
+.gitattributes text eol=lf

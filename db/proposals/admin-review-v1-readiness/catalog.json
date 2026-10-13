@@ -1,0 +1,1493 @@
+{
+  "relations": [
+    {
+      "schema": "aibean_private",
+      "name": "admin_review_installations",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "claim_disputes",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "creator_applications",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "creator_capability_requests",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "vendor_edit_requests",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "verification_requests",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    }
+  ],
+  "columns": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "package_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "sql_sha256",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "installed_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "owner_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "opened_by",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "reason",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'open'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "decision",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "name",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "bio",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "links",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'pending'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "application_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "desired_state",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "requested_by",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "reason",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'pending_operator'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "applied_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "applied_by",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "base_revision",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "proposed",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "note",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "payment_state",
+      "type": "text",
+      "not_null": true,
+      "expression": "'required'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'pending'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "base_revision",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "evidence",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "note",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "payment_state",
+      "type": "text",
+      "not_null": true,
+      "expression": "'required'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'pending'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    }
+  ],
+  "constraints": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "admin_review_installations_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (package_id)",
+      "validated": true
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "admin_review_installations_sql_sha256_check",
+      "type": "c",
+      "definition": "CHECK ((sql_sha256 ~ '^[0-9a-f]{64}$'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_check",
+      "type": "c",
+      "definition": "CHECK (((status = 'open'::text) OR ((decision IS NOT NULL) AND (reviewer_id IS NOT NULL) AND (review_reason IS NOT NULL) AND (reviewed_at IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_claim_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (claim_id) REFERENCES claim_requests(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_decision_check",
+      "type": "c",
+      "definition": "CHECK ((decision = ANY (ARRAY['retain'::text, 'revoke'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_opened_by_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (opened_by) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_owner_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_reviewer_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['open'::text, 'resolved'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_tool_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_check",
+      "type": "c",
+      "definition": "CHECK (((status = 'pending'::text) OR ((reviewer_id IS NOT NULL) AND (review_reason IS NOT NULL) AND (reviewed_at IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_links_check",
+      "type": "c",
+      "definition": "CHECK ((jsonb_typeof(links) = 'array'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_reviewer_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text, 'suspension_requested'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_user_id_key",
+      "type": "u",
+      "definition": "UNIQUE (user_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_application_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (application_id) REFERENCES creator_applications(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_check",
+      "type": "c",
+      "definition": "CHECK (((status <> 'applied'::text) OR ((applied_at IS NOT NULL) AND (applied_by IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_desired_state_check",
+      "type": "c",
+      "definition": "CHECK ((desired_state = ANY (ARRAY['enabled'::text, 'disabled'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_requested_by_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (requested_by) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['pending_operator'::text, 'applied'::text, 'cancelled'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "paid_edit_no_promo",
+      "type": "c",
+      "definition": "CHECK ((payment_state = 'required'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_check",
+      "type": "c",
+      "definition": "CHECK (((status = 'pending'::text) OR ((reviewer_id IS NOT NULL) AND (review_reason IS NOT NULL) AND (reviewed_at IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_payment_state_check",
+      "type": "c",
+      "definition": "CHECK ((payment_state = ANY (ARRAY['required'::text, 'promo_zero'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_proposed_check",
+      "type": "c",
+      "definition": "CHECK ((jsonb_typeof(proposed) = 'object'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_reviewer_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_tool_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_check",
+      "type": "c",
+      "definition": "CHECK (((status = 'pending'::text) OR ((reviewer_id IS NOT NULL) AND (review_reason IS NOT NULL) AND (reviewed_at IS NOT NULL))))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_evidence_check",
+      "type": "c",
+      "definition": "CHECK ((jsonb_typeof(evidence) = 'array'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_payment_state_check",
+      "type": "c",
+      "definition": "CHECK ((payment_state = ANY (ARRAY['required'::text, 'promo_zero'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_reviewer_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_status_check",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_tool_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_user_id_fkey",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    }
+  ],
+  "indexes": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "admin_review_installations_pkey",
+      "definition": "CREATE UNIQUE INDEX admin_review_installations_pkey ON aibean_private.admin_review_installations USING btree (package_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "claim_disputes_pkey",
+      "definition": "CREATE UNIQUE INDEX claim_disputes_pkey ON public.claim_disputes USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "one_open_tool_dispute",
+      "definition": "CREATE UNIQUE INDEX one_open_tool_dispute ON public.claim_disputes USING btree (tool_id) WHERE (status = 'open'::text)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_pkey",
+      "definition": "CREATE UNIQUE INDEX creator_applications_pkey ON public.creator_applications USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "creator_applications_user_id_key",
+      "definition": "CREATE UNIQUE INDEX creator_applications_user_id_key ON public.creator_applications USING btree (user_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "creator_capability_requests_pkey",
+      "definition": "CREATE UNIQUE INDEX creator_capability_requests_pkey ON public.creator_capability_requests USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "one_pending_creator_capability",
+      "definition": "CREATE UNIQUE INDEX one_pending_creator_capability ON public.creator_capability_requests USING btree (user_id, desired_state) WHERE (status = 'pending_operator'::text)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "one_pending_vendor_edit",
+      "definition": "CREATE UNIQUE INDEX one_pending_vendor_edit ON public.vendor_edit_requests USING btree (tool_id) WHERE (status = 'pending'::text)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "vendor_edit_requests_pkey",
+      "definition": "CREATE UNIQUE INDEX vendor_edit_requests_pkey ON public.vendor_edit_requests USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "one_pending_verification_request",
+      "definition": "CREATE UNIQUE INDEX one_pending_verification_request ON public.verification_requests USING btree (tool_id) WHERE (status = 'pending'::text)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "verification_requests_pkey",
+      "definition": "CREATE UNIQUE INDEX verification_requests_pkey ON public.verification_requests USING btree (id)",
+      "valid": true,
+      "ready": true
+    }
+  ],
+  "policies": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "name": "runtime_read_review_ledger",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    }
+  ],
+  "acl": [
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "admin_review_installations",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "claim_disputes",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_applications",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_capability_requests",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "vendor_edit_requests",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "verification_requests",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    }
+  ],
+  "columnAcl": [],
+  "triggers": []
+}

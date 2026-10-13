@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-13T13:58:30.107Z",
+  "status": "PASS_LOCAL_ONLY",
+  "hostedInstallation": "NOT_EXECUTED",
+  "hostedWriteAuthorized": false,
+  "sourceCommit": "30a7e475898c9684d7a3de880565caa306f4dab3",
+  "sqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+  "mechanismSha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b",
+  "dependencies": 34,
+  "nativeScenarios": 15,
+  "syntheticClusters": 3,
+  "protectedFilesUnchanged": 355,
+  "originalRecoveryManifestUnchanged": true,
+  "previousInstallerUnchanged": true,
+  "historicalRecoveryArtifactsTouched": false,
+  "quality": {
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "automatedTests": 126,
+    "productionBuild": "PASS",
+    "runtimeVulnerabilities": 0,
+    "ci": "PENDING_PUBLICATION"
+  },
+  "executionReadyAfterIndependentOwnerApproval": true,
+  "operatorPrivateAndHostedPreflight": "MANDATORY_BEFORE_EXECUTION"
+}
