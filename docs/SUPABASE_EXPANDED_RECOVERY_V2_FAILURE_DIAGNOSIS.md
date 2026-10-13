@@ -86,8 +86,9 @@ The snapshot visibility test deliberately updates and restores a **synthetic** r
 - Complete automated suite: **121 passed, zero failed**; thirteen focused recovery/diagnostic tests included.
 - Lint and TypeScript: **PASS**.
 - Runtime dependency audit: **zero vulnerabilities**.
-- Local production build: **PASS on an unchanged source copy using supported webpack mode**, with no private `.env` copied. The existing OneDrive `.next` cache has Windows reparse/access errors; default local build and partial cache preservation failed with EPERM. No application source/configuration was changed to bypass that. [Isolated-build evidence](evidence/supabase-recovery-v3-isolated-build.json). Default Turbopack validation will be independently reported by GitHub CI.
-- Previous result commit `ee31dc5`: [GitHub Validate 38343497860 PASS](https://github.com/nzagha/aibean/actions/runs/38343497860). This is historical CI, not validation of the new correction. New correction CI/publication is recorded after push.
+- Local production build: **PASS on an unchanged source copy using supported webpack mode**, with no private `.env` copied. The existing OneDrive `.next` cache has Windows reparse/access errors; default local build and partial cache preservation failed with EPERM. No application source/configuration was changed to bypass that. [Isolated-build evidence](evidence/supabase-recovery-v3-isolated-build.json). The default production build independently passed on GitHub CI.
+- Corrective commit **`376c6ae1f6a9bc83117f155c5faa5c113e2f1979`** is pushed to `codex/supabase-foundation`. [GitHub Validate 38400283994 PASS](https://github.com/nzagha/aibean/actions/runs/38400283994): clean dependency installation, lint, TypeScript, automated tests, default production build and runtime dependency audit all passed. Native PostgreSQL/Windows CMS results are the separately recorded local suite, not a GitHub-hosted Windows test.
+- Previous result commit `ee31dc5`: [GitHub Validate 38343497860 PASS](https://github.com/nzagha/aibean/actions/runs/38343497860), retained only as historical validation.
 
 The frozen baseline SQL, original migrations, private crypto/lifecycle/credential bridges, v1/v2 manifests and application source remain unchanged. The three pre-existing untracked skill/source-import items remain unpublished.
 

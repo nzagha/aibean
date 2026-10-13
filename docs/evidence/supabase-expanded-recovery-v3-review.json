@@ -37,7 +37,10 @@
     "defaultLocalBuild": "BLOCKED_WINDOWS_CACHE_REPARSE_EPERM",
     "runtimeVulnerabilities": 0,
     "previousCommitCi": "PASS",
-    "correctionCi": "PENDING_PUBLICATION"
+    "correctionCi": "PASS",
+    "correctionCommit": "376c6ae1f6a9bc83117f155c5faa5c113e2f1979",
+    "correctionCiUrl": "https://github.com/nzagha/aibean/actions/runs/38400283994",
+    "defaultCiProductionBuild": "PASS"
   },
   "readyForIndependentExecutionReview": true,
   "hostedAuthorizationUsed": false
