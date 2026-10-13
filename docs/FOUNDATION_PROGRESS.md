@@ -1,5 +1,7 @@
 # Supabase foundation: stage evidence and next milestone
 
+**Admin Review v1 publication validated:** `99298e96defdc340f7782c4f4b5a4bc6770f2fe8` is pushed; [GitHub Validate 38409932853](https://github.com/nzagha/aibean/actions/runs/38409932853) passed all configured checks. Mechanism seal remains `96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b`. Hosted installation remains unexecuted and independently gated.
+
 **Admin Review v1 installation mechanism LOCAL PASS — 13 October 2026:** Dedicated exact-hash installer and independent read-only verifier are implemented; 15 native scenarios (three fresh synthetic clusters) pass, including effective browser/service/runtime denial, protected capabilities, concurrent one-winner installation, late rollback and post-commit preservation. Approved SQL remains `5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca`; mechanism seal `96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b` binds 34 dependencies. Actual recovery v3 remains PASS; hosted installation is unexecuted and needs new independent owner approval. [Working commands, evidence and exact authorization](ADMIN_REVIEW_V1_HOSTED_INSTALLATION_READINESS.md). Earlier installer-preparation gaps below are historical.
 
 

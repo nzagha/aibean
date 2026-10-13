@@ -19,7 +19,9 @@
     "automatedTests": 126,
     "productionBuild": "PASS",
     "runtimeVulnerabilities": 0,
-    "ci": "PENDING_PUBLICATION"
+    "ci": "PASS",
+    "ciCommit": "99298e96defdc340f7782c4f4b5a4bc6770f2fe8",
+    "ciUrl": "https://github.com/nzagha/aibean/actions/runs/38409932853"
   },
   "executionReadyAfterIndependentOwnerApproval": true,
   "operatorPrivateAndHostedPreflight": "MANDATORY_BEFORE_EXECUTION"
