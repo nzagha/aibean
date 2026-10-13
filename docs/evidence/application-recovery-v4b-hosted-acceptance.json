@@ -103,5 +103,21 @@
     "executableChanges": false,
     "privateBackupMaterialSelected": false
   },
-  "ci": "PENDING_PUBLICATION"
+  "ci": {
+    "status": "SUCCESS_WORKFLOW_AND_CHECKS_JOB",
+    "resultCommit": "e4ee101557ebb54d71d8aae04eba7c4c28c93aa1",
+    "run": 38469273673,
+    "url": "https://github.com/nzagha/aibean/actions/runs/38469273673",
+    "configuredChecks": [
+      "lint",
+      "typecheck",
+      "automated tests",
+      "default production build",
+      "runtime dependency audit"
+    ],
+    "individualStepResultsIndependentlyVerified": false,
+    "individualStepTelemetry": "UNAVAILABLE_EMPTY_ARRAY_FROM_RUN_JOBS_AND_INDIVIDUAL_JOB_ENDPOINTS",
+    "hostedRecoveryExecuted": false,
+    "actualRecoveryInvocationsRemain": 1
+  }
 }
