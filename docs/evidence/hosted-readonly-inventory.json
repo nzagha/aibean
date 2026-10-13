@@ -1,0 +1,5502 @@
+{
+  "capturedAt": "2026-10-13T03:14:42.643Z",
+  "authorizedCommit": "110251c296ff0fcb447b29dc5e5202be504bcfc2",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Exact repository branch and authorized revision",
+      "status": "PASS"
+    },
+    {
+      "name": "Corrected recovery v2 manifest and all fourteen dependency checksums",
+      "status": "PASS"
+    },
+    {
+      "name": "Original installation and baseline migration file checksums",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing encrypted archive/metadata integrity, private CMS certificate/key ACLs and in-memory decrypt verification",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing protected local storage, binaries and failed-target preservation prerequisites",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing private operator credential and exact direct project target",
+      "status": "PASS"
+    },
+    {
+      "name": "Hosted database/operator and strict CA/hostname/TLS read-only identity",
+      "status": "PASS"
+    },
+    {
+      "name": "Installed baseline tables/FKs/policies, original Drizzle and security histories",
+      "status": "PASS"
+    },
+    {
+      "name": "Restricted runtime roles/membership and protected effective grants",
+      "status": "PASS"
+    },
+    {
+      "name": "Aggregate Auth/User/mapping/TestUsers counts match recovery prerequisites",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact eighteen-table/two-sequence scope, constraints/indexes/grants/RLS and ledger metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "Both historical TestUsers records privately match the original verified archive",
+      "status": "PASS"
+    },
+    {
+      "name": "TestUsers definitions/constraints/indexes/RLS/policies/sequence remain unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Database encoding/collation and scoped metadata comparison with historical post-C inventory",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh postflight catalog/count/history and TestUsers continuity",
+      "status": "PASS"
+    }
+  ],
+  "hostedWrites": false,
+  "hostedApplicationRecordBodiesExported": false,
+  "newBackup": false,
+  "newRecovery": false,
+  "newDatabase": false,
+  "privateDataPublished": false,
+  "recoveryPackage": {
+    "sha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+    "dependencies": 14,
+    "tables": 18,
+    "sequences": 2,
+    "changed": false
+  },
+  "originalRecovery": {
+    "ciphertextIntegrity": "PASS",
+    "plaintextArchiveHash": "PASS",
+    "decryptability": "PASS",
+    "metadataIntegrity": "PASS",
+    "privateCertificateAndKeyPermissions": "PASS",
+    "newArchiveCreated": false
+  },
+  "localPrerequisites": {
+    "existingCmsProfileOnly": true,
+    "requiredBinaryAvailability": "PASS",
+    "nativePostgreSql": "17.11",
+    "ntfsAndMinimumCapacity": "PASS",
+    "openSslAvailability": "PASS",
+    "privateStorageAcl": "PASS",
+    "retainedFailedTargetStopped": true,
+    "recoveryTargetReadiness": "Existing prerequisites only; new target TLS/identity/pristine checks deferred to separately authorized executor",
+    "retainedFailedTargetCount": 1,
+    "newExpandedArtifactCount": 0,
+    "newTargetCreated": false,
+    "nonSynchronizedRoot": "PASS",
+    "retainedFailedTargetUntouched": true
+  },
+  "identity": {
+    "database": "postgres",
+    "operator": "postgres",
+    "session_user": "postgres",
+    "server_version": "17.6",
+    "read_only": "on",
+    "tls": true
+  },
+  "hostnameVerified": true,
+  "applicationTables": [
+    {
+      "tablename": "audit_logs",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "billing_webhook_receipts",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "claim_requests",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "featured_placements",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "orders",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "rate_limits",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "saved_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stack_tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "stacks",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "taxonomy",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tool_reviews",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "tools",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "users",
+      "rowsecurity": true
+    },
+    {
+      "tablename": "vendor_access",
+      "rowsecurity": true
+    }
+  ],
+  "foreignKeys": [
+    {
+      "schema_name": "aibean_private",
+      "table_name": "user_identities",
+      "conname": "user_identities_auth_user_id_fkey",
+      "definition": "FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "schema_name": "aibean_private",
+      "table_name": "user_identities",
+      "conname": "user_identities_user_id_fkey",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "claim_requests",
+      "conname": "claim_requests_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "claim_requests",
+      "conname": "claim_requests_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "featured_placements",
+      "conname": "featured_placements_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "featured_placements",
+      "conname": "featured_placements_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "orders",
+      "conname": "orders_claim_id_claim_requests_id_fk",
+      "definition": "FOREIGN KEY (claim_id) REFERENCES claim_requests(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "orders",
+      "conname": "orders_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "saved_tools",
+      "conname": "saved_tools_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "saved_tools",
+      "conname": "saved_tools_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stack_tools",
+      "conname": "stack_tools_stack_id_stacks_id_fk",
+      "definition": "FOREIGN KEY (stack_id) REFERENCES stacks(id) ON DELETE CASCADE"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stack_tools",
+      "conname": "stack_tools_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "stacks",
+      "conname": "stacks_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tool_reviews",
+      "conname": "tool_reviews_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tool_reviews",
+      "conname": "tool_reviews_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "tools",
+      "conname": "tools_category_id_taxonomy_id_fk",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "vendor_access",
+      "conname": "vendor_access_tool_id_tools_id_fk",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "vendor_access",
+      "conname": "vendor_access_user_id_users_id_fk",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+    }
+  ],
+  "drizzleHistory": [
+    {
+      "hash": "b58134b31944656eda45a6ba929fcdb66a5ec4e66e01a8cfd3d8d9b16d4f4468",
+      "created_at": "1791247215670"
+    },
+    {
+      "hash": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1",
+      "created_at": "1791249181547"
+    }
+  ],
+  "securityHistory": [
+    {
+      "id": "aibean-foundation-v1",
+      "sql_sha256": "eea0e7309e13440224ca80030a367afc76bc99c08b2027fc722b8fa2b388277a"
+    }
+  ],
+  "applicationPolicies": [
+    {
+      "schemaname": "aibean_private",
+      "tablename": "user_identities",
+      "policyname": "runtime_insert_identity",
+      "roles": "{aibean_runtime}",
+      "cmd": "INSERT",
+      "qual": null,
+      "with_check": "true"
+    },
+    {
+      "schemaname": "aibean_private",
+      "tablename": "user_identities",
+      "policyname": "runtime_read_identity",
+      "roles": "{aibean_runtime}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    },
+    {
+      "schemaname": "public",
+      "tablename": "audit_logs",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "billing_webhook_receipts",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "claim_requests",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "featured_placements",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "orders",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "rate_limits",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "saved_tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "stack_tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "stacks",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "taxonomy",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tool_reviews",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "tools",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "users",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schemaname": "public",
+      "tablename": "vendor_access",
+      "policyname": "runtime_service",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    }
+  ],
+  "runtime": {
+    "roles": [
+      {
+        "rolname": "aibean_app_login",
+        "rolcanlogin": true,
+        "rolinherit": true,
+        "rolsuper": false,
+        "rolbypassrls": false,
+        "rolcreatedb": false,
+        "rolcreaterole": false,
+        "rolreplication": false
+      },
+      {
+        "rolname": "aibean_runtime",
+        "rolcanlogin": false,
+        "rolinherit": true,
+        "rolsuper": false,
+        "rolbypassrls": false,
+        "rolcreatedb": false,
+        "rolcreaterole": false,
+        "rolreplication": false
+      }
+    ],
+    "inherited": [
+      {
+        "parent": "aibean_runtime",
+        "child": "aibean_app_login",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": false
+      }
+    ],
+    "operatorAdministration": [
+      {
+        "parent": "aibean_app_login",
+        "child": "postgres",
+        "admin_option": true,
+        "inherit_option": false,
+        "set_option": false
+      },
+      {
+        "parent": "aibean_runtime",
+        "child": "postgres",
+        "admin_option": true,
+        "inherit_option": false,
+        "set_option": false
+      }
+    ],
+    "restrictions": {
+      "database_create": false,
+      "public_create": false,
+      "private_create": false,
+      "admin_change": false,
+      "creator_change": false,
+      "mapping_change": false,
+      "ledger_access": false,
+      "security_ledger_access": false
+    }
+  },
+  "counts": {
+    "auth_users": 0,
+    "auth_identities": 0,
+    "application_users": 0,
+    "mappings": 0,
+    "testusers": 2
+  },
+  "scope": {
+    "relations": [
+      {
+        "schema": "aibean_private",
+        "name": "installations",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "aibean_private",
+        "name": "user_identities",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": false,
+        "force_rls": false
+      },
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations_id_seq",
+        "kind": "S",
+        "owner": "postgres",
+        "rls": false,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers_id_seq",
+        "kind": "S",
+        "owner": "postgres",
+        "rls": false,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "audit_logs",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "billing_webhook_receipts",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "claim_requests",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "featured_placements",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "orders",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "rate_limits",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "saved_tools",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "stack_tools",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "stacks",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "taxonomy",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "tool_reviews",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "tools",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "users",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      },
+      {
+        "schema": "public",
+        "name": "vendor_access",
+        "kind": "r",
+        "owner": "postgres",
+        "rls": true,
+        "force_rls": false
+      }
+    ],
+    "indexes": [
+      {
+        "schema": "aibean_private",
+        "relation": "installations",
+        "name": "installations_pkey",
+        "definition": "CREATE UNIQUE INDEX installations_pkey ON aibean_private.installations USING btree (id)"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_pkey",
+        "definition": "CREATE UNIQUE INDEX user_identities_pkey ON aibean_private.user_identities USING btree (auth_user_id)"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_user_id_key",
+        "definition": "CREATE UNIQUE INDEX user_identities_user_id_key ON aibean_private.user_identities USING btree (user_id)"
+      },
+      {
+        "schema": "drizzle",
+        "relation": "__drizzle_migrations",
+        "name": "__drizzle_migrations_pkey",
+        "definition": "CREATE UNIQUE INDEX __drizzle_migrations_pkey ON drizzle.__drizzle_migrations USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_email_key",
+        "definition": "CREATE UNIQUE INDEX \"TestUsers_email_key\" ON public.\"TestUsers\" USING btree (email)"
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_pkey",
+        "definition": "CREATE UNIQUE INDEX \"TestUsers_pkey\" ON public.\"TestUsers\" USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "audit_logs",
+        "name": "audit_logs_pkey",
+        "definition": "CREATE UNIQUE INDEX audit_logs_pkey ON public.audit_logs USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "billing_webhook_receipts",
+        "name": "billing_webhook_receipts_pkey",
+        "definition": "CREATE UNIQUE INDEX billing_webhook_receipts_pkey ON public.billing_webhook_receipts USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_pkey",
+        "definition": "CREATE UNIQUE INDEX claim_requests_pkey ON public.claim_requests USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_pkey",
+        "definition": "CREATE UNIQUE INDEX featured_placements_pkey ON public.featured_placements USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_stripe_session_id_unique",
+        "definition": "CREATE UNIQUE INDEX featured_placements_stripe_session_id_unique ON public.featured_placements USING btree (stripe_session_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_claim_id_unique",
+        "definition": "CREATE UNIQUE INDEX orders_claim_id_unique ON public.orders USING btree (claim_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_pkey",
+        "definition": "CREATE UNIQUE INDEX orders_pkey ON public.orders USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_stripe_session_id_unique",
+        "definition": "CREATE UNIQUE INDEX orders_stripe_session_id_unique ON public.orders USING btree (stripe_session_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "rate_limits",
+        "name": "rate_limits_pkey",
+        "definition": "CREATE UNIQUE INDEX rate_limits_pkey ON public.rate_limits USING btree (key)"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_user_id_tool_id_pk",
+        "definition": "CREATE UNIQUE INDEX saved_tools_user_id_tool_id_pk ON public.saved_tools USING btree (user_id, tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_stack_id_tool_id_pk",
+        "definition": "CREATE UNIQUE INDEX stack_tools_stack_id_tool_id_pk ON public.stack_tools USING btree (stack_id, tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "stacks_pkey",
+        "definition": "CREATE UNIQUE INDEX stacks_pkey ON public.stacks USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "taxonomy",
+        "name": "taxonomy_pkey",
+        "definition": "CREATE UNIQUE INDEX taxonomy_pkey ON public.taxonomy USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "one_review_per_user_tool",
+        "definition": "CREATE UNIQUE INDEX one_review_per_user_tool ON public.tool_reviews USING btree (user_id, tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_pkey",
+        "definition": "CREATE UNIQUE INDEX tool_reviews_pkey ON public.tool_reviews USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_pkey",
+        "definition": "CREATE UNIQUE INDEX tools_pkey ON public.tools USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_slug_unique",
+        "definition": "CREATE UNIQUE INDEX tools_slug_unique ON public.tools USING btree (slug)"
+      },
+      {
+        "schema": "public",
+        "relation": "users",
+        "name": "users_pkey",
+        "definition": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_pkey",
+        "definition": "CREATE UNIQUE INDEX vendor_access_pkey ON public.vendor_access USING btree (tool_id)"
+      }
+    ],
+    "constraints": [
+      {
+        "schema": "aibean_private",
+        "relation": "installations",
+        "name": "installations_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_auth_user_id_fkey",
+        "type": "f",
+        "definition": "FOREIGN KEY (auth_user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (auth_user_id)"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_user_id_fkey",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "user_identities_user_id_key",
+        "type": "u",
+        "definition": "UNIQUE (user_id)"
+      },
+      {
+        "schema": "drizzle",
+        "relation": "__drizzle_migrations",
+        "name": "__drizzle_migrations_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_email_key",
+        "type": "u",
+        "definition": "UNIQUE (email)"
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "TestUsers_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "audit_logs",
+        "name": "audit_logs_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "billing_webhook_receipts",
+        "name": "billing_webhook_receipts_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "claim_requests_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_duration",
+        "type": "c",
+        "definition": "CHECK (((duration_days IS NULL) OR ((duration_days >= 1) AND (duration_days <= 365))))"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_paid_window",
+        "type": "c",
+        "definition": "CHECK (((status <> ALL (ARRAY['active'::text, 'suspended'::text])) OR ((paid_at IS NOT NULL) AND (starts_at IS NOT NULL) AND (ends_at IS NOT NULL) AND (ends_at > starts_at) AND (amount IS NOT NULL) AND (duration_days IS NOT NULL))))"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_stripe_session_id_unique",
+        "type": "u",
+        "definition": "UNIQUE (stripe_session_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_placements_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_positive_amount",
+        "type": "c",
+        "definition": "CHECK (((amount IS NULL) OR (amount > 0)))"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "featured_status",
+        "type": "c",
+        "definition": "CHECK ((status = ANY (ARRAY['pending_review'::text, 'approved'::text, 'rejected'::text, 'active'::text, 'suspended'::text])))"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_claim_id_claim_requests_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (claim_id) REFERENCES claim_requests(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_claim_id_unique",
+        "type": "u",
+        "definition": "UNIQUE (claim_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_stripe_session_id_unique",
+        "type": "u",
+        "definition": "UNIQUE (stripe_session_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "orders_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "rate_limits",
+        "name": "rate_limits_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (key)"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_user_id_tool_id_pk",
+        "type": "p",
+        "definition": "PRIMARY KEY (user_id, tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "saved_tools_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_stack_id_stacks_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (stack_id) REFERENCES stacks(id) ON DELETE CASCADE"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_stack_id_tool_id_pk",
+        "type": "p",
+        "definition": "PRIMARY KEY (stack_id, tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "stack_tools_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "stacks_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "stacks_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "taxonomy",
+        "name": "taxonomy_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "rating_range",
+        "type": "c",
+        "definition": "CHECK (((rating >= 1) AND (rating <= 5)))"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "tool_reviews_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_category_id_taxonomy_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "tools_slug_unique",
+        "type": "u",
+        "definition": "UNIQUE (slug)"
+      },
+      {
+        "schema": "public",
+        "relation": "users",
+        "name": "users_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_pkey",
+        "type": "p",
+        "definition": "PRIMARY KEY (tool_id)"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_tool_id_tools_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "vendor_access_user_id_users_id_fk",
+        "type": "f",
+        "definition": "FOREIGN KEY (user_id) REFERENCES users(id)"
+      }
+    ],
+    "policies": [
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "runtime_insert_identity",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "INSERT",
+        "qual": null,
+        "with_check": "true"
+      },
+      {
+        "schema": "aibean_private",
+        "relation": "user_identities",
+        "name": "runtime_read_identity",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "SELECT",
+        "qual": "true",
+        "with_check": null
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "Enable insert for authenticated users only",
+        "permissive": "PERMISSIVE",
+        "roles": "{authenticated,dashboard_user}",
+        "cmd": "INSERT",
+        "qual": null,
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "TestUsers",
+        "name": "Enable read access for all users",
+        "permissive": "PERMISSIVE",
+        "roles": "{public}",
+        "cmd": "SELECT",
+        "qual": "true",
+        "with_check": null
+      },
+      {
+        "schema": "public",
+        "relation": "audit_logs",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "billing_webhook_receipts",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "claim_requests",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "featured_placements",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "orders",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "rate_limits",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "saved_tools",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "stack_tools",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "stacks",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "taxonomy",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "tool_reviews",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "tools",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "users",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      },
+      {
+        "schema": "public",
+        "relation": "vendor_access",
+        "name": "runtime_service",
+        "permissive": "PERMISSIVE",
+        "roles": "{aibean_runtime}",
+        "cmd": "ALL",
+        "qual": "true",
+        "with_check": "true"
+      }
+    ],
+    "schemas": [
+      {
+        "schema": "aibean_private",
+        "owner": "postgres"
+      },
+      {
+        "schema": "drizzle",
+        "owner": "postgres"
+      },
+      {
+        "schema": "public",
+        "owner": "pg_database_owner"
+      }
+    ],
+    "acl": [
+      {
+        "kind": "column",
+        "schema": "public",
+        "object": "users",
+        "column": "id",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "f",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "EXECUTE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "r",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "postgres",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "anon",
+        "grantor": "supabase_admin",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "authenticated",
+        "grantor": "supabase_admin",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "postgres",
+        "grantor": "supabase_admin",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "default",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "S",
+        "default_owner": "supabase_admin",
+        "grantee": "service_role",
+        "grantor": "supabase_admin",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "aibean_private",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "aibean_private",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "CREATE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "aibean_private",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "drizzle",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "CREATE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "drizzle",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "PUBLIC",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "anon",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "authenticated",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "pg_database_owner",
+        "grantor": "pg_database_owner",
+        "privilege": "CREATE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "pg_database_owner",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "schema",
+        "schema": "public",
+        "object": "",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "pg_database_owner",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "anon",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "authenticated",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "sequence",
+        "schema": "public",
+        "object": "TestUsers_id_seq",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "USAGE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "installations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "aibean_private",
+        "object": "user_identities",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "drizzle",
+        "object": "__drizzle_migrations",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "TestUsers",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "service_role",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "audit_logs",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "billing_webhook_receipts",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "claim_requests",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "featured_placements",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "orders",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "rate_limits",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "saved_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stack_tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "stacks",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "taxonomy",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tool_reviews",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "tools",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "users",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "aibean_runtime",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "DELETE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "INSERT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "MAINTAIN",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "REFERENCES",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "SELECT",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRIGGER",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "TRUNCATE",
+        "grantable": false
+      },
+      {
+        "kind": "table",
+        "schema": "public",
+        "object": "vendor_access",
+        "column": "",
+        "default_kind": "",
+        "default_owner": "",
+        "grantee": "postgres",
+        "grantor": "postgres",
+        "privilege": "UPDATE",
+        "grantable": false
+      }
+    ],
+    "sequences": [
+      {
+        "schema": "drizzle",
+        "name": "__drizzle_migrations_id_seq",
+        "type": "integer",
+        "seqstart": "1",
+        "seqincrement": "1",
+        "seqmax": "2147483647",
+        "seqmin": "1",
+        "seqcache": "1",
+        "seqcycle": false,
+        "owning_schema": "drizzle",
+        "owning_table": "__drizzle_migrations",
+        "owning_column": "id"
+      },
+      {
+        "schema": "public",
+        "name": "TestUsers_id_seq",
+        "type": "bigint",
+        "seqstart": "1",
+        "seqincrement": "1",
+        "seqmax": "9223372036854775807",
+        "seqmin": "1",
+        "seqcache": "1",
+        "seqcycle": false,
+        "owning_schema": "public",
+        "owning_table": "TestUsers",
+        "owning_column": "id"
+      }
+    ],
+    "counts": {
+      "aibean_private.installations": 1,
+      "aibean_private.user_identities": 0,
+      "drizzle.__drizzle_migrations": 2,
+      "public.TestUsers": 2,
+      "public.audit_logs": 0,
+      "public.billing_webhook_receipts": 0,
+      "public.claim_requests": 0,
+      "public.featured_placements": 0,
+      "public.orders": 0,
+      "public.rate_limits": 0,
+      "public.saved_tools": 0,
+      "public.stack_tools": 0,
+      "public.stacks": 0,
+      "public.taxonomy": 0,
+      "public.tool_reviews": 0,
+      "public.tools": 0,
+      "public.users": 0,
+      "public.vendor_access": 0
+    }
+  },
+  "testUsersPrivateContinuity": true,
+  "testUsersMetadataContinuity": true,
+  "databaseEnvironment": {
+    "owner": "postgres",
+    "encoding": "UTF8",
+    "collation_provider": "i",
+    "collation": "en_US.UTF-8",
+    "ctype": "en_US.UTF-8",
+    "locale": "en-US",
+    "collation_version": "153.121",
+    "server_version": "17.6"
+  },
+  "schemas": [
+    {
+      "name": "aibean_private"
+    },
+    {
+      "name": "auth"
+    },
+    {
+      "name": "drizzle"
+    },
+    {
+      "name": "extensions"
+    },
+    {
+      "name": "graphql"
+    },
+    {
+      "name": "graphql_public"
+    },
+    {
+      "name": "public"
+    },
+    {
+      "name": "realtime"
+    },
+    {
+      "name": "storage"
+    },
+    {
+      "name": "vault"
+    }
+  ],
+  "managedTableInventory": [
+    {
+      "schema": "auth",
+      "tables": 27
+    },
+    {
+      "schema": "realtime",
+      "tables": 3
+    },
+    {
+      "schema": "storage",
+      "tables": 8
+    },
+    {
+      "schema": "vault",
+      "tables": 1
+    }
+  ],
+  "authSessionProposalPrerequisites": [
+    {
+      "operator_can_read_sessions": true,
+      "expected_session_columns": 3,
+      "proposed_function_absent": true
+    }
+  ],
+  "sourceContinuity": "PASS",
+  "correctedRecoveryReadyForSeparateAuthorization": true,
+  "environmentAndOriginalArtifactsUnchanged": true,
+  "forwardPackages": [
+    {
+      "id": "admin-review-v1",
+      "reviewedSqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+      "expectedNewPublicTables": 5,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "admin-operations-v2",
+      "reviewedSqlSha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39",
+      "expectedNewPublicTables": 4,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "creator-content-v1",
+      "reviewedSqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+      "expectedNewPublicTables": 15,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "creator-files-v1",
+      "reviewedSqlSha256": "88b5cc102a30097f7579f7dcd1da482e691522353439b5f688abcce2ad50b66b",
+      "expectedNewPublicTables": 1,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "discovery-v1",
+      "reviewedSqlSha256": "c29a3436daa54eee9f9ec1e9eb0e633da6d7cc14cb42fd9b05784db5a96de0b3",
+      "expectedNewPublicTables": 4,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "pricing-v1",
+      "reviewedSqlSha256": "80ad136519030266bbf03d7b6edab9a541d3548874f9c5f89a9b2a416821fcab",
+      "expectedNewPublicTables": 5,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    },
+    {
+      "id": "affiliate-creator-v1",
+      "reviewedSqlSha256": "0a06cae4801d6c8f4493694c9fe537c412d61b4d33c89d3a7926df45c701704a",
+      "expectedNewPublicTables": 8,
+      "hostedInstalled": false,
+      "expectedObjectsAbsent": true
+    }
+  ],
+  "newAuthProposal": {
+    "sqlSha256": "d1afd314dd083009abe0912dfc7f1a91861a90450e9979a068f9c856741b7bb3",
+    "functionAbsent": true,
+    "ledgerAbsent": true,
+    "operatorCanReadManagedSessionMetadata": true,
+    "expectedThreeTypedColumns": true,
+    "hostedInstalled": false
+  },
+  "summary": {
+    "applicationRlsTables": 14,
+    "scopeTables": 18,
+    "scopeSequences": 2,
+    "foreignKeys": 18,
+    "indexes": 25,
+    "policies": 18,
+    "constraints": 47,
+    "checksPassed": 15
+  },
+  "executionContext": {
+    "initialInvokerMissingTemporaryPathBindings": true,
+    "pathsResolvedFromExistingAiBeanPrivateProfile": true,
+    "privateProfileChanged": false,
+    "environmentFileChanged": false,
+    "verificationResumedOnlyAfterOriginalProfileWasLocated": true,
+    "preliminaryAttemptsOpenedHostedConnections": false
+  },
+  "hostedConnections": "Existing protected operator only",
+  "catalogComparisonLimits": [
+    "Historical post-C evidence matched relation/owner/RLS inventory and installed FK/policy/history/role expectations.",
+    "Original TestUsers definitions/policies/indexes/sequence/data matched encrypted metadata; its digest stayed private.",
+    "Current scoped columns/grants/check/index definitions were catalog-inventoried; every historical managed-object attribute and provider setting was not re-audited."
+  ],
+  "publication": {
+    "status": "sanitized documentation/evidence prepared",
+    "applicationCodeChanged": false,
+    "approvedSqlOrManifestsChanged": false,
+    "operatorHarnessExcludedFromGit": true
+  }
+}

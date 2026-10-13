@@ -1,5 +1,7 @@
 # aiBean MVP product completion report — 12 October 2026
 
+**Fresh hosted inventory under Authorization 1: PASS.** At 2026-10-13 03:14 UTC (12 October local), protected read-only operator inspection verifies the original eighteen-table/two-sequence scope, fourteen RLS application tables, eighteen FKs, original ledgers/runtime restrictions and privately unchanged TestUsers records. Auth accounts/identities, application Users and mappings remain zero. Existing encrypted recovery/certificate/ACL/native prerequisites and v2's fourteen checksums pass; no backup/export/restore/install/Auth/provider/configuration change occurred. [Exact observations and next recovery-only authorization](HOSTED_READONLY_INVENTORY_RESULT.md). The previous inventory gate below is completed; actual expanded recovery and each installation/provider/release decision remain pending.
+
 ## Current increment: local hosted-integration release engineering
 
 **Published and CI verified:** [Implementation 4edc94f](https://github.com/nzagha/aibean/commit/4edc94f6288dbfbd57ee14c6f2241b4dbee833e5) and [correction 5f0802d](https://github.com/nzagha/aibean/commit/5f0802db806820e072fb95ec7f21fe27ac79cf12) are pushed. [Validate 38338559505](https://github.com/nzagha/aibean/actions/runs/38338559505) passed lint, TypeScript, all 116 tests, build and runtime audit on exact corrected source `5f0802db806820e072fb95ec7f21fe27ac79cf12`. The initial CI timing failure and test-only correction are retained in the result; no frozen SQL/production throttle changed.

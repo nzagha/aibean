@@ -2,6 +2,8 @@
 
 Prepared 12 October 2026 on `codex/supabase-foundation`, starting at `5fd2e96bea8568051085264fb2332e8951af16ea`. This is an execution handoff, not consent to execute. The current website/private environment remains on its existing authentication mode. No hosted connection, read, write, export, account, email, provider activation or deployment was performed in this milestone.
 
+**Authorization 1 subsequently completed:** fresh hosted read-only inspection passed on 12 October local / 13 October UTC under exact owner consent. Existing recovery archive/private prerequisites and v2 checksums pass, with zero account/mapping counts and unchanged TestUsers. [Fresh result](HOSTED_READONLY_INVENTORY_RESULT.md). The inventory approval below is now historical; the next independent decision is corrected recovery v2 execution. No recovery/install/provider write was authorized or executed by the inspection.
+
 ## Verified locally
 
 - Exclusive guarded Supabase production mode; shared PostgreSQL atomic throttle/replay state; epoch-bound proofs; app and provider session revocation; five-minute sensitive-action reauthentication; server-only HttpOnly cookies; same-origin forms, bound PKCE and duplicate callback rejection.
