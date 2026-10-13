@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-13T14:46:02.240Z",
+  "status": "FAIL",
+  "readonlyProcedure": true,
+  "installerInvoked": false,
+  "hostedWrites": false,
+  "exitCode": 1,
+  "verifierResult": {
+    "status": "FAIL",
+    "stage": "package-operation",
+    "details": "Protected details withheld; stop for operator review",
+    "commitAcknowledged": false,
+    "decision": "STOP_NO_RETRY",
+    "automaticRetry": false
+  },
+  "finishedAt": "2026-10-13T14:46:21.292Z"
+}

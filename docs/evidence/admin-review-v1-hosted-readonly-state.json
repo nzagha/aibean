@@ -1,0 +1,42 @@
+{
+  "capturedAt": "2026-10-13T14:47:21.127Z",
+  "status": "ABSENT_CONFIRMED",
+  "readOnly": true,
+  "installerInvoked": false,
+  "hostedWrites": false,
+  "procedure": "Frozen Admin Review v1 identity, baseline, inventory and catalog helpers; absent-package diagnostic only",
+  "reviewRelationCount": 0,
+  "presentReviewRelations": [],
+  "reviewCounts": {
+    "foreignKeys": 0,
+    "constraints": 0,
+    "indexes": 0,
+    "policies": 0
+  },
+  "absentRelations": [
+    "aibean_private.admin_review_installations",
+    "public.claim_disputes",
+    "public.creator_applications",
+    "public.creator_capability_requests",
+    "public.vendor_edit_requests",
+    "public.verification_requests"
+  ],
+  "targetOperatorAndTlsVerified": true,
+  "originalFoundationContinuity": true,
+  "originalDrizzleHistory": true,
+  "foundationRlsTables": 14,
+  "foundationForeignKeys": 18,
+  "foundationIndexes": 25,
+  "foundationConstraints": 47,
+  "foundationPolicies": 18,
+  "foundationTableCount": 18,
+  "foundationSequences": 2,
+  "drizzleEntries": 2,
+  "securityLedgerEntries": 1,
+  "testUsersRecords": 2,
+  "testUsersPrivateIntegrityMatch": true,
+  "emptyAccountsUsersAndMappings": true,
+  "effectiveBaselineGrantsAndRolesPreserved": true,
+  "recoveryV3AndOriginalArchiveIntactAndDecryptable": true,
+  "privateEnvironmentUnchanged": true
+}
