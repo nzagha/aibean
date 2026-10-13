@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "package": "admin-review-v1",
+  "readOnly": true,
+  "verified": {
+    "tables": 6,
+    "publicTables": 5,
+    "rls": 6,
+    "foreignKeys": 16,
+    "indexes": 11,
+    "constraints": 42,
+    "policies": 6,
+    "independentSessions": 3,
+    "baselinePreserved": true,
+    "effectiveRoleColumnGrants": true
+  },
+  "mechanismSha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "verifiedAt": "2026-10-13T15:08:24.590Z",
+  "privateEnvironmentUnchanged": true
+}

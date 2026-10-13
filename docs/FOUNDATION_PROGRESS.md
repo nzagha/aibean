@@ -1,8 +1,12 @@
 # Supabase foundation: stage evidence and next milestone
 
+**Authorization 5 — Admin Review v1 HOSTED PASS, 13 October 2026.** The unchanged 34-dependency mechanism executed the approved SQL once; COMMIT acknowledged and the separately invoked read-only verifier PASS. Five public tables and the private ledger, 16 FKs, 42 constraints, 11 indexes and six RLS policies/grants are verified. Original foundation/history, both TestUsers records, zero accounts/mappings, private environment and original/v3 backups remain preserved. Only Admin Review v1 was installed; no provider or capability activation. [Actual execution and independent acceptance](ADMIN_REVIEW_V1_HOSTED_INSTALLATION_RESULT.md). Admin Operations v2 may proceed only to separate preparation/review/authorization. Recovery v3 excludes the new six relations; new coverage remains required before real feature writes.
+
+Earlier dated absence, preparation and recovery paragraphs below are historical, superseded by this actual installation result; their consent cannot be reused.
+
+
 **Hosted diagnostic publication CI PASS:** Result commit `87a2afe33714c097e912f6c9a59d8ddfa159482a` is pushed; [Validate 38416782755](https://github.com/nzagha/aibean/actions/runs/38416782755) passed lint/typecheck/tests/build/runtime audit. This confirms publication validation; Admin Review v1 remains absent from the hosted target.
 
-**Admin Review v1 hosted verification — 13 October 2026: ABSENT CONFIRMED.** The frozen read-only installed-state verifier returned FAIL; its inventory/catalog/continuity helpers independently confirmed all five review tables and the private ledger absent, with the original foundation, both TestUsers records and recovery v3 preserved. Accessible Codex-run history shows offline inspections only; an asserted external installation/commit remains unsubstantiated. No installer/retry/write was performed. [Actual diagnostic result and evidence boundaries](ADMIN_REVIEW_V1_HOSTED_INSTALLATION_RESULT.md). Admin Operations hosted readiness remains dependent on actual verified Admin Review installation.
 
 
 **Admin Review v1 publication validated:** `99298e96defdc340f7782c4f4b5a4bc6770f2fe8` is pushed; [GitHub Validate 38409932853](https://github.com/nzagha/aibean/actions/runs/38409932853) passed all configured checks. Mechanism seal remains `96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b`. Hosted installation remains unexecuted and independently gated.

@@ -1,0 +1,34 @@
+{
+  "authorization": "Authorization 5",
+  "mode": "verify",
+  "startedAt": "2026-10-13T15:07:19.263Z",
+  "invocationCount": 1,
+  "sourceCommit": "759d3bc653472da2f938bb3aa5f5b050a73d9b05",
+  "sqlSha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca",
+  "mechanismSha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b",
+  "finishedAt": "2026-10-13T15:08:24.907Z",
+  "exitCode": 0,
+  "processErrorCategory": null,
+  "sanitizedResult": {
+    "status": "PASS",
+    "package": "admin-review-v1",
+    "readOnly": true,
+    "verified": {
+      "tables": 6,
+      "publicTables": 5,
+      "rls": 6,
+      "foreignKeys": 16,
+      "indexes": 11,
+      "constraints": 42,
+      "policies": 6,
+      "independentSessions": 3,
+      "baselinePreserved": true,
+      "effectiveRoleColumnGrants": true
+    },
+    "mechanismSha256": "96f727fde749cc8ab56a647b7f9ed3dc750fb73bc4864c603f3502fbef94030b",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "verifiedAt": "2026-10-13T15:08:24.590Z",
+    "privateEnvironmentUnchanged": true
+  }
+}
