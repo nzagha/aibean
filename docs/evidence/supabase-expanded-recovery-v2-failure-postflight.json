@@ -1,0 +1,36 @@
+{
+  "capturedAt": "2026-10-13T03:42:05.775Z",
+  "status": "PASS",
+  "readOnlyInspection": true,
+  "recoveryGate": "FAIL",
+  "automaticRetry": false,
+  "hostedWrites": false,
+  "hostedContinuity": {
+    "status": "PASS",
+    "strictTargetOperatorTls": true,
+    "historiesRolesRlsAndGrants": true,
+    "freshInventoryUnchanged": true,
+    "emptyAuthUsersAndMappings": true,
+    "testUsersPrivateIntegrityAndMetadata": true,
+    "originalArchiveDecryptable": true,
+    "applicationRecordBodiesExported": false
+  },
+  "retainedTargets": [
+    {
+      "packageSha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+      "stopped": true,
+      "completionWitnessPresent": false,
+      "bootstrapPlaintextPasswordPresent": false,
+      "serverLogBytes": 0
+    },
+    {
+      "packageSha256": "a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30",
+      "stopped": true,
+      "completionWitnessPresent": false,
+      "bootstrapPlaintextPasswordPresent": false,
+      "serverLogBytes": 0
+    }
+  ],
+  "newExpandedArtifactCount": 0,
+  "originalArchiveAccessibleIntactAndDecryptable": true
+}

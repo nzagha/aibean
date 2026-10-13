@@ -1,70 +1,65 @@
-# aiBean expanded application recovery execution result
+# aiBean corrected expanded recovery v2 execution result
 
-**Correction preparation — 10 October 2026: PASS locally; hosted recovery remains FAIL / awaiting new execution approval.** The owner-authorized v2 correction normalizes the PostgreSQL address and completes source metadata/history and new local-target readiness before application body capture. All 70 automated tests and the exact shared executor's native PostgreSQL/CMS rehearsal pass. New manifest SHA-256: `5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec`. [Correction review and exact execution authorization](SUPABASE_EXPANDED_RECOVERY_CORRECTION_REVIEW.md). The original v1 manifest/failure evidence remain historical; no hosted retry, Auth activation or original retained-target modification occurred.
+**Recovery gate: FAIL.** Authorization 2 was consumed by one exact executor invocation on 12 October 2026 local / 13 October UTC. It stopped at `approved-scoped-export` before encryption or restoration. No second attempt, repair, installation or provider activation followed.
 
+Target: project `yfknxidgphhepdtwazhn`, database `postgres`, branch `codex/supabase-foundation`. Authorized inventory commit: `bea2ca7ebd38d3c331f6e3e098138487ef7c0030`.
 
-**Recovery gate: FAIL — stopped before native hosted export.** Executed once on 10 October 2026 under the owner's explicit authorization, on branch `codex/supabase-foundation`, against project `yfknxidgphhepdtwazhn`, database `postgres`.
+Exact unchanged v2 manifest SHA-256: **`5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec`**. The manifest and all fourteen dependency byte hashes passed before and after execution. Only `scripts/execute-expanded-recovery.ts --execute-approved=5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec` performed the recovery attempt. Its ignored local launcher supplied existing process-only private paths; it did not alter the reviewed executable or manifest, credentials, private profile or environment file.
 
-Exact executed manifest SHA-256: `a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30`. All eleven reviewed executable/dependency hashes passed before execution and remain unchanged afterwards. The executor was `scripts/execute-expanded-recovery.ts`; no reviewed executable, prerequisite SQL or manifest was modified or retried. The exact scope remains the eighteen tables and two sequences in the [reviewed proposal](SUPABASE_EXPANDED_APPLICATION_RECOVERY_PROPOSAL.md).
+## Observed results
 
-## Observed outcome
+| Check | Result |
+| --- | --- |
+| Branch, authorized revision, manifest and fourteen dependencies | PASS |
+| Immediate independent hosted operator/project/database/CA/hostname/TLS | PASS |
+| Exact eighteen-table/two-sequence inventory, RLS/grants/roles and original histories | PASS |
+| Two historical TestUsers records and private digest/metadata/sequence continuity | PASS before capture and in independent postflight |
+| Auth users/identities, application Users, identity mappings | PASS: all zero |
+| Original encrypted archive/metadata, decryptability and protected CMS/key/storage prerequisites | PASS |
+| New isolated PostgreSQL identity, normalized loopback address, TLS/hostname and pristine schema | PASS: executor advanced beyond these guards |
+| Scoped hosted export | FAIL to complete; attempted, exception redacted |
+| New encrypted archive, metadata or success receipt | NONE CREATED; zero expanded artifacts independently observed |
+| Encrypted expanded archive integrity/decryptability | NOT ESTABLISHED; no archive exists |
+| Isolated hosted-data restoration; restored schema/security/data/ledger validation | NOT EXECUTED |
+| Hosted continuity, histories, definitions, policies, grants and original private backup | PASS in independent read-only postflight |
+| Original failed v1 target | Unchanged, stopped and retained |
+| Newly created failed v2 target | Stopped and retained; no completion witness or bootstrap plaintext password |
+| Frozen package and private environment | Unchanged |
 
-| Check                                         | Result and evidence boundary                                                                                                                                                              |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Manifest / dependency integrity               | PASS; exact approved bytes before and after the attempt                                                                                                                                   |
-| Source prerequisite checks                    | PASS; strict CA/hostname TLS, correct project/database/operator, expected scope, installed histories, role restrictions and zero Auth accounts/mappings                                   |
-| Original encrypted backup                     | PASS; retained, accessible, hash-verified and decryptable before and after the stopped attempt                                                                                            |
-| Expanded hosted export                        | FAIL to complete; `pg_dump` was **not attempted**                                                                                                                                         |
-| New encrypted archive integrity               | FAIL to establish; **no new archive or encrypted metadata was created**, rather than an observed corrupt archive                                                                          |
-| Isolated local restoration                    | FAIL to reach restoration; the disposable cluster was prepared, then execution stopped before dump/restore or application prerequisites                                                   |
-| Tables, sequences and ledgers restored        | NOT EXECUTED; no hosted data was restored locally                                                                                                                                         |
-| Hosted data/history/RLS/grants continuity     | PASS; independent postflight verifies both unchanged TestUsers records, fourteen RLS application tables, eighteen FKs, original Drizzle/security history and runtime/browser restrictions |
-| Failed target disposition                     | Stopped and retained privately; no postmaster PID, no completion witness, no bootstrap plaintext password; zero new encrypted expanded artifacts                                          |
-| Website / private environment / Auth settings | No change; current password mode remains active and provider-test gate remains disabled                                                                                                   |
+The attempt ran from **2026-10-13T03:40:14.613Z** through **2026-10-13T03:41:09.355Z**. Independent postflight was captured at **2026-10-13T03:42:05.775Z**. The exact executor returned exit code 1 with `hostedExportAttempted=true`, `encryptedArchiveRetained=false`, `sourceWrites=false` and `transientTargetRetainedOnFailure=true`.
 
-The executor returned exit code 1 with `stage=new-local-target-preparation`, `hostedExportAttempted=false`, `encryptedArchiveRetained=false`, `sourceWrites=false`, and `transientTargetRetainedOnFailure=true`. It did not automatically reset or retry. Its finalizer stopped the known disposable target. Independent `pg_ctl status` returned the stopped-server status; the target log existed and was empty.
+The masked-address defect no longer blocks this attempt: the new local identity query uses `host(inet_server_addr())`, and the strict database/operator/version/TLS/loopback checks completed before capture. All source metadata/history and local target readiness guards completed before private application record-body capture. A separate immediate preflight additionally compared the server-computed TestUsers digest to the original encrypted metadata before launching the executor; no personal digest or record value was published.
 
-**Record-body distinction:** after source preflight, this approved executor read selected application row bodies into its private process to calculate integrity values. Those in-memory reads preceded local-target readiness. No native dump, persisted expanded archive or restored hosted row was produced. No row values or personal-record digests are included in this report. The separate read-only preflight/postflight script computes TestUsers continuity inside PostgreSQL and publishes only equality evidence.
+## Failure boundary and diagnostic limits
 
-Preflight completed at **20:39:44 UTC**. Independent postflight completed at **20:42:41 UTC**. Both verified TestUsers count two, internal User/mapping/Auth-user/Auth-identity counts zero, unchanged definitions/policies/sequence state, denied browser TestUsers table/column access, original migration hashes/timestamps and the security ledger. Previously excluded TestUsers sequence access remains as before. Source checks used read-only transactions, and the executor made no hosted writes. [Postflight evidence](evidence/supabase-next-stage-readiness.json), [sanitized attempt evidence](evidence/supabase-expanded-application-recovery-result.json).
+The executor sets `approved-scoped-export` immediately before native pg_dump. That stage also includes archive bounds/header, TOC/schema allowlist validation, same-snapshot integrity comparison and encryption. The sanitized failure does **not** identify which assertion or native operation failed. Dump completion, a valid in-memory archive and an exact root cause are unverified; do not label this a confirmed pg_dump, TLS or schema defect. There is no retained encrypted expanded archive or metadata. Both retained target server logs contain zero bytes; neither target was restarted for diagnosis.
 
-## Confirmed defect and diagnostic limits
+Selected application bodies were captured into private process memory after the guards for integrity comparison, and pg_dump was attempted. This is not a successful persisted backup. Supabase-managed Auth/Vault/Storage/Realtime bodies, passwords, platform secrets and private keys were outside the selectors; none was uploaded. Source operations used read-only transactions/connections. No hosted write or configuration-changing API was invoked. Fresh scoped comparisons confirm unchanged records/catalog/history/permissions; this is not a global proof of every unrelated managed service's state.
 
-The approved executor's local identity query uses `inet_server_addr()::text AS host`, then requires the literal string `127.0.0.1`. PostgreSQL renders a host `inet` value cast to text with its mask: **`127.0.0.1/32`**. An isolated in-memory PostgreSQL reproduction returned that value; `host(CAST('127.0.0.1' AS inet))` returned **`127.0.0.1`**. Consequently, the reviewed comparison rejects a valid loopback identity when reached.
+## Retention and recovery limitations
 
-This is a reproducible blocker in the failed stage. The executor intentionally redacts raw exceptions, and its retained server log is empty, so the precise failing assertion from this particular attempt is not independently recoverable. Other lifecycle/TLS issues cannot be excluded until a corrected, approved operation passes. No failed target was restarted for diagnosis.
+The original verified pre-install TestUsers encrypted archive/metadata/receipt are still accessible, byte-identical and decryptable. They remain the only verified hosted-data recovery point and do not cover the installed application foundation. Both failed targets are private, stopped and retained without modification or cleanup; the original target's top-level file hashes and stopped witness were compared before/after. No new target is eligible for success-only deletion.
 
-The prior synthetic native recovery test exercised dump/restore, permissions and data comparisons but **did not exercise this exact executor local-identity comparison**. Its PASS and the 66 automated tests do not establish successful hosted recovery. This coverage gap is now explicitly recorded.
+Hosted PostgreSQL is **17.6**, local tools/server **17.11**. Source ICU/locale versus local Windows C-locale platform differences still require review for a future real hosted restore. This failed attempt establishes no cross-version restoration success. NOLOGIN role surrogates and empty local Auth scaffolding cannot reconstruct the Supabase platform, role passwords or real hosted identities. Storage object bytes, provider/settings/DNS/deployment recovery, independent-device key recovery and off-device retention remain outside this gate. No forensic erasure guarantee is claimed.
 
-## Historical proposed correction — subsequently implemented in v2
+Supabase Free manual scoped backups do not provide managed daily-backup or PITR guarantees, and database backups exclude Storage object bytes. [Official backup limitations](https://supabase.com/docs/guides/platform/backups). No external private backup upload is authorized.
 
-The bounded local-address change is:
+## Blocker and next decision
 
-```diff
-- inet_server_addr()::text AS host
-+ host(inet_server_addr()) AS host
-```
+**All subsequent hosted schema installation approvals remain blocked by the failed expanded recovery gate.** Do not run any seven feature package, Auth release package, historical A/B/C operation, hosted Auth/provider test or account creation. The one-execution authorization is exhausted. Do not retry v2 merely because its preflight or synthetic tests pass.
 
-Keep the strict expected loopback address, database, role, version, TLS and certificate checks. Do not weaken them or accept a remote endpoint. Add a regression test of the exact local identity query/comparison under disposable native PostgreSQL, including a rejected non-loopback identity.
+If the owner wants engineering to investigate, the next bounded authorization is:
 
-Also place all snapshot history/scope and local-target readiness checks before selected row-body capture. The current executor validates source history independently before the run, but its snapshot helper checks ledger contents after its private body loop, and local-target readiness follows that loop. Moving these gates before body capture better enforces the owner's explicit prerequisite boundary. Include tests proving a failed history or local-target check prevents body queries.
+> I authorize local diagnosis of the corrected expanded recovery v2 failure at approved-scoped-export and preparation of a separately reviewed correction only if required. Use synthetic records in fresh disposable native PostgreSQL environments, exercise the exact executor/export/TOC/security validation path and add sanitized stage-specific diagnostics and regression coverage without exposing protected data. Preserve the eighteen-table/two-sequence scope, all existing TLS/history/privacy guards, the original encrypted backup, both stopped failed targets and all frozen package/history bytes. Publish exact changed-file checksums, local validation evidence and a new versioned manifest for my review. Do not rerun a hosted export or recovery, restart/modify/delete either retained target, change hosted data/settings, install any package, create accounts, send email or activate providers. A hosted retry requires a separate explicit authorization bound to the reviewed package hash.
 
-These changes would alter reviewed executable hashes. They have **not** been made. After separate correction authorization, prepare and validate the changed package, regenerate its manifest and present its exact new SHA-256 for a separate execution decision. Preserve the stopped failed target and original backup unless cleanup is explicitly approved; the current success-only cleanup condition has not been met.
+No correction or local recovery rehearsal was automatically started. [Historical v1 result](SUPABASE_EXPANDED_APPLICATION_RECOVERY_V1_HISTORICAL_RESULT.md) and [v1 evidence](evidence/supabase-expanded-application-recovery-v1-historical.json) preserve the original failure rather than relabeling it. The v1 hash `a759d686d2a108f7d3c91e35d0db3ff014beae2d7992e2aa587a1dd32bfb1b30` remains historical only.
 
-## Historical retention, limitations and preparation authorization
+## Validation and publication
 
-The original pre-installation encrypted TestUsers archive remains the only verified hosted-data recovery point. It does not cover the installed application foundation. No new successful expanded backup exists. The failed disposable target and generated local secrets remain in the restricted, non-synchronized private directory; no backup material, private paths, certificates, credentials, personal records or row digests are published.
+Eight existing recovery regression tests pass; they do not establish actual hosted export/restoration success. No production code, SQL, manifest or test was changed. Lint, TypeScript, all 116 automated tests, production build and zero-vulnerability runtime dependency audit pass. The initial restricted Windows context blocked path canonicalization/registry access and three loopback/symlink-dependent tests; checks rerun in the normal Windows context pass without source changes. Final offline manifest inspection verifies all fourteen unchanged hashes; its default NOT EXECUTED output describes that inspection invocation, not the actual attempt above. The result-commit CI has not yet been checked. Only sanitized documents/evidence are selected for GitHub; private launcher/preflight files stay ignored.
 
-Even after a future successful expanded run, the proposed application archive will exclude managed Auth/password/session/Storage/Vault recovery and provider settings. NOLOGIN role surrogates and an empty local Auth FK scaffold cannot recreate the Supabase service. PostgreSQL patch version and Windows C-locale differences require a separate platform review for any future real hosted restore. Independent-device key recovery/off-device retention remain unverified.
+- [Sanitized active attempt evidence](evidence/supabase-expanded-application-recovery-result.json)
+- [Executor invocation and preservation verification](evidence/supabase-expanded-recovery-v2-execution-verification.json)
+- [Independent failure postflight](evidence/supabase-expanded-recovery-v2-failure-postflight.json)
 
-The recovery gate does not permit proceeding to SMTP, password-policy, redirect changes or two-account hosted Auth tests. Their existing [configuration](SUPABASE_AUTH_EMAIL_READINESS.md) and [test/cutover plans](SUPABASE_HOSTED_AUTH_TEST_AND_CUTOVER_PLAN.md) remain proposals. The next bounded authorization is:
-
-> I authorize preparation of a corrected expanded recovery package: normalize the local PostgreSQL address with host(inet_server_addr()), move all required history/scope/local-target readiness guards before row-body capture, and add regression coverage for those boundaries. Preserve the eighteen-table/two-sequence scope and every TLS, privacy, retention and hosted-write restriction. Validate using synthetic disposable local data and publish the exact changed files and new manifest SHA-256 for my review. Do not retry the hosted export/restore, restart or delete the retained failed target, change hosted data/settings, create accounts, send emails or activate Auth until I separately authorize the new package.
-
-This new approval is required by the owner's instruction: **“Do not modify reviewed executable files or expand the authorized scope without stopping for another approval.”** No new operational approval is inferred from the failed attempt.
-
-## Automated validation and GitHub
-
-The unchanged implementation has 66 passing automated tests, a passing native synthetic rehearsal, lint/typecheck/build and zero reported runtime vulnerabilities. [GitHub Validate 38070884364](https://github.com/nzagha/aibean/actions/runs/38070884364) passed on implementation commit `3eab5d1989af99299fd79fdd1b5e90951aed71cc`; publication commit `66fed960adc8ce94fc135e6edd47c8540393038d` added evidence only. The frozen package still passes offline checksum inspection after this stopped attempt. The address-format mismatch was separately reproduced in an ephemeral local database; no executable repair was applied.
-
-Only the failure report, sanitized aggregate evidence and active status updates are published for this attempt. [GitHub Validate 38084997727](https://github.com/nzagha/aibean/actions/runs/38084997727) passed lint, typecheck, all 66 tests, production build and runtime audit for result commit `3c85e50a52fa0651a3e53af45d86f47576f17a28`. All seven publication files passed the private-value scan with zero matches. This later evidence-only update records that result; no reviewed code changed. The earlier synthetic PASS remains historical evidence and is not relabeled as a successful hosted backup.
+All fourteen selected publication files pass the protected-value scan and staged whitespace validation. Private backups, certificate material, personal records/digests and operator launchers are excluded. The frozen discovery/pricing SQL index checks also pass. Publication is limited to this branch's sanitized documentation/evidence.

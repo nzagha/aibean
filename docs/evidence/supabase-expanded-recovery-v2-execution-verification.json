@@ -1,0 +1,73 @@
+{
+  "startedAt": "2026-10-13T03:40:14.613Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "authorizedRevision": "bea2ca7ebd38d3c331f6e3e098138487ef7c0030",
+  "packageSha256": "5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec",
+  "attempts": 1,
+  "checks": [
+    {
+      "name": "Exact branch and authorized inventory commit",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen manifest and fourteen dependency hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing private preparation profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing PowerShell and OpenSSL binaries",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing protected storage, native binaries and original stopped failed target",
+      "status": "PASS"
+    },
+    {
+      "name": "Immediate independent hosted continuity and history preflight before any body capture",
+      "status": "PASS"
+    },
+    {
+      "name": "Original backups and private environment unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Original failed target untouched and stopped",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen manifest and dependencies unchanged after execution",
+      "status": "PASS"
+    }
+  ],
+  "status": "FAIL",
+  "sourceWrites": false,
+  "independentHostedPreflight": {
+    "status": "PASS",
+    "strictTargetOperatorTls": true,
+    "historiesRolesRlsAndGrants": true,
+    "freshInventoryUnchanged": true,
+    "emptyAuthUsersAndMappings": true,
+    "testUsersPrivateIntegrityAndMetadata": true,
+    "originalArchiveDecryptable": true,
+    "applicationRecordBodiesExported": false
+  },
+  "executorExitCode": 1,
+  "executorResult": {
+    "recoveryGate": "FAIL",
+    "stage": "approved-scoped-export",
+    "hostedExportAttempted": true,
+    "encryptedArchiveRetained": false,
+    "sourceWrites": false,
+    "automaticResetOrRepeat": false,
+    "transientTargetRetainedOnFailure": true,
+    "details": "Private diagnostics redacted; reviewed recovery decision required"
+  },
+  "stoppedAt": "approved-scoped-export",
+  "details": "Further execution stopped. Protected diagnostics withheld; no automatic retry.",
+  "finishedAt": "2026-10-13T03:41:09.355Z",
+  "launcherLastCompletedCheck": "Frozen manifest and dependencies unchanged after execution"
+}

@@ -1,5 +1,7 @@
 # Expanded recovery v2 correction review
 
+**Authorization 2 actual corrected recovery v2: FAIL — 12 October local / 13 October 2026 UTC.** One exact `5249c408d2610ab30e8e691f2f8396b3b83fd2ffc05053aaafebc6cb952acfec` executor invocation passed fourteen hashes, source continuity/history/roles and new local TLS/operator/pristine checks, then stopped at `approved-scoped-export`. No expanded encrypted archive or restore exists. Independent postflight confirms unchanged hosted data/history/grants, both TestUsers records, zero accounts/mappings, original decryptable backup and private environment. The original and new failed targets are stopped and retained. No retry, repair, installation, Auth or provider activation followed. [Active failure, evidence and next bounded authorization](SUPABASE_EXPANDED_APPLICATION_RECOVERY_RESULT.md). Expanded recovery remains a blocker; Authorization 2 is exhausted. Earlier dated readiness/authorization paragraphs are historical.
+
 Prepared under the owner's correction-only authorization on 10 October 2026. **Local correction and synthetic native validation: PASS. Hosted recovery gate remains FAIL from the original attempt; no hosted retry occurred.** Branch: `codex/supabase-foundation`.
 
 ## Exact package
