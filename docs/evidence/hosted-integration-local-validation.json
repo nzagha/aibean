@@ -63,7 +63,32 @@
       "passed": 46,
       "failed": 0
     },
-    "correctedCI": "pending"
+    "correctedCI": {
+      "status": "PASS",
+      "run": 38338559505,
+      "url": "https://github.com/nzagha/aibean/actions/runs/38338559505",
+      "sourceCommit": "5f0802db806820e072fb95ec7f21fe27ac79cf12",
+      "checks": [
+        "lint",
+        "TypeScript",
+        "116 automated tests",
+        "production build",
+        "runtime dependency audit"
+      ],
+      "nativePostgresExecutedByCI": false
+    },
+    "correctedImplementationCommit": "5f0802db806820e072fb95ec7f21fe27ac79cf12",
+    "correctedImplementationPushed": true,
+    "protectedValueScans": [
+      {
+        "files": 44,
+        "status": "PASS"
+      },
+      {
+        "files": 6,
+        "status": "PASS"
+      }
+    ]
   },
   "limitations": [
     "Synthetic loopback Auth service uses real pinned SDK, not full GoTrue or hosted mail/JWT deployment.",

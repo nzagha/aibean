@@ -4,6 +4,8 @@
 
 **Local release engineering and integrated installation rehearsal: PASS. Hosted production identity/recovery readiness: not established.** No hosted connections, writes, backup/export/restore, accounts, email, provider activation, environment changes, DNS or deployment occurred. Existing website branding/layout and transitional login mode remain unchanged. Work did not repeat product audits, recreate modules or repeat A/B/C.
 
+**Publication verified:** implementation [4edc94f](https://github.com/nzagha/aibean/commit/4edc94f6288dbfbd57ee14c6f2241b4dbee833e5) and validated correction [5f0802d](https://github.com/nzagha/aibean/commit/5f0802db806820e072fb95ec7f21fe27ac79cf12) are pushed. [GitHub Validate 38338559505](https://github.com/nzagha/aibean/actions/runs/38338559505) passed all configured checks on exact corrected implementation source `5f0802db806820e072fb95ec7f21fe27ac79cf12`, including the full 116-test suite. Native PostgreSQL remains separately verified locally (46 scenarios); GitHub's configured job does not run native PostgreSQL. All 44 initial files and six correction files passed protected-value scanning. Three pre-existing untracked skill/import items remain preserved and unpublished.
+
 ## Auth protections implemented
 
 - `shared-security.ts` uses the existing server-only RLS `rate_limits` table through Drizzle. Atomic database-owned fifteen-minute windows share a global 1,000-attempt budget and per-purpose/HMAC-normalized-email budgets (ten login/reauth attempts, three other attempts). No forwarded-IP trust or process-local production fallback. Fixed-window boundaries are intentional; provider throttles apply independently. Bounded maintenance removes only expired Auth namespaces; an operator schedule remains to be reviewed.
