@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-13T02:28:11.938Z",
+  "date": "2026-10-13T02:46:01.329Z",
   "environment": "Native disposable PostgreSQL; synthetic data only",
   "version": "postgres (PostgreSQL) 17.11",
   "tls": "Verified generated test CA, loopback hostname/IP, SCRAM authentication; hostnossl rejected",
@@ -17,8 +17,8 @@
       "sha256": "168fd0b654a75e1174052fc444893a66362f89bb3d1cdaec3bbfe9fcbf4f4df1"
     }
   ],
-  "backupSha256": "14e24ae2040d4bc26536b15b8b8be24bd49b887113d0f65d0c49bbd7a51d55d0",
-  "roleBackupSha256": "fd3dc769cffc5d8f561c299de9d7b5b85c42f2d52e0ddca79ada6f9c09b6f09d",
+  "backupSha256": "b99d43d253a2c2735cde2008384ec31cd3b8f0a68618acbdcb275839e13082e6",
+  "roleBackupSha256": "2bd03428badb4447b928b17bb2395e8d33790a3d3b6c32f8c44ae255b774a6ca",
   "applicationTables": 14,
   "foreignKeys": 18,
   "preservedTestUsers": 2,

@@ -46,7 +46,24 @@
   "providerActivations": 0,
   "privateEnvironmentChanged": false,
   "publication": {
-    "status": "pending tested commit/push and CI"
+    "implementationCommit": "4edc94f6288dbfbd57ee14c6f2241b4dbee833e5",
+    "implementationPushed": true,
+    "initialCI": {
+      "run": 38338039349,
+      "url": "https://github.com/nzagha/aibean/actions/runs/38338039349",
+      "status": "FAIL",
+      "reason": "Existing fixed-minute affiliate burst test crossed the window boundary"
+    },
+    "correction": "Synthetic burst clock pinned with per-request savepoint rollback; same step-up guard enforced in candidate and production",
+    "affectedTests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "nativeRehearsalAfterCorrection": {
+      "passed": 46,
+      "failed": 0
+    },
+    "correctedCI": "pending"
   },
   "limitations": [
     "Synthetic loopback Auth service uses real pinned SDK, not full GoTrue or hosted mail/JWT deployment.",

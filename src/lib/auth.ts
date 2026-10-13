@@ -16,7 +16,6 @@ import { ownerPredicates } from "./db/owned-resources";
 import { ACCESS_COOKIE, RECOVERY_COOKIE } from "./supabase/auth-proof";
 import { verifiedBusinessAccount } from "./supabase/business-session";
 import { creatorPublishingAllowed } from "./admin/review-storage";
-import { productionAuth } from "./auth-mode";
 import { sharedAuthSecurity } from "./supabase/release-server";
 import { createAuthProofs } from "./supabase/auth-proof";
 export const authConfigured = () => authMode() === "clerk";
@@ -95,7 +94,9 @@ export async function requireVendorCapability(toolId: string) {
 export const requireApprovedCreator = requireCreator;
 export const requireToolOwner = requireVendorCapability;
 export async function requireRecentAuthentication(returnTo = "/account") {
-  if (!productionAuth()) return;
+  // The isolated candidate must exercise the same sensitive-action boundary
+  // as production, so hosted acceptance can verify it before release.
+  if (authMode() !== "supabase") return;
   const cookieStore = await cookies();
   const proof = createAuthProofs(
     process.env.AIBEAN_RECOVERY_SECRET || "",

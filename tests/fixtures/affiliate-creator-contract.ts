@@ -562,27 +562,46 @@ export async function affiliateCreatorContract(db: DB) {
     "0",
   );
   const burst = { hash: "3".repeat(64), source: "resource" as const };
-  for (let i = 0; i < 30; i++)
-    await registerOutbound(
-      db,
-      "tools",
-      "dis-t1",
-      "internal",
-      burst,
-      "dis-resource",
-      String(prog.config_sha256),
+  // A fixed-window burst must occupy one PostgreSQL now() window. Slow CI can
+  // cross a minute between independent transactions. Pin only this synthetic
+  // contract's outer clock and retain per-request rollback via savepoints.
+  await db.transaction(async (tx) => {
+    const burstDb: IdentityDatabase = {
+      async transaction<T>(work: (inner: IdentityTransaction) => Promise<T>) {
+        await tx.execute(sql`SAVEPOINT affiliate_burst_request`);
+        try {
+          const result = await work(tx);
+          await tx.execute(sql`RELEASE SAVEPOINT affiliate_burst_request`);
+          return result;
+        } catch (error) {
+          await tx.execute(sql`ROLLBACK TO SAVEPOINT affiliate_burst_request`);
+          await tx.execute(sql`RELEASE SAVEPOINT affiliate_burst_request`);
+          throw error;
+        }
+      },
+    };
+    for (let i = 0; i < 30; i++)
+      await registerOutbound(
+        burstDb,
+        "tools",
+        "dis-t1",
+        "internal",
+        burst,
+        "dis-resource",
+        String(prog.config_sha256),
+      );
+    await assert.rejects(
+      registerOutbound(
+        burstDb,
+        "tools",
+        "dis-t1",
+        "internal",
+        burst,
+        "dis-resource",
+        String(prog.config_sha256),
+      ),
     );
-  await assert.rejects(
-    registerOutbound(
-      db,
-      "tools",
-      "dis-t1",
-      "internal",
-      burst,
-      "dis-resource",
-      String(prog.config_sha256),
-    ),
-  );
+  });
   await assert.rejects(
     db.execute(
       sql`UPDATE public.creator_revision_history SET revision='tampered'`,
