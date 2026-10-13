@@ -62,7 +62,7 @@ Admin Operations v2 may be prepared locally in a separate task, but it **cannot 
 
 ## Publication and verification evidence
 
-Only sanitized diagnostic documents/evidence are published. No SQL, mechanism, recovery manifest, application code or private settings were changed. Documentation JSON/whitespace/secret scans and offline exact-hash inspections pass. Existing code CI remains [Validate 38409932853 PASS](https://github.com/nzagha/aibean/actions/runs/38409932853); it is local-tooling validation, not hosted installation evidence. Diagnostic result commit/CI are recorded after push.
+Only sanitized diagnostic documents/evidence are published. No SQL, mechanism, recovery manifest, application code or private settings were changed. Documentation JSON/whitespace/secret scans and offline exact-hash inspections pass. Diagnostic result commit `87a2afe33714c097e912f6c9a59d8ddfa159482a` is pushed to `codex/supabase-foundation`; [Validate 38416782755 PASS](https://github.com/nzagha/aibean/actions/runs/38416782755) independently passed lint, TypeScript, automated tests, production build and runtime dependency audit. CI validates the repository; it does not establish hosted installation. This subsequent documentation-only update records the observed CI result.
 
 - [Accessible local command history](evidence/admin-review-v1-local-execution-history-inspection.json)
 - [Exact frozen read-only verifier invocation](evidence/admin-review-v1-readonly-verifier-invocation.json)
