@@ -1,0 +1,109 @@
+{
+  "authorization": 8,
+  "status": "PASS",
+  "startedAt": "2026-10-13T20:50:52.964Z",
+  "sourceCommit": "1401e9a73c925b7ed2fcf4f7a639a8dc56c9d7db",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "packageSha256": "523b351d870e36efd9283b06b9a19b68bb2de2b31e0cd87bd200008f27861deb",
+  "dependencies": 138,
+  "executorInvocations": 0,
+  "checks": [
+    {
+      "name": "Exact source branch commit manifest and 138 dependencies before protected access",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing protected operator recovery profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Required private process-only binding tools",
+      "status": "PASS"
+    },
+    {
+      "name": "No prior v4b namespace receipt or conflicting execution",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected storage native 17.11 prerequisites and two stopped historical failures",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent immediate read-only hosted metadata history grants and private continuity",
+      "status": "PASS"
+    },
+    {
+      "name": "Historical backups targets configuration unchanged immediately before execution",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact frozen package immediately before single launch",
+      "status": "PASS"
+    },
+    {
+      "name": "Historical targets backups private profile environment final preservation",
+      "status": "PASS"
+    }
+  ],
+  "hostedWrites": false,
+  "automaticRetry": false,
+  "privatePrerequisites": {
+    "openSslAvailability": "PASS",
+    "nativePostgreSql": "17.11",
+    "existingCmsProfileOnly": true,
+    "newTargetCreated": false,
+    "retainedFailedTargetsStopped": true,
+    "requiredBinaryAvailability": "PASS",
+    "nonSynchronizedRoot": "PASS",
+    "retainedFailedTargetCount": 2,
+    "ntfsAndMinimumCapacity": "PASS",
+    "retainedFailedTargetUntouched": true,
+    "existingExpandedArtifactCount": 3,
+    "privateStorageAcl": "PASS",
+    "recoveryTargetReadiness": "Existing prerequisites only; new target TLS/identity/pristine checks deferred to separately authorized executor"
+  },
+  "preflight": {
+    "status": "PASS",
+    "phase": "preflight",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "operator": "postgres",
+    "sessionOperator": "postgres",
+    "strictTlsHostnameVerified": true,
+    "sourceDatabaseEnvironment": {
+      "owner": "postgres",
+      "encoding": "UTF8",
+      "collation_provider": "i",
+      "collation": "en_US.UTF-8",
+      "ctype": "en_US.UTF-8",
+      "locale": "en-US",
+      "collation_version": "153.121",
+      "server_version": "17.6"
+    },
+    "selectedTables": 29,
+    "selectedSequences": 2,
+    "foreignKeys": 42,
+    "constraints": 122,
+    "indexes": 47,
+    "policies": 29,
+    "applicationRlsTables": 23,
+    "drizzleEntries": 2,
+    "securityEntries": 1,
+    "reviewLedgerEntries": 1,
+    "operationsLedgerEntries": 1,
+    "testUsersRecords": 2,
+    "authUsers": 0,
+    "authIdentities": 0,
+    "applicationUsers": 0,
+    "identityMappings": 0,
+    "publicFeatureRecords": 0,
+    "privateIntegrity": "PASS",
+    "foundationReviewOperationsHistory": "PASS",
+    "effectiveGrantsAndRoles": "PASS",
+    "recordBodiesExported": false,
+    "sourceWrites": false
+  },
+  "preflightOnly": true,
+  "finishedAt": "2026-10-13T20:52:20.443Z"
+}
