@@ -1,5 +1,8 @@
 # Active MVP remediation plan
 
+**Local QA publication verified:** Implementation `108b729b3bf9a953c6d8e68d76d1397404f34303` and desktop-access correction `c507912748a4d9fa4625a3807eee607dfd89590a` are pushed; [Validate 38617677711](https://github.com/nzagha/aibean/actions/runs/38617677711) and [Validate 38619181447](https://github.com/nzagha/aibean/actions/runs/38619181447) completed successfully. A file-handle-based helper fixes packaged Codex AppData virtualization without credential copies or ACL expansion; all four endpoint probes pass. Original 24 local-overlay and 170 Creator Content dependencies still match. Actual owner password-entry/browser completion and final restart verification remain pending; do not claim complete browser acceptance. No hosted operation occurred.
+
+
 **Local account testing v2 — implemented and locally validated; browser completion pending, 14 October 2026.** The existing disposable QA database now supports confirmed ordinary signup, genuine change/reset with session revocation, a protected local mailbox and an eight-hour preserving loopback launcher. Full automated/native/security/build checks pass; original 170 Creator Content dependencies, SQL and private hosted configuration remain unchanged. Actual browser registration/confirmation/login/account pass; owner credential-entry handoff, new-adapter four-role browser checks and final restart evidence remain pending. No hosted connection/provider/recovery/installation occurred. [Current owner guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md), [accurate verification status](LOCAL_AUTHENTICATION_TEST_RESULTS.md), [private access](LOCAL_QA_CREDENTIAL_ACCESS.md). Earlier preview restrictions and restart-rotation instructions are historical.
 
 
