@@ -1,16 +1,89 @@
 {
-  "status": "PENDING_PUSH_AND_CI_OBSERVATION",
+  "status": "PUBLISHED_SOURCE_CI_PASS",
   "branch": "codex/supabase-foundation",
   "startingCommit": "b66cf738f59e163326be3a66bc5d693fa86f21f0",
   "localValidation": "PASS",
   "automatedTests": 154,
   "nativeScenarios": 16,
   "hostedConnections": 0,
-  "sourceCommit": null,
-  "remoteVerified": false,
+  "sourceCommit": "1206c8e21ffb7fd3ad1abc993b48bb16879a168f",
+  "remoteVerified": true,
   "ci": {
-    "status": "UNVERIFIED",
-    "url": null
+    "id": 38503767948,
+    "commit": "1206c8e21ffb7fd3ad1abc993b48bb16879a168f",
+    "name": "Validate",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38503767948",
+    "jobs": [
+      {
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run build",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm audit --omit=dev --audit-level=high",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
   },
   "publicationScan": {
     "status": "PASS",
@@ -25,5 +98,8 @@
     "newManifestGitBytes": "PASS",
     "originalFrozenDependenciesGitBytes": 170,
     "originalEvidenceGitBytes": 12
-  }
+  },
+  "observedAt": "2026-10-14T03:02:19.831Z",
+  "preservedOriginalClassification": "COMMITTED_INDEPENDENT_VERIFIER_PASS_REVIEW_REQUIRED",
+  "hostedOperations": 0
 }
