@@ -1,3 +1,5 @@
+> Current local account testing: the eight-hour preserving launcher, registration, password management and protected mailbox supersede the previous preview restrictions. See [the current account guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md). The observations below are the historical first preview results.
+
 # Local website issues and blockers
 
 October 14, 2026. Scope: synthetic local QA only. The website is available through the lease-bounded preview documented in `LOCAL_WEBSITE_RECOVERY_RESULT.md`.

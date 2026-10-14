@@ -1,3 +1,5 @@
+> Current local account testing: the eight-hour preserving launcher, registration, password management and protected mailbox supersede the previous preview restrictions. See [the current account guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md). The observations below are the historical first preview results.
+
 # Private local QA account handoff
 
 Four genuine synthetic password-mode personas were provisioned in a new disposable local PostgreSQL database. No hosted User or Supabase Auth account was created. Normal server authorization is unchanged. The two peer isolation fixtures have no login handoff.

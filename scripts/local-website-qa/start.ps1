@@ -1,5 +1,13 @@
 $ErrorActionPreference='Stop'
 $workspace=(Get-Location).Path
+if (Test-Path .\test-results\local-website-qa-active.json) {
+  $taskPrevious=Get-Content .\test-results\local-website-qa-active.json -Raw | ConvertFrom-Json
+  if ($taskPrevious.authVersion -eq 2) {
+    Write-Output 'Resuming the existing account-testing database and credentials; no new fixture will be created.'
+    & powershell.exe -NoProfile -File scripts/local-website-qa/start-account-testing.ps1 -LeaseHours 8
+    exit $LASTEXITCODE
+  }
+}
 if (-not (Test-Path -LiteralPath (Join-Path $workspace 'package.json')) -or -not (Test-Path -LiteralPath (Join-Path $workspace 'scripts\local-website-qa\start.ts'))) {throw 'Run from the aiBean repository root'}
 $env:PG_TEST_BIN=Join-Path $workspace 'test-results\postgres-validation\portable\pgsql\bin'
 $env:PG_TEST_OPENSSL='C:\Program Files\Git\usr\bin\openssl.exe'

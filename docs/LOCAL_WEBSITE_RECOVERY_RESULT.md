@@ -1,3 +1,5 @@
+> Current local account testing: the eight-hour preserving launcher, registration, password management and protected mailbox supersede the previous preview restrictions. See [the current account guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md). The observations below are the historical first preview results.
+
 # Local website recovery result
 
 Observed on October 14, 2026. Scope: local Windows development only, on `codex/supabase-foundation`. No public deployment or hosted Supabase inspection was performed.

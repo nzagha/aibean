@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "privateEnvironmentUnchanged": true,
+  "stagedProposalDependencies": 24,
+  "runtimeVulnerabilities": 0,
+  "automatedTests": 161,
+  "nativeAuthChecks": 27,
+  "hostedConnections": 0
+}

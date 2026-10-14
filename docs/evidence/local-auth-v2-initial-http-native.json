@@ -1,0 +1,96 @@
+{
+  "capturedAt": "2026-10-14T18:00:19.386Z",
+  "target": "EXISTING_DISPOSABLE_NATIVE_POSTGRESQL_ONLY",
+  "hostedConnections": 0,
+  "checks": [
+    {
+      "check": "Strict local native target and TLS",
+      "status": "PASS"
+    },
+    {
+      "check": "Actual registration validates confirmation and policy",
+      "status": "PASS"
+    },
+    {
+      "check": "Actual registration creates only ordinary User and ignores privilege metadata",
+      "status": "PASS"
+    },
+    {
+      "check": "Unverified login and business access denied",
+      "status": "PASS"
+    },
+    {
+      "check": "Duplicate registration has same generic response and no password replacement",
+      "status": "PASS"
+    },
+    {
+      "check": "Local mailbox is protected; confirmation never exposed publicly",
+      "status": "PASS"
+    },
+    {
+      "check": "Private mailbox login and one-use email confirmation",
+      "status": "PASS"
+    },
+    {
+      "check": "Verified login, secure cookie and account rendering",
+      "status": "PASS"
+    },
+    {
+      "check": "Current password failure does not change sessions or credential",
+      "status": "PASS"
+    },
+    {
+      "check": "Real password change revokes both independent sessions",
+      "status": "PASS"
+    },
+    {
+      "check": "Forgot-password enumeration boundary and no token in public response",
+      "status": "PASS"
+    },
+    {
+      "check": "Invalid and account-purpose mismatched tokens reject",
+      "status": "PASS"
+    },
+    {
+      "check": "Recovery exchange is single use and recovery session cannot authorize business",
+      "status": "FAIL"
+    },
+    {
+      "check": "Real reset revokes access session, rejects replay and accepts only new password",
+      "status": "PASS"
+    },
+    {
+      "check": "Capabilities and identity unchanged by password operations",
+      "status": "PASS"
+    },
+    {
+      "check": "Actual server denies ordinary Admin and Creator access",
+      "status": "FAIL"
+    },
+    {
+      "check": "Forged cross-origin registration, change and reset reject",
+      "status": "PASS"
+    },
+    {
+      "check": "Concurrent signup yields exactly one ordinary identity",
+      "status": "PASS"
+    },
+    {
+      "check": "Atomic shared throttling cannot bypass budget concurrently",
+      "status": "PASS"
+    },
+    {
+      "check": "Logout revokes server session and clears cookie",
+      "status": "PASS"
+    },
+    {
+      "check": "All existing persona credentials remain unchanged and login on a consistent origin",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "pass": 19,
+    "fail": 2
+  },
+  "browserEvidenceSeparate": true
+}

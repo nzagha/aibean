@@ -1,0 +1,221 @@
+{
+  "version": "local-qa-auth-v2",
+  "scope": "DEVELOPMENT_SNAPSHOT_ONLY",
+  "hostedInstallationAuthorized": false,
+  "productionSourceReplaced": false,
+  "originalMechanism": {
+    "path": "db/proposals/creator-content-v1-readiness/mechanism.json",
+    "sha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+    "verifiedDependencies": 170
+  },
+  "hashing": "New source and generated overlays use canonical LF SHA-256; original frozen dependencies retain exact byte checksums.",
+  "files": [
+    {
+      "path": "scripts/local-website-qa/account-v2/build.mjs",
+      "canonicalLfSha256": "80db529dfa01872107d4810590e401c982dca0214f3a69aa7e2d0c33adef9445"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/overlays.ts",
+      "canonicalLfSha256": "a46170ebc31ab441db6e1bdbd24ce53e49bf8cded20ea437bd44cfdb6e3f0477"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/review-package.ts",
+      "canonicalLfSha256": "0ae1a232fe77a2732f13d29e8ab596aae614d84315ec66471475bd0af7cc5d72"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/rotate-credentials.ts",
+      "canonicalLfSha256": "84c474e86c2c104f01fa68f53b8d351a3a553a1f37bbfe7d6526c7d78636ef7f"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/serve.ts",
+      "canonicalLfSha256": "1f5b687cb9321102a3bb1e84f1d23caef25a08b688a1d43e3ff6f86a84a0435a"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/test-auth.ts",
+      "canonicalLfSha256": "47547bf2d1cdb4189a3b7a097cb5006e6695d71a389b2bbc93f1329119ada68a"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/verify-access.ts",
+      "canonicalLfSha256": "f77bd8a1f48cbb4da6d0cb6b56c8d96e133f4e1855abb28341c78a861176b058"
+    },
+    {
+      "path": "scripts/local-website-qa/account-v2/verify-continuity.ts",
+      "canonicalLfSha256": "2a302656f39c037da2f4ee505aa027133b32c6feeb749b88adaee10b51396bf5"
+    },
+    {
+      "path": "scripts/local-website-qa/open-test-access.ps1",
+      "canonicalLfSha256": "50bad873d4cde27a4987c505fe455778eda896ab203828da992f046cfaf17dbd"
+    },
+    {
+      "path": "scripts/local-website-qa/rotate-test-credentials.ps1",
+      "canonicalLfSha256": "e7d19188e6d500102b5c7ba3db4d26965c74d848f68fe7bca3d2db0124d78346"
+    },
+    {
+      "path": "scripts/local-website-qa/start-account-testing.ps1",
+      "canonicalLfSha256": "31d543913b2d793b0cc4f83ca3972f843b1b8c0707f1e979943a4200123b371b"
+    },
+    {
+      "path": "scripts/local-website-qa/start.ps1",
+      "canonicalLfSha256": "29557cb17a46ddf84350262f16982d2eeddf4afff008a438a1df28ea5dee37ae"
+    },
+    {
+      "path": "scripts/local-website-qa/start.ts",
+      "canonicalLfSha256": "fdb3f170849365d919e799c96910e5262b05c8888e592fd0a4346532bf6a00d4"
+    },
+    {
+      "path": "scripts/local-website-qa/stop.ps1",
+      "canonicalLfSha256": "67d9cb20258fdcf15a43de7336461933b4b921e0b44b852a7f080a74fff12837"
+    },
+    {
+      "path": "src/components/local-qa-auth-page.tsx",
+      "canonicalLfSha256": "629a7e7eaf692f048b9b6563940a14339dfbb1b2e598d35dcaa5ddcf30812d94"
+    },
+    {
+      "path": "src/components/local-qa-mailbox.tsx",
+      "canonicalLfSha256": "58b4967911bea3e5d117b3ce4314c500c1905917b355bbc5fd37c8c9ffdb6343"
+    },
+    {
+      "path": "src/components/local-qa-security.tsx",
+      "canonicalLfSha256": "be2735f7d6b30e28eaedc8f56abb1851eab9d849b88ce7f1b342a8bbd69e701c"
+    },
+    {
+      "path": "src/lib/local-qa-auth/config.ts",
+      "canonicalLfSha256": "f1420f0b9089c84ba53f11ab06561109350f6e2cdcdd49c88417489e67724992"
+    },
+    {
+      "path": "src/lib/local-qa-auth/core.ts",
+      "canonicalLfSha256": "107325b233275dd8dbb0bb5198b9af7b65c6ba7b0e1f0286272712fd7f41e0ee"
+    },
+    {
+      "path": "src/lib/local-qa-auth/handler.ts",
+      "canonicalLfSha256": "debc93a1ee617ea4df405432a9e80c596e145a7c61effd9e8400adbbd2f1f400"
+    },
+    {
+      "path": "src/lib/local-qa-auth/handoff.ts",
+      "canonicalLfSha256": "d670c7791a01de989d8f35b1c6f895083aa2558ccd4715c9c7e1499d5e486b88"
+    },
+    {
+      "path": "src/lib/local-qa-auth/runtime.ts",
+      "canonicalLfSha256": "d75adfd869c6947d09fa26f79e4207e7ef7d6df96067b7fce2f1474ab37b20ee"
+    },
+    {
+      "path": "src/lib/local-qa-auth/schema.sql",
+      "canonicalLfSha256": "5200e94a5acd3e413f5cf116dfb8b0cdc298b755e72759e30cd81dc8966e8e68"
+    },
+    {
+      "path": "tests/local-qa-auth-v2.test.ts",
+      "canonicalLfSha256": "4afa150a8934bc9cb7a704f5fc83af4cd4cd782ba0760cd5caf954a3065f5334"
+    }
+  ],
+  "overlays": [
+    {
+      "path": "src/app/account/page.tsx",
+      "originalSha256": "99200696c59697fcfe4a04b58e9bd03bfb96de4fad12f5753fc63ddf5a1c6510",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "1c26cf8cdd21c25b91564549f6d5aa6ae3d434d4f756094dfc546630effa1731"
+    },
+    {
+      "path": "src/app/account/security/page.tsx",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "8f6acee919a36bfe38c8b370f95e3d8c3a517a960ce888ce032aefcd624fd20e"
+    },
+    {
+      "path": "src/app/api/auth/login/route.ts",
+      "originalSha256": "1aa32ce8a80f4574625ad75aa9776e7f5be883ea5422a9dd60c628828c310676",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "52d5b52e2f708175fcd7e819647efb07975e4f18e4153d1479443c33fdda413d"
+    },
+    {
+      "path": "src/app/api/auth/logout/route.ts",
+      "originalSha256": "2779c962e802bb1e611c942aec29e5c9e7002827d79964433020ec4b1355a525",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "fa3d757bdd490e31158be39176cf83a1e85c7c92e562d5eb470d121024891d47"
+    },
+    {
+      "path": "src/app/api/auth/register/route.ts",
+      "originalSha256": "9bfc0ee27ee8099c6b9b15de9f3abf5e2ff020770cec286300d738df0eec1cb8",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "aa293989aa852d28841762bd664ab45c1761f92e52f35148d162e2ce5b8b3466"
+    },
+    {
+      "path": "src/app/api/auth/reset/route.ts",
+      "originalSha256": "5bb62ef3bea4258cbb9e50f7e514e2d7dbe468eb14cb28d9f9bb127edcdbe8a2",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "cc4724d9f55fa864caa6f48c6fd28c9371da63f7ce3ae3257f906a6ad4d5aa9b"
+    },
+    {
+      "path": "src/app/api/local-qa/change/route.ts",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "defcaa3e074a0e9dcb3de7aff49f9088b4c0981ba36f045331e50e02412ee4de"
+    },
+    {
+      "path": "src/app/api/local-qa/exchange/route.ts",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "f057cfc6267eb78c91e4403cac5a57467dd46a7e6c6fd7f08bcb9c1fe602f7a7"
+    },
+    {
+      "path": "src/app/api/local-qa/forgot/route.ts",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "804802d50a1d06b77aa931433704c2dd46cd6b7f764b29fdbb0af53ed2ea5d7c"
+    },
+    {
+      "path": "src/app/api/local-qa/mailbox/route.ts",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "97ca689a6dc8e7c731f74f10e0d21cde8a97e8eedfba3ce0d2444915cc8429ed"
+    },
+    {
+      "path": "src/app/forgot-password/page.tsx",
+      "originalSha256": "60b92ce70738efa722a12b6a699a46ba25fec4ab1ce45f16868d3921d71fd7d5",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "001a1bfaade10eb54fcac3cf5bc63f0cb0b26a851616b044a16430aae41b6437"
+    },
+    {
+      "path": "src/app/local-mailbox/page.tsx",
+      "originalSha256": null,
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "7059501103e1d6e5e8054caff6488f7d90322e4a2dcc35bba899a3a5fd5c1385"
+    },
+    {
+      "path": "src/app/reset-password/page.tsx",
+      "originalSha256": "56b9fc04f2d8c9010966de6e4c2cb6d4a7dee4eca5408bbe7c807983579d9599",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "8c22658cdd5eed4068795740c0cde04a4650598ff8ff8943e489e6dea9c2c5f4"
+    },
+    {
+      "path": "src/components/auth-page.tsx",
+      "originalSha256": "13a97b7ea1a186068794b0bec606466b67ebcf1cd5252189f332b943e92a3b26",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "3e1a8f290edafa56837d375c5a5a9fa7ce899c6a2751b6381da19df7fb2889ff"
+    },
+    {
+      "path": "src/lib/db/local-acceptance-config.ts",
+      "originalSha256": "ff41f3edcccaebf3db3e8a379fc8f509c52eb155cb805ef325f3ce74e8d8732a",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "6eaf07f86f55fe222a13257a485151bc0d66a61e9a90ef5c546f60430abfde50"
+    },
+    {
+      "path": "src/lib/password-auth.ts",
+      "originalSha256": "8723c1638a86d886795f1a20893fd05ce0730994a5fa7bbdd0ae05e568307c1e",
+      "frozenDependency": false,
+      "generatedCanonicalLfSha256": "8c7b70de040c512deffb18d0853863c3a51e83e5cb01ec63d395bcd0e8b12ea1"
+    }
+  ],
+  "validation": [
+    "161 automated tests",
+    "27 HTTP/native PostgreSQL checks",
+    "isolated production build",
+    "actual overlay type-check",
+    "separate browser record"
+  ],
+  "limitations": [
+    "No hosted Supabase Auth verification",
+    "Eight-hour default local lease",
+    "Finite local TLS certificate validity",
+    "Four-persona rotation is explicit and was not performed"
+  ]
+}

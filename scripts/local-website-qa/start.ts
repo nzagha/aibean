@@ -48,6 +48,14 @@ assert.equal(
   0,
   "QA setup accepts no target URL or existing data directory",
 );
+if (
+  existsSync("test-results/local-website-qa-active.json") &&
+  JSON.parse(readFileSync("test-results/local-website-qa-active.json", "utf8"))
+    .authVersion === 2
+)
+  throw Error(
+    "Use start-account-testing.ps1 to preserve existing account-testing identities and credentials.",
+  );
 
 const run = randomBytes(16).toString("hex");
 const root = resolve("test-results", "product-acceptance-" + run);

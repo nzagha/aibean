@@ -1,3 +1,5 @@
+> Current local account testing: the eight-hour preserving launcher, registration, password management and protected mailbox supersede the previous preview restrictions. See [the current account guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md). The observations below are the historical first preview results.
+
 # Owner local website testing guide
 
 Start at **http://127.0.0.1:3000/**. Retrieve current credentials using [the private handoff](LOCAL_QA_TEST_ACCOUNT_HANDOFF.md). Check the active preview expiry and restart if necessary using [the recovery guide](LOCAL_WEBSITE_RECOVERY_RESULT.md). The preview uses synthetic local data; it is not connected to hosted Supabase.
