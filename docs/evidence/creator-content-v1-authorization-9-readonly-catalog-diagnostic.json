@@ -1,0 +1,97 @@
+{
+  "status": "CATALOG_MATCH",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "readOnly": true,
+  "strictTlsHostnameVerified": true,
+  "inventoryTables": 45,
+  "sequences": 2,
+  "newRelations": 16,
+  "newColumns": 146,
+  "newForeignKeys": 39,
+  "newConstraints": 79,
+  "newIndexes": 28,
+  "newPolicies": 16,
+  "catalogGroups": [
+    {
+      "group": "relations",
+      "expectedRows": 16,
+      "actualRows": 16,
+      "equal": true
+    },
+    {
+      "group": "columns",
+      "expectedRows": 146,
+      "actualRows": 146,
+      "equal": true
+    },
+    {
+      "group": "constraints",
+      "expectedRows": 79,
+      "actualRows": 79,
+      "equal": true
+    },
+    {
+      "group": "indexes",
+      "expectedRows": 28,
+      "actualRows": 28,
+      "equal": true
+    },
+    {
+      "group": "policies",
+      "expectedRows": 16,
+      "actualRows": 16,
+      "equal": true
+    },
+    {
+      "group": "acl",
+      "expectedRows": 180,
+      "actualRows": 180,
+      "equal": true
+    },
+    {
+      "group": "columnAcl",
+      "expectedRows": 0,
+      "actualRows": 0,
+      "equal": true
+    },
+    {
+      "group": "triggers",
+      "expectedRows": 0,
+      "actualRows": 0,
+      "equal": true
+    }
+  ],
+  "boundedDifferences": [],
+  "newFeatureRecordCounts": {
+    "account_notifications": 0,
+    "account_profiles": 0,
+    "ai_playbooks": 0,
+    "ai_skills": 0,
+    "content_reports": 0,
+    "creator_follows": 0,
+    "creator_resources": 0,
+    "engagement_counters": 0,
+    "event_tools": 0,
+    "playbook_skills": 0,
+    "playbook_tools": 0,
+    "public_events": 0,
+    "saved_entities": 0,
+    "skill_tools": 0,
+    "stack_settings": 0
+  },
+  "totals": {
+    "constraints": 201,
+    "foreign_keys": 81,
+    "indexes": 75,
+    "policies": 45
+  },
+  "ledger": [
+    {
+      "package_id": "creator-content-v1",
+      "sql_sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d"
+    }
+  ],
+  "hostedWrites": false,
+  "recordBodiesRead": false
+}

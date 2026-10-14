@@ -1,0 +1,128 @@
+{
+  "authorization": 9,
+  "status": "PASS_PREFLIGHT_ONLY",
+  "sourceCommit": "c847ee0855f17ac06dfd391009d965134815c440",
+  "startedAt": "2026-10-14T01:17:41.025Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+  "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "dependencies": 170,
+  "installerInvocations": 0,
+  "verifierInvocations": 0,
+  "checks": [
+    {
+      "name": "Exact branch source SQL mechanism and all 170 dependencies before private access",
+      "status": "PASS"
+    },
+    {
+      "name": "No prior Creator attempt marker or execution/verifier receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing protected operator profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing process-only native bindings available",
+      "status": "PASS"
+    },
+    {
+      "name": "Read-only storage tools and stopped historical failed targets",
+      "status": "PASS"
+    },
+    {
+      "name": "Two historical failed plus successful v4a and v4b targets stopped protected",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh independent encrypted checkpoints and hosted 29-table read-only preflight",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected artifacts environment and exact package unchanged before installation",
+      "status": "PASS"
+    }
+  ],
+  "automaticRetry": false,
+  "executionMode": "PREFLIGHT_ONLY",
+  "privatePrerequisites": {
+    "privateStorageAcl": "PASS",
+    "existingCmsProfileOnly": true,
+    "recoveryTargetReadiness": "Existing prerequisites only; new target TLS/identity/pristine checks deferred to separately authorized executor",
+    "nativePostgreSql": "17.11",
+    "retainedFailedTargetCount": 2,
+    "existingExpandedArtifactCount": 3,
+    "retainedFailedTargetsStopped": true,
+    "ntfsAndMinimumCapacity": "PASS",
+    "retainedFailedTargetUntouched": true,
+    "newTargetCreated": false,
+    "nonSynchronizedRoot": "PASS",
+    "requiredBinaryAvailability": "PASS",
+    "openSslAvailability": "PASS"
+  },
+  "retention": {
+    "successfulV4bTargets": 1,
+    "targetRestarted": false,
+    "successfulV4aTargets": 1,
+    "historicalFailedTargets": 2,
+    "protectedOwnershipAclAndAncestors": "PASS",
+    "targetDeleted": false,
+    "targetDataModified": false,
+    "certificateBindingUnchanged": true,
+    "status": "PASS",
+    "allStopped": true
+  },
+  "preflight": {
+    "exitCode": 0,
+    "processError": null,
+    "result": {
+      "status": "PASS",
+      "phase": "preflight",
+      "project": "yfknxidgphhepdtwazhn",
+      "database": "postgres",
+      "operator": "postgres",
+      "sessionOperator": "postgres",
+      "strictTlsHostnameVerified": true,
+      "readOnly": true,
+      "sourceDatabaseEnvironment": {
+        "owner": "postgres",
+        "encoding": "UTF8",
+        "collation_provider": "i",
+        "collation": "en_US.UTF-8",
+        "ctype": "en_US.UTF-8",
+        "locale": "en-US",
+        "collation_version": "153.121",
+        "server_version": "17.6"
+      },
+      "tables": 29,
+      "sequences": 2,
+      "foreignKeys": 42,
+      "constraints": 122,
+      "indexes": 47,
+      "policies": 29,
+      "newRelations": 0,
+      "newColumns": 0,
+      "newForeignKeys": 0,
+      "drizzleEntries": 2,
+      "foundationSecurityEntries": 1,
+      "adminReviewEntries": 1,
+      "adminOperationsEntries": 1,
+      "creatorContentEntries": 0,
+      "testUsersRecords": 2,
+      "testUsersPrivateContinuity": "PASS",
+      "authUsers": 0,
+      "authIdentities": 0,
+      "applicationUsers": 0,
+      "identityMappings": 0,
+      "featureRecords": 0,
+      "allCheckpointContinuity": "PASS",
+      "v4bVersion5ArchiveDecryptionHashesAnd239EntryList": "PASS",
+      "grantsRolesRlsAndOwners": "PASS",
+      "hostedWritesByThisVerifier": false,
+      "recordBodiesExported": false
+    }
+  },
+  "hostedSqlAttempted": false,
+  "finishedAt": "2026-10-14T01:21:19.565Z"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "FAIL",
+  "stage": "independent-postflight",
+  "sqlState": "REDACTED",
+  "attempted": true,
+  "commitAcknowledged": true,
+  "rollback": "NOT_NEEDED",
+  "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+  "automaticRetry": false
+}

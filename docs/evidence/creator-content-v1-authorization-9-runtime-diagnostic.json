@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "role": "aibean_app_login",
+  "database": "postgres",
+  "strictTlsHostnameVerified": true,
+  "metadataOnlyProbes": true,
+  "hostedWrites": false
+}

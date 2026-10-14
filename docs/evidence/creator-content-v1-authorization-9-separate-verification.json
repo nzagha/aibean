@@ -1,0 +1,34 @@
+{
+  "authorization": 9,
+  "status": "PASS",
+  "startedAt": "2026-10-14T01:39:38.109Z",
+  "verifierInvocations": 1,
+  "installerInvocations": 0,
+  "readOnly": true,
+  "exitCode": 0,
+  "processError": null,
+  "result": {
+    "status": "PASS",
+    "package": "creator-content-v1",
+    "readOnly": true,
+    "verified": {
+      "tables": 16,
+      "publicTables": 15,
+      "rls": 16,
+      "foreignKeys": 39,
+      "indexes": 28,
+      "constraints": 79,
+      "policies": 16,
+      "independentSessions": 3,
+      "baselinePreserved": true,
+      "effectiveRoleColumnGrants": true
+    },
+    "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+    "project": "yfknxidgphhepdtwazhn",
+    "database": "postgres",
+    "verifiedAt": "2026-10-14T01:45:38.868Z",
+    "privateEnvironmentUnchanged": true
+  },
+  "finishedAt": "2026-10-14T01:45:39.043Z",
+  "privateEnvironmentUnchanged": true
+}

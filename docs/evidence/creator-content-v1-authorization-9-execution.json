@@ -1,0 +1,149 @@
+{
+  "authorization": 9,
+  "status": "FAIL",
+  "sourceCommit": "c847ee0855f17ac06dfd391009d965134815c440",
+  "startedAt": "2026-10-14T01:22:52.158Z",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+  "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "dependencies": 170,
+  "installerInvocations": 1,
+  "verifierInvocations": 0,
+  "checks": [
+    {
+      "name": "Exact branch source SQL mechanism and all 170 dependencies before private access",
+      "status": "PASS"
+    },
+    {
+      "name": "No prior Creator attempt marker or execution/verifier receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "Unique existing protected operator profile",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing process-only native bindings available",
+      "status": "PASS"
+    },
+    {
+      "name": "Read-only storage tools and stopped historical failed targets",
+      "status": "PASS"
+    },
+    {
+      "name": "Two historical failed plus successful v4a and v4b targets stopped protected",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh independent encrypted checkpoints and hosted 29-table read-only preflight",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected artifacts environment and exact package unchanged before installation",
+      "status": "PASS"
+    },
+    {
+      "name": "Frozen hashes and protected artifacts preserved after installer",
+      "status": "PASS"
+    }
+  ],
+  "automaticRetry": false,
+  "executionMode": "execute-approved",
+  "privatePrerequisites": {
+    "openSslAvailability": "PASS",
+    "retainedFailedTargetsStopped": true,
+    "existingExpandedArtifactCount": 3,
+    "recoveryTargetReadiness": "Existing prerequisites only; new target TLS/identity/pristine checks deferred to separately authorized executor",
+    "ntfsAndMinimumCapacity": "PASS",
+    "privateStorageAcl": "PASS",
+    "nativePostgreSql": "17.11",
+    "newTargetCreated": false,
+    "nonSynchronizedRoot": "PASS",
+    "existingCmsProfileOnly": true,
+    "retainedFailedTargetCount": 2,
+    "requiredBinaryAvailability": "PASS",
+    "retainedFailedTargetUntouched": true
+  },
+  "retention": {
+    "allStopped": true,
+    "targetDataModified": false,
+    "targetRestarted": false,
+    "successfulV4bTargets": 1,
+    "certificateBindingUnchanged": true,
+    "successfulV4aTargets": 1,
+    "protectedOwnershipAclAndAncestors": "PASS",
+    "status": "PASS",
+    "targetDeleted": false,
+    "historicalFailedTargets": 2
+  },
+  "preflight": {
+    "exitCode": 0,
+    "processError": null,
+    "result": {
+      "status": "PASS",
+      "phase": "preflight",
+      "project": "yfknxidgphhepdtwazhn",
+      "database": "postgres",
+      "operator": "postgres",
+      "sessionOperator": "postgres",
+      "strictTlsHostnameVerified": true,
+      "readOnly": true,
+      "sourceDatabaseEnvironment": {
+        "owner": "postgres",
+        "encoding": "UTF8",
+        "collation_provider": "i",
+        "collation": "en_US.UTF-8",
+        "ctype": "en_US.UTF-8",
+        "locale": "en-US",
+        "collation_version": "153.121",
+        "server_version": "17.6"
+      },
+      "tables": 29,
+      "sequences": 2,
+      "foreignKeys": 42,
+      "constraints": 122,
+      "indexes": 47,
+      "policies": 29,
+      "newRelations": 0,
+      "newColumns": 0,
+      "newForeignKeys": 0,
+      "drizzleEntries": 2,
+      "foundationSecurityEntries": 1,
+      "adminReviewEntries": 1,
+      "adminOperationsEntries": 1,
+      "creatorContentEntries": 0,
+      "testUsersRecords": 2,
+      "testUsersPrivateContinuity": "PASS",
+      "authUsers": 0,
+      "authIdentities": 0,
+      "applicationUsers": 0,
+      "identityMappings": 0,
+      "featureRecords": 0,
+      "allCheckpointContinuity": "PASS",
+      "v4bVersion5ArchiveDecryptionHashesAnd239EntryList": "PASS",
+      "grantsRolesRlsAndOwners": "PASS",
+      "hostedWritesByThisVerifier": false,
+      "recordBodiesExported": false
+    }
+  },
+  "installerStartedAt": "2026-10-14T01:26:25.869Z",
+  "installation": {
+    "exitCode": 1,
+    "processError": null,
+    "result": {
+      "status": "FAIL",
+      "stage": "independent-postflight",
+      "sqlState": "REDACTED",
+      "attempted": true,
+      "commitAcknowledged": true,
+      "rollback": "NOT_NEEDED",
+      "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+      "automaticRetry": false
+    }
+  },
+  "installerFinishedAt": "2026-10-14T01:36:45.141Z",
+  "stoppedAt": "Frozen hashes and protected artifacts preserved after installer",
+  "details": "Controlled operation stopped; protected details withheld. No automatic retry.",
+  "finishedAt": "2026-10-14T01:36:47.441Z"
+}
