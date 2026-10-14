@@ -1,0 +1,92 @@
+{
+  "capturedAt": "2026-10-14T11:59:05.654Z",
+  "repository": "nzagha/aibean",
+  "branch": "codex/supabase-foundation",
+  "publishedSourceCommit": "62938ebb5a190f499f6f26cab4abb2b88985823a",
+  "remoteSourceCommitVerified": true,
+  "sourceValidation": {
+    "id": 38559970152,
+    "commit": "62938ebb5a190f499f6f26cab4abb2b88985823a",
+    "name": "Validate",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38559970152",
+    "jobs": [
+      {
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run build",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm audit --omit=dev --audit-level=high",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "localValidation": "docs/evidence/local-website-qa-validation.json",
+  "localHttp": "docs/evidence/local-website-http-qa.json",
+  "localBrowser": "docs/evidence/local-website-browser-qa.json",
+  "localNative": "docs/evidence/local-website-native-qa.json",
+  "privateCredentialAclIndependentlyVerified": true,
+  "privateCredentialStorage": "OWNER_AND_SYSTEM_ONLY_LOCALAPPDATA_OUTSIDE_ONEDRIVE",
+  "hostedConnections": 0,
+  "documentationFollowupCi": "Separate run; observed conclusion reported at handoff, not inferred from source CI"
+}
