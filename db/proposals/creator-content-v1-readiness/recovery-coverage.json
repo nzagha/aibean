@@ -1,0 +1,312 @@
+{
+  "designId": "application-recovery-coverage-v4c-creator-v1",
+  "status": "DESIGN_ONLY_NOT_EXECUTABLE_NOT_AUTHORIZED",
+  "project": "yfknxidgphhepdtwazhn",
+  "database": "postgres",
+  "checkpoint": "v4c-content-installed-pre-activation",
+  "predecessor": {
+    "manifest": "db/recovery/application-recovery-v4b.json",
+    "sha256": "523b351d870e36efd9283b06b9a19b68bb2de2b31e0cd87bd200008f27861deb",
+    "tables": 29,
+    "sequences": 2,
+    "actualHostedRecovery": "PASS",
+    "independentEvidence": "docs/evidence/creator-content-v1-checkpoint-evidence.json"
+  },
+  "creatorInstallation": {
+    "sql": "db/proposals/creator-content-v1/reviewed-installation.sql",
+    "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+    "mechanism": "db/proposals/creator-content-v1-readiness/mechanism.json",
+    "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+    "hostedInstallationRequired": true,
+    "notExecutedByDesign": true
+  },
+  "selectedTables": [
+    "aibean_private.admin_operations_installations",
+    "aibean_private.admin_review_installations",
+    "aibean_private.content_installations",
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "public.TestUsers",
+    "public.account_notifications",
+    "public.account_profiles",
+    "public.ai_playbooks",
+    "public.ai_skills",
+    "public.audit_logs",
+    "public.billing_products",
+    "public.billing_transactions",
+    "public.billing_webhook_receipts",
+    "public.claim_disputes",
+    "public.claim_requests",
+    "public.commerce_subscriptions",
+    "public.content_reports",
+    "public.creator_applications",
+    "public.creator_capability_requests",
+    "public.creator_follows",
+    "public.creator_resources",
+    "public.engagement_counters",
+    "public.event_tools",
+    "public.featured_placements",
+    "public.orders",
+    "public.playbook_skills",
+    "public.playbook_tools",
+    "public.public_events",
+    "public.rate_limits",
+    "public.saved_entities",
+    "public.saved_tools",
+    "public.skill_tools",
+    "public.stack_settings",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tool_submissions",
+    "public.tools",
+    "public.users",
+    "public.vendor_access",
+    "public.vendor_edit_requests",
+    "public.verification_requests"
+  ],
+  "selectedSequences": [
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers_id_seq"
+  ],
+  "scope": [
+    "aibean_private.admin_operations_installations",
+    "aibean_private.admin_review_installations",
+    "aibean_private.content_installations",
+    "aibean_private.installations",
+    "aibean_private.user_identities",
+    "drizzle.__drizzle_migrations",
+    "drizzle.__drizzle_migrations_id_seq",
+    "public.TestUsers",
+    "public.TestUsers_id_seq",
+    "public.account_notifications",
+    "public.account_profiles",
+    "public.ai_playbooks",
+    "public.ai_skills",
+    "public.audit_logs",
+    "public.billing_products",
+    "public.billing_transactions",
+    "public.billing_webhook_receipts",
+    "public.claim_disputes",
+    "public.claim_requests",
+    "public.commerce_subscriptions",
+    "public.content_reports",
+    "public.creator_applications",
+    "public.creator_capability_requests",
+    "public.creator_follows",
+    "public.creator_resources",
+    "public.engagement_counters",
+    "public.event_tools",
+    "public.featured_placements",
+    "public.orders",
+    "public.playbook_skills",
+    "public.playbook_tools",
+    "public.public_events",
+    "public.rate_limits",
+    "public.saved_entities",
+    "public.saved_tools",
+    "public.skill_tools",
+    "public.stack_settings",
+    "public.stack_tools",
+    "public.stacks",
+    "public.taxonomy",
+    "public.tool_reviews",
+    "public.tool_submissions",
+    "public.tools",
+    "public.users",
+    "public.vendor_access",
+    "public.vendor_edit_requests",
+    "public.verification_requests"
+  ],
+  "counts": {
+    "tables": 45,
+    "sequences": 2,
+    "foreignKeys": 81,
+    "constraints": 201,
+    "indexes": 75,
+    "policies": 45,
+    "publicApplicationRlsTables": 38
+  },
+  "allowedInitialRecordCounts": {
+    "aibean_private.admin_operations_installations": 1,
+    "aibean_private.admin_review_installations": 1,
+    "aibean_private.content_installations": 1,
+    "aibean_private.installations": 1,
+    "aibean_private.user_identities": 0,
+    "drizzle.__drizzle_migrations": 2,
+    "public.TestUsers": 2,
+    "public.account_notifications": 0,
+    "public.account_profiles": 0,
+    "public.ai_playbooks": 0,
+    "public.ai_skills": 0,
+    "public.audit_logs": 0,
+    "public.billing_products": 0,
+    "public.billing_transactions": 0,
+    "public.billing_webhook_receipts": 0,
+    "public.claim_disputes": 0,
+    "public.claim_requests": 0,
+    "public.commerce_subscriptions": 0,
+    "public.content_reports": 0,
+    "public.creator_applications": 0,
+    "public.creator_capability_requests": 0,
+    "public.creator_follows": 0,
+    "public.creator_resources": 0,
+    "public.engagement_counters": 0,
+    "public.event_tools": 0,
+    "public.featured_placements": 0,
+    "public.orders": 0,
+    "public.playbook_skills": 0,
+    "public.playbook_tools": 0,
+    "public.public_events": 0,
+    "public.rate_limits": 0,
+    "public.saved_entities": 0,
+    "public.saved_tools": 0,
+    "public.skill_tools": 0,
+    "public.stack_settings": 0,
+    "public.stack_tools": 0,
+    "public.stacks": 0,
+    "public.taxonomy": 0,
+    "public.tool_reviews": 0,
+    "public.tool_submissions": 0,
+    "public.tools": 0,
+    "public.users": 0,
+    "public.vendor_access": 0,
+    "public.vendor_edit_requests": 0,
+    "public.verification_requests": 0
+  },
+  "allowedInitialRecordTotal": 8,
+  "ledgerExpectations": {
+    "drizzleEntries": 2,
+    "foundation": 1,
+    "adminReview": 1,
+    "adminOperations": 1,
+    "creatorContent": 1
+  },
+  "catalogSources": [
+    {
+      "path": "db/install/reviewed-installation.sql",
+      "sha256": "72818e1233ab51ebbac861a822d89ee0d52d4c12ee32a193746c631bdf639b0c"
+    },
+    {
+      "path": "db/install/runtime-login-proposal.sql",
+      "sha256": "3c76ee6f5f203cbc3a140308a1360edb326ed5319fc3de9c3400c35b94e8b940"
+    },
+    {
+      "path": "db/install/testusers-security-proposal.sql",
+      "sha256": "0c53e6cb250512624d4a73135e8ea122eb8573b8be494b9dbe55ac9bb29985db"
+    },
+    {
+      "path": "db/proposals/admin-review-v1.sql",
+      "sha256": "5f016dce942a7570cc8770549a4b021b456fdbb74d3bdf0512d98e418ff0faca"
+    },
+    {
+      "path": "db/proposals/admin-review-v1-readiness/catalog.json",
+      "sha256": "2d30633345c18f1bccc016cd856e3ec02aea70715c6d2f6fe901d393b7915efc"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2/0000_admin_operations.sql",
+      "sha256": "1d13ac175e967a2a9512f1ed1e0e2d6b5c34a3fa2c67692d9adcf70fef686d39"
+    },
+    {
+      "path": "db/proposals/admin-operations-v2-readiness/catalog.json",
+      "sha256": "cbdc7fa218307a12ca2c13f4eb64a378abff12bfaf79b76269ecf1875813bc85"
+    },
+    {
+      "path": "db/proposals/creator-content-v1/reviewed-installation.sql",
+      "sha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d"
+    },
+    {
+      "path": "db/proposals/creator-content-v1-readiness/catalog.json",
+      "sha256": "ce3dc10741151bdae4c8751a65b7ecf91de062867a7200672e9260377625f3d4"
+    }
+  ],
+  "include": [
+    "Exact selected definitions, column/default/nullability metadata, validated constraints, indexes and owners",
+    "All effective schema/table/column/sequence grants, RLS policies and restricted role flags/memberships without role passwords",
+    "Original migration and four installation histories, private identity mapping structure",
+    "All selected rows in approved encrypted snapshot, original TestUsers records and both sequence states",
+    "Private integrity metadata and source continuity"
+  ],
+  "exclude": [
+    "Managed Auth/identities/session/password records, Vault/Storage/Realtime secrets and records",
+    "Provider keys, credentials, passwords and CMS private keys",
+    "Storage files and unrelated objects or configurations"
+  ],
+  "externalDependency": {
+    "relation": "auth.users",
+    "reason": "Private identity-map foreign key",
+    "localFixture": "Fresh empty local UUID-key fixture only; never export managed records",
+    "requireAuthUsersAndIdentities": 0,
+    "requireApplicationUsersAndMappings": 0
+  },
+  "roles": {
+    "operator": "postgres",
+    "runtimeGroup": "aibean_runtime NOLOGIN/NOSUPERUSER/NOBYPASSRLS/NOCREATEDB/NOCREATEROLE/NOREPLICATION",
+    "runtimeLogin": "aibean_app_login restricted existing login; no password export",
+    "managedRoles": "Empty local surrogates only; no managed role or platform credential export",
+    "publicDataApi": "anon/authenticated/service_role no direct application access",
+    "contentDeleteAllowlist": [
+      "public.event_tools",
+      "public.playbook_skills",
+      "public.playbook_tools",
+      "public.skill_tools",
+      "public.saved_entities",
+      "public.creator_follows"
+    ],
+    "contentLedgerRuntime": "SELECT only"
+  },
+  "plannedBounds": {
+    "plainArchiveBytes": 4194304,
+    "plainIntegrityMetadataBytes": 4194304,
+    "selectedRecords": 10000,
+    "approvalRequiredBeforeExecution": true,
+    "stopOnOverflowOrUnexpectedRecords": true
+  },
+  "preCaptureGates": [
+    "New exact-hash owner recovery authorization after Creator installation and independent postflight PASS",
+    "Fresh correct source project/database/operator/trusted TLS and full 45-table/two-sequence inventory",
+    "All catalog/grants/RLS/owners/roles and exact ledger histories; no feature/account drift",
+    "Original and all successful checkpoint archives intact and decryptable; all failed/success targets remain stopped untouched",
+    "Verified protected non-synchronized storage capacity/ACLs and existing CMS key/certificate",
+    "Fresh isolated PostgreSQL 17 target with strict TLS, loopback, role/database identity and pristine reviewed prerequisites",
+    "Every prerequisite passes before any source record-body capture"
+  ],
+  "restoreVerification": [
+    "Exact 45 tables/two sequences and archive object allowlist including full RLS policy names",
+    "All 81 FKs, 201 constraints, 75 indexes, 45 policies and effective grants/owners",
+    "Eight expected selected records, private checksums, ledgers and sequence comparisons",
+    "Runtime protected User capabilities and no elevated login/group privileges",
+    "Fresh source unchanged after read-only export; independent archive decrypt/hash verification",
+    "New target shutdown and retained recovery data; create-new successful receipt after all fallible checks"
+  ],
+  "preserve": [
+    "Original encrypted TestUsers archive",
+    "Successful v3/v4a/v4b encrypted archives and private receipts",
+    "All historical stopped failed targets and stopped successful v4a/v4b targets",
+    "New failed targets, new successful encrypted checkpoint and stopped recovered target"
+  ],
+  "implementationRequired": [
+    "Separate versioned v4c executor, strict allowlist and local prerequisites without editing frozen recovery mechanisms",
+    "Derive/compare full successor catalog from frozen source in fresh synthetic native PostgreSQL",
+    "CMS export/decrypt/restore plus every-stage failure injection and source preservation native regression tests",
+    "Immutable complete executable manifest and new exact owner authorization",
+    "Bounded stage diagnostics without private paths/record bodies/digests/credentials",
+    "No automatic profile/target creation, cleanup, provider activation or execution from this design"
+  ],
+  "limitations": [
+    "Logical scoped recovery only; no Free-plan PITR or whole-platform recovery",
+    "No Storage-file or managed Auth/Vault backup",
+    "Previously hosted 17.6 versus native 17.11; ICU en-US versus local libc/C",
+    "Owner-controlled CMS key required; runtime passwords configured privately on future recovered deployment",
+    "If feature accounts/records are populated later, scope/count/bounds must be newly reviewed before export"
+  ],
+  "executionOrder": [
+    "Separate exact Creator Content install authorization",
+    "Single install followed by package-specific independent verifier",
+    "Separately prepare and native-validate v4c executable package bound to this complete design",
+    "Independent exact-hash v4c owner authorization and execution",
+    "Do not install next package or activate feature/provider/account writes until expanded recovery passes"
+  ]
+}

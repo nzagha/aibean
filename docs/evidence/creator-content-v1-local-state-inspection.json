@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-10-14T01:00:00.159Z",
+  "branch": "codex/supabase-foundation",
+  "localHeadAtInspection": "0c3970f464c2383db6938e9ac76034dfa8055df0",
+  "freshFetchedRemoteHeadAtInspection": "0c3970f464c2383db6938e9ac76034dfa8055df0",
+  "aheadCommits": 0,
+  "modifiedTrackedFiles": 0,
+  "preexistingUntrackedPreserved": [
+    ".agents/",
+    "aiBean_Source_Files_Git_Import.zip",
+    "skills-lock.json"
+  ],
+  "initialClassification": "PARTIAL_EXISTING_SQL_AND_GENERIC_REHEARSAL_ONLY",
+  "dedicatedInstallerPresent": false,
+  "dedicatedVerifierPresent": false,
+  "dedicatedNativeEvidencePresent": false,
+  "sealedReadinessMechanismPresent": false,
+  "availablePriorCodexRun": {
+    "task": "Authorization 8 Recovery v4b",
+    "status": "completed",
+    "error": null,
+    "creatorReadinessRunObserved": false
+  },
+  "noWorkDiscarded": true,
+  "noInferenceOfHostedAbsenceFromMissingCommit": true,
+  "hostedConnectionsThisTask": 0
+}

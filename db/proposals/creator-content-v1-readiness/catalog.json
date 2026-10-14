@@ -1,0 +1,3588 @@
+{
+  "relations": [
+    {
+      "schema": "aibean_private",
+      "name": "content_installations",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "account_notifications",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "account_profiles",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "ai_playbooks",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "ai_skills",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "content_reports",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "creator_follows",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "creator_resources",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "engagement_counters",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "event_tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "playbook_skills",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "playbook_tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "public_events",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "saved_entities",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "skill_tools",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    },
+    {
+      "schema": "public",
+      "name": "stack_settings",
+      "kind": "r",
+      "owner": "postgres",
+      "rls": true,
+      "force_rls": false
+    }
+  ],
+  "columns": [
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "package_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "sql_sha256",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "installed_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "message",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "read",
+      "type": "boolean",
+      "not_null": true,
+      "expression": "false"
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "handle",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "display_name",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "bio",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "website",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'draft'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "slug",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "title",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "summary",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "category_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "use_case_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "industry_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'draft'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "outcome",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "audience",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "difficulty",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "minutes",
+      "type": "integer",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "steps",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "examples",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "free_to_read",
+      "type": "boolean",
+      "not_null": true,
+      "expression": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "slug",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "title",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "summary",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "category_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "use_case_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "industry_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'draft'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "outcome",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "instructions",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "prompts",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "examples",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "review_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "skill_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "playbook_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "resource_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "event_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "reason",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'open'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "creator_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "slug",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "title",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "summary",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "category_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "use_case_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "industry_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'draft'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "destination",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "disclosure",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "skill_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "playbook_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "kind",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "entity_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "day",
+      "type": "date",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "source",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "requests",
+      "type": "integer",
+      "not_null": true,
+      "expression": "1"
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "event_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "playbook_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "skill_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "playbook_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "slug",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "title",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "summary",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "category_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "use_case_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "industry_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "status",
+      "type": "text",
+      "not_null": true,
+      "expression": "'draft'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "reviewer_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "review_reason",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "published_at",
+      "type": "timestamp with time zone",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "description",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "organizer",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "event_type",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "format",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "venue",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "city",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "country",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "virtual_url",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "registration_url",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "starts_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "ends_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "timezone",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "featured",
+      "type": "boolean",
+      "not_null": true,
+      "expression": "false"
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "user_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "skill_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "playbook_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "event_id",
+      "type": "text",
+      "not_null": false,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "skill_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "tool_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "stack_id",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "visibility",
+      "type": "text",
+      "not_null": true,
+      "expression": "'private'::text"
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "ordered_tool_ids",
+      "type": "jsonb",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "note",
+      "type": "text",
+      "not_null": true,
+      "expression": null
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "not_null": true,
+      "expression": "now()"
+    }
+  ],
+  "constraints": [
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "content_installations_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (package_id)",
+      "validated": true
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "content_installations_sql_sha256_check",
+      "type": "c",
+      "definition": "CHECK ((sql_sha256 ~ '^[0-9a-f]{64}$'::text))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "account_notifications_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "account_notifications_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_handle_unique",
+      "type": "u",
+      "definition": "UNIQUE (handle)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (user_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "profile_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['draft'::text, 'pending'::text, 'published'::text, 'rejected'::text, 'suspended'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_category_id_taxonomy_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_slug_unique",
+      "type": "u",
+      "definition": "UNIQUE (slug)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "playbook_difficulty",
+      "type": "c",
+      "definition": "CHECK ((difficulty = ANY (ARRAY['beginner'::text, 'intermediate'::text, 'advanced'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "playbook_free",
+      "type": "c",
+      "definition": "CHECK ((free_to_read = true))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "playbook_minutes",
+      "type": "c",
+      "definition": "CHECK ((minutes > 0))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "playbook_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['draft'::text, 'pending'::text, 'published'::text, 'rejected'::text, 'archived'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_category_id_taxonomy_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_slug_unique",
+      "type": "u",
+      "definition": "UNIQUE (slug)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "skill_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['draft'::text, 'pending'::text, 'published'::text, 'rejected'::text, 'archived'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_event_id_public_events_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (event_id) REFERENCES public_events(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_playbook_id_ai_playbooks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (playbook_id) REFERENCES ai_playbooks(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_resource_id_creator_resources_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (resource_id) REFERENCES creator_resources(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_review_id_tool_reviews_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (review_id) REFERENCES tool_reviews(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_skill_id_ai_skills_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (skill_id) REFERENCES ai_skills(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "report_one_target",
+      "type": "c",
+      "definition": "CHECK ((num_nonnulls(review_id, skill_id, playbook_id, resource_id, event_id) = 1))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "report_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['open'::text, 'dismissed'::text, 'actioned'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "creator_follows_creator_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (creator_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "creator_follows_user_id_creator_id_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (user_id, creator_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "creator_follows_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "follow_not_self",
+      "type": "c",
+      "definition": "CHECK ((user_id <> creator_id))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_category_id_taxonomy_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_playbook_id_ai_playbooks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (playbook_id) REFERENCES ai_playbooks(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_skill_id_ai_skills_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (skill_id) REFERENCES ai_skills(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_slug_unique",
+      "type": "u",
+      "definition": "UNIQUE (slug)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "resource_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['draft'::text, 'pending'::text, 'published'::text, 'rejected'::text, 'archived'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "counter_kind",
+      "type": "c",
+      "definition": "CHECK ((kind = ANY (ARRAY['tools'::text, 'resources'::text, 'events'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "counter_positive",
+      "type": "c",
+      "definition": "CHECK ((requests > 0))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "counter_source",
+      "type": "c",
+      "definition": "CHECK ((source = ANY (ARRAY['internal'::text, 'direct'::text, 'external'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "engagement_counters_kind_entity_id_day_source_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (kind, entity_id, day, source)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "event_tools_event_id_public_events_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (event_id) REFERENCES public_events(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "event_tools_event_id_tool_id_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (event_id, tool_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "event_tools_tool_id_tools_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "playbook_skills_playbook_id_ai_playbooks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (playbook_id) REFERENCES ai_playbooks(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "playbook_skills_playbook_id_skill_id_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (playbook_id, skill_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "playbook_skills_skill_id_ai_skills_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (skill_id) REFERENCES ai_skills(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "playbook_tools_playbook_id_ai_playbooks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (playbook_id) REFERENCES ai_playbooks(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "playbook_tools_playbook_id_tool_id_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (playbook_id, tool_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "playbook_tools_tool_id_tools_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "event_dates",
+      "type": "c",
+      "definition": "CHECK ((ends_at > starts_at))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "event_format",
+      "type": "c",
+      "definition": "CHECK ((format = ANY (ARRAY['in_person'::text, 'virtual'::text, 'hybrid'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "event_status",
+      "type": "c",
+      "definition": "CHECK ((status = ANY (ARRAY['draft'::text, 'pending'::text, 'published'::text, 'rejected'::text, 'archived'::text, 'canceled'::text])))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_category_id_taxonomy_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (category_id) REFERENCES taxonomy(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_reviewer_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (reviewer_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_slug_unique",
+      "type": "u",
+      "definition": "UNIQUE (slug)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_event_id_public_events_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (event_id) REFERENCES public_events(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_playbook_id_ai_playbooks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (playbook_id) REFERENCES ai_playbooks(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_skill_id_ai_skills_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (skill_id) REFERENCES ai_skills(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_user_id_users_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (user_id) REFERENCES users(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_one_target",
+      "type": "c",
+      "definition": "CHECK ((num_nonnulls(skill_id, playbook_id, event_id) = 1))",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "skill_tools_skill_id_ai_skills_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (skill_id) REFERENCES ai_skills(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "skill_tools_skill_id_tool_id_pk",
+      "type": "p",
+      "definition": "PRIMARY KEY (skill_id, tool_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "skill_tools_tool_id_tools_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (tool_id) REFERENCES tools(id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "stack_settings_pkey",
+      "type": "p",
+      "definition": "PRIMARY KEY (stack_id)",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "stack_settings_stack_id_stacks_id_fk",
+      "type": "f",
+      "definition": "FOREIGN KEY (stack_id) REFERENCES stacks(id) ON DELETE CASCADE",
+      "validated": true
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "stack_visibility",
+      "type": "c",
+      "definition": "CHECK ((visibility = ANY (ARRAY['private'::text, 'public'::text])))",
+      "validated": true
+    }
+  ],
+  "indexes": [
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "content_installations_pkey",
+      "definition": "CREATE UNIQUE INDEX content_installations_pkey ON aibean_private.content_installations USING btree (package_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "account_notifications_pkey",
+      "definition": "CREATE UNIQUE INDEX account_notifications_pkey ON public.account_notifications USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "notification_owner",
+      "definition": "CREATE INDEX notification_owner ON public.account_notifications USING btree (user_id, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_handle_unique",
+      "definition": "CREATE UNIQUE INDEX account_profiles_handle_unique ON public.account_profiles USING btree (handle)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "account_profiles_pkey",
+      "definition": "CREATE UNIQUE INDEX account_profiles_pkey ON public.account_profiles USING btree (user_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_pkey",
+      "definition": "CREATE UNIQUE INDEX ai_playbooks_pkey ON public.ai_playbooks USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "ai_playbooks_slug_unique",
+      "definition": "CREATE UNIQUE INDEX ai_playbooks_slug_unique ON public.ai_playbooks USING btree (slug)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "playbook_queue",
+      "definition": "CREATE INDEX playbook_queue ON public.ai_playbooks USING btree (status, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_pkey",
+      "definition": "CREATE UNIQUE INDEX ai_skills_pkey ON public.ai_skills USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "ai_skills_slug_unique",
+      "definition": "CREATE UNIQUE INDEX ai_skills_slug_unique ON public.ai_skills USING btree (slug)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "skill_queue",
+      "definition": "CREATE INDEX skill_queue ON public.ai_skills USING btree (status, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "content_reports_pkey",
+      "definition": "CREATE UNIQUE INDEX content_reports_pkey ON public.content_reports USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "report_queue",
+      "definition": "CREATE INDEX report_queue ON public.content_reports USING btree (status, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "creator_follows_user_id_creator_id_pk",
+      "definition": "CREATE UNIQUE INDEX creator_follows_user_id_creator_id_pk ON public.creator_follows USING btree (user_id, creator_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_pkey",
+      "definition": "CREATE UNIQUE INDEX creator_resources_pkey ON public.creator_resources USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "creator_resources_slug_unique",
+      "definition": "CREATE UNIQUE INDEX creator_resources_slug_unique ON public.creator_resources USING btree (slug)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "resource_queue",
+      "definition": "CREATE INDEX resource_queue ON public.creator_resources USING btree (status, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "engagement_counters_kind_entity_id_day_source_pk",
+      "definition": "CREATE UNIQUE INDEX engagement_counters_kind_entity_id_day_source_pk ON public.engagement_counters USING btree (kind, entity_id, day, source)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "event_tools_event_id_tool_id_pk",
+      "definition": "CREATE UNIQUE INDEX event_tools_event_id_tool_id_pk ON public.event_tools USING btree (event_id, tool_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "playbook_skills_playbook_id_skill_id_pk",
+      "definition": "CREATE UNIQUE INDEX playbook_skills_playbook_id_skill_id_pk ON public.playbook_skills USING btree (playbook_id, skill_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "playbook_tools_playbook_id_tool_id_pk",
+      "definition": "CREATE UNIQUE INDEX playbook_tools_playbook_id_tool_id_pk ON public.playbook_tools USING btree (playbook_id, tool_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "event_queue",
+      "definition": "CREATE INDEX event_queue ON public.public_events USING btree (status, starts_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_pkey",
+      "definition": "CREATE UNIQUE INDEX public_events_pkey ON public.public_events USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "public_events_slug_unique",
+      "definition": "CREATE UNIQUE INDEX public_events_slug_unique ON public.public_events USING btree (slug)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_owner",
+      "definition": "CREATE INDEX saved_entities_owner ON public.saved_entities USING btree (user_id, created_at)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "saved_entities_pkey",
+      "definition": "CREATE UNIQUE INDEX saved_entities_pkey ON public.saved_entities USING btree (id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "skill_tools_skill_id_tool_id_pk",
+      "definition": "CREATE UNIQUE INDEX skill_tools_skill_id_tool_id_pk ON public.skill_tools USING btree (skill_id, tool_id)",
+      "valid": true,
+      "ready": true
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "stack_settings_pkey",
+      "definition": "CREATE UNIQUE INDEX stack_settings_pkey ON public.stack_settings USING btree (stack_id)",
+      "valid": true,
+      "ready": true
+    }
+  ],
+  "policies": [
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "name": "runtime_read_content_ledger",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "SELECT",
+      "qual": "true",
+      "with_check": null
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "name": "runtime_service",
+      "permissive": "PERMISSIVE",
+      "roles": "{aibean_runtime}",
+      "cmd": "ALL",
+      "qual": "true",
+      "with_check": "true"
+    }
+  ],
+  "acl": [
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "aibean_private",
+      "relation": "content_installations",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_notifications",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "account_profiles",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_playbooks",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "ai_skills",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "content_reports",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_follows",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "creator_resources",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "engagement_counters",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "event_tools",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_skills",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "playbook_tools",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "public_events",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "saved_entities",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "skill_tools",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "aibean_runtime",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "aibean_runtime",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "aibean_runtime",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "DELETE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "INSERT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "MAINTAIN",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "REFERENCES",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "SELECT",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "TRIGGER",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "TRUNCATE",
+      "is_grantable": false
+    },
+    {
+      "schema": "public",
+      "relation": "stack_settings",
+      "grantee": "postgres",
+      "privilege_type": "UPDATE",
+      "is_grantable": false
+    }
+  ],
+  "columnAcl": [],
+  "triggers": []
+}

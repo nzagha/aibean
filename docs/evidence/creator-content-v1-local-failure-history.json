@@ -1,0 +1,55 @@
+{
+  "status": "RESOLVED_LOCAL_PREPARATION_FAILURES",
+  "capturedAt": "2026-10-14T01:02:44.079Z",
+  "nativeRuns": [
+    {
+      "localRun": 1,
+      "status": "FAIL",
+      "completedNativeScenarios": 17,
+      "stage": "Creator workflows: ordinary denial, owner isolation, moderation, notifications and transactional rollback",
+      "safeCode": "REDACTED",
+      "source": "fresh synthetic native PostgreSQL only",
+      "targetsStopped": true,
+      "artifactsRetained": true,
+      "cause": "Missing second synthetic Creator fixture required by the shared workflow contract",
+      "sqlChanged": false,
+      "hostedConnections": 0
+    },
+    {
+      "localRun": 2,
+      "status": "FAIL",
+      "completedNativeScenarios": 17,
+      "stage": "Creator workflows: ordinary denial, owner isolation, moderation, notifications and transactional rollback",
+      "safeCode": "REDACTED",
+      "source": "fresh synthetic native PostgreSQL only",
+      "targetsStopped": true,
+      "artifactsRetained": true,
+      "cause": "Missing second synthetic Creator fixture required by the shared workflow contract",
+      "sqlChanged": false,
+      "hostedConnections": 0
+    },
+    {
+      "localRun": 3,
+      "status": "PASS",
+      "completedNativeScenarios": 18,
+      "stage": "COMPLETE",
+      "safeCode": null,
+      "source": "fresh synthetic native PostgreSQL only",
+      "targetsStopped": true,
+      "artifactsRetained": true,
+      "cause": "Required synthetic fixture supplied; all scenarios passed",
+      "sqlChanged": false,
+      "hostedConnections": 0
+    }
+  ],
+  "offlineScanner": {
+    "initial": "Imported JSON not accepted",
+    "resolution": "JSON included before initial seal"
+  },
+  "sandboxTests": {
+    "initial": "Filesystem symlink EPERM and loopback scanner unavailable",
+    "resolution": "150 tests pass in permitted local run"
+  },
+  "sensitiveDebugOutputPublished": false,
+  "historicalRecoveryTargetsAccessed": false
+}

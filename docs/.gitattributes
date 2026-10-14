@@ -1,0 +1,2 @@
+# Preserve this new sealed native evidence across Windows/Linux checkouts.
+evidence/creator-content-v1-native-readiness.json text eol=lf

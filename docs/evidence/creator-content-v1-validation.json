@@ -1,0 +1,70 @@
+{
+  "status": "PASS_LOCAL_ONLY",
+  "capturedAt": "2026-10-14T01:00:00.159Z",
+  "branch": "codex/supabase-foundation",
+  "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+  "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "dependencies": 170,
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "automatedTests": {
+    "status": "PASS",
+    "tests": 150,
+    "pass": 150,
+    "fail": 0,
+    "skipped": 0
+  },
+  "nativePostgreSQL": {
+    "status": "PASS",
+    "version": "17.11",
+    "freshInstances": 5,
+    "scenarioCount": 18,
+    "syntheticOnly": true,
+    "allTargetsStoppedAndRetained": true
+  },
+  "productionBuild": "PASS_ISOLATED_WEBPACK_NO_PRIVATE_ENV",
+  "runtimeAudit": {
+    "status": "PASS",
+    "vulnerabilities": 0
+  },
+  "earlierFailures": [
+    {
+      "stage": "synthetic-content-workflow-fixture",
+      "runs": 2,
+      "cause": "Missing second synthetic Creator identity required by the shared contract",
+      "correction": "Added the same content-other fixture used by the existing integrated rehearsal",
+      "hostedImpact": false
+    },
+    {
+      "stage": "offline-import-inventory",
+      "cause": "JSON local imports not accepted by initial scanner",
+      "correction": "Include imported JSON in transitive checksum inventory before seal creation",
+      "hostedImpact": false
+    },
+    {
+      "stage": "default-sandbox-suite",
+      "cause": "Windows symlink EPERM and loopback scanner restriction",
+      "correction": "Complete suite passed with native local filesystem/socket permissions",
+      "hostedImpact": false
+    }
+  ],
+  "sqlAndPredecessorPackagesChanged": false,
+  "hostedConnections": 0,
+  "hostedWrites": 0,
+  "recoveryInvocations": 0,
+  "providerActivations": 0,
+  "privateArtifactsAccessed": false,
+  "creatorHostedInstallation": "NOT_EXECUTED_THIS_TASK",
+  "currentHostedState": "NOT_REFRESHED_LAST_VERIFIED_RECOVERY_V4B_29_TABLES",
+  "hostedReadiness": "REQUIRES_NEW_EXACT_OWNER_AUTHORIZATION_AND_FRESH_PREFLIGHT",
+  "ci": "PENDING_PUBLICATION",
+  "successorRecoveryCoverage": {
+    "status": "PASS_DESIGN_ONLY",
+    "path": "db/proposals/creator-content-v1-readiness/recovery-coverage.json",
+    "sha256": "0930ee6475ee61760ea33c0e0c82c4abef7621c658de4ed17aae4d74c30477e4",
+    "tables": 45,
+    "sequences": 2,
+    "executionAuthorized": false
+  },
+  "independentPriorCheckpointEvidence": "PASS_HISTORICAL_INDEPENDENT_V4B_EVIDENCE_CONSISTENT"
+}

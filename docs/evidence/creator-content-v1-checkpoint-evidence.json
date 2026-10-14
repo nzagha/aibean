@@ -1,0 +1,29 @@
+{
+  "status": "PASS_HISTORICAL_INDEPENDENT_V4B_EVIDENCE_CONSISTENT",
+  "capturedAt": "2026-10-14T01:01:59.088Z",
+  "freshPrivateCheckpointAccess": false,
+  "hostedConnections": 0,
+  "sourceEvidence": [
+    {
+      "path": "docs/evidence/application-recovery-v4b-hosted-result.json",
+      "sha256": "3d6d318542aa5adc6e97b2be81d6aa9364236cb7a9173a5eb8c1342355dad7c2"
+    },
+    {
+      "path": "docs/evidence/application-recovery-v4b-controlled-execution.json",
+      "sha256": "b66e983547927dc61f27b12dddb82eb263c5ca2192a6682a7fac7fb57feccfcc"
+    }
+  ],
+  "independentVerification": {
+    "status": "PASS",
+    "archiveCiphertextIntegrity": true,
+    "metadataCiphertextIntegrity": true,
+    "archivePlaintextIntegrity": true,
+    "metadataBindingsAndCounts": true,
+    "nativeArchiveListCount": 239,
+    "decryptable": true
+  },
+  "priorVerifiedAt": "2026-10-13T21:00:37.783Z",
+  "packageSha256": "523b351d870e36efd9283b06b9a19b68bb2de2b31e0cd87bd200008f27861deb",
+  "recoveryGate": "PASS",
+  "privateArtifactsRetouched": false
+}
