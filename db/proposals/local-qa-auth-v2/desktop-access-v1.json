@@ -1,0 +1,27 @@
+{
+  "version": "local-qa-auth-v2-desktop-access-v1",
+  "scope": "LOCAL_OWNER_HANDOFF_ONLY",
+  "predecessor": {
+    "path": "db/proposals/local-qa-auth-v2/change-proposal.json",
+    "sha256": "4949fa4056c93785e788c813676cc53c030a32f2dafaf7443ef2dfcfd29aebe5",
+    "dependenciesUnchanged": 24
+  },
+  "files": [
+    {
+      "path": "scripts/local-website-qa/open-desktop-test-access.ps1",
+      "previousSha256": null,
+      "canonicalLfSha256": "d8772427002b76271acef7a3541a349c090dbdf2f675d022aa24af9a84e20330",
+      "change": "Resolve the approved existing credential file handle to the packaged Codex physical path before opening Notepad; never copy credentials or broaden permissions."
+    }
+  ],
+  "originalCreatorContentDependenciesPreserved": 170,
+  "hostedOperationsAuthorized": false,
+  "validation": {
+    "nativePowerShellExecution": "PASS",
+    "fourActualLoginProbes": "PASS",
+    "fileHandlePhysicalPathScope": "PASS",
+    "ownerAndSystemOnlyRecipients": "PASS",
+    "credentialsPrinted": false,
+    "ownerVisibleNotepadConfirmation": "PENDING"
+  }
+}

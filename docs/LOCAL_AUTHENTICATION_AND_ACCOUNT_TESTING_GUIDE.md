@@ -7,7 +7,7 @@ This guide supersedes the earlier 110-minute preview and disabled-registration i
 From the repository root in the Codex integrated PowerShell terminal:
 
 ```powershell
-powershell.exe -NoProfile -File scripts/local-website-qa/open-test-access.ps1
+powershell.exe -NoProfile -File scripts/local-website-qa/open-desktop-test-access.ps1
 ```
 
 This checks the actual four login endpoints, prints their status and lease expiry, and opens the current protected credential handoff in Notepad. Passwords are never printed. If an endpoint reports rate limiting, wait 15 minutes; that result does not establish a stale password. Avoid repeated probes during that window.
@@ -54,7 +54,7 @@ Confirmation/reset tokens and recovery sessions expire after 15 minutes. The own
 powershell.exe -NoProfile -File scripts/local-website-qa/stop.ps1
 # Wait until the four listeners close, then resume the same fixture.
 powershell.exe -NoProfile -File scripts/local-website-qa/start-account-testing.ps1 -LeaseHours 8
-powershell.exe -NoProfile -File scripts/local-website-qa/open-test-access.ps1
+powershell.exe -NoProfile -File scripts/local-website-qa/open-desktop-test-access.ps1
 ```
 
 LeaseHours accepts 1–12. Startup is asynchronous; the access helper reports when login is actually available. A normal restart preserves the database, registered identities, password hashes and four current passwords. It creates new source snapshots so code changes take effect. The runner is not a Windows service and does not survive reboot. Occupied ports stop startup without killing unrelated processes. Historical backups, recovery targets and snapshots are retained.

@@ -1,7 +1,7 @@
 {
-  "capturedAt": "2026-10-14T18:43:29.552Z",
+  "capturedAt": "2026-10-14T18:54:39.707Z",
   "status": "PASS",
-  "stagedFiles": 40,
+  "stagedFiles": 7,
   "protectedValueCategories": [
     "fixture passwords",
     "mailbox password",

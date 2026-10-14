@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "proposalSha256": "f79f8a578a6e7408084f4cd3217d927d541e98c1ff3ac84681099b563b0aa0ee",
+  "hostedConnections": 0,
+  "privateFileContentsPublished": false,
+  "desktopAppDataRedirectionConfirmed": true,
+  "nativeLaunchAndFourLoginProbes": "PASS",
+  "ownerVisibleConfirmation": "PENDING"
+}
