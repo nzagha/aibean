@@ -1,0 +1,394 @@
+{
+  "capturedAt": "2026-10-14T03:55:53.022Z",
+  "target": "EXPLICIT_ISOLATED_FOUR_PERSONA_LOOPBACK_QA",
+  "hostedConnections": 0,
+  "credentialsPublished": false,
+  "results": [
+    {
+      "check": "Runtime is actual isolated PostgreSQL 17 TLS and restricted role",
+      "status": "PASS"
+    },
+    {
+      "check": "Public render /",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /tools",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /categories",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /industries",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /use-cases",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /search",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /compare",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /pricing",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /creators",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /skills",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /playbooks",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /events",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /login",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /register",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /submit",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public render /for-vendors",
+      "status": "FAIL"
+    },
+    {
+      "check": "user unauthenticated panel denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "user genuine password login and signed cookie",
+      "status": "FAIL"
+    },
+    {
+      "check": "admin unauthenticated panel denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "admin genuine password login and signed cookie",
+      "status": "FAIL"
+    },
+    {
+      "check": "creator unauthenticated panel denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "creator genuine password login and signed cookie",
+      "status": "FAIL"
+    },
+    {
+      "check": "vendor unauthenticated panel denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "vendor genuine password login and signed cookie",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/tools",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/tools/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/taxonomy",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/reviews",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/creators",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/capabilities",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/claims",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/edits",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/verification",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/disputes",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/content/skills",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/content/playbooks",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/content/resources",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/content/events",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/featured",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/commerce/pricing",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/commerce/payments",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/commerce/subscriptions",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/commerce/submissions",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/analytics",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/audit",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/affiliates",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/profiles",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/reports",
+      "status": "FAIL"
+    },
+    {
+      "check": "Admin render /admin/files",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/profile",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/comparisons",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/following",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/activity",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/billing",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/membership",
+      "status": "FAIL"
+    },
+    {
+      "check": "User render /account/submissions",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/profile/preview",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/analytics",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/skills",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/playbooks",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/resources",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/events",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/skills/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/playbooks/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/resources/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator render /creator/content/events/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor render /vendor",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor render /featured/manage",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor render /vendor/tools/a256e8c5-2d66-4276-822d-2fa23ae33317",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor render /vendor/tools/a256e8c5-2d66-4276-822d-2fa23ae33317/analytics",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor render /creator/content/events",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User capability denial /admin",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User capability denial /admin/tools/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User capability denial /creator",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User capability denial /creator/content/skills/new",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User capability denial /vendor/tools/a256e8c5-2d66-4276-822d-2fa23ae33317",
+      "status": "FAIL"
+    },
+    {
+      "check": "Ordinary User vendor overview remains a legitimate empty state",
+      "status": "FAIL"
+    },
+    {
+      "check": "creator Admin denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "vendor Admin denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "Vendor cannot edit another approved owner Tool",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator cannot inspect another Creator private draft",
+      "status": "FAIL"
+    },
+    {
+      "check": "Public cannot see another Creator private draft",
+      "status": "FAIL"
+    },
+    {
+      "check": "User owns private Stack detail",
+      "status": "FAIL"
+    },
+    {
+      "check": "Creator cannot inspect User private Stack",
+      "status": "FAIL"
+    },
+    {
+      "check": "User cookie rejected by admin preview",
+      "status": "FAIL"
+    },
+    {
+      "check": "User cookie rejected by creator preview",
+      "status": "FAIL"
+    },
+    {
+      "check": "User cookie rejected by vendor preview",
+      "status": "FAIL"
+    },
+    {
+      "check": "Forged login Origin rejected",
+      "status": "FAIL"
+    },
+    {
+      "check": "Registration cannot create privileged users in temporary mode",
+      "status": "FAIL"
+    },
+    {
+      "check": "Homepage JavaScript CSS and brand assets actually respond",
+      "status": "FAIL"
+    },
+    {
+      "check": "Homepage JavaScript CSS and brand assets actually respond",
+      "status": "FAIL",
+      "detail": "Unexpected local test error; raw details withheld"
+    }
+  ],
+  "summary": {
+    "pass": 1,
+    "fail": 94
+  },
+  "externalProviders": "BLOCKED_NOT_CONFIGURED_OR_AUTHORIZED"
+}

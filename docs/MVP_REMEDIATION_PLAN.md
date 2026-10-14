@@ -142,3 +142,7 @@ Entry points and capability-derived account navigation are implemented and local
 ## Control Panel continuation — 10 October 2026
 
 Implemented existing-schema User management, Admin inventory filtering/pagination, scoped Vendor inventory and approved Creator access/navigation. These are increments rather than completion of the four panels. Shared restricted-runtime synthetic tests pass in PGlite and native PostgreSQL; real provider/browser journeys remain unverified. Pending work and explicit external gates are recorded in AIBEAN_MVP_PRODUCT_COMPLETION_REPORT.md. Preserve the corrected recovery package; no hosted schema/Auth/backup operation is authorized by this development stage.
+
+## Local owner QA milestone — 14 October 2026
+
+The isolated local preview and four genuine test personas are available through the lease-bounded procedure in LOCAL_WEBSITE_TESTING_GUIDE.md. Missing category/use-case index routes were repaired. See FOUR_CONTROL_PANELS_QA_MATRIX.md for route, browser action, isolation and native permission/rollback evidence; it does not certify unexecuted workflow mutations or provider integrations. No hosted Supabase connection, migration, recovery retry or provider activation occurred. Pending hosted recovery/identity release approvals remain unchanged.

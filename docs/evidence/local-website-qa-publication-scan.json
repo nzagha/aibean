@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-14T11:55:00.316Z",
+  "stagedFiles": 38,
+  "protectedValueScan": "PASS",
+  "privatePathScan": "PASS",
+  "issues": [],
+  "frozenDependencies": 170,
+  "frozenDependencyMismatches": [],
+  "privateEnvironmentUnchanged": true,
+  "privateContentsPublished": false
+}

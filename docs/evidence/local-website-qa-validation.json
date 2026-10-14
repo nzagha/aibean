@@ -1,0 +1,24 @@
+{
+  "capturedAt": "2026-10-14T11:44:54.351Z",
+  "automated": {
+    "passed": 157,
+    "failed": 0
+  },
+  "http": {
+    "pass": 195,
+    "fail": 0
+  },
+  "native": {
+    "passed": 5,
+    "failed": 0
+  },
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "isolatedProductionBuild": "PASS",
+  "runtimeDependencyVulnerabilities": 0,
+  "frozenDependencies": 170,
+  "hashMismatches": [],
+  "privateEnvironmentUnchanged": true,
+  "hostedConnections": 0,
+  "privateCredentialStorage": "OWNER_AND_SYSTEM_ONLY_LOCALAPPDATA_OUTSIDE_ONEDRIVE"
+}

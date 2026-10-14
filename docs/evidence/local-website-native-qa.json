@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-10-14T11:54:11.308Z",
+  "target": "ISOLATED_NATIVE_POSTGRESQL_17_ONLY",
+  "hostedConnections": 0,
+  "checks": [
+    {
+      "check": "Exact newly created restricted local runtime target",
+      "status": "PASS"
+    },
+    {
+      "check": "Restricted runtime cannot assign protected is_admin",
+      "status": "PASS"
+    },
+    {
+      "check": "Restricted runtime cannot assign protected is_creator",
+      "status": "PASS"
+    },
+    {
+      "check": "Protected capability values unchanged after denied writes",
+      "status": "PASS"
+    },
+    {
+      "check": "Native failed transaction rolls back Tool mutation completely",
+      "status": "PASS"
+    }
+  ]
+}

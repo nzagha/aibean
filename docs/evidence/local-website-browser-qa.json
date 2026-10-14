@@ -1,0 +1,49 @@
+{
+  "capturedAt": "2026-10-14T11:45:07.049Z",
+  "environment": "DISPOSABLE_LOOPBACK_ONLY",
+  "browser": "Codex in-app browser",
+  "checks": [
+    {
+      "check": "User signed login and Stack create with feedback",
+      "status": "PASS",
+      "evidence": "local-website-user-panel.png"
+    },
+    {
+      "check": "Admin signed login and dashboard",
+      "status": "PASS",
+      "evidence": "local-website-admin-panel.png"
+    },
+    {
+      "check": "Creator signed login, required-field validation and private Skill draft saved",
+      "status": "PASS",
+      "evidence": "local-website-creator-draft.png"
+    },
+    {
+      "check": "Vendor signed login and owned-Tool pending edit request",
+      "status": "PASS",
+      "evidence": "local-website-vendor-request.png"
+    },
+    {
+      "check": "390px mobile menu open/close, focus and homepage overflow",
+      "status": "PASS",
+      "width": 390,
+      "documentWidth": 390,
+      "brokenImages": 0
+    },
+    {
+      "check": "Search Acceptance renders two Tools",
+      "status": "PASS"
+    },
+    {
+      "check": "Two Compare controls populate tray and open comparison",
+      "status": "PASS",
+      "width": 390,
+      "documentWidth": 375,
+      "internalScrollableComparison": true
+    }
+  ],
+  "sampledConsoleErrors": 0,
+  "sampledHydrationErrors": 0,
+  "credentialsPublished": false,
+  "hostedInteractions": 0
+}

@@ -1,0 +1,1201 @@
+{
+  "capturedAt": "2026-10-14T03:46:35.235Z",
+  "target": "EXPLICIT_ISOLATED_FOUR_PERSONA_LOOPBACK_QA",
+  "hostedConnections": 0,
+  "credentialsPublished": false,
+  "results": [
+    {
+      "check": "Runtime is actual isolated PostgreSQL 17 TLS and restricted role",
+      "status": "FAIL"
+    },
+    {
+      "route": "/",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /",
+      "status": "PASS"
+    },
+    {
+      "route": "/tools",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /tools",
+      "status": "PASS"
+    },
+    {
+      "check": "Public render /categories",
+      "status": "FAIL"
+    },
+    {
+      "route": "/industries",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /industries",
+      "status": "PASS"
+    },
+    {
+      "check": "Public render /use-cases",
+      "status": "FAIL"
+    },
+    {
+      "route": "/search",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /search",
+      "status": "PASS"
+    },
+    {
+      "route": "/compare",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /compare",
+      "status": "PASS"
+    },
+    {
+      "check": "Public render /pricing",
+      "status": "FAIL"
+    },
+    {
+      "route": "/creators",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /creators",
+      "status": "PASS"
+    },
+    {
+      "route": "/skills",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /skills",
+      "status": "PASS"
+    },
+    {
+      "route": "/playbooks",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /playbooks",
+      "status": "PASS"
+    },
+    {
+      "route": "/events",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /events",
+      "status": "PASS"
+    },
+    {
+      "route": "/login",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /login",
+      "status": "PASS"
+    },
+    {
+      "route": "/register",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /register",
+      "status": "PASS"
+    },
+    {
+      "route": "/submit",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /submit",
+      "status": "PASS"
+    },
+    {
+      "route": "/for-vendors",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public render /for-vendors",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "user unauthenticated panel denial",
+      "status": "PASS"
+    },
+    {
+      "check": "user genuine password login and signed cookie",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "admin unauthenticated panel denial",
+      "status": "PASS"
+    },
+    {
+      "check": "admin genuine password login and signed cookie",
+      "status": "PASS"
+    },
+    {
+      "check": "creator unauthenticated panel denial",
+      "status": "FAIL"
+    },
+    {
+      "check": "creator genuine password login and signed cookie",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "vendor unauthenticated panel denial",
+      "status": "PASS"
+    },
+    {
+      "check": "vendor genuine password login and signed cookie",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/tools",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/new",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 1,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/tools/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/taxonomy",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/taxonomy",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/reviews",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/reviews",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/creators",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/creators",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/capabilities",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/capabilities",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/claims",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/claims",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/edits",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/edits",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/verification",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/verification",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/disputes",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/disputes",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/content/skills",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/content/skills",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/content/playbooks",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/content/playbooks",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/content/resources",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/content/resources",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/content/events",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/content/events",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/featured",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/featured",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/commerce/pricing",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/commerce/pricing",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/commerce/payments",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/commerce/payments",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/commerce/subscriptions",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/commerce/subscriptions",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/commerce/submissions",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/commerce/submissions",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/analytics",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/analytics",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/audit",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/audit",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/affiliates",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/affiliates",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/profiles",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/profiles",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/reports",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/reports",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/files",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin render /admin/files",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/profile",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/profile",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/comparisons",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/comparisons",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/following",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/following",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/activity",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/activity",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/billing",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/billing",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/membership",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/membership",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/submissions",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User render /account/submissions",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/profile/preview",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/profile/preview",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/analytics",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/analytics",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/skills",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/playbooks",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/playbooks",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/resources",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/resources",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/events",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/events",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/skills/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/playbooks/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/playbooks/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/resources/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/resources/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/events/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator render /creator/content/events/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor render /vendor",
+      "status": "PASS"
+    },
+    {
+      "route": "/featured/manage",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor render /featured/manage",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor render /vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7/analytics",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor render /vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7/analytics",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/events",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor render /creator/content/events",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User capability denial /admin",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/new",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User capability denial /admin/tools/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User capability denial /creator",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills/new",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User capability denial /creator/content/skills/new",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User capability denial /vendor/tools/c03e9417-d037-4902-ae2f-39694459d2a7",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User vendor overview remains a legitimate empty state",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "creator Admin denial",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "vendor Admin denial",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/a7d23549-9698-4df1-a945-b48721f0bb7b",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor cannot edit another approved owner Tool",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills/7f5f6637-8304-4b77-99a2-125c95870230",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator cannot inspect another Creator private draft",
+      "status": "PASS"
+    },
+    {
+      "route": "/skills/other-creator-private-draft",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Public cannot see another Creator private draft",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/stacks/5f6d5d79-338c-404c-8d1c-82dec40c1551",
+      "persona": "user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User owns private Stack detail",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/stacks/5f6d5d79-338c-404c-8d1c-82dec40c1551",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator cannot inspect User private Stack",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User cookie rejected by admin preview",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User cookie rejected by creator preview",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "User cookie rejected by vendor preview",
+      "status": "PASS"
+    },
+    {
+      "check": "Forged login Origin rejected",
+      "status": "PASS"
+    },
+    {
+      "check": "Registration cannot create privileged users in temporary mode",
+      "status": "FAIL"
+    },
+    {
+      "route": "/",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Homepage JavaScript CSS and brand assets actually respond",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/new",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 1,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Derive rendered Admin create action reference",
+      "status": "FAIL"
+    },
+    {
+      "route": "/account",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "user genuine logout clears session and denies account",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "admin genuine logout clears session and denies account",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "creator genuine logout clears session and denies account",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "vendor genuine logout clears session and denies account",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "pass": 180,
+    "fail": 7
+  },
+  "externalProviders": "BLOCKED_NOT_CONFIGURED_OR_AUTHORIZED"
+}
