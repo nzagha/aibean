@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "packageId": "creator-content-postflight-forensics-local-only",
+  "status": "DIAGNOSTIC_OBSERVERS_NOT_A_HOSTED_INSTALLER",
+  "historicalSourceCommit": "b66cf738f59e163326be3a66bc5d693fa86f21f0",
+  "frozenMechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "frozenDependencyCount": 170,
+  "frozenDependenciesChanged": 0,
+  "checksumEncoding": "UTF8_LF_TEXT",
+  "files": [
+    {
+      "path": "scripts/creator-content-forensics/.gitattributes",
+      "sha256": "ea8902967b8728dc1c02f804243c7bb07872a503b5ca93cf042d1450c3d07f98"
+    },
+    {
+      "path": "scripts/creator-content-forensics/native-test.ts",
+      "sha256": "2f23a243fd34117f8225009cccf9ccd5c6be2283ffe7994647c915c5b14cbc9a"
+    },
+    {
+      "path": "scripts/creator-content-forensics/safe-diagnostics.ts",
+      "sha256": "ebdf6718a9b0530d75c0db942e144834576dea93e8220af6808327ded08ebcd5"
+    },
+    {
+      "path": "scripts/creator-content-forensics/unit.test.ts",
+      "sha256": "50af969c29bb3c50e9cb8f21ef25133c981e09b5c6c68f52b7616c1415be8842"
+    },
+    {
+      "path": "scripts/creator-content-forensics/preservation.mjs",
+      "sha256": "d2c409910a7c37184f8bc9e09322278106e6e3af3a5c525ffa486d6bb0521a96"
+    },
+    {
+      "path": "scripts/creator-content-forensics/build-local.mjs",
+      "sha256": "6485f0e39c355bc861be5c9d9c810e418df605f30c4085f20115af1e531cc6c8"
+    },
+    {
+      "path": "scripts/creator-content-forensics/report.mjs",
+      "sha256": "b28535a7eff3c554d03209767ea847613d93a8a932e4269fca505ae952943cc1"
+    },
+    {
+      "path": "tests/creator-content-forensics.test.ts",
+      "sha256": "3aeea371c90821073258882ce117d3c391326ad8e8803f7904f0f79f7b7dee1e"
+    }
+  ],
+  "tests": {
+    "nativeScenarios": 16,
+    "automatedTests": 154
+  },
+  "hostedExecutionAuthorized": false
+}

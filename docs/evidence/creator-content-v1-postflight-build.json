@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-14T02:51:03.032Z",
+  "bundler": "webpack",
+  "sourceFiles": 530,
+  "privateEnvironmentCopied": false,
+  "hostedConnectionsConfigured": false,
+  "sourceRepositoryNotUsedAsBuildTarget": true
+}

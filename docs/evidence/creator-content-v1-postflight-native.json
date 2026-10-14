@@ -1,0 +1,795 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-14T02:44:46.538Z",
+  "postgresVersion": "17.11",
+  "scope": "FRESH_SYNTHETIC_LOOPBACK_TLS_ONLY",
+  "hostedConnections": 0,
+  "originalFrozenDependencies": 170,
+  "originalReceiptsUnchanged": true,
+  "scenarios": [
+    {
+      "name": "clean",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "PASS",
+        "package": "creator-content-v1",
+        "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "verified": {
+          "tables": 16,
+          "publicTables": 15,
+          "rls": 16,
+          "foreignKeys": 39,
+          "indexes": 28,
+          "constraints": 79,
+          "policies": 16,
+          "independentSessions": 3,
+          "baselinePreserved": true,
+          "effectiveRoleColumnGrants": true
+        },
+        "hostedAuthActivated": false,
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 43,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 105,
+          "CONSTRAINT_CATALOG": 19,
+          "INDEX_CATALOG": 19,
+          "RLS_POLICY_CATALOG": 19,
+          "AGGREGATE_COUNTS": 90,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 85,
+          "EFFECTIVE_GRANTS": 2963,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3,
+          "CONTENT_LEDGER": 2,
+          "RUNTIME_IDENTITY": 1,
+          "RUNTIME_EMPTY_SELECT": 15
+        },
+        "diagnostics": []
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": false,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "managed-reference-drift",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 35,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 77,
+          "CONSTRAINT_CATALOG": 14,
+          "INDEX_CATALOG": 14,
+          "RLS_POLICY_CATALOG": 14,
+          "AGGREGATE_COUNTS": 66,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 74,
+          "EFFECTIVE_GRANTS": 1368,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "AGGREGATE_COUNTS",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "BASELINE_COMPARISON"
+          }
+        ]
+      },
+      "baselineChangedComponents": [
+        "foundation.foundation.managed"
+      ],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "baseline-before",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "preflight",
+        "sqlState": "REDACTED",
+        "attempted": false,
+        "commitAcknowledged": false,
+        "rollback": "NOT_NEEDED",
+        "decision": "STOP_NO_RETRY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 0,
+        "commitAcknowledgments": 0,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 0,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 18,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684
+        },
+        "diagnostics": [
+          {
+            "operation": "PREFLIGHT_BASELINE",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "BASELINE_COMPARISON"
+          }
+        ]
+      },
+      "baselineChangedComponents": [
+        "foundation.foundation.content",
+        "foundation.foundation.originalTestUsersDigest"
+      ],
+      "syntheticCheckpoint": "FAIL",
+      "standaloneWhileFaultPresent": "NOT_APPLICABLE",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "baseline-after",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 35,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 77,
+          "CONSTRAINT_CATALOG": 14,
+          "INDEX_CATALOG": 14,
+          "RLS_POLICY_CATALOG": 14,
+          "AGGREGATE_COUNTS": 66,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 74,
+          "EFFECTIVE_GRANTS": 1368,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "AGGREGATE_COUNTS",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "BASELINE_COMPARISON"
+          }
+        ]
+      },
+      "baselineChangedComponents": [
+        "foundation.foundation.content",
+        "foundation.foundation.originalTestUsersDigest"
+      ],
+      "syntheticCheckpoint": "FAIL",
+      "standaloneWhileFaultPresent": "FAIL",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "connection-loss",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "SESSION_PID_PROBE",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECTION_CLOSED",
+            "assertionId": null
+          },
+          {
+            "operation": "OPERATOR_IDENTITY",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECTION_DESTROYED",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "operator-timeout",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "SESSION_PID_PROBE",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECT_TIMEOUT",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "runtime-timeout",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "SESSION_PID_PROBE",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECT_TIMEOUT",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "statement-timeout",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "57014",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "SESSION_PID_PROBE",
+            "category": "POSTGRES_SQLSTATE",
+            "safeCode": "57014",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "idle-timeout",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "SESSION_PID_PROBE",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECTION_CLOSED",
+            "assertionId": null
+          },
+          {
+            "operation": "OPERATOR_IDENTITY",
+            "category": "TRANSPORT_OR_DRIVER",
+            "safeCode": "CONNECTION_DESTROYED",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "catalog-mismatch",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 41,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 105,
+          "CONSTRAINT_CATALOG": 19,
+          "INDEX_CATALOG": 19,
+          "RLS_POLICY_CATALOG": 19,
+          "AGGREGATE_COUNTS": 75,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 85,
+          "EFFECTIVE_GRANTS": 1810,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "RELATION_CATALOG",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "INSTALLED_STRUCTURE_ASSERTION"
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "FAIL",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "grant-mismatch",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 41,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 105,
+          "CONSTRAINT_CATALOG": 19,
+          "INDEX_CATALOG": 19,
+          "RLS_POLICY_CATALOG": 19,
+          "AGGREGATE_COUNTS": 75,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 85,
+          "EFFECTIVE_GRANTS": 1810,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3
+        },
+        "diagnostics": [
+          {
+            "operation": "RELATION_CATALOG",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "INSTALLED_STRUCTURE_ASSERTION"
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "FAIL",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "rollback",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "exact-transaction",
+        "sqlState": "P0001",
+        "attempted": true,
+        "commitAcknowledged": false,
+        "rollback": "VERIFIED",
+        "decision": "STOP_NO_RETRY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 0,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 0,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 38,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 78,
+          "CONSTRAINT_CATALOG": 14,
+          "INDEX_CATALOG": 14,
+          "RLS_POLICY_CATALOG": 14,
+          "AGGREGATE_COUNTS": 66,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 74,
+          "EFFECTIVE_GRANTS": 1368,
+          "EXACT_REVIEWED_SQL": 1,
+          "CONTENT_LEDGER": 1
+        },
+        "diagnostics": [
+          {
+            "operation": "EXACT_REVIEWED_SQL",
+            "category": "POSTGRES_SQLSTATE",
+            "safeCode": "P0001",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "NOT_APPLICABLE",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "cleanup-rejection",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "PASS",
+        "package": "creator-content-v1",
+        "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "verified": {
+          "tables": 16,
+          "publicTables": 15,
+          "rls": 16,
+          "foreignKeys": 39,
+          "indexes": 28,
+          "constraints": 79,
+          "policies": 16,
+          "independentSessions": 3,
+          "baselinePreserved": true,
+          "effectiveRoleColumnGrants": true
+        },
+        "hostedAuthActivated": false,
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 43,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 105,
+          "CONSTRAINT_CATALOG": 19,
+          "INDEX_CATALOG": 19,
+          "RLS_POLICY_CATALOG": 19,
+          "AGGREGATE_COUNTS": 90,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 85,
+          "EFFECTIVE_GRANTS": 2963,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3,
+          "CONTENT_LEDGER": 2,
+          "RUNTIME_IDENTITY": 1,
+          "RUNTIME_EMPTY_SELECT": 15
+        },
+        "diagnostics": []
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": false,
+      "cleanupRejectionInjected": true,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "factory-error",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 0,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 19,
+          "OPERATOR_IDENTITY": 1,
+          "RELATION_CATALOG": 39,
+          "CONSTRAINT_CATALOG": 7,
+          "INDEX_CATALOG": 7,
+          "RLS_POLICY_CATALOG": 7,
+          "AGGREGATE_COUNTS": 33,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 37,
+          "EFFECTIVE_GRANTS": 684,
+          "EXACT_REVIEWED_SQL": 1
+        },
+        "diagnostics": [
+          {
+            "operation": "CLIENT_FACTORY",
+            "category": "REDACTED",
+            "safeCode": "REDACTED",
+            "assertionId": null
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "runtime-identity",
+      "status": "PASS",
+      "installerReceipt": {
+        "status": "FAIL",
+        "stage": "independent-postflight",
+        "sqlState": "REDACTED",
+        "attempted": true,
+        "commitAcknowledged": true,
+        "rollback": "NOT_NEEDED",
+        "decision": "REVIEW_FORWARD_FIX_OR_RECOVERY",
+        "automaticRetry": false
+      },
+      "observations": {
+        "sqlInvocations": 1,
+        "commitAcknowledgments": 1,
+        "reservedReleases": 1,
+        "installationRollbackAfterCommit": 0,
+        "cleanupCalls": 3,
+        "operations": {
+          "OTHER_REVIEWED_QUERY": 43,
+          "OPERATOR_IDENTITY": 2,
+          "RELATION_CATALOG": 105,
+          "CONSTRAINT_CATALOG": 19,
+          "INDEX_CATALOG": 19,
+          "RLS_POLICY_CATALOG": 19,
+          "AGGREGATE_COUNTS": 90,
+          "PRIVATE_INTEGRITY_OR_MANAGED_METADATA": 85,
+          "EFFECTIVE_GRANTS": 2835,
+          "EXACT_REVIEWED_SQL": 1,
+          "SESSION_PID_PROBE": 3,
+          "CONTENT_LEDGER": 1,
+          "RUNTIME_IDENTITY": 1
+        },
+        "diagnostics": [
+          {
+            "operation": "RUNTIME_IDENTITY",
+            "category": "ASSERTION",
+            "safeCode": "ERR_ASSERTION",
+            "assertionId": "RUNTIME_ROLE_TLS_ASSERTION"
+          }
+        ]
+      },
+      "baselineChangedComponents": [],
+      "syntheticCheckpoint": "PASS",
+      "standaloneWhileFaultPresent": "PASS",
+      "failedEvidenceRetained": true,
+      "cleanupRejectionInjected": false,
+      "nativeTlsVerified": true,
+      "hostedConnections": 0
+    },
+    {
+      "name": "concurrent",
+      "status": "PASS",
+      "explicitSyntheticCalls": 3,
+      "sqlInvocations": 2,
+      "acknowledgedCommits": 1,
+      "loserRollback": "VERIFIED",
+      "repeatRefusedBeforeSql": true,
+      "automaticRetry": false
+    }
+  ],
+  "newTargets": 16,
+  "stoppedTargets": 16,
+  "targetsRetained": true,
+  "historicalArtifactsAccessed": false
+}

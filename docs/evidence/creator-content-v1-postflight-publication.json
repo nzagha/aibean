@@ -1,0 +1,29 @@
+{
+  "status": "PENDING_PUSH_AND_CI_OBSERVATION",
+  "branch": "codex/supabase-foundation",
+  "startingCommit": "b66cf738f59e163326be3a66bc5d693fa86f21f0",
+  "localValidation": "PASS",
+  "automatedTests": 154,
+  "nativeScenarios": 16,
+  "hostedConnections": 0,
+  "sourceCommit": null,
+  "remoteVerified": false,
+  "ci": {
+    "status": "UNVERIFIED",
+    "url": null
+  },
+  "publicationScan": {
+    "status": "PASS",
+    "capturedAt": "2026-10-14T02:56:57.263Z",
+    "stagedFiles": 15,
+    "allowedPathsOnly": true,
+    "privatePaths": false,
+    "credentials": false,
+    "privateKeyBodies": false,
+    "personalRecords": false,
+    "recordDigests": false,
+    "newManifestGitBytes": "PASS",
+    "originalFrozenDependenciesGitBytes": 170,
+    "originalEvidenceGitBytes": 12
+  }
+}

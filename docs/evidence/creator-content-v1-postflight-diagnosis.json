@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "capturedAt": "2026-10-14T02:56:43.026Z",
+  "classification": "C_UNRESOLVED",
+  "localValidation": "PASS",
+  "originalInstallationClassification": "COMMITTED_INDEPENDENT_VERIFIER_PASS_REVIEW_REQUIRED",
+  "historicalOutcome": {
+    "installerInvocations": 1,
+    "installerExitCode": 1,
+    "commitAcknowledged": true,
+    "stage": "independent-postflight",
+    "safeCode": "REDACTED",
+    "rollback": "NOT_NEEDED",
+    "automaticRetry": false,
+    "separateVerifierInvocations": 1,
+    "separateVerifierStatus": "PASS",
+    "catalogDiagnostic": "PASS",
+    "restrictedRuntimeDiagnostic": "PASS"
+  },
+  "sqlSha256": "ecdac0e6d3448456d16b71a274d29a62050264ba9d406d4077081c998541f78d",
+  "mechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "originalEvidencePreserved": true,
+  "frozenDependencyCount": 170,
+  "confirmedFindings": [
+    "Original handler discards assertion IDs and most native driver codes",
+    "Installer compares pre-install reference; standalone compares fresh post-install reference",
+    "Managed relation metadata is in baseline but outside scoped checkpoint comparison",
+    "Synthetic managed metadata drift reproduces REDACTED failure followed by standalone PASS",
+    "Synthetic connection/factory/runtime faults can also reproduce the coarse receipt",
+    "Persistent application continuity and successor catalog/grant faults remain fail-closed",
+    "Plain statement timeout retains 57014 and does not alone match REDACTED",
+    "Ordinary asynchronous cleanup rejection is absorbed and cannot alone explain caught failure"
+  ],
+  "originalRootCauseEstablished": false,
+  "installedSqlOrSecurityDefectEstablished": false,
+  "frozenMechanismModified": false,
+  "productionCorrection": "NOT_JUSTIFIED_BY_CURRENT_EVIDENCE",
+  "futureDiagnostics": "NEW_VERSION_REVIEW_AND_SEAL_REQUIRED_BEFORE_ANY_INTEGRATION",
+  "diagnosticPackage": {
+    "path": "scripts/creator-content-forensics/diagnostic-package-v1.json",
+    "sha256": "9ad0bdbe08a62190aab4cf12c0ee10ccb0a36d0d6c2b80230555c8c680d2194f",
+    "files": 8,
+    "hostedInstaller": false
+  },
+  "native": {
+    "status": "PASS",
+    "postgresVersion": "17.11",
+    "finalScenarios": 16,
+    "finalNewTargets": 16,
+    "finalStoppedTargets": 16,
+    "allTaskOwnedTargetsStoppedAndRetained": 38,
+    "actualRestrictedRuntime": true,
+    "strictLocalTls": true,
+    "negativeCaAndHostnameRejected": true,
+    "checkpoint": "FROZEN_CONTINUITY_FUNCTION_WITH_IN_MEMORY_SYNTHETIC_CAPTURE",
+    "privateCmsOrHistoricalCheckpointAccessed": false,
+    "committedInvocationInstallationRollbackCalls": 0,
+    "automaticReinstall": false
+  },
+  "preliminaryLocalRuns": [
+    {
+      "operation": "harness-module-setup",
+      "status": "FAIL",
+      "cause": "CJS top-level-await and numeric typing fixed in new harness; no native targets created"
+    },
+    {
+      "operation": "immediate-socket-loss-injection",
+      "status": "FAIL",
+      "cause": "Installed native driver nextWrite null-socket uncaught error; no frozen failure receipt produced",
+      "targets": 5,
+      "stoppedAndRetained": true,
+      "change": "New harness waits for socket-close event; frozen driver/mechanism unchanged",
+      "originalRootCauseEvidence": false
+    },
+    {
+      "operation": "checkpoint-fixture-shape",
+      "status": "FAIL",
+      "cause": "Initial simplified TestUsers fixture lacked documented unique constraint; corrected fresh synthetic fixture only",
+      "targets": 1,
+      "stoppedAndRetained": true
+    },
+    {
+      "operation": "first-complete-native-run",
+      "status": "PASS",
+      "scenarios": 16,
+      "targets": 16,
+      "stoppedAndRetained": true
+    },
+    {
+      "operation": "final-native-run",
+      "status": "PASS",
+      "scenarios": 16,
+      "targets": 16,
+      "stoppedAndRetained": true
+    },
+    {
+      "operation": "Next-route-types-sandbox",
+      "status": "FAIL_THEN_PASS",
+      "cause": "Windows sandbox canonicalization denied; permitted local validation passed"
+    },
+    {
+      "operation": "lint-new-build-helper",
+      "status": "FAIL_THEN_PASS",
+      "cause": "Converted new helper to ESM; frozen code untouched"
+    }
+  ],
+  "validation": {
+    "automated": {
+      "pass": 154,
+      "fail": 0,
+      "skip": 0
+    },
+    "finalFocused": {
+      "pass": 4,
+      "fail": 0
+    },
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "productionBuild": "PASS",
+    "runtimeAudit": {
+      "status": "PASS",
+      "vulnerabilities": 0
+    },
+    "frozenHashes": "PASS"
+  },
+  "limitations": [
+    "No original underlying assertion, cause, substage or baseline-difference receipt survives",
+    "Synthetic possibilities do not establish the historical hosted condition",
+    "Local 17.11/libc-C differs from historical hosted 17.6/ICU-en-US",
+    "Private CMS/checkpoints/historical targets were not accessed or revalidated in this task",
+    "Existing v4b checkpoint covers 29-table predecessor, not 45-table installed successor"
+  ],
+  "futureReadOnlyHostedDiagnostic": "OPTIONAL_SEPARATE_OWNER_AUTHORIZATION_REQUIRED; cannot reconstruct erased error without contemporaneous logs",
+  "localV4cPreparation": "OWNER_REVIEW_AND_EXPLICIT_RISK_ACCEPTANCE_REQUIRED; NOT_STARTED",
+  "boundaries": {
+    "hostedConnections": 0,
+    "hostedQueries": 0,
+    "hostedWrites": 0,
+    "hostedInstallations": 0,
+    "recoveryOperations": 0,
+    "historicalArtifactsAccessed": false,
+    "accountsCreated": 0,
+    "providerActivation": false,
+    "featureChanges": false,
+    "dnsOrDeploymentChanges": false
+  }
+}

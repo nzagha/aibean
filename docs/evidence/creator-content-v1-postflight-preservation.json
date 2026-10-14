@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-14T02:55:59.334Z",
+  "sourceCommit": "b66cf738f59e163326be3a66bc5d693fa86f21f0",
+  "originalMechanismSha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+  "frozenDependencyCount": 170,
+  "frozenDependenciesUnchanged": true,
+  "originalReceipts": [
+    {
+      "path": "docs/CREATOR_CONTENT_V1_HOSTED_INSTALLATION_RESULT.md",
+      "sha256": "85b58daffd708c70a39f1e3cf266291b9c13b890f6ddd6a4d6c7f8ecbd2b8ab3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/CREATOR_CONTENT_V1_HOSTED_INSTALLATION_READINESS.md",
+      "sha256": "3e157fdfd9123b9cabd4c09de2ed14909aeb8180f6fa7ed57a4218f12f28624a",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-acceptance.json",
+      "sha256": "9426c21573d10c8d79f1794a0015c305724a3e94cd111d7ed57115034ee5cea9",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-execution.json",
+      "sha256": "7728eca3c0fcd602b7f112ac244bda273496d33fcd904961550caed56efa3c6f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-hosted-execute-result.json",
+      "sha256": "85f04858b19a240b28fc7d87e749510b08107e2560c032d9381c0f061adae505",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-hosted-verify-result.json",
+      "sha256": "e00b02f20ceb7527054c222d7147c07b97c0d3ad2a606eca512217ae15d89f49",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-readonly-catalog-diagnostic.json",
+      "sha256": "7ad5af5593d4eef4219b174b01526578c103bb5460f13cc7ed3361ede538e873",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-runtime-diagnostic.json",
+      "sha256": "a1c00e117c5e95924cf2513495d7c8010c7bdd026cb08ed2bca1b7d7591b3bae",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-hosted-attempt.json",
+      "sha256": "2fc96942b2f0654eb8d126d5eddf28876fdbbe940c81a04ef993388abd5b0101",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-preflight.json",
+      "sha256": "7232065d343aba8d7b843ebe6e64dacf372cfae134140f0caf878012f602091e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-authorization-9-separate-verification.json",
+      "sha256": "e75a8572fb62bcef6b7afa4a04e3cdf7cfe5f04b44e592a3164de464fa7aea74",
+      "unchanged": true
+    },
+    {
+      "path": "docs/evidence/creator-content-v1-hosted-ci.json",
+      "sha256": "ceb502ae3732cedeabe757216ccdffd9a01db030cfa1cd18cd65783d93022a3e",
+      "unchanged": true
+    }
+  ],
+  "taskOwnedFreshTargetsStoppedAndRetained": 38,
+  "privateArtifactsAccessed": false,
+  "hostedConnections": 0
+}
