@@ -1,0 +1,81 @@
+{
+  "status": "SUCCESS",
+  "capturedAt": "2026-10-14T01:07:39.063Z",
+  "sourceCommit": "c462324c98165026f6800cc17ce7a046818be93b",
+  "runId": 38493614206,
+  "url": "https://github.com/nzagha/aibean/actions/runs/38493614206",
+  "workflowConclusion": "success",
+  "jobs": [
+    {
+      "name": "checks",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm audit --omit=dev --audit-level=high",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "requiredStepResultsIndependentlyObserved": true,
+  "telemetry": "REQUIRED_CHECK_STEPS_SUCCESS_OBSERVED",
+  "nativePostgreSQLEvidence": "Separate local five-target native validation; this CI run does not execute the Windows native harness",
+  "hostedOperationsTriggered": false
+}

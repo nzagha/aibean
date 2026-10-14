@@ -70,4 +70,6 @@ Current evidence: **112 automated tests**, **43 native PostgreSQL scenarios**, *
 
 [Corrections, prioritized gaps and external approvals](MVP_PRODUCT_ACCEPTANCE_AND_UX_RESULT.md), [route-by-route coverage](MVP_ROUTE_FUNCTIONAL_COVERAGE.md), [native evidence](evidence/mvp-product-native-acceptance.json), [completion report](AIBEAN_MVP_PRODUCT_COMPLETION_REPORT.md).
 
+| Requirement | Verification | Evidence | Remaining gate |
+|---|---|---|---|
 | Creator Content v1 guarded installation readiness | LOCAL PASS; hosted not executed this task | 170-file seal; 18 native cases; 150 automated tests | Separate exact owner authorization and fresh hosted preflight |

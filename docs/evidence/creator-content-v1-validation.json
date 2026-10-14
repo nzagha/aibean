@@ -57,7 +57,12 @@
   "creatorHostedInstallation": "NOT_EXECUTED_THIS_TASK",
   "currentHostedState": "NOT_REFRESHED_LAST_VERIFIED_RECOVERY_V4B_29_TABLES",
   "hostedReadiness": "REQUIRES_NEW_EXACT_OWNER_AUTHORIZATION_AND_FRESH_PREFLIGHT",
-  "ci": "PENDING_PUBLICATION",
+  "ci": {
+    "status": "SUCCESS",
+    "sourceCommit": "c462324c98165026f6800cc17ce7a046818be93b",
+    "url": "https://github.com/nzagha/aibean/actions/runs/38493614206",
+    "requiredStepResultsIndependentlyObserved": true
+  },
   "successorRecoveryCoverage": {
     "status": "PASS_DESIGN_ONLY",
     "path": "db/proposals/creator-content-v1-readiness/recovery-coverage.json",
