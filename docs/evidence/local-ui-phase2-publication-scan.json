@@ -1,0 +1,15 @@
+{
+  "capturedAt": "2026-10-15T17:08:46.247Z",
+  "status": "PASS",
+  "stagedFiles": 47,
+  "protectedValueCategories": [
+    "fixture passwords",
+    "mailbox password",
+    "browser test passwords",
+    "local mail tokens",
+    "private environment secrets",
+    "private QA paths"
+  ],
+  "credentialsDisclosed": false,
+  "hostedConnections": 0
+}

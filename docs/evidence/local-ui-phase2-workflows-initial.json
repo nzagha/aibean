@@ -1,0 +1,475 @@
+{
+  "capturedAt": "2026-10-15T16:38:35.417Z",
+  "kind": "ACTUAL_HTTP_SERVER_ACTIONS_AND_NATIVE_DB_NOT_BROWSER",
+  "hostedConnections": 0,
+  "providersActivated": false,
+  "existingFourPasswordsRotated": false,
+  "results": [
+    {
+      "check": "Disposable ordinary workflow account uses real registration/confirmation and receives no capability",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/new",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 1,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/tools/634bdfc5-1746-4274-a47d-19a49a2d7c54/preview",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/tools/phase2-workflows-8469d46796",
+      "persona": "guest",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin creates a new complete private Tool draft",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/634bdfc5-1746-4274-a47d-19a49a2d7c54",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 1,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin edits only the new Tool and publishes with current revision",
+      "status": "FAIL"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User saves and removes a new Tool through genuine actions",
+      "status": "FAIL"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User creates, renames, populates and orders a disposable Stack",
+      "status": "FAIL"
+    },
+    {
+      "route": "/account/stacks/1d39ce2e-687e-4f76-80bd-3e33c787e267",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Peer sessions cannot read, mutate or delete the disposable User Stack",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/profile",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User profile save remains a private non-Creator draft",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Ordinary User review is pending until independent Admin moderation",
+      "status": "FAIL"
+    },
+    {
+      "route": "/creators/apply",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/creators?q=Phase2%20applicant%208469d46796",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator application approval creates a pending operator request without granting capability",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator creates a private skills draft with real validation",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/playbooks/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/playbooks/b089bb96-91f8-4226-be55-b71ce346e198",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/playbooks/b089bb96-91f8-4226-be55-b71ce346e198",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator creates a private playbooks draft with real validation",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/events/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator creates a private events draft with real validation",
+      "status": "FAIL"
+    },
+    {
+      "route": "/creator/content/resources/new",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/resources/efce4bc0-423f-41dd-a08b-25b50ee6c57e",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/resources/efce4bc0-423f-41dd-a08b-25b50ee6c57e",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator creates a private resources draft with real validation",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/creator/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/content/skills/0df4ea74-92bd-47e3-a90f-6d3af17023e2",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/skills/phase2-skills-8469d46796",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Creator edits and submits a new Skill; another identity cannot moderate it",
+      "status": "PASS"
+    },
+    {
+      "route": "/creator/content/playbooks/b089bb96-91f8-4226-be55-b71ce346e198",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/content/playbooks/b089bb96-91f8-4226-be55-b71ce346e198",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/playbooks/phase2-playbooks-8469d46796",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Playbook validates ordered steps and independent moderation",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/bbfa1840-a7dd-4c96-8e25-a7f838f7ff5a",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/vendor/tools/bbfa1840-a7dd-4c96-8e25-a7f838f7ff5a",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor edit proposal preserves canonical Tool and remains payment pending",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/bbfa1840-a7dd-4c96-8e25-a7f838f7ff5a",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/vendor/tools/bbfa1840-a7dd-4c96-8e25-a7f838f7ff5a",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Vendor verification request does not award a badge or fabricate settlement",
+      "status": "PASS"
+    },
+    {
+      "route": "/vendor/tools/bbfa1840-a7dd-4c96-8e25-a7f838f7ff5a",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/vendor/tools/d1afb6c0-5d52-47d6-9ad5-6fdaf0c1ea0f",
+      "persona": "vendor",
+      "status": "PASS",
+      "httpStatus": 307,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Same-origin forged Vendor Tool target is rejected without a proposal",
+      "status": "PASS"
+    },
+    {
+      "route": "/account",
+      "persona": "disposable-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Owned disposable Stack deletion preserves saved Tools and peer resources",
+      "status": "PASS"
+    },
+    {
+      "route": "/admin/tools/634bdfc5-1746-4274-a47d-19a49a2d7c54",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 1,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "New Tool archive and invalid archived-to-published transition are enforced",
+      "status": "FAIL"
+    },
+    {
+      "route": "/admin/audit?entity=634bdfc5-1746-4274-a47d-19a49a2d7c54",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Admin audit and Creator analytics render the persisted local workflows",
+      "status": "FAIL"
+    }
+  ],
+  "summary": {
+    "pass": 56,
+    "fail": 7
+  }
+}

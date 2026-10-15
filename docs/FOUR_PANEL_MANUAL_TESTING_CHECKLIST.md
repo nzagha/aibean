@@ -1,3 +1,7 @@
+## Current acceptance — 15 October 2026
+
+**PARTIAL: native workflows and restart continuity verified; fresh real-browser acceptance BLOCKED.** Read [the consolidated acceptance report](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md) and [per-action evidence](evidence/local-ui-phase2-acceptance-matrix.json). This supersedes earlier lease/rotation/cross-port statements. Original identities/passwords, source seals, fixtures, private environment and historical evidence are preserved. No hosted connection or provider action occurred.
+
 # Four-panel manual testing
 
 Use [private credential access](LOCAL_QA_CREDENTIAL_ACCESS.md) and the [account guide](LOCAL_AUTHENTICATION_AND_ACCOUNT_TESTING_GUIDE.md). Keep separate browser profiles when testing simultaneous identities. The common 3000 origin supports every persona with unchanged server-side authorization.

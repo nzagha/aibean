@@ -1,3 +1,7 @@
+## Current acceptance — 15 October 2026
+
+**PARTIAL: native workflows and restart continuity verified; fresh real-browser acceptance BLOCKED.** Read [the consolidated acceptance report](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md) and [per-action evidence](evidence/local-ui-phase2-acceptance-matrix.json). This supersedes earlier lease/rotation/cross-port statements. Original identities/passwords, source seals, fixtures, private environment and historical evidence are preserved. No hosted connection or provider action occurred.
+
 # Local authentication verification
 
 October 14, 2026. Branch: `codex/supabase-foundation`. This increment uses only the owner's existing disposable native PostgreSQL QA fixture and new development source snapshots. There were no hosted Supabase connections, exports, installations, account creation or provider changes.

@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "stage": "read-scope-table:aibean_private.installations",
+  "code": "42501",
+  "privateValuesDisclosed": false,
+  "hostedConnections": 0
+}

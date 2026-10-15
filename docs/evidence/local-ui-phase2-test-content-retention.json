@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-15T16:51:03.541Z",
+  "scope": "EXACT_TASK_GENERATED_SLUGS_AND_AUTHOR_AND_START_TIME",
+  "counts": {
+    "skills": 3,
+    "playbooks": 2,
+    "events": 1,
+    "resources": 2
+  },
+  "recordsDeleted": 0,
+  "originalFixturesModified": false,
+  "paymentsSimulated": false,
+  "hostedConnections": 0
+}

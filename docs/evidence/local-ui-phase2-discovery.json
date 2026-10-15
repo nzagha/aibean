@@ -1,0 +1,195 @@
+{
+  "capturedAt": "2026-10-15T16:47:59.721Z",
+  "kind": "ACTUAL_HTTP_AND_NATIVE_NOT_BROWSER",
+  "passwordsChanged": false,
+  "providersActivated": false,
+  "hostedConnections": 0,
+  "results": [
+    {
+      "route": "/compare?tools=acceptance-tool-1,acceptance-tool-2",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account/comparisons/8e1435d4-4118-42c5-b67c-4fd3824d966d",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Registered User saves a named two-Tool comparison and reloads persisted membership",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/comparisons/8e1435d4-4118-42c5-b67c-4fd3824d966d",
+      "persona": "creator",
+      "status": "PASS",
+      "httpStatus": 404,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Comparison stays private across account sessions",
+      "status": "PASS"
+    },
+    {
+      "route": "/@acceptance-creator",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account/following",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/@acceptance-creator",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Registered User follows and unfollows creators without changing an existing follow",
+      "status": "PASS"
+    },
+    {
+      "route": "/skills/acceptance-skill",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account/following",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/skills/acceptance-skill",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Registered User follows and unfollows skills without changing an existing follow",
+      "status": "PASS"
+    },
+    {
+      "route": "/account/activity",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account/billing",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/account/membership",
+      "persona": "registered-user",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/commerce/pricing",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/commerce/payments",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/commerce/subscriptions",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/claims",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/disputes",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "route": "/admin/reports",
+      "persona": "admin",
+      "status": "PASS",
+      "httpStatus": 200,
+      "unlabelledControls": 0,
+      "nestedForms": 0,
+      "kind": "HTTP_RENDER_ACCESS"
+    },
+    {
+      "check": "Activity, billing and membership show actual local state without provider success claims",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "pass": 23,
+    "fail": 0
+  }
+}

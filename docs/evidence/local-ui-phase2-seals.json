@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-15T17:08:06.835Z",
+  "creatorDependencies": 170,
+  "overlayDependencies": 24,
+  "desktopExtension": true,
+  "observerDependencies": 16,
+  "observerInventorySha256": "b2da295477ec341b93b67b3622e72b80a49da3f6baaa7a774da1668ab4fc4f15",
+  "historicalSealsUnchanged": true,
+  "hostedConnections": 0
+}

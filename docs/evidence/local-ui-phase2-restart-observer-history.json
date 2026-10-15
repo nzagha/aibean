@@ -1,0 +1,26 @@
+{
+  "status": "RETAINED_FAILURE_EVIDENCE",
+  "attempts": [
+    {
+      "stage": "resume-same-fixture",
+      "result": "FAIL",
+      "cause": "Windows PowerShell ACL module could not autoload; inherited module discovery loaded duplicate ObjectSecurity type data",
+      "fixturePreserved": true
+    },
+    {
+      "stage": "capture-current-sessions",
+      "result": "FAIL",
+      "cause": "Diagnostic module import reproduced duplicate ObjectSecurity extended type data",
+      "fixturePreserved": true
+    },
+    {
+      "stage": "resume-same-fixture",
+      "result": "FAIL_OBSERVER",
+      "cause": "Synchronous parent reported failure although a new runner and listeners started; private record continuity independently passed",
+      "fixturePreserved": true
+    }
+  ],
+  "correction": "Only the new observer resets inherited PSModulePath for Windows default module discovery, ignores child stdio and waits for exact owned cluster shutdown. Frozen launcher and ACL/TLS guards unchanged.",
+  "privateValuesDisclosed": false,
+  "hostedConnections": 0
+}

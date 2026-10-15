@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "existingLocalSchemaVerified": true,
+  "noSchemaInstalled": true,
+  "localTargetAndTlsVerified": true,
+  "originalIdentitiesAndPrivateCheckpointPreserved": true,
+  "registeredAccountsPresent": true,
+  "scopedApplicationRelations": 66,
+  "recordBodiesExported": false,
+  "hostedConnections": 0,
+  "capturedAt": "2026-10-15T16:25:45.042Z"
+}

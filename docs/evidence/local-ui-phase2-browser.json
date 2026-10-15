@@ -1,0 +1,12 @@
+{
+  "status": "BLOCKED",
+  "kind": "ACTUAL_BROWSER",
+  "freshBrowserActionsCompleted": 0,
+  "reason": "Browser URL policy rejected the saved internal data URL error page. Owner requested to open normal localhost /login; no response received at report preparation.",
+  "workaroundAttempted": false,
+  "previousScreenshotsPreserved": true,
+  "passwordEntryAndSubmission": "Requires owner handoff under the browser tool policy; no bypass.",
+  "screenshotsCreated": 0,
+  "consoleObserved": false,
+  "hostedConnections": 0
+}

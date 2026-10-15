@@ -1,0 +1,18 @@
+{
+  "capturedAt": "2026-10-15T17:05:16.746Z",
+  "automatedTests": {
+    "pass": 163,
+    "fail": 0,
+    "nativeWindows": true
+  },
+  "initialSandboxAttempt": {
+    "pass": 160,
+    "fail": 3,
+    "classification": "Sandbox blocks Windows junction creation and loopback service access; full authorized native rerun passed"
+  },
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "isolatedProductionBuild": "PASS",
+  "runtimeVulnerabilities": 0,
+  "hostedConnections": 0
+}

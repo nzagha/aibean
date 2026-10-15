@@ -1,3 +1,7 @@
+## Current acceptance — 15 October 2026
+
+**PARTIAL: native workflows and restart continuity verified; fresh real-browser acceptance BLOCKED.** Read [the consolidated acceptance report](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md) and [per-action evidence](evidence/local-ui-phase2-acceptance-matrix.json). This supersedes earlier lease/rotation/cross-port statements. Original identities/passwords, source seals, fixtures, private environment and historical evidence are preserved. No hosted connection or provider action occurred.
+
 # Four Control Panels and public website QA matrix
 
 Observed October 14, 2026 in the explicit disposable loopback fixture. **PASS means only the named executed check passed.** Route rendering/access is separate from full workflow acceptance. External integrations remain BLOCKED. Every row links to the actual [HTTP/native evidence](evidence/local-website-http-qa.json); browser checks are separately recorded below. No hosted state was inspected or modified.

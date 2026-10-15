@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-15T16:28:35.792Z",
+  "registeredIdentitiesAndHashesPreserved": true,
+  "fourCredentialValuesPreserved": true,
+  "applicationRecordsAndLedgersPreserved": true,
+  "applicationRelationsChecked": 66,
+  "privateEnvironmentUnchanged": true,
+  "currentSourceLoaded": true,
+  "hostedConnections": 0
+}

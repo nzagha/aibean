@@ -1,0 +1,26 @@
+{
+  "classification": "PUBLIC_FORM_FEEDBACK_ONLY",
+  "feedback": [
+    {
+      "operation": "Save private draft",
+      "expected": "Draft saved.",
+      "publicFeedback": [
+        "Your playbooks limit is reached. Existing content remains available; remove an item or review membership options."
+      ]
+    },
+    {
+      "operation": "Save private draft",
+      "expected": "Draft saved.",
+      "publicFeedback": [
+        "Your events limit is reached. Existing content remains available; remove an item or review membership options."
+      ]
+    },
+    {
+      "operation": "Save private draft",
+      "expected": "Draft saved.",
+      "publicFeedback": [
+        "Your resources limit is reached. Existing content remains available; remove an item or review membership options."
+      ]
+    }
+  ]
+}
