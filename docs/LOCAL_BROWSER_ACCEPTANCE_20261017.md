@@ -25,7 +25,7 @@ The new disposable browser account uses a separate existing owner-protected hand
 
 ## Actual cases
 
-65 PASS observations currently recorded. This count includes navigation/access and mutations, not 65 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
+78 PASS observations currently recorded. This count includes navigation/access and mutations, not 78 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
 
 | Case | Persona | Route | Action | Status | Observed result |
 | --- | --- | --- | --- | --- | --- |
@@ -94,6 +94,19 @@ The new disposable browser account uses a separate existing owner-protected hand
 | 63 | Fresh User | /tools/acceptance-tool-1 | Add second Tool to fresh Stack | PASS | Tool added to your stack |
 | 64 | Fresh User | /account/stacks/:newId | Reorder two Tools and reload | PASS | Browser Tool first, fixture Tool second after reload; notes retained |
 | 65 | Admin | /admin/content/skills/:newId | Independently approve Creator Skill | PASS | Published; editorial decision saved, audited and author notified |
+| 66 | Admin | /admin/reviews | Approve only new synthetic User review, then filter approved | PASS | New Tool review appears approved, rating four; pending queue removed it |
+| 67 | Admin | /admin/claims | Inspect claim queue only | PASS | Zero pending matching claims; no decision made |
+| 68 | Admin | /admin/disputes | Inspect dispute queue only | PASS | Zero matching disputes; no decision made |
+| 69 | Admin | /admin/creators | Inspect application queue only | PASS | Zero matching pending applications; no capability granted |
+| 70 | Admin | /admin/verification | Inspect existing verification only | PASS | One pending request, payment required; checklist independent; existing request unchanged |
+| 71 | Admin | /admin/featured | Read placement queue | PASS | No requests; approval allows checkout; confirmed payment activates placement |
+| 72 | Admin | /admin/commerce/payments | Read payment queue | PASS | Zero matching sandbox payments; capabilities/rank separate |
+| 73 | Admin | /admin/commerce/pricing | Inspect configuration only | PASS | Proposed/Preview; exact configuration approval required; no refund requests; no edits |
+| 74 | Admin | /admin/commerce/subscriptions | Inspect subscription queue | PASS | No matching subscription records; no cancellation/provider activation |
+| 75 | Admin | /account/stacks/:otherUserNewId | Open another User private Stack directly | PASS | 404; private Stack title/notes/order not disclosed |
+| 76 | Admin | /account/comparisons/:otherUserNewId | Open another User private comparison | PASS | 404 without private name or Tool membership |
+| 77 | Admin public browsing | /events/:newDraftSlug | Open unpublished Event public URL | PASS | 404; no draft Event body exposed |
+| 78 | Admin public browsing | /skills/:newPublishedSlug | Read published Skill after independent approval | PASS | New Skill public page shows instructions, outcome, author and Browser Tool reference |
 
 ## Publication interruption
 
@@ -101,7 +114,7 @@ The Admin Tool publication action was submitted once. The native JavaScript conf
 
 ## Authentication gate
 
-Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed password replacement; the browser displayed Password updated, the old password was rejected, and owner login with the changed password opened the ordinary dashboard. Admin, Creator and Tool-owner boundaries still denied the fresh User. Forgot-password submission, local recovery-message receipt and token exchange to the clean reset form passed. The owner also completed reset and subsequent login; the ordinary dashboard was independently observed, and a separate read-only audit confirms exactly one password-reset event. Replayed recovery and confirmation messages are rejected. The reset success toast itself was not independently captured. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
+Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed password replacement; the browser displayed Password updated, the old password was rejected, and owner login with the changed password opened the ordinary dashboard. Admin, Creator and Tool-owner boundaries still denied the fresh User. Forgot-password submission, local recovery-message receipt and token exchange to the clean reset form passed. The owner also completed reset and subsequent login; the ordinary dashboard was independently observed, and a separate read-only audit confirms exactly one password-reset event. Replayed recovery and confirmation messages are rejected. The reset success toast itself was not independently captured. [Local read-only Auth audit and ordinary capability evidence](evidence/local-ui-browser-20261017-auth-postflight.json) confirms committed registration, confirmation, change and reset events without reading password hashes or authenticating with the changed/reset credential. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
 
 ## Remaining detailed acceptance
 
@@ -114,9 +127,9 @@ Fresh registration, denial before confirmation, local message receipt, confirmat
 | User follows | Tool follow, reset continuity and unfollow PASS; Creator follow/unfollow NOT TESTED in this browser run |
 | User profile | PASS: fresh ordinary private profile saved; no public Creator capability |
 | User activity, billing and membership | PASS for named read-only empty/usage checks; no payment mutation claimed |
-| Independent Admin moderation | Skill publication PASS with owner confirmation; Playbook prepared for owner action; User review pending until explicitly recorded |
-| Admin archive eligibility and claims/disputes/Creator applications/verification adjudication | NOT TESTED in this browser run; prior native checks are separate |
-| Admin pricing/subscription/payment queue UI | NOT TESTED in this browser run; no provider success claim |
+| Independent Admin moderation | Skill publication PASS with owner confirmation; User review independently approved and verified in the approved queue; Playbook prepared for owner action |
+| Admin archive eligibility and claims/disputes/Creator applications/verification adjudication | Archive NOT TESTED; claim/dispute/application decisions BLOCKED by empty pending queues; existing verification remains payment-required and preserved. Named queue-read cases PASS; prior native mutations are separate |
+| Admin pricing/subscription/payment/featured queue UI | PASS for named read-only states: empty queues and explicit sandbox/preview gates. No provider success claim |
 | Existing Creator profile changes, peer Creator draft isolation, unpublished content preview | NOT TESTED in this browser run; original profiles preserved |
 | New Vendor edit/verification proposal submission | BLOCKED by existing pending requests; duplicates not created and previous requests preserved |
 | Vendor Tool owned by a different Vendor | NOT TESTED as a separate browser case; tested unowned Admin-created Tool denial is narrower |
@@ -125,7 +138,7 @@ Fresh registration, denial before confirmation, local message receipt, confirmat
 
 ## Validation and continuity
 
-Same implementation validation on October 17: [167 automated tests, lint, TypeScript, isolated production build, zero runtime vulnerabilities](evidence/local-qa-tls-renewal-v1-validation.json); [CI 39061861880](https://github.com/nzagha/aibean/actions/runs/39061861880) SUCCESS for the source commit above. Earlier native auth27, access198, workflows71 and discovery23 PASS remain [separate October 15 observations](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md). [Browser-evidence commit d02f35de154d70c8dad802f0e3e94ec195555dfc](https://github.com/nzagha/aibean/commit/d02f35de154d70c8dad802f0e3e94ec195555dfc) is verified remotely; [its exact CI 39063792130](https://github.com/nzagha/aibean/actions/runs/39063792130) completed SUCCESS, including build and runtime audit. This is Linux CI, separate from actual browser/native observations. No schema migrations or installations were rerun.
+Same implementation validation on October 17: [167 automated tests, lint, TypeScript, isolated production build, zero runtime vulnerabilities](evidence/local-qa-tls-renewal-v1-validation.json); [CI 39061861880](https://github.com/nzagha/aibean/actions/runs/39061861880) SUCCESS for the source commit above. Earlier native auth27, access198, workflows71 and discovery23 PASS remain [separate October 15 observations](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md). [Browser-evidence commit d02f35de154d70c8dad802f0e3e94ec195555dfc](https://github.com/nzagha/aibean/commit/d02f35de154d70c8dad802f0e3e94ec195555dfc) is verified remotely; [its exact CI 39063792130](https://github.com/nzagha/aibean/actions/runs/39063792130) completed SUCCESS, including build and runtime audit. This is Linux CI, separate from actual browser/native observations. [Follow-up commit 5323d66123fa8b579108968d27c28efd05b07572 CI](https://github.com/nzagha/aibean/actions/runs/39064065276) and [recovery/User workflow commit 86c5d0376a1d71a2cf316298c29da0b5f95939de CI](https://github.com/nzagha/aibean/actions/runs/39064625187) also completed SUCCESS. No schema migrations or installations were rerun.
 
 [Five frozen manifests and all 214 dependencies match](evidence/local-ui-browser-20261017-seals.json): Creator Content170, local Auth24, desktop helper1, Phase2 observers16, TLS renewal3. The preserving restart/TLS renewal already verified 66 relation continuity digests, identities/password hashes, private environment and mailbox before these new browser mutations. The records newly created today have not been claimed as independently verified across a later restart.
 

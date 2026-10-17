@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-10-17T20:00:39.7286183+00:00",
+  "status": "PASS",
+  "kind": "LOCAL_HTTP_AVAILABILITY_NOT_BROWSER_ACCEPTANCE",
+  "ownedRunnerVerified": true,
+  "leaseExpiresAt": "2026-10-18T03:10:24.1610000+00:00",
+  "pages": [
+    {
+      "url": "http://127.0.0.1:3000/",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3000/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3002/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3003/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3004/login",
+      "status": 200
+    }
+  ],
+  "passwordsRotated": false,
+  "hostedConnections": 0
+}

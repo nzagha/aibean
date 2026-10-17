@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-17T19:55:53.995Z",
+  "capturedAt": "2026-10-17T20:00:05.294Z",
   "status": "PARTIAL_PLAYBOOK_CONFIRMATION_AND_PANEL_CASES_PENDING",
   "browser": "Codex in-app browser",
   "sourceCommit": "ecb2efddfb7c7484aa72e49dc14cd96f10912d45",
@@ -1117,11 +1117,232 @@
         "Inspect the stated visible result"
       ],
       "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/reviews",
+      "action": "Approve only new synthetic User review, then filter approved",
+      "expected": "Pending transitions to approved by independent Admin",
+      "actual": "New Tool review appears approved, rating four; pending queue removed it",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Approve only new synthetic User review, then filter approved",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/claims",
+      "action": "Inspect claim queue only",
+      "expected": "Honest pending queue; no automatic ownership",
+      "actual": "Zero pending matching claims; no decision made",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect claim queue only",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/disputes",
+      "action": "Inspect dispute queue only",
+      "expected": "Honest empty queue",
+      "actual": "Zero matching disputes; no decision made",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect dispute queue only",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/creators",
+      "action": "Inspect application queue only",
+      "expected": "No automatic capabilities",
+      "actual": "Zero matching pending applications; no capability granted",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect application queue only",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/verification",
+      "action": "Inspect existing verification only",
+      "expected": "Payment remains required; verification separate",
+      "actual": "One pending request, payment required; checklist independent; existing request unchanged",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect existing verification only",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/featured",
+      "action": "Read placement queue",
+      "expected": "Preserve $99/five days and approval/payment gates",
+      "actual": "No requests; approval allows checkout; confirmed payment activates placement",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Read placement queue",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/commerce/payments",
+      "action": "Read payment queue",
+      "expected": "No fabricated settlement",
+      "actual": "Zero matching sandbox payments; capabilities/rank separate",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Read payment queue",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/commerce/pricing",
+      "action": "Inspect configuration only",
+      "expected": "Preview with explicit activation gate",
+      "actual": "Proposed/Preview; exact configuration approval required; no refund requests; no edits",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect configuration only",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/commerce/subscriptions",
+      "action": "Inspect subscription queue",
+      "expected": "Honest empty sandbox state",
+      "actual": "No matching subscription records; no cancellation/provider activation",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect subscription queue",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/account/stacks/:otherUserNewId",
+      "action": "Open another User private Stack directly",
+      "expected": "Deny despite Admin capability",
+      "actual": "404; private Stack title/notes/order not disclosed",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Open another User private Stack directly",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/account/comparisons/:otherUserNewId",
+      "action": "Open another User private comparison",
+      "expected": "Deny",
+      "actual": "404 without private name or Tool membership",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Open another User private comparison",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin public browsing",
+      "route": "/events/:newDraftSlug",
+      "action": "Open unpublished Event public URL",
+      "expected": "Hide unpublished draft",
+      "actual": "404; no draft Event body exposed",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Open unpublished Event public URL",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin public browsing",
+      "route": "/skills/:newPublishedSlug",
+      "action": "Read published Skill after independent approval",
+      "expected": "Public content and linked Tool appear only after review",
+      "actual": "New Skill public page shows instructions, outcome, author and Browser Tool reference",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Read published Skill after independent approval",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
     }
   ],
   "summary": {
-    "pass": 65,
-    "total": 65
+    "pass": 78,
+    "total": 78
   },
   "hostedConnections": 0,
   "credentialsDisclosed": false,
@@ -1159,5 +1380,217 @@
     "originalFourPasswords": "UNCHANGED",
     "previousNativeRestart": "PASS_66_RELATIONS",
     "restartAfterNewBrowserRecords": "NOT_TESTED"
-  }
+  },
+  "remainingCases": [
+    {
+      "persona": "Fresh User",
+      "route": "/account/security",
+      "action": "Incorrect current password",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Current browser journey did not submit an incorrect-current-password change; native negative passed",
+      "reproduction": [
+        "Incorrect current password",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/login",
+      "action": "Previous changed password rejected after reset",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Changed/reset credential entry reserved to owner",
+      "reproduction": [
+        "Previous changed password rejected after reset",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/local-mailbox",
+      "action": "Expired token rejection",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Consumed-token replay passed; explicit expiry remains native-only",
+      "reproduction": [
+        "Expired token rejection",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Cross-role",
+      "route": "/account",
+      "action": "Separate browser profiles and revocation",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Only shared-cookie in-app browser used",
+      "reproduction": [
+        "Separate browser profiles and revocation",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Creator",
+      "route": "/account/profile",
+      "action": "Existing approved Creator profile edit",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Preserved existing published fixture profile",
+      "reproduction": [
+        "Existing approved Creator profile edit",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Creator",
+      "route": "/creator/content/skills/:peerId",
+      "action": "Peer draft denial",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Native denial passed; browser case pending",
+      "reproduction": [
+        "Peer draft denial",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/content/playbooks/:newId",
+      "action": "Independent Playbook publication",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Concrete decision prepared for owner submission/confirmation; agent did not submit",
+      "reproduction": [
+        "Independent Playbook publication",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/tools/:newId",
+      "action": "Archive eligibility",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Existing synthetic Tool remains published for related content",
+      "reproduction": [
+        "Archive eligibility",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/claims",
+      "action": "Claim adjudication",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Pending queue empty; no ownership changes fabricated",
+      "reproduction": [
+        "Claim adjudication",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/disputes",
+      "action": "Dispute adjudication",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Queue empty",
+      "reproduction": [
+        "Dispute adjudication",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/creators",
+      "action": "Creator capability decision",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Pending queue empty; no capabilities fabricated",
+      "reproduction": [
+        "Creator capability decision",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/verification",
+      "action": "Verification adjudication",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Existing request payment required and preserved",
+      "reproduction": [
+        "Verification adjudication",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Vendor",
+      "route": "/vendor/tools/:ownedId",
+      "action": "Fresh edit/verification submission",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Existing pending requests prevent duplicate creation",
+      "reproduction": [
+        "Fresh edit/verification submission",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Vendor",
+      "route": "/vendor/tools/:peerOwnedId",
+      "action": "Different Vendor-owned Tool write denial",
+      "status": "NOT TESTED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Unowned Admin-created Tool denial passed; stricter peer-owned browser case separate",
+      "reproduction": [
+        "Different Vendor-owned Tool write denial",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "All",
+      "route": "Provider integrations",
+      "action": "SMTP/Stripe/Storage/scanning/affiliates",
+      "status": "BLOCKED",
+      "expected": "Run the named case under existing authorization and fixture rules",
+      "actual": "Providers disabled and hosted activation excluded",
+      "reproduction": [
+        "SMTP/Stripe/Storage/scanning/affiliates",
+        "Observe status without bypassing prerequisite"
+      ],
+      "severity": "ACCEPTANCE_GAP_NOT_CONFIRMED_PRODUCT_DEFECT",
+      "consoleError": "NOT_OBSERVED"
+    }
+  ]
 }
