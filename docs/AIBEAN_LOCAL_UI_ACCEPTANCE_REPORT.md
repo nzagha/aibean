@@ -1,3 +1,7 @@
+## Current resumption status — 17 October 2026
+
+**LOCAL WEBSITE — BLOCKED:** the eight-hour lease and pinned local TLS certificate have expired. All four preview ports are closed and the exact retained QA PostgreSQL cluster is stopped. Fixture and credential files remain present. No database connection, restart, certificate replacement or hosted access was attempted. The owner explicitly required stopping on TLS expiry. See [the verified blocker and proposed preserving renewal](LOCAL_QA_TLS_RENEWAL_READINESS.md). Earlier PASS/running observations below are historical.
+
 # aiBean local UI acceptance — Phase 2
 
 15 October 2026; branch `codex/supabase-foundation`. **Local website running; acceptance PARTIAL because fresh actual-browser testing is blocked.** No hosted Supabase connection, schema installation, backup/recovery, deployment or provider activation occurred. No application source or frozen mechanism was changed.

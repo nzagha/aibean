@@ -1,3 +1,7 @@
+## Current resumption status — 17 October 2026
+
+**LOCAL WEBSITE — BLOCKED:** the eight-hour lease and pinned local TLS certificate have expired. All four preview ports are closed and the exact retained QA PostgreSQL cluster is stopped. Fixture and credential files remain present. No database connection, restart, certificate replacement or hosted access was attempted. The owner explicitly required stopping on TLS expiry. See [the verified blocker and proposed preserving renewal](LOCAL_QA_TLS_RENEWAL_READINESS.md). Earlier PASS/running observations below are historical.
+
 **Phase 2 local acceptance — 15 October 2026:** Native auth 27, HTTP/access 198, product workflow 71 and discovery 23 checks pass; full 163-test suite, isolated build and runtime audit pass. Preserving restart verifies all 66 application/ledger relation checks, accounts/passwords/private environment/current source. Fresh actual-browser acceptance remains BLOCKED by the saved-tab URL policy and pending owner HTTP-page/password-entry handoff. Implementation `776dc43a4ddf42448af79a874c856258a50145cc` is verified remotely and [Validate 38774920174](https://github.com/nzagha/aibean/actions/runs/38774920174) completed successfully. No production app/frozen source or hosted/provider settings changed. [Current consolidated report](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md) supersedes earlier local-preview restrictions; historical entries below remain unchanged.
 
 # Supabase foundation: stage evidence and next milestone
