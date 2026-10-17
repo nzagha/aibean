@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-17T19:48:40.913Z",
-  "status": "PARTIAL_OWNER_RESET_SUBMISSION_AND_LOGIN_PENDING",
+  "capturedAt": "2026-10-17T19:55:53.995Z",
+  "status": "PARTIAL_PLAYBOOK_CONFIRMATION_AND_PANEL_CASES_PENDING",
   "browser": "Codex in-app browser",
   "sourceCommit": "ecb2efddfb7c7484aa72e49dc14cd96f10912d45",
   "cases": [
@@ -842,19 +842,295 @@
         "Inspect the stated visible result"
       ],
       "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/reset-password → /account",
+      "action": "Owner resets password and logs in",
+      "expected": "Reset credential works; ordinary account persists",
+      "actual": "Owner reported reset/login; browser shows same ordinary account and pending review",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "ownerHandoff": true,
+      "observationLimit": "Reset success toast not independently captured; subsequent authenticated dashboard observed",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Owner resets password and logs in",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/profile",
+      "action": "Save new private profile",
+      "expected": "Persist without public Creator publication",
+      "actual": "Draft status and synthetic fields persist; public publishing unavailable",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Save new private profile",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/compare?tools=fixture1,fixture2",
+      "action": "Save named two-Tool comparison",
+      "expected": "Account-scoped saved comparison",
+      "actual": "Comparison saved to your account",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Save named two-Tool comparison",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/comparisons/:newId",
+      "action": "Reopen saved comparison",
+      "expected": "Persist private name and two selected Tools",
+      "actual": "Named private comparison reopened with both fixture Tools selected",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Reopen saved comparison",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/local-mailbox",
+      "action": "Replay consumed recovery message",
+      "expected": "Reject reused token",
+      "actual": "Expired, invalid or already used; no reset grant issued",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Replay consumed recovery message",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/local-mailbox",
+      "action": "Replay consumed confirmation message",
+      "expected": "Reject reused token",
+      "actual": "Already-used invalid-link state persists; no new confirmation",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Replay consumed confirmation message",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/billing",
+      "action": "Inspect billing empty state",
+      "expected": "No false settled payment or paid capability",
+      "actual": "No request payments; Free preview; sandbox only",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect billing empty state",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/membership",
+      "action": "Inspect free limits and actual usage",
+      "expected": "No paid/Creator benefit; reflect saved comparison/follow",
+      "actual": "Free status, one comparison and one follow; Creator content quotas zero",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Inspect free limits and actual usage",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/following",
+      "action": "Verify follow after password reset",
+      "expected": "Same ordinary account follow retained",
+      "actual": "One newly followed Tool shown",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Verify follow after password reset",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/following",
+      "action": "Unfollow new Tool",
+      "expected": "Remove only this new follow",
+      "actual": "Zero followed targets; No follows yet",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Unfollow new Tool",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/activity",
+      "action": "Read notifications and saved-content state",
+      "expected": "No unrelated private notifications",
+      "actual": "Empty account-scoped lists; No notifications yet",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Read notifications and saved-content state",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/stacks/:newId",
+      "action": "Save private Stack notes",
+      "expected": "Persist notes and private visibility",
+      "actual": "Stack ordering and visibility saved; no public Creator profile",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Save private Stack notes",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/tools/:newTool",
+      "action": "Add new Tool to fresh Stack",
+      "expected": "Private membership added",
+      "actual": "Tool added to your stack",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Add new Tool to fresh Stack",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/tools/acceptance-tool-1",
+      "action": "Add second Tool to fresh Stack",
+      "expected": "Second private membership",
+      "actual": "Tool added to your stack",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Add second Tool to fresh Stack",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account/stacks/:newId",
+      "action": "Reorder two Tools and reload",
+      "expected": "Persist order and private notes",
+      "actual": "Browser Tool first, fixture Tool second after reload; notes retained",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Reorder two Tools and reload",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/content/skills/:newId",
+      "action": "Independently approve Creator Skill",
+      "expected": "Publish with reason, audit and author notification",
+      "actual": "Published; editorial decision saved, audited and author notified",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "ownerHandoff": true,
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Independently approve Creator Skill",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
     }
   ],
   "summary": {
-    "pass": 49,
-    "total": 49
+    "pass": 65,
+    "total": 65
   },
   "hostedConnections": 0,
   "credentialsDisclosed": false,
   "limitations": [
-    "Successful browser password replacement/reset awaits owner input",
     "Distinct browser profiles not tested; local ports share host cookies",
-    "Vendor request creation not repeated because existing requests pending",
-    "Remaining detailed panel checklist remains incomplete"
+    "Incorrect-current-password and replaced-password-after-reset negatives remain native-only",
+    "Vendor new request creation not repeated because existing requests pending",
+    "Remaining detailed panel checklist incomplete",
+    "Playbook moderation prepared but not submitted by agent; awaiting owner action"
   ],
   "controlLimitations": [
     "Native confirmation dialog required owner handoff; publication then verified without retry",
@@ -871,11 +1147,13 @@
     "forgotRequest": "PASS",
     "localMailbox": "PASS",
     "resetTokenExchange": "PASS",
-    "resetSubmission": "PENDING_OWNER",
-    "resetPasswordLogin": "PENDING_OWNER",
+    "resetSubmission": "PASS_OWNER_PERFORMED_AND_AUDIT_VERIFIED",
+    "resetPasswordLogin": "PASS_OWNER_PERFORMED_DASHBOARD_OBSERVED",
     "incorrectCurrentPassword": "NOT_TESTED_IN_THIS_BROWSER_RUN",
-    "tokenReplay": "NOT_TESTED_IN_THIS_BROWSER_RUN",
-    "separateProfileSessionRevocation": "NOT_TESTED_IN_THIS_BROWSER_RUN"
+    "tokenReplay": "PASS_CONSUMED_RECOVERY_AND_CONFIRMATION",
+    "separateProfileSessionRevocation": "NOT_TESTED_IN_THIS_BROWSER_RUN",
+    "expiredToken": "NOT_TESTED_IN_THIS_BROWSER_RUN",
+    "previousChangedPasswordAfterReset": "NOT_TESTED_IN_THIS_BROWSER_RUN"
   },
   "continuity": {
     "originalFourPasswords": "UNCHANGED",

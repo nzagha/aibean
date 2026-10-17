@@ -25,7 +25,7 @@ The new disposable browser account uses a separate existing owner-protected hand
 
 ## Actual cases
 
-49 PASS observations currently recorded. This count includes navigation/access and mutations, not 49 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
+65 PASS observations currently recorded. This count includes navigation/access and mutations, not 65 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
 
 | Case | Persona | Route | Action | Status | Observed result |
 | --- | --- | --- | --- | --- | --- |
@@ -78,6 +78,22 @@ The new disposable browser account uses a separate existing owner-protected hand
 | 47 | Fresh User | /forgot-password | Request recovery email | PASS | Eligible message notice; no external email |
 | 48 | Fresh User | /local-mailbox | Read new recovery message | PASS | Recovery message received in protected mailbox |
 | 49 | Fresh User | /reset-password | Exchange recovery message | PASS | Reset form opened at clean URL |
+| 50 | Fresh User | /reset-password → /account | Owner resets password and logs in | PASS | Owner reported reset/login; browser shows same ordinary account and pending review |
+| 51 | Fresh User | /account/profile | Save new private profile | PASS | Draft status and synthetic fields persist; public publishing unavailable |
+| 52 | Fresh User | /compare?tools=fixture1,fixture2 | Save named two-Tool comparison | PASS | Comparison saved to your account |
+| 53 | Fresh User | /account/comparisons/:newId | Reopen saved comparison | PASS | Named private comparison reopened with both fixture Tools selected |
+| 54 | Fresh User | /local-mailbox | Replay consumed recovery message | PASS | Expired, invalid or already used; no reset grant issued |
+| 55 | Fresh User | /local-mailbox | Replay consumed confirmation message | PASS | Already-used invalid-link state persists; no new confirmation |
+| 56 | Fresh User | /account/billing | Inspect billing empty state | PASS | No request payments; Free preview; sandbox only |
+| 57 | Fresh User | /account/membership | Inspect free limits and actual usage | PASS | Free status, one comparison and one follow; Creator content quotas zero |
+| 58 | Fresh User | /account/following | Verify follow after password reset | PASS | One newly followed Tool shown |
+| 59 | Fresh User | /account/following | Unfollow new Tool | PASS | Zero followed targets; No follows yet |
+| 60 | Fresh User | /account/activity | Read notifications and saved-content state | PASS | Empty account-scoped lists; No notifications yet |
+| 61 | Fresh User | /account/stacks/:newId | Save private Stack notes | PASS | Stack ordering and visibility saved; no public Creator profile |
+| 62 | Fresh User | /tools/:newTool | Add new Tool to fresh Stack | PASS | Tool added to your stack |
+| 63 | Fresh User | /tools/acceptance-tool-1 | Add second Tool to fresh Stack | PASS | Tool added to your stack |
+| 64 | Fresh User | /account/stacks/:newId | Reorder two Tools and reload | PASS | Browser Tool first, fixture Tool second after reload; notes retained |
+| 65 | Admin | /admin/content/skills/:newId | Independently approve Creator Skill | PASS | Published; editorial decision saved, audited and author notified |
 
 ## Publication interruption
 
@@ -85,18 +101,20 @@ The Admin Tool publication action was submitted once. The native JavaScript conf
 
 ## Authentication gate
 
-Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed password replacement; the browser displayed Password updated, the old password was rejected, and owner login with the changed password opened the ordinary dashboard. Admin, Creator and Tool-owner boundaries still denied the fresh User. Forgot-password submission, local recovery-message receipt and token exchange to the clean reset form passed. Successful reset submission and reset-password login remain owner-dependent until their cases are explicitly recorded. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
+Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed password replacement; the browser displayed Password updated, the old password was rejected, and owner login with the changed password opened the ordinary dashboard. Admin, Creator and Tool-owner boundaries still denied the fresh User. Forgot-password submission, local recovery-message receipt and token exchange to the clean reset form passed. The owner also completed reset and subsequent login; the ordinary dashboard was independently observed, and a separate read-only audit confirms exactly one password-reset event. Replayed recovery and confirmation messages are rejected. The reset success toast itself was not independently captured. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
 
 ## Remaining detailed acceptance
 
 | Work | Browser status / limitation |
 | --- | --- |
 | Incorrect-current-password negative on this new identity | NOT TESTED; prior native negative PASS retained |
-| Password change/reset follow-up logins and reset submission | See current structured cases; owner entry required |
+| Password change/reset follow-up logins and reset submission | PASS with owner entry/submission; subsequent dashboards observed; reset audit independently verified |
 | Distinct simultaneous browser profiles and all-session UI invalidation | NOT TESTED; one shared browser cookie jar; native regression evidence retained |
-| User Stack Tool ordering, saved named comparisons, Creator follow/unfollow | NOT TESTED in this browser run; native workflow coverage retained |
-| User profile, activity, billing and membership mutation details | NOT TESTED in this browser run |
-| Independent Admin moderation of new Skill, Playbook and User review | NOT TESTED until explicitly recorded; new content stays pending |
+| User Stack Tool ordering and saved named comparisons | PASS: two memberships, move/save/reload, named comparison save/reopen |
+| User follows | Tool follow, reset continuity and unfollow PASS; Creator follow/unfollow NOT TESTED in this browser run |
+| User profile | PASS: fresh ordinary private profile saved; no public Creator capability |
+| User activity, billing and membership | PASS for named read-only empty/usage checks; no payment mutation claimed |
+| Independent Admin moderation | Skill publication PASS with owner confirmation; Playbook prepared for owner action; User review pending until explicitly recorded |
 | Admin archive eligibility and claims/disputes/Creator applications/verification adjudication | NOT TESTED in this browser run; prior native checks are separate |
 | Admin pricing/subscription/payment queue UI | NOT TESTED in this browser run; no provider success claim |
 | Existing Creator profile changes, peer Creator draft isolation, unpublished content preview | NOT TESTED in this browser run; original profiles preserved |
@@ -111,12 +129,12 @@ Same implementation validation on October 17: [167 automated tests, lint, TypeSc
 
 [Five frozen manifests and all 214 dependencies match](evidence/local-ui-browser-20261017-seals.json): Creator Content170, local Auth24, desktop helper1, Phase2 observers16, TLS renewal3. The preserving restart/TLS renewal already verified 66 relation continuity digests, identities/password hashes, private environment and mailbox before these new browser mutations. The records newly created today have not been claimed as independently verified across a later restart.
 
-Only new task-specific synthetic Tool/Skill/Playbook/Event/resource/review data was created through ordinary UI workflows. Only the new disposable Stack was deleted. Existing content, pending Vendor requests, all four provisioned passwords, historical recovery targets and backups remain preserved. No hosted connection occurred.
+Only new task-specific synthetic User profile/comparison/Stack/Tool/Skill/Playbook/Event/resource/review data was created through ordinary UI workflows. Only the new disposable Stack was deleted. Existing content, pending Vendor requests, all four provisioned passwords, historical recovery targets and backups remain preserved. No hosted connection occurred.
 
 ## Priorities and handoff
 
 - P0: no confirmed new application defect.
-- P1 acceptance gate: finish owner-operated password change/reset logins and replay/session checks; complete independent moderation and remaining panel workflows.
+- P1 acceptance gate: complete remaining password negatives and separate-profile session checks, independent moderation and detailed panel workflows; successful owner change/reset/logins and consumed-token replay are recorded.
 - P1 provider readiness: hosted Auth/SMTP/payments/Storage remain intentionally unavailable; require separate reviewed approvals.
 - P2 QA limitations: native modal control requires owner confirmation; separate real browser profiles and wider desktop/accessibility coverage remain unverified.
 - P2 availability: eight-hour lease and finite local certificate require the reviewed preserving restart/renewal procedure; never disable TLS validation.

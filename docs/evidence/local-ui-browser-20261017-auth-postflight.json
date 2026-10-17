@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-10-17T19:53:48.209Z",
+  "status": "PASS",
+  "kind": "READ_ONLY_LOCAL_DATABASE_POSTFLIGHT_NOT_BROWSER",
+  "scope": "ONLY_NEW_SYNTHETIC_BROWSER_USER",
+  "confirmed": true,
+  "admin": false,
+  "creator": false,
+  "auditEvents": [
+    {
+      "action": "local-qa.email-confirmed",
+      "count": 1
+    },
+    {
+      "action": "local-qa.password-changed",
+      "count": 1
+    },
+    {
+      "action": "local-qa.password-reset",
+      "count": 1
+    },
+    {
+      "action": "local-qa.registered",
+      "count": 1
+    }
+  ],
+  "passwordHashesRead": false,
+  "credentialsUsedForLogin": false,
+  "hostedConnections": 0,
+  "privateValuesDisclosed": false
+}

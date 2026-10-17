@@ -1,6 +1,6 @@
 ## Latest actual browser acceptance — 17 October 2026
 
-**LOCAL WEBSITE — RUNNING; acceptance PARTIAL.** 49 actual in-app-browser observations passed, including all four unchanged fixture logins, Admin Tool creation/edit/preview/audited publication, Creator content drafts and review submission, Vendor ownership denial, and fresh ordinary registration/confirmation/login. Password replacement status and remaining owner handoffs are recorded in [the current browser report](LOCAL_BROWSER_ACCEPTANCE_20261017.md) and [per-action evidence](evidence/local-ui-browser-20261017-result.json). Older blocked/no-browser entries below are historical. No hosted connection, provider activation, schema installation or frozen source change occurred.
+**LOCAL WEBSITE — RUNNING; acceptance PARTIAL.** 65 actual in-app-browser observations passed, including all four unchanged fixture logins, Admin Tool creation/edit/preview/audited publication, Creator content drafts and review submission, Vendor ownership denial, and fresh ordinary registration/confirmation/login. Owner-operated password change/reset and subsequent logins passed; consumed recovery-token replay was rejected. Detailed remaining panel cases are recorded in [the current browser report](LOCAL_BROWSER_ACCEPTANCE_20261017.md) and [per-action evidence](evidence/local-ui-browser-20261017-result.json). Older blocked/no-browser entries below are historical. No hosted connection, provider activation, schema installation or frozen source change occurred.
 
 ## Current status after preserving TLS renewal — 17 October 2026
 
