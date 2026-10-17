@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-17T19:13:44.949Z",
+  "automatedTests": {
+    "pass": 167,
+    "fail": 0
+  },
+  "newSyntheticTests": 4,
+  "lint": "PASS",
+  "typecheck": "PASS",
+  "isolatedProductionBuild": "PASS",
+  "runtimeVulnerabilities": 0,
+  "strictNativePostgresContinuity": "PASS",
+  "browserAcceptance": "PENDING_OWNER_HTTP_PAGE_AND_PASSWORD_HANDOFF",
+  "hostedConnections": 0
+}

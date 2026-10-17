@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-17T19:09:57.960Z",
+  "syntheticTests": 4,
+  "failed": 0,
+  "checks": [
+    "restricted target/identity/pin guards",
+    "same key and bounded hostname/date certificate",
+    "strict native TLS and wrong-host rejection",
+    "two-file failure preservation",
+    "bounded CLI failure before target access"
+  ],
+  "existingFixtureModified": false,
+  "hostedConnections": 0
+}

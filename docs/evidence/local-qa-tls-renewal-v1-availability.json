@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-17T19:12:02.586Z",
+  "homepageStatus": 200,
+  "results": [
+    {
+      "url": "http://127.0.0.1:3000/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3002/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3003/login",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:3004/login",
+      "status": 200
+    }
+  ],
+  "kind": "NATIVE_HTTP_NOT_BROWSER",
+  "hostedConnections": 0
+}

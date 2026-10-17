@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "capturedAt": "2026-10-17T19:10:37.684Z",
+  "packageSha256": "c088be8079d60ff6358587a3455eaa4742d07aa2304db2124ffa5cfc0c344937",
+  "newCertificateExpiresAt": "2026-10-24T19:10:21.000Z",
+  "strictTlsAndHostname": true,
+  "samePrivateKey": true,
+  "certificateAndPinOnly": true,
+  "applicationRelationsPreserved": 66,
+  "registeredIdentitiesAndHashesPreserved": true,
+  "allFourOriginalPasswordsVerified": true,
+  "mailboxVerified": true,
+  "originalArtifactsRetained": true,
+  "runnerPid": 56664,
+  "leaseExpiresAt": "2026-10-18T03:10:24.161Z",
+  "databaseSchemasModified": false,
+  "hostedConnections": 0
+}

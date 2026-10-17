@@ -1,3 +1,7 @@
+## Current status after preserving TLS renewal — 17 October 2026
+
+**LOCAL WEBSITE — RUNNING:** renewal and strict native continuity verification passed, all four original passwords and the protected mailbox work, and the homepage/login pages return HTTP 200. Current lease ends at 23:10:24 EDT on October 17; renewed certificate expires October 24 at 15:10:21 EDT. All 66 application/ledger continuity checks and original identity/password hashes matched. Full suite: 167 PASS, zero FAIL. Fresh real-browser acceptance still awaits an owner-opened HTTP page. See [the actual renewal result](LOCAL_QA_TLS_RENEWAL_RESULT.md). This supersedes the expired-state entry below; earlier entries remain historical. No hosted connection or schema/data repair occurred.
+
 # Local QA TLS expiry and proposed preserving renewal
 
 Observed 17 October 2026. Branch: `codex/supabase-foundation`; inspected HEAD: `e8386c1632b4bf9823fd6fb9b961c1eeb11d489b`.

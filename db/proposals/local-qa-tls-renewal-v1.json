@@ -1,0 +1,53 @@
+{
+  "version": "local-qa-tls-renewal-v1",
+  "scope": "EXISTING_DISPOSABLE_LOCAL_FIXTURE_ONLY",
+  "run": "a30dde3c772abd9240b16ddfb358c12d",
+  "expectedOldCertificateSha256": "12cb4e0f5cc4a4a4ac085c681be4c537da3d040efe081ca398a29db7ea348c77",
+  "certificateValidityDays": 7,
+  "sameKeyRequired": true,
+  "certificateAndPinOnly": true,
+  "schemasModified": false,
+  "hostedOperationsAuthorized": false,
+  "predecessors": [
+    {
+      "path": "db/proposals/creator-content-v1-readiness/mechanism.json",
+      "sha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220"
+    },
+    {
+      "path": "db/proposals/local-qa-auth-v2/change-proposal.json",
+      "sha256": "4949fa4056c93785e788c813676cc53c030a32f2dafaf7443ef2dfcfd29aebe5"
+    },
+    {
+      "path": "db/proposals/local-qa-auth-v2/desktop-access-v1.json",
+      "sha256": "f79f8a578a6e7408084f4cd3217d927d541e98c1ff3ac84681099b563b0aa0ee"
+    },
+    {
+      "path": "db/proposals/local-ui-acceptance-phase2-v1.json",
+      "sha256": "b2da295477ec341b93b67b3622e72b80a49da3f6baaa7a774da1668ab4fc4f15"
+    }
+  ],
+  "files": [
+    {
+      "path": "scripts/local-website-qa/tls-renewal-v1/execute.ts",
+      "previousSha256": null,
+      "canonicalLfSha256": "e1a860ba52bf0a657a4e250955a1dae32f0e926fd7bf060a5533e1b551c158df"
+    },
+    {
+      "path": "scripts/local-website-qa/tls-renewal-v1/policy.ts",
+      "previousSha256": null,
+      "canonicalLfSha256": "a4c28f53f57f5ad3fc0cf0c645faa4f36e139d8d02328a619b844f17da2f3f96"
+    },
+    {
+      "path": "tests/local-qa-tls-renewal.test.ts",
+      "previousSha256": null,
+      "canonicalLfSha256": "ec281b6143944fbb87f897be3c9068239a28ce3a0dd66030039652447be29b77"
+    }
+  ],
+  "validation": {
+    "syntheticNativeTlsTests": 4,
+    "failed": 0,
+    "lint": "PASS",
+    "typecheck": "PASS"
+  },
+  "ownerAuthorization": "Continue after the published preserving renewal request on 2026-10-17; no hosted authority."
+}
