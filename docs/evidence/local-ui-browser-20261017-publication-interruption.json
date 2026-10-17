@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-10-17T19:32:05.579Z",
+  "kind": "READ_ONLY_LOCAL_POSTFLIGHT_NOT_BROWSER",
+  "scope": "ONLY_NEW_SYNTHETIC_BROWSER_TOOL",
+  "status": "draft",
+  "publishAuditCount": 0,
+  "publicationBrowserResult": "UNRESOLVED_DIALOG_CONTROL",
+  "publicationActionRepeated": false,
+  "hostedConnections": 0,
+  "privateValuesDisclosed": false
+}

@@ -1,0 +1,37 @@
+{
+  "capturedAt": "2026-10-17T19:42:28.902Z",
+  "status": "PASS",
+  "packages": [
+    {
+      "path": "db/proposals/creator-content-v1-readiness/mechanism.json",
+      "sha256": "731a763b3afe78e4459514ad650702056cf71dc7f1de9c9141819e0cb3df8220",
+      "dependencies": 170,
+      "status": "PASS"
+    },
+    {
+      "path": "db/proposals/local-qa-auth-v2/change-proposal.json",
+      "sha256": "4949fa4056c93785e788c813676cc53c030a32f2dafaf7443ef2dfcfd29aebe5",
+      "dependencies": 24,
+      "status": "PASS"
+    },
+    {
+      "path": "db/proposals/local-qa-auth-v2/desktop-access-v1.json",
+      "sha256": "f79f8a578a6e7408084f4cd3217d927d541e98c1ff3ac84681099b563b0aa0ee",
+      "dependencies": 1,
+      "status": "PASS"
+    },
+    {
+      "path": "db/proposals/local-ui-acceptance-phase2-v1.json",
+      "sha256": "b2da295477ec341b93b67b3622e72b80a49da3f6baaa7a774da1668ab4fc4f15",
+      "dependencies": 16,
+      "status": "PASS"
+    },
+    {
+      "path": "db/proposals/local-qa-tls-renewal-v1.json",
+      "sha256": "c088be8079d60ff6358587a3455eaa4742d07aa2304db2124ffa5cfc0c344937",
+      "dependencies": 3,
+      "status": "PASS"
+    }
+  ],
+  "hostedConnections": 0
+}

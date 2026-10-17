@@ -1,0 +1,118 @@
+{
+  "capturedAt": "2026-10-17T19:32:22.316Z",
+  "status": "PARTIAL_MANUAL_DIALOG_HANDOFF",
+  "kind": "ACTUAL_IAB_BROWSER",
+  "cases": [
+    {
+      "persona": "User",
+      "route": "/account",
+      "action": "Sign in with unchanged fixture password",
+      "expected": "User dashboard with private workspaces",
+      "actual": "Your next moves, saved Tools, Stacks and User workspaces visible",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "privateScreenshotRetained": true
+    },
+    {
+      "persona": "User",
+      "route": "/account",
+      "action": "Create and rename a new disposable Stack",
+      "expected": "New private Stack persists; original Stacks preserved",
+      "actual": "Stack created and Your changes are saved; original fixture headings still present",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "privateScreenshotRetained": true
+    },
+    {
+      "persona": "User",
+      "route": "/account",
+      "action": "Delete only the new disposable Stack",
+      "expected": "New Stack removed; originals retained",
+      "actual": "New Stack heading disappeared; original Stacks remain",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "privateScreenshotRetained": true
+    },
+    {
+      "persona": "User",
+      "route": "/admin",
+      "action": "Open Admin directly",
+      "expected": "Deny and return to User workspace",
+      "actual": "Redirected to account?notice=admin-required with Admin access is required",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "User",
+      "route": "/account",
+      "action": "Sign out",
+      "expected": "Return to login and clear business access",
+      "actual": "Login page displays You have been signed out",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin",
+      "action": "Open operational dashboard",
+      "expected": "Counts, queues, recent activity and navigation",
+      "actual": "Content and trust dashboard rendered current counts and recent Stack activity",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/tools/new",
+      "action": "Create new synthetic Tool draft",
+      "expected": "Draft remains unpublished with link to saved draft",
+      "actual": "Draft created. Review its private preview before publication.",
+      "status": "PASS",
+      "screenshot": "local-ui-browser-20261017-admin-tool-created.png",
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/tools/[new-id]/preview",
+      "action": "Inspect private draft preview",
+      "expected": "Unpublished, unverified Tool with no paid/ranking benefit",
+      "actual": "Private Admin preview · draft, Not awarded, Last Verified Never",
+      "status": "PASS",
+      "screenshot": "local-ui-browser-20261017-admin-tool-preview.png",
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/tools/[new-id]",
+      "action": "Edit Tool description with reviewer reason",
+      "expected": "Persist audited content edit without changing trust or ownership",
+      "actual": "Tool content saved. Trust and ownership remain subject to independent review.",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER"
+    },
+    {
+      "persona": "Admin",
+      "route": "/admin/tools/[new-id]",
+      "action": "Request publication once",
+      "expected": "Confirm and visibly verify publication",
+      "actual": "JavaScript confirmation interrupted control; documented dialog API returned undefined and inspection timed out. Independent read-only check found draft and zero publication audit entries.",
+      "status": "BLOCKED",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER"
+    }
+  ],
+  "existingFourPasswordsChanged": false,
+  "freshRegistration": "NOT_TESTED_YET",
+  "creatorVendorBrowserSessions": "NOT_TESTED_YET",
+  "passwordChangeReset": "PENDING_HUMAN_ENTRY",
+  "distinctBrowserProfiles": "NOT_TESTED",
+  "unresolvedDialog": "Tool publication confirmation",
+  "privateScreenshotsRetained": true,
+  "hostedConnections": 0
+}
