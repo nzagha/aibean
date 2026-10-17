@@ -1,0 +1,25 @@
+{
+  "capturedAt": "2026-10-17T19:47:12.618Z",
+  "kind": "READ_ONLY_LOCAL_DATABASE_POSTFLIGHT_NOT_BROWSER",
+  "scope": "ONLY_NEW_SYNTHETIC_BROWSER_TOOL",
+  "status": "PASS",
+  "publicationStatus": "published",
+  "actions": [
+    {
+      "action": "tool.created",
+      "count": 1
+    },
+    {
+      "action": "tool.edited",
+      "count": 1
+    },
+    {
+      "action": "tool.published",
+      "count": 1
+    }
+  ],
+  "otherAuditedInteractions": 2,
+  "publicationExecutedExactlyOnce": true,
+  "hostedConnections": 0,
+  "privateValuesDisclosed": false
+}

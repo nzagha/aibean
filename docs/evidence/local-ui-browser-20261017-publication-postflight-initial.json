@@ -1,0 +1,8 @@
+{
+  "capturedAt": "2026-10-17T19:45:59.432Z",
+  "status": "FAIL",
+  "kind": "READ_ONLY_LOCAL_DATABASE_POSTFLIGHT_NOT_BROWSER",
+  "errorCategory": "ERR_ASSERTION",
+  "sourceModified": false,
+  "hostedConnections": 0
+}

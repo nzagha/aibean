@@ -25,7 +25,7 @@ The new disposable browser account uses a separate existing owner-protected hand
 
 ## Actual cases
 
-41 PASS observations currently recorded. This count includes navigation/access and mutations, not 41 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
+49 PASS observations currently recorded. This count includes navigation/access and mutations, not 49 complete product journeys. The [structured evidence](evidence/local-ui-browser-20261017-result.json) includes expected/actual outcomes and screenshot links. Non-public original workspace screenshots are retained privately.
 
 | Case | Persona | Route | Action | Status | Observed result |
 | --- | --- | --- | --- | --- | --- |
@@ -70,14 +70,22 @@ The new disposable browser account uses a separate existing owner-protected hand
 | 39 | Fresh User | /account/security | Open security form | PASS | Current/new/confirmation fields visible; no elevated capabilities |
 | 40 | Fresh User | /account/security | Owner enters and submits password change | PASS | Password updated; signed out; sign in again |
 | 41 | Fresh User | /login | Login with previous password after change | PASS | Credential denial shown after old password submission |
+| 42 | Fresh User | /login | Owner logs in with changed password | PASS | Ordinary User dashboard and pending review preserved |
+| 43 | Fresh User | /admin | Direct Admin access after password change | PASS | Admin required notice |
+| 44 | Fresh User | /creator | Direct Creator access after password change | PASS | Approved Creator required |
+| 45 | Fresh User | /vendor/tools/:fixtureOwnedTool | Access another account owned Tool after password replacement | PASS | Approved Tool ownership required |
+| 46 | Fresh User | /account | Logout after changed-password login | PASS | Signed out notice |
+| 47 | Fresh User | /forgot-password | Request recovery email | PASS | Eligible message notice; no external email |
+| 48 | Fresh User | /local-mailbox | Read new recovery message | PASS | Recovery message received in protected mailbox |
+| 49 | Fresh User | /reset-password | Exchange recovery message | PASS | Reset form opened at clean URL |
 
 ## Publication interruption
 
-The Admin Tool publication action was submitted once. The native JavaScript confirmation blocked browser inspection and the documented dialog API returned no dialog. No repeat submission occurred. The owner confirmed the existing dialog. The browser then showed published status, publication success and three audit entries: created, edited and published. The earlier [interruption observation](evidence/local-ui-browser-20261017-publication-interruption.json) remains historical; it predates confirmation and is not the final publication state. This is a browser-control limitation, not a demonstrated application defect.
+The Admin Tool publication action was submitted once. The native JavaScript confirmation blocked browser inspection and the documented dialog API returned no dialog. No repeat submission occurred. The owner confirmed the existing dialog. The browser then showed published status, publication success and three audit entries: created, edited and published. The earlier [interruption observation](evidence/local-ui-browser-20261017-publication-interruption.json) remains historical; it predates confirmation and is not the final publication state. This is a browser-control limitation, not a demonstrated application defect. A separate strict-TLS read-only local postflight also confirms published status and exactly one Tool-created, edited and published action. Its initial assertion expected only three total entity actions; later User follow/review actions correctly added two more. The observer was corrected to assert the lifecycle subset separately; original failure and diagnostic evidence are retained. No application or database fix was required.
 
 ## Authentication gate
 
-Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed the password replacement. Its exact result and subsequent login/reset steps are in the structured evidence. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
+Fresh registration, denial before confirmation, local message receipt, confirmation, confirmed login and Account Security are PASS in the browser. The owner performed password replacement; the browser displayed Password updated, the old password was rejected, and owner login with the changed password opened the ordinary dashboard. Admin, Creator and Tool-owner boundaries still denied the fresh User. Forgot-password submission, local recovery-message receipt and token exchange to the clean reset form passed. Successful reset submission and reset-password login remain owner-dependent until their cases are explicitly recorded. Changed/reset credential entry must remain owner-operated under the browser confirmation policy. A successful native HTTP test is not a substitute. Do not mark unperformed owner steps PASS.
 
 ## Remaining detailed acceptance
 
@@ -99,7 +107,7 @@ Fresh registration, denial before confirmation, local message receipt, confirmat
 
 ## Validation and continuity
 
-Same implementation validation on October 17: [167 automated tests, lint, TypeScript, isolated production build, zero runtime vulnerabilities](evidence/local-qa-tls-renewal-v1-validation.json); [CI 39061861880](https://github.com/nzagha/aibean/actions/runs/39061861880) SUCCESS for the source commit above. Earlier native auth27, access198, workflows71 and discovery23 PASS remain [separate October 15 observations](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md). No schema migrations or installations were rerun.
+Same implementation validation on October 17: [167 automated tests, lint, TypeScript, isolated production build, zero runtime vulnerabilities](evidence/local-qa-tls-renewal-v1-validation.json); [CI 39061861880](https://github.com/nzagha/aibean/actions/runs/39061861880) SUCCESS for the source commit above. Earlier native auth27, access198, workflows71 and discovery23 PASS remain [separate October 15 observations](AIBEAN_LOCAL_UI_ACCEPTANCE_REPORT.md). [Browser-evidence commit d02f35de154d70c8dad802f0e3e94ec195555dfc](https://github.com/nzagha/aibean/commit/d02f35de154d70c8dad802f0e3e94ec195555dfc) is verified remotely; [its exact CI 39063792130](https://github.com/nzagha/aibean/actions/runs/39063792130) completed SUCCESS, including build and runtime audit. This is Linux CI, separate from actual browser/native observations. No schema migrations or installations were rerun.
 
 [Five frozen manifests and all 214 dependencies match](evidence/local-ui-browser-20261017-seals.json): Creator Content170, local Auth24, desktop helper1, Phase2 observers16, TLS renewal3. The preserving restart/TLS renewal already verified 66 relation continuity digests, identities/password hashes, private environment and mailbox before these new browser mutations. The records newly created today have not been claimed as independently verified across a later restart.
 

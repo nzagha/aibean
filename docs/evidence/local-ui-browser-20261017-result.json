@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-17T19:44:39.432Z",
-  "status": "PARTIAL_OWNER_CHANGED_CREDENTIAL_LOGIN_PENDING",
+  "capturedAt": "2026-10-17T19:48:40.913Z",
+  "status": "PARTIAL_OWNER_RESET_SUBMISSION_AND_LOGIN_PENDING",
   "browser": "Codex in-app browser",
   "sourceCommit": "ecb2efddfb7c7484aa72e49dc14cd96f10912d45",
   "cases": [
@@ -705,11 +705,148 @@
         "Inspect the stated visible result"
       ],
       "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/login",
+      "action": "Owner logs in with changed password",
+      "expected": "Changed credential works",
+      "actual": "Ordinary User dashboard and pending review preserved",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "ownerHandoff": true,
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Owner logs in with changed password",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/admin",
+      "action": "Direct Admin access after password change",
+      "expected": "Deny; no new capabilities",
+      "actual": "Admin required notice",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Direct Admin access after password change",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/creator",
+      "action": "Direct Creator access after password change",
+      "expected": "Deny",
+      "actual": "Approved Creator required",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Direct Creator access after password change",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/vendor/tools/:fixtureOwnedTool",
+      "action": "Access another account owned Tool after password replacement",
+      "expected": "Deny",
+      "actual": "Approved Tool ownership required",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Access another account owned Tool after password replacement",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/account",
+      "action": "Logout after changed-password login",
+      "expected": "Clear business session",
+      "actual": "Signed out notice",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Logout after changed-password login",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/forgot-password",
+      "action": "Request recovery email",
+      "expected": "Generic notice and protected local message",
+      "actual": "Eligible message notice; no external email",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Request recovery email",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/local-mailbox",
+      "action": "Read new recovery message",
+      "expected": "Matching synthetic destination",
+      "actual": "Recovery message received in protected mailbox",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Read new recovery message",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
+    },
+    {
+      "persona": "Fresh User",
+      "route": "/reset-password",
+      "action": "Exchange recovery message",
+      "expected": "Valid single-use token opens reset form without secret URL",
+      "actual": "Reset form opened at clean URL",
+      "status": "PASS",
+      "screenshot": null,
+      "kind": "ACTUAL_IAB_BROWSER",
+      "severity": "NONE_OBSERVED",
+      "reproduction": [
+        "Sign in with the named local persona",
+        "Exchange recovery message",
+        "Inspect the stated visible result"
+      ],
+      "consoleError": "NOT_OBSERVED"
     }
   ],
   "summary": {
-    "pass": 41,
-    "total": 41
+    "pass": 49,
+    "total": 49
   },
   "hostedConnections": 0,
   "credentialsDisclosed": false,
@@ -722,5 +859,27 @@
   "controlLimitations": [
     "Native confirmation dialog required owner handoff; publication then verified without retry",
     "Automatic approval review rejected agent entry of newly changed credential; login handed to owner; no workaround"
-  ]
+  ],
+  "authentication": {
+    "registration": "PASS",
+    "unconfirmedLoginDenial": "PASS",
+    "confirmation": "PASS",
+    "confirmedLogin": "PASS",
+    "passwordChange": "PASS_OWNER_PERFORMED",
+    "oldPasswordRejection": "PASS",
+    "changedPasswordLogin": "PASS_OWNER_PERFORMED",
+    "forgotRequest": "PASS",
+    "localMailbox": "PASS",
+    "resetTokenExchange": "PASS",
+    "resetSubmission": "PENDING_OWNER",
+    "resetPasswordLogin": "PENDING_OWNER",
+    "incorrectCurrentPassword": "NOT_TESTED_IN_THIS_BROWSER_RUN",
+    "tokenReplay": "NOT_TESTED_IN_THIS_BROWSER_RUN",
+    "separateProfileSessionRevocation": "NOT_TESTED_IN_THIS_BROWSER_RUN"
+  },
+  "continuity": {
+    "originalFourPasswords": "UNCHANGED",
+    "previousNativeRestart": "PASS_66_RELATIONS",
+    "restartAfterNewBrowserRecords": "NOT_TESTED"
+  }
 }
